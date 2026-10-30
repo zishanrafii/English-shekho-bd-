@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Quiz (C1-C2) — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#04080f;
+  --surface:#080e1a;
+  --surface2:#0c1322;
+  --surface3:#101828;
+  --border:rgba(255,255,255,.055);
+  --gold:#f5c842;
+  --gold2:#e0a820;
+  --teal:#2dd4bf;
+  --rose:#fb7185;
+  --indigo:#818cf8;
+  --emerald:#34d399;
+  --orange:#fb923c;
+  --muted:#64748b;
+  --sub:#94a3b8;
+  --text:#f0f4f8;
+}
+
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(129,140,248,.025),transparent 60%);
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+.wrap{max-width:1160px;margin:auto;padding:1.6rem 1.4rem 0;position:relative;z-index:1;}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+  background:rgba(8,14,26,.8);border:1px solid var(--border);
+  border-radius:18px;padding:.9rem 1.4rem;
+  backdrop-filter:blur(24px);box-shadow:0 4px 32px rgba(0,0,0,.4);
+  position:sticky;top:16px;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));border:1px solid rgba(245,200,66,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 18px rgba(245,200,66,.12);flex-shrink:0;}
+.logo-text h1{font-size:1.55rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--sub);text-decoration:none;transition:.2s;border:1px solid transparent;}
+.nav-link:hover{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.nav-link.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.28);color:var(--gold);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));display:flex;align-items:center;justify-content:center;font-size:1rem;overflow:hidden;border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;transition:.2s;box-shadow:0 0 14px rgba(245,200,66,.1);}
+.user-avatar:hover{border-color:var(--gold);box-shadow:0 0 22px rgba(245,200,66,.25);}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);color:var(--rose);padding:.4rem .9rem;border-radius:10px;cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* ─── HERO ─── */
+.hero{border-radius:24px;padding:2.2rem 2.4rem;margin-bottom:1.8rem;position:relative;overflow:hidden;background:linear-gradient(135deg,#080e18,#0a1220);border:1px solid rgba(255,255,255,.07);box-shadow:0 8px 48px rgba(0,0,0,.45);}
+.hero-stripe{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);}
+.hero-orb1{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.1),transparent 70%);top:-100px;left:-80px;pointer-events:none;}
+.hero-orb2{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.09),transparent 70%);bottom:-80px;right:-60px;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.7rem;opacity:.8;}
+.hero h2{font-size:2.1rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;line-height:1.15;}
+.hero h2 span{background:linear-gradient(135deg,#f5c842,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--sub);font-size:13.5px;line-height:1.7;max-width:500px;font-family:'Noto Sans Bengali',sans-serif;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.hstat{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.75rem 1.2rem;text-align:center;min-width:78px;transition:.2s;position:relative;overflow:hidden;}
+.hstat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5;}
+.hstat:hover{border-color:rgba(245,200,66,.25);transform:translateY(-2px);}
+.hstat-v{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+/* ─── SECTION TITLE ─── */
+.section-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ─── LEVEL TABS ─── */
+.level-tabs{display:flex;gap:8px;margin-bottom:1.8rem;flex-wrap:wrap;}
+.level-tab{padding:.6rem 1.3rem;border-radius:14px;font-size:13px;font-weight:700;border:1px solid var(--border);background:var(--surface2);color:var(--sub);cursor:pointer;transition:.2s;text-decoration:none;display:flex;align-items:center;gap:8px;}
+.level-tab:hover{border-color:rgba(245,200,66,.25);color:var(--text);}
+.level-tab.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.3);color:var(--gold);}
+
+/* ─── PROGRESS PANEL ─── */
+.progress-panel{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.4rem 1.6rem;margin-bottom:1.8rem;}
+.pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:1rem;}
+.pp-item{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:13px;padding:.9rem 1rem;text-align:center;}
+.pp-val{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pp-label{font-size:10.5px;color:var(--muted);margin-top:2px;font-family:'Noto Sans Bengali',sans-serif;}
+.progress-track{height:7px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin:.7rem 0 .4rem;}
+.progress-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#f5c842,#2dd4bf);transition:width .8s ease;box-shadow:0 0 10px rgba(245,200,66,.25);}
+.progress-meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;}
+
+/* ─── TOPIC PILLS ─── */
+.cat-pills{display:flex;gap:8px;margin-bottom:1.6rem;flex-wrap:wrap;}
+.pill{padding:.45rem 1.1rem;border-radius:20px;font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface2);color:var(--sub);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.pill:hover{border-color:rgba(245,200,66,.25);color:var(--text);}
+.pill.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.3);color:var(--gold);}
+.pill-count{font-family:'JetBrains Mono',monospace;font-size:9.5px;opacity:.7;}
+
+/* ─── QUIZ CARD ─── */
+.quiz-card-wrap{margin-bottom:1.8rem;}
+.quiz-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:24px;padding:2.2rem 2rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.35);
+}
+.quiz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f5c842,#2dd4bf,transparent);}
+.q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.4rem;flex-wrap:wrap;gap:.6rem;}
+.q-counter{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+.q-topic-tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);color:#f5c842;text-transform:uppercase;letter-spacing:.5px;}
+.q-question{font-size:1.25rem;font-weight:700;line-height:1.5;margin-bottom:1.6rem;}
+.q-question .qbn{font-family:'Noto Sans Bengali',sans-serif;font-weight:500;font-size:.9rem;color:var(--sub);display:block;margin-top:.4rem;}
+.q-options{display:flex;flex-direction:column;gap:10px;margin-bottom:1.6rem;}
+.q-option{
+  background:rgba(255,255,255,.025);border:1px solid var(--border);
+  border-radius:14px;padding:.95rem 1.2rem;cursor:pointer;
+  display:flex;align-items:center;gap:12px;transition:.2s;font-size:14px;font-weight:600;
+}
+.q-option:hover{border-color:rgba(245,200,66,.25);background:rgba(255,255,255,.04);}
+.q-option .opt-letter{
+  width:28px;height:28px;border-radius:9px;background:var(--surface3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;
+  font-size:12px;font-weight:700;color:var(--sub);flex-shrink:0;transition:.2s;
+}
+.q-option.selected{border-color:rgba(245,200,66,.35);background:rgba(245,200,66,.06);}
+.q-option.selected .opt-letter{background:rgba(245,200,66,.15);color:var(--gold);border-color:rgba(245,200,66,.3);}
+.q-option.correct{border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.08);}
+.q-option.correct .opt-letter{background:rgba(52,211,153,.15);color:#34d399;border-color:rgba(52,211,153,.3);}
+.q-option.incorrect{border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.08);}
+.q-option.incorrect .opt-letter{background:rgba(251,113,133,.15);color:var(--rose);border-color:rgba(251,113,133,.3);}
+.q-option.disabled{cursor:default;}
+.q-explain{display:none;background:rgba(255,255,255,.025);border-left:3px solid rgba(245,200,66,.3);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;font-size:12.5px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;line-height:1.7;margin-bottom:1.4rem;}
+.q-explain.show{display:block;}
+.q-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+.q-btn{padding:.7rem 1.6rem;border-radius:13px;font-weight:700;font-size:13.5px;cursor:pointer;border:1px solid var(--border);background:var(--surface3);color:var(--sub);transition:.2s;font-family:'Outfit',sans-serif;}
+.q-btn:hover{border-color:rgba(245,200,66,.25);color:var(--text);}
+.q-btn-next{background:linear-gradient(135deg,rgba(245,200,66,.16),rgba(45,212,191,.12));border-color:rgba(245,200,66,.3);color:var(--gold);}
+.q-btn-next:hover{background:linear-gradient(135deg,rgba(245,200,66,.24),rgba(45,212,191,.18));}
+.q-btn:disabled{opacity:.4;cursor:not-allowed;}
+.q-progress-track{height:6px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-bottom:1.4rem;}
+.q-progress-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#f5c842,#2dd4bf);transition:width .4s ease;}
+
+/* ─── RESULT CARD ─── */
+.result-card{display:none;text-align:center;padding:2.6rem 2rem;}
+.result-card.show{display:block;}
+.result-emoji{font-size:3.5rem;margin-bottom:.6rem;}
+.result-title{font-size:1.7rem;font-weight:800;margin-bottom:.4rem;}
+.result-score{font-size:2.6rem;font-weight:900;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.result-sub{color:var(--sub);font-size:13px;font-family:'Noto Sans Bengali',sans-serif;margin-bottom:1.6rem;}
+.result-stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:1.8rem;}
+.rstat{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;padding:.8rem 1.4rem;text-align:center;min-width:90px;}
+.rstat-v{font-size:1.4rem;font-weight:800;}
+.rstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ─── FOOTER ─── */
+footer{margin-top:3rem;border-top:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),rgba(45,212,191,.35),transparent);}
+.footer-inner{max-width:1160px;margin:auto;padding:2.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;}
+.footer-brand .brand-name{font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.9rem;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:11px;color:#2a3545;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.copyright-text span{color:#374151;}
+.footer-col h4{font-size:.9rem;font-weight:700;color:var(--sub);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.dev-card{background:linear-gradient(135deg,rgba(245,200,66,.04),rgba(45,212,191,.04));border:1px solid rgba(245,200,66,.12);border-radius:14px;padding:1.1rem;}
+.dev-name{font-size:1.05rem;font-weight:800;color:#f0f4f8;margin-bottom:.1rem;}
+.dev-title{font-size:10px;color:var(--gold);letter-spacing:.8px;margin-bottom:.8rem;font-family:'JetBrains Mono',monospace;}
+.dev-contact{display:flex;flex-direction:column;gap:.45rem;}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);}
+.contact-row a{color:var(--sub);text-decoration:none;transition:.15s;}
+.contact-row a:hover{color:var(--gold);}
+.contact-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:rgba(255,255,255,.05);}
+.social-links{display:flex;flex-direction:column;gap:.55rem;}
+.social-link{display:flex;align-items:center;gap:10px;padding:.55rem .85rem;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid var(--border);text-decoration:none;color:var(--sub);font-size:12px;transition:.2s;}
+.social-link:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);color:#f0f4f8;transform:translateX(3px);}
+.sl-icon{font-size:.9rem;width:20px;text-align:center;}
+.sl-label{font-weight:600;}
+.sl-handle{color:var(--muted);font-size:10.5px;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{max-width:1160px;margin:auto;padding:.8rem 1.4rem 1.3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;border-top:1px solid rgba(255,255,255,.04);font-size:11px;color:#2d3748;font-family:'JetBrains Mono',monospace;}
+.footer-bottom a{color:#374151;text-decoration:none;}
+.footer-bottom a:hover{color:var(--muted);}
+.footer-heart{color:var(--rose);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:800px){.footer-inner{grid-template-columns:1fr;gap:1.6rem;}.nav-links{display:none;}}
+@media(max-width:600px){.topbar{flex-direction:column;align-items:flex-start;}.hero h2{font-size:1.6rem;}.wrap{padding:1rem .9rem 0;}.footer-bottom{flex-direction:column;align-items:flex-start;}.quiz-card{padding:1.6rem 1.2rem;}.q-question{font-size:1.05rem;}}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;top:20px;right:20px;background:#0c1322;color:#f0f4f8;padding:.9rem 1.2rem;border-radius:14px;border-left:3px solid #f5c842;z-index:9999;opacity:0;transform:translateY(-16px);transition:.3s;font-size:13.5px;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.toast.show{opacity:1;transform:translateY(0);}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>ENGLISH LEARNING PLATFORM · A1 TO C2</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-advanced.html" class="nav-link active">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="vocab-dashboard.html" class="nav-link">Vocabulary</a>
+        <a href="writing-lab.html" class="nav-link">Writing</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" onclick="location.href='profile.html'">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">📝 Advanced Quiz · C1-C2</div>
+        <h2>Master <span>Fluent</span> English 🏆</h2>
+        <p class="hero-sub">Grammar Inversion, Subjunctive, Vocabulary, Idioms, Literature, Critical Thinking, Phonetics, Academic Writing, Language — ২৫০+ MCQ। C1 ও C2 আলাদা করে practice করো।</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-v" id="h-score">0</div>
+          <div class="hstat-l">Score</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-total">0</div>
+          <div class="hstat-l">Questions</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-streak">0</div>
+          <div class="hstat-l">Best Streak</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL TABS -->
+  <div class="level-tabs">
+    <a href="quiz-beginner.html" class="level-tab">🟢 Beginner (A1-A2)</a>
+    <a href="quiz-intermediate.html" class="level-tab">🟡 Intermediate (B1-B2)</a>
+    <a href="quiz-advanced.html" class="level-tab active">🔴 Advanced (C1-C2)</a>
+  </div>
+
+  <!-- SUBLEVEL TABS -->
+  <div class="level-tabs" style="margin-top:-.8rem;margin-bottom:1.4rem;" id="sublevel-tabs">
+    <a href="quiz-advanced.html" class="level-tab">📋 All Topics</a>
+    <a href="quiz-advanced.html?level=C1" class="level-tab">🔵 C1 Only</a>
+    <a href="quiz-advanced.html?level=C2" class="level-tab">🟣 C2 Only</a>
+    <a href="quiz-advanced.html?cat=Grammar" class="level-tab">📐 Grammar</a>
+    <a href="quiz-advanced.html?cat=Vocabulary" class="level-tab">📖 Vocabulary</a>
+    <a href="quiz-advanced.html?cat=Idioms" class="level-tab">💬 Idioms</a>
+    <a href="quiz-advanced.html?cat=Academic Writing" class="level-tab">✍️ Academic</a>
+    <a href="quiz-advanced.html?cat=Literature" class="level-tab">📚 Literature</a>
+    <a href="quiz-advanced.html?cat=Critical Thinking" class="level-tab">🧠 Critical</a>
+    <a href="quiz-advanced.html?cat=Phonetics" class="level-tab">🔊 Phonetics</a>
+    <a href="quiz-advanced.html?cat=Language" class="level-tab">🗣️ Language</a>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
+      <div style="font-weight:700;font-size:15px;">📊 Quiz Progress</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);" id="prog-label">0 / 0 answered</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-bar" style="width:0%"></div></div>
+    <div class="progress-meta"><span id="prog-pct">0% complete</span><span id="prog-acc">Accuracy: 0%</span></div>
+    <div class="pp-grid" id="pp-grid"></div>
+  </div>
+
+  <!-- TOPIC PILLS -->
+  <div class="cat-pills" id="cat-pills"></div>
+
+  <!-- QUIZ CARD -->
+  <div class="quiz-card-wrap">
+    <div class="quiz-card" id="quiz-card">
+      <div class="q-progress-track"><div class="q-progress-fill" id="q-prog"></div></div>
+      <div class="q-meta">
+        <span class="q-counter" id="q-counter">Question 1 / 1</span>
+        <span class="q-topic-tag" id="q-topic">Topic</span>
+      </div>
+      <div class="q-question" id="q-question">—</div>
+      <div class="q-options" id="q-options"></div>
+      <div class="q-explain" id="q-explain"></div>
+      <div class="q-actions">
+        <button class="q-btn" id="btn-skip">Skip →</button>
+        <button class="q-btn q-btn-next" id="btn-next" disabled>Next Question →</button>
+      </div>
+    </div>
+
+    <!-- RESULT CARD -->
+    <div class="quiz-card result-card" id="result-card">
+      <div class="result-emoji" id="r-emoji">🎉</div>
+      <div class="result-title" id="r-title">Quiz Complete!</div>
+      <div class="result-score" id="r-score">0%</div>
+      <div class="result-sub" id="r-sub">তুমি দারুণ করেছো! নিচে তোমার রেজাল্ট দেখো।</div>
+      <div class="result-stats">
+        <div class="rstat"><div class="rstat-v" style="color:#34d399;" id="r-correct">0</div><div class="rstat-l">Correct</div></div>
+        <div class="rstat"><div class="rstat-v" style="color:var(--rose);" id="r-wrong">0</div><div class="rstat-l">Wrong</div></div>
+        <div class="rstat"><div class="rstat-v" style="color:var(--gold);" id="r-streak">0</div><div class="rstat-l">Best Streak</div></div>
+      </div>
+      <div id="r-cat-breakdown"></div>
+      <div id="r-wrong-words"></div>
+      <div class="result-actions">
+        <button class="q-btn q-btn-next" id="btn-retry">🔁 Retry Quiz</button>
+        <button class="q-btn" onclick="location.href='quiz-intermediate.html'">← Intermediate</button>
+        <button class="q-btn" onclick="location.href='dashboard.html'">🏠 Dashboard</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম। A1 থেকে C2 পর্যন্ত vocabulary, grammar, speaking এবং live chat সুবিধা।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span><br><span>Unauthorized reproduction</span><br><span>is strictly prohibited.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { safeUrl,
+  auth, db, signOut, requireAuth,
+  doc, getDoc, setDoc, updateDoc, increment,
+  collection, addDoc, serverTimestamp
+} from "./js/firebase-config.js";
+
+/* ══════════════════════════════════════════════
+   QUIZ BANK — ADVANCED C1-C2
+   250+ MCQ across 9 topics
+══════════════════════════════════════════════ */
+const QUIZ_BANK = [
+
+  /* ── GRAMMAR — Advanced (40 questions) ── */
+  {id:"g1",  topic:"Grammar", level:"C1", q:"\"I suggest he ___ there immediately.\"", qbn:"Subjunctive mood।",
+   options:["goes","go","going","to go"], answer:1,
+   explain:"✅ Subjunctive: suggest/recommend/demand + that + subject + bare infinitive (V1). 'he go' সঠিক।"},
+  {id:"g2",  topic:"Grammar", level:"C1", q:"Never ___ such a beautiful sunset.", qbn:"Inversion with Never।",
+   options:["I have seen","have I seen","I saw","I had seen"], answer:1,
+   explain:"✅ Negative adverb (Never) বাক্যের শুরুতে → Inversion: have I seen।"},
+  {id:"g3",  topic:"Grammar", level:"C1", q:"\"It was John who broke the vase.\" This is a:", qbn:"Sentence type।",
+   options:["Passive sentence","Cleft sentence","Conditional sentence","Reported speech"], answer:1,
+   explain:"✅ Cleft sentence = 'It + be + focus + who/that clause' — নির্দিষ্ট তথ্যে জোর দেয়।"},
+  {id:"g4",  topic:"Grammar", level:"C1", q:"She ___ been working there for five years before she retired.", qbn:"Past Perfect Continuous।",
+   options:["has","was","had","is"], answer:2,
+   explain:"✅ অতীতের ঘটনার আগ পর্যন্ত চলমান কাজ → Past Perfect Continuous (had been + Ving)।"},
+  {id:"g5",  topic:"Grammar", level:"C2", q:"Rarely ___ such dedication in a student.", qbn:"Inversion with Rarely।",
+   options:["I have seen","have I seen","I see","do I see"], answer:3,
+   explain:"✅ Rarely + inversion: do I see (Simple Present)। Never have I / Rarely do I।"},
+  {id:"g6",  topic:"Grammar", level:"C1", q:"\"___ it not been for your help, I would have failed.\"", qbn:"Inverted Third Conditional।",
+   options:["Was","Were","Had","Should"], answer:2,
+   explain:"✅ Had it not been for = If it had not been for — Third Conditional inversion।"},
+  {id:"g7",  topic:"Grammar", level:"C2", q:"The report demands that the CEO ___ held accountable.", qbn:"Subjunctive passive।",
+   options:["is","be","was","were"], answer:1,
+   explain:"✅ Demand + that + subject + be (passive subjunctive)। 'be held' সঠিক।"},
+  {id:"g8",  topic:"Grammar", level:"C1", q:"Little ___ she know what awaited her.", qbn:"Inversion with Little।",
+   options:["did","does","has","was"], answer:0,
+   explain:"✅ Little + did + subject + know — negative inversion (Simple Past)।"},
+  {id:"g9",  topic:"Grammar", level:"C2", q:"What we need ___ more investment in education.", qbn:"Pseudo-cleft।",
+   options:["are","is","be","were"], answer:1,
+   explain:"✅ Pseudo-cleft: 'What we need' is singular focus → 'is' সঠিক।"},
+  {id:"g10", topic:"Grammar", level:"C1", q:"She insisted that he ___ the meeting.", qbn:"Subjunctive after insist।",
+   options:["attends","attend","attended","attending"], answer:1,
+   explain:"✅ Insist that + subject + bare infinitive (subjunctive): 'he attend'।"},
+  {id:"g11", topic:"Grammar", level:"C1", q:"Only after the meeting ended ___ able to relax.", qbn:"Inversion with Only after।",
+   options:["I was","was I","I am","am I"], answer:1,
+   explain:"✅ Only after + clause, inversion in main clause: was I able।"},
+  {id:"g12", topic:"Grammar", level:"C2", q:"\"The more you read, ___.\" Complete correctly.", qbn:"Parallel comparative।",
+   options:["more you know","the more you know","you know more","the more know you"], answer:1,
+   explain:"✅ The more…the more — parallel comparative structure।"},
+  {id:"g13", topic:"Grammar", level:"C1", q:"No sooner ___ than the alarm went off.", qbn:"No sooner inversion।",
+   options:["he had left","had he left","he left","did he leave"], answer:1,
+   explain:"✅ No sooner + had + subject + V3 (inversion) + than।"},
+  {id:"g14", topic:"Grammar", level:"C2", q:"He is thought ___ the most influential writer of his generation.", qbn:"Passive + infinitive।",
+   options:["being","to be","to have","be"], answer:1,
+   explain:"✅ Is thought/believed/considered + to be — passive reporting structure।"},
+  {id:"g15", topic:"Grammar", level:"C1", q:"\"Were I to resign, what would happen?\" This means:", qbn:"Formal conditional।",
+   options:["If I resign","If I had resigned","If I were to resign","If I resigned"], answer:2,
+   explain:"✅ Were I to = If I were to — formal/literary Second Conditional।"},
+  {id:"g16", topic:"Grammar", level:"C2", q:"Not until decades later ___ the truth revealed.", qbn:"Passive inversion।",
+   options:["was","the truth was","it was","did"], answer:0,
+   explain:"✅ Not until + time expression → was + subject (passive inversion)।"},
+  {id:"g17", topic:"Grammar", level:"C1", q:"\"She treated him as though he ___ a child.\" Correct form:", qbn:"As though + subjunctive।",
+   options:["is","was","were","be"], answer:2,
+   explain:"✅ As though/as if + were (subjunctive) — কাল্পনিক পরিস্থিতি।"},
+  {id:"g18", topic:"Grammar", level:"C2", q:"The proposal was rejected, ___ came as a surprise.", qbn:"Non-restrictive relative।",
+   options:["that","which","what","who"], answer:1,
+   explain:"✅ Non-restrictive relative clause (পুরো clause refer করলে) → which।"},
+  {id:"g19", topic:"Grammar", level:"C1", q:"He managed to complete the task, ___ was remarkable.", qbn:"Which vs That।",
+   options:["that","which","what","who"], answer:1,
+   explain:"✅ পুরো clause-এর উপর comment → which (non-defining relative clause)।"},
+  {id:"g20", topic:"Grammar", level:"C2", q:"\"Scarcely had she arrived ___ the argument began.\"", qbn:"Scarcely inversion।",
+   options:["when","than","that","before"], answer:0,
+   explain:"✅ Scarcely had + V3 + when (not 'than' — No sooner uses 'than')।"},
+
+  /* ── VOCABULARY — Advanced (50 questions) ── */
+  {id:"v1",  topic:"Vocabulary", level:"C1", q:"\"Ubiquitous\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["Rare","Omnipresent","Hidden","Temporary"], answer:1,
+   explain:"✅ Ubiquitous = present everywhere / সর্বত্র বিদ্যমান।"},
+  {id:"v2",  topic:"Vocabulary", level:"C1", q:"\"Ambiguous\" শব্দের অর্থ:", qbn:"অর্থ বেছে নাও।",
+   options:["সুনির্দিষ্ট","দ্ব্যর্থক","নির্ভুল","সরল"], answer:1,
+   explain:"✅ Ambiguous = having more than one meaning / দ্ব্যর্থবোধক।"},
+  {id:"v3",  topic:"Vocabulary", level:"C1", q:"Antonym of \"Meticulous\":", qbn:"Antonym বেছে নাও।",
+   options:["Careful","Careless","Precise","Thorough"], answer:1,
+   explain:"✅ Meticulous (অতি যত্নশীল) → Careless (অসতর্ক)।"},
+  {id:"v4",  topic:"Vocabulary", level:"C2", q:"\"Laconic\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["বাচাল","অত্যন্ত সংক্ষিপ্ত","দীর্ঘ","অস্পষ্ট"], answer:1,
+   explain:"✅ Laconic = using very few words / সংক্ষিপ্ত ও কম কথায় বলা।"},
+  {id:"v5",  topic:"Vocabulary", level:"C1", q:"\"Ephemeral\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["চিরস্থায়ী","ক্ষণস্থায়ী","বিশাল","প্রাচীন"], answer:1,
+   explain:"✅ Ephemeral = lasting for a very short time / ক্ষণস্থায়ী।"},
+  {id:"v6",  topic:"Vocabulary", level:"C2", q:"\"Sycophant\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["সমালোচক","তোষামোদকারী","নেতা","বিজয়ী"], answer:1,
+   explain:"✅ Sycophant = a person who flatters powerful people / তোষামোদকারী।"},
+  {id:"v7",  topic:"Vocabulary", level:"C1", q:"\"Pragmatic\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["আদর্শবাদী","বাস্তববাদী","আবেগপ্রবণ","অযৌক্তিক"], answer:1,
+   explain:"✅ Pragmatic = dealing with things practically / বাস্তববাদী।"},
+  {id:"v8",  topic:"Vocabulary", level:"C2", q:"\"Obfuscate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["স্পষ্ট করা","ইচ্ছাকৃতভাবে অস্পষ্ট করা","উন্নত করা","সমাধান করা"], answer:1,
+   explain:"✅ Obfuscate = to make unclear / ইচ্ছাকৃতভাবে অস্পষ্ট বা বিভ্রান্তিকর করা।"},
+  {id:"v9",  topic:"Vocabulary", level:"C1", q:"\"Pertinent\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["অপ্রাসঙ্গিক","প্রাসঙ্গিক","বিভ্রান্তিকর","অনুপযুক্ত"], answer:1,
+   explain:"✅ Pertinent = relevant / প্রাসঙ্গিক।"},
+  {id:"v10", topic:"Vocabulary", level:"C2", q:"\"Equivocate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["সরাসরি বলা","দ্ব্যর্থবোধক ভাষায় সত্য এড়ানো","সমান করা","বিতর্ক করা"], answer:1,
+   explain:"✅ Equivocate = use ambiguous language to avoid commitment।"},
+  {id:"v11", topic:"Vocabulary", level:"C1", q:"\"Reiterate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["নতুন বলা","পুনরায় বলা","খণ্ডন করা","সংক্ষেপ করা"], answer:1,
+   explain:"✅ Reiterate = to say or do again / পুনরাবৃত্তি করা।"},
+  {id:"v12", topic:"Vocabulary", level:"C2", q:"\"Recalcitrant\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["অনুগত","একগুঁয়ে/অবাধ্য","বিনম্র","উদার"], answer:1,
+   explain:"✅ Recalcitrant = stubbornly disobedient / একগুঁয়ে, অবাধ্য।"},
+  {id:"v13", topic:"Vocabulary", level:"C1", q:"\"Vindictive\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["ক্ষমাশীল","প্রতিশোধপরায়ণ","উদার","সহানুভূতিশীল"], answer:1,
+   explain:"✅ Vindictive = having a strong desire for revenge।"},
+  {id:"v14", topic:"Vocabulary", level:"C2", q:"\"Impetuous\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["সতর্ক","বেপরোয়া","ধীর","বিচক্ষণ"], answer:1,
+   explain:"✅ Impetuous = acting quickly without thinking / বেপরোয়া।"},
+  {id:"v15", topic:"Vocabulary", level:"C1", q:"\"Exacerbate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["উন্নত করা","আরো খারাপ করা","সমাধান করা","শান্ত করা"], answer:1,
+   explain:"✅ Exacerbate = to make worse / আরো খারাপ করা।"},
+  {id:"v16", topic:"Vocabulary", level:"C2", q:"\"Perspicacious\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["বোকা","তীক্ষ্ণবুদ্ধি","অলস","অস্পষ্ট"], answer:1,
+   explain:"✅ Perspicacious = having a ready insight / তীক্ষ্ণবুদ্ধিসম্পন্ন।"},
+  {id:"v17", topic:"Vocabulary", level:"C1", q:"\"Ameliorate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["খারাপ করা","উন্নত করা","ধ্বংস করা","বিলম্বিত করা"], answer:1,
+   explain:"✅ Ameliorate = to make better / উন্নত করা।"},
+  {id:"v18", topic:"Vocabulary", level:"C2", q:"\"Inveterate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["নতুন","দীর্ঘস্থায়ী/পোক্ত","সাময়িক","বিরল"], answer:1,
+   explain:"✅ Inveterate = having a habit/belief that is long-established / পুরনো অভ্যাসযুক্ত।"},
+  {id:"v19", topic:"Vocabulary", level:"C1", q:"\"Salient\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["অপ্রাসঙ্গিক","সবচেয়ে গুরুত্বপূর্ণ/উল্লেখযোগ্য","লুকানো","সাধারণ"], answer:1,
+   explain:"✅ Salient = most noticeable or important / সবচেয়ে উল্লেখযোগ্য।"},
+  {id:"v20", topic:"Vocabulary", level:"C2", q:"\"Propitious\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["অশুভ","শুভ/অনুকূল","নিরপেক্ষ","বিপজ্জনক"], answer:1,
+   explain:"✅ Propitious = giving or indicating a good chance of success / অনুকূল।"},
+  {id:"v21", topic:"Vocabulary", level:"C1", q:"\"Taciturn\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["বাচাল","কম কথা বলে এমন","সৎ","উৎসাহী"], answer:1,
+   explain:"✅ Taciturn = reserved or uncommunicative / কম কথা বলে এমন।"},
+  {id:"v22", topic:"Vocabulary", level:"C2", q:"\"Circumspect\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["বেপরোয়া","সতর্ক ও বিচক্ষণ","উদাসীন","অলস"], answer:1,
+   explain:"✅ Circumspect = wary and careful about possible risks।"},
+  {id:"v23", topic:"Vocabulary", level:"C1", q:"\"Mitigate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["বাড়ানো","কমানো/লাঘব করা","বিলম্বিত করা","অনুমোদন করা"], answer:1,
+   explain:"✅ Mitigate = to lessen the severity / কমানো।"},
+  {id:"v24", topic:"Vocabulary", level:"C2", q:"\"Pellucid\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["অস্বচ্ছ","স্বচ্ছ ও স্পষ্ট","জটিল","অস্পষ্ট"], answer:1,
+   explain:"✅ Pellucid = translucently clear / স্ফটিকস্পষ্ট।"},
+  {id:"v25", topic:"Vocabulary", level:"C1", q:"\"Eloquent\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["চুপচাপ","সুবক্তা","অস্পষ্ট","দুর্বল"], answer:1,
+   explain:"✅ Eloquent = fluent and persuasive / বাগ্মী।"},
+  {id:"v26", topic:"Vocabulary", level:"C2", q:"\"Garrulous\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["নীরব","অতিরিক্ত কথা বলে এমন","বিনম্র","গুরুগম্ভীর"], answer:1,
+   explain:"✅ Garrulous = excessively talkative / বাচাল।"},
+  {id:"v27", topic:"Vocabulary", level:"C1", q:"\"Proliferate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["হ্রাস পাওয়া","দ্রুত বৃদ্ধি পাওয়া","স্থির থাকা","বিলুপ্ত হওয়া"], answer:1,
+   explain:"✅ Proliferate = to grow or increase rapidly।"},
+  {id:"v28", topic:"Vocabulary", level:"C2", q:"\"Enervate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["শক্তি দেওয়া","শক্তি হরণ করা","উত্তেজিত করা","অনুপ্রাণিত করা"], answer:1,
+   explain:"✅ Enervate = to weaken / শক্তি ক্ষয় করা।"},
+  {id:"v29", topic:"Vocabulary", level:"C1", q:"\"Elucidate\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["জটিল করা","স্পষ্ট করে ব্যাখ্যা করা","লুকানো","পরিবর্তন করা"], answer:1,
+   explain:"✅ Elucidate = to explain clearly।"},
+  {id:"v30", topic:"Vocabulary", level:"C2", q:"\"Ignominious\" means:", qbn:"অর্থ বেছে নাও।",
+   options:["গৌরবময়","লজ্জাজনক","সাহসী","উল্লেখযোগ্য"], answer:1,
+   explain:"✅ Ignominious = deserving public disgrace / লজ্জাজনক।"},
+
+  /* ── IDIOMS & EXPRESSIONS (40 questions) ── */
+  {id:"i1",  topic:"Idioms", level:"C1", q:"\"Bite the bullet\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["পালিয়ে যাওয়া","কষ্টকর পরিস্থিতি সাহসে সহ্য করা","রেগে যাওয়া","উদযাপন করা"], answer:1,
+   explain:"✅ Bite the bullet = endure a painful situation bravely।"},
+  {id:"i2",  topic:"Idioms", level:"C1", q:"\"Beat around the bush\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["সরাসরি কথা বলা","মূল বিষয় এড়িয়ে ঘুরিয়ে কথা বলা","ঝগড়া করা","সফল হওয়া"], answer:1,
+   explain:"✅ Beat around the bush = avoid getting to the main point।"},
+  {id:"i3",  topic:"Idioms", level:"C1", q:"\"A blessing in disguise\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["স্পষ্ট সৌভাগ্য","প্রথমে খারাপ কিন্তু পরে ভালো","সবসময় ভালো","ধর্মীয় আশীর্বাদ"], answer:1,
+   explain:"✅ A blessing in disguise = something that seems bad but turns out good।"},
+  {id:"i4",  topic:"Idioms", level:"C1", q:"\"Burn the midnight oil\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["তেল পোড়ানো","রাত জেগে কাজ করা","আগুন লাগানো","অপচয় করা"], answer:1,
+   explain:"✅ Burn the midnight oil = work late into the night।"},
+  {id:"i5",  topic:"Idioms", level:"C2", q:"\"Cut the Gordian knot\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["জটিল সমস্যা সমাধান না করা","সাহসী পদক্ষেপে জটিল সমস্যা সমাধান করা","দড়ি কাটা","এড়িয়ে যাওয়া"], answer:1,
+   explain:"✅ Cut the Gordian knot = solve a difficult problem boldly।"},
+  {id:"i6",  topic:"Idioms", level:"C1", q:"\"Let the cat out of the bag\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["বিড়াল ছাড়া","অজান্তে গোপন কথা প্রকাশ করা","কাউকে সাহায্য করা","বিভ্রান্ত হওয়া"], answer:1,
+   explain:"✅ Let the cat out of the bag = accidentally reveal a secret।"},
+  {id:"i7",  topic:"Idioms", level:"C2", q:"\"Pyrrhic victory\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["বড় বিজয়","অত্যধিক ক্ষতিসাধনে অর্জিত বিজয়","সহজ বিজয়","নৈতিক বিজয়"], answer:1,
+   explain:"✅ Pyrrhic victory = a victory that inflicts such a devastating toll that it is tantamount to defeat।"},
+  {id:"i8",  topic:"Idioms", level:"C1", q:"\"Throw in the towel\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["তোয়ালে ছুঁড়ে দেওয়া","হার মেনে নেওয়া","সফল হওয়া","চেষ্টা চালিয়ে যাওয়া"], answer:1,
+   explain:"✅ Throw in the towel = admit defeat / surrender।"},
+  {id:"i9",  topic:"Idioms", level:"C2", q:"\"Catch-22\" refers to:", qbn:"Idiom-এর অর্থ।",
+   options:["সহজ সমাধান","এমন পরিস্থিতি যেখানে একটি সমস্যার সমাধান অন্য সমস্যা তৈরি করে","সংখ্যা ২২","দুটি বিকল্প"], answer:1,
+   explain:"✅ Catch-22 = a paradoxical situation from which there is no escape।"},
+  {id:"i10", topic:"Idioms", level:"C1", q:"\"Take with a pinch of salt\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["আক্ষরিকভাবে গ্রহণ করা","সন্দেহের সাথে গ্রহণ করা","সম্পূর্ণ বিশ্বাস করা","উপেক্ষা করা"], answer:1,
+   explain:"✅ Take with a pinch of salt = be skeptical about something।"},
+  {id:"i11", topic:"Idioms", level:"C1", q:"\"Sitting on the fence\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["বেড়ায় বসা","নিরপেক্ষ থাকা/সিদ্ধান্ত না নেওয়া","একমত হওয়া","বিপক্ষে যাওয়া"], answer:1,
+   explain:"✅ Sitting on the fence = not taking sides, being neutral।"},
+  {id:"i12", topic:"Idioms", level:"C2", q:"\"A Herculean task\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["সহজ কাজ","অত্যন্ত কঠিন কাজ","দলীয় কাজ","দ্রুত কাজ"], answer:1,
+   explain:"✅ Herculean task = a task requiring enormous strength or effort।"},
+  {id:"i13", topic:"Idioms", level:"C1", q:"\"Read between the lines\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["আক্ষরিকভাবে পড়া","লুকানো অর্থ বোঝা","দ্রুত পড়া","শব্দ গণনা করা"], answer:1,
+   explain:"✅ Read between the lines = understand the hidden meaning।"},
+  {id:"i14", topic:"Idioms", level:"C2", q:"\"The devil's advocate\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["শয়তানের উকিল","বিপক্ষে যুক্তি দেওয়া ব্যক্তি","একগুঁয়ে ব্যক্তি","নিরপেক্ষ ব্যক্তি"], answer:1,
+   explain:"✅ Devil's advocate = a person who argues the opposite side for the sake of argument।"},
+  {id:"i15", topic:"Idioms", level:"C1", q:"\"In the same boat\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["একই নৌকায় থাকা","একই কঠিন পরিস্থিতিতে থাকা","একসাথে ভ্রমণ করা","একমত হওয়া"], answer:1,
+   explain:"✅ In the same boat = in the same difficult situation।"},
+  {id:"i16", topic:"Idioms", level:"C2", q:"\"Achilles' heel\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["পায়ের ব্যথা","একমাত্র দুর্বলতা","শক্তিশালী দিক","ক্ষত"], answer:1,
+   explain:"✅ Achilles' heel = a weak spot in an otherwise strong person/situation।"},
+  {id:"i17", topic:"Idioms", level:"C1", q:"\"Going back to square one\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["সামনে এগিয়ে যাওয়া","একেবারে শুরু থেকে শুরু করা","প্রায় শেষ করা","অর্ধেক করা"], answer:1,
+   explain:"✅ Go back to square one = start over from the beginning।"},
+  {id:"i18", topic:"Idioms", level:"C2", q:"\"Kick the bucket\" is a euphemism for:", qbn:"Idiom-এর অর্থ।",
+   options:["মারামারি","মারা যাওয়া","পদত্যাগ করা","পরাজিত হওয়া"], answer:1,
+   explain:"✅ Kick the bucket = to die (informal/euphemistic)।"},
+  {id:"i19", topic:"Idioms", level:"C1", q:"\"Under the thumb\" means:", qbn:"Idiom-এর অর্থ।",
+   options:["স্বাধীন","সম্পূর্ণ নিয়ন্ত্রণে","চাপে পড়া","লুকিয়ে থাকা"], answer:1,
+   explain:"✅ Under someone's thumb = completely under their control।"},
+  {id:"i20", topic:"Idioms", level:"C2", q:"\"Bread and butter\" issues refer to:", qbn:"Idiom-এর অর্থ।",
+   options:["খাবার সংক্রান্ত বিষয়","দৈনন্দিন জীবনের মৌলিক বিষয়","অর্থনীতি","রান্নার বিষয়"], answer:1,
+   explain:"✅ Bread and butter = fundamental/basic concerns of everyday life।"},
+
+  /* ── ACADEMIC WRITING (30 questions) ── */
+  {id:"aw1",  topic:"Academic Writing", level:"C1", q:"Which phrase introduces a COUNTER-ARGUMENT?", qbn:"Counter-argument connector।",
+   options:["Furthermore","Admittedly","Therefore","In addition"], answer:1,
+   explain:"✅ Admittedly = স্বীকার করে হলেও — counter-argument introduce করে।"},
+  {id:"aw2",  topic:"Academic Writing", level:"C1", q:"\"The data suggests that...\" — this is:", qbn:"Academic hedging।",
+   options:["A definitive claim","Hedged language","An opinion","A fact"], answer:1,
+   explain:"✅ Hedged language (suggests, may, appears to) অনিশ্চয়তা প্রকাশ করে।"},
+  {id:"aw3",  topic:"Academic Writing", level:"C2", q:"\"Notwithstanding the above,\" is used to:", qbn:"Connector।",
+   options:["উদাহরণ দিতে","বিপরীত দৃষ্টিভঙ্গি দিতে","উপসংহার টানতে","কারণ বলতে"], answer:1,
+   explain:"✅ Notwithstanding = despite / তা সত্ত্বেও।"},
+  {id:"aw4",  topic:"Academic Writing", level:"C1", q:"A 'coherent' argument is one that is:", qbn:"Academic term।",
+   options:["ভুল","সুসংগত ও যুক্তিসংগত","অসম্পূর্ণ","পক্ষপাতদুষ্ট"], answer:1,
+   explain:"✅ Coherent = logically consistent and well-structured।"},
+  {id:"aw5",  topic:"Academic Writing", level:"C2", q:"\"This paper seeks to interrogate the notion that...\" This means:", qbn:"Academic purpose।",
+   options:["বিষয়টি সত্য বলে প্রমাণ করতে","বিষয়টিকে সমালোচনামূলকভাবে পরীক্ষা করতে","বিষয়টি বাদ দিতে","বিষয়টি এড়াতে"], answer:1,
+   explain:"✅ Interrogate a notion = critically examine an idea।"},
+  {id:"aw6",  topic:"Academic Writing", level:"C1", q:"\"As evidenced by...\" is used to:", qbn:"Evidence connector।",
+   options:["মতামত দিতে","প্রমাণ উপস্থাপন করতে","উপসংহার টানতে","সংজ্ঞা দিতে"], answer:1,
+   explain:"✅ As evidenced by = প্রমাণস্বরূপ — evidence connector।"},
+  {id:"aw7",  topic:"Academic Writing", level:"C2", q:"'Epistemological' relates to:", qbn:"Academic term।",
+   options:["জ্ঞানের উৎস ও প্রকৃতি","ভৌগোলিক অধ্যয়ন","সংখ্যাতত্ত্ব","ইতিহাস"], answer:1,
+   explain:"✅ Epistemology = the study of knowledge / জ্ঞানতত্ত্ব।"},
+  {id:"aw8",  topic:"Academic Writing", level:"C1", q:"\"It could be argued that...\" expresses:", qbn:"Hedging।",
+   options:["নিশ্চিত সত্য","সম্ভাব্য দৃষ্টিভঙ্গি","অন্যের মতামত","পরিসংখ্যান"], answer:1,
+   explain:"✅ Could be argued = hedged claim / সম্ভাব্যতা বোঝায়।"},
+  {id:"aw9",  topic:"Academic Writing", level:"C2", q:"\"Ontological\" relates to:", qbn:"Academic term।",
+   options:["ভাষার গঠন","অস্তিত্বের প্রকৃতি","সংখ্যাতত্ত্ব","সমাজবিজ্ঞান"], answer:1,
+   explain:"✅ Ontology = the study of the nature of being / অস্তিত্বতত্ত্ব।"},
+  {id:"aw10", topic:"Academic Writing", level:"C1", q:"A 'seminal' work in a field is:", qbn:"Academic term।",
+   options:["গুরুত্বহীন","ভিত্তিগত ও প্রভাবশালী","সাম্প্রতিক","বিতর্কিত"], answer:1,
+   explain:"✅ Seminal work = highly influential foundational work।"},
+
+  /* ── LITERATURE & RHETORIC (30 questions) ── */
+  {id:"lr1",  topic:"Literature", level:"C1", q:"'Irony' means:", qbn:"Literary device।",
+   options:["আক্ষরিক অর্থে বলা","বিপরীত অর্থে বলা","অতিরঞ্জন","পুনরাবৃত্তি"], answer:1,
+   explain:"✅ Irony = using words to convey the opposite of their literal meaning।"},
+  {id:"lr2",  topic:"Literature", level:"C1", q:"'Metaphor' is:", qbn:"Literary device।",
+   options:["সরাসরি তুলনা","পরোক্ষ তুলনা","শব্দের পুনরাবৃত্তি","অতিরঞ্জন"], answer:1,
+   explain:"✅ Metaphor = saying one thing is another (without like/as)।"},
+  {id:"lr3",  topic:"Literature", level:"C1", q:"'Alliteration' is:", qbn:"Literary device।",
+   options:["শব্দের অর্থ","একই ব্যঞ্জনধ্বনির পুনরাবৃত্তি","কবিতার ছন্দ","বিপরীত শব্দ"], answer:1,
+   explain:"✅ Alliteration = repetition of the same initial consonant sound।"},
+  {id:"lr4",  topic:"Literature", level:"C2", q:"'Hyperbole' means:", qbn:"Literary device।",
+   options:["সংক্ষেপণ","অতিরঞ্জন","উপমা","ব্যঙ্গ"], answer:1,
+   explain:"✅ Hyperbole = extreme exaggeration for effect।"},
+  {id:"lr5",  topic:"Literature", level:"C1", q:"'Personification' means:", qbn:"Literary device।",
+   options:["ব্যক্তির বর্ণনা","নির্জীব বস্তুকে মানবিক গুণ আরোপ","শব্দের খেলা","ছন্দ"], answer:1,
+   explain:"✅ Personification = giving human qualities to non-human things।"},
+  {id:"lr6",  topic:"Literature", level:"C2", q:"'Oxymoron' is:", qbn:"Literary device।",
+   options:["সমার্থক শব্দ","পরস্পরবিরোধী শব্দের সমন্বয়","উপমা","অনুপ্রাস"], answer:1,
+   explain:"✅ Oxymoron = contradictory terms together: 'deafening silence'।"},
+  {id:"lr7",  topic:"Literature", level:"C1", q:"'Soliloquy' in drama means:", qbn:"Literary term।",
+   options:["দ্বন্দ্ব","একা মনের কথা বলা","দলীয় সংলাপ","নীরবতা"], answer:1,
+   explain:"✅ Soliloquy = a character speaking thoughts aloud alone।"},
+  {id:"lr8",  topic:"Literature", level:"C2", q:"'Epistrophe' is:", qbn:"Rhetorical device।",
+   options:["বাক্যের শুরুতে পুনরাবৃত্তি","বাক্যের শেষে পুনরাবৃত্তি","মাঝে পুনরাবৃত্তি","বিপরীত অর্থে বলা"], answer:1,
+   explain:"✅ Epistrophe = repetition of a word/phrase at the END of successive clauses।"},
+  {id:"lr9",  topic:"Literature", level:"C1", q:"'Anaphora' is:", qbn:"Rhetorical device।",
+   options:["বাক্যের শেষে পুনরাবৃত্তি","বাক্যের শুরুতে পুনরাবৃত্তি","মাঝে পুনরাবৃত্তি","অনুপ্রাস"], answer:1,
+   explain:"✅ Anaphora = repetition at the START of successive clauses. 'We shall fight...'"},
+  {id:"lr10", topic:"Literature", level:"C2", q:"'Catharsis' in literature refers to:", qbn:"Literary term।",
+   options:["দ্বন্দ্ব","আবেগের পরিশুদ্ধি/মুক্তি","উত্তেজনা","সমাধান"], answer:1,
+   explain:"✅ Catharsis = emotional purification through art / Aristotle-এর ধারণা।"},
+
+  /* ── CRITICAL THINKING (20 questions) ── */
+  {id:"ct1",  topic:"Critical Thinking", level:"C1", q:"An 'ad hominem' argument:", qbn:"Logical fallacy।",
+   options:["বিষয়ের যুক্তি দেয়","ব্যক্তিকে আক্রমণ করে","তথ্য দেয়","উদাহরণ দেয়"], answer:1,
+   explain:"✅ Ad hominem = attacking the person rather than the argument।"},
+  {id:"ct2",  topic:"Critical Thinking", level:"C1", q:"'Straw man' fallacy means:", qbn:"Logical fallacy।",
+   options:["সঠিক যুক্তি","প্রতিপক্ষের যুক্তকে বিকৃত করে আক্রমণ","তথ্য প্রদান","উদাহরণ দেওয়া"], answer:1,
+   explain:"✅ Straw man = misrepresenting opponent's argument to attack it easily।"},
+  {id:"ct3",  topic:"Critical Thinking", level:"C2", q:"'False dichotomy' means:", qbn:"Logical fallacy।",
+   options:["দুটি সঠিক বিকল্প","কৃত্রিমভাবে শুধু দুটি বিকল্প উপস্থাপন","তথ্যভিত্তিক দ্বন্দ্ব","নৈতিক সিদ্ধান্ত"], answer:1,
+   explain:"✅ False dichotomy = presenting only two options when more exist।"},
+  {id:"ct4",  topic:"Critical Thinking", level:"C1", q:"'Circular reasoning' means:", qbn:"Logical fallacy।",
+   options:["স্পষ্ট যুক্তি","কারণ ও ফলাফল একই বস্তু","ভালো প্রমাণ","নতুন তথ্য"], answer:1,
+   explain:"✅ Circular reasoning = the conclusion is used as a premise।"},
+  {id:"ct5",  topic:"Critical Thinking", level:"C2", q:"'Hasty generalization' means:", qbn:"Logical fallacy।",
+   options:["যথেষ্ট তথ্যের ভিত্তিতে সিদ্ধান্ত","অল্প তথ্যের ভিত্তিতে ব্যাপক সিদ্ধান্ত","সঠিক বিশ্লেষণ","দীর্ঘ গবেষণা"], answer:1,
+   explain:"✅ Hasty generalization = drawing broad conclusions from limited examples।"},
+  {id:"ct6",  topic:"Critical Thinking", level:"C1", q:"'Slippery slope' argument claims:", qbn:"Logical fallacy।",
+   options:["একটি পদক্ষেপ ভালো","একটি পদক্ষেপ অনিবার্যভাবে চরম পরিণতি আনবে","যুক্তি সঠিক","তথ্য যথেষ্ট"], answer:1,
+   explain:"✅ Slippery slope = claiming one action will lead to extreme consequences inevitably।"},
+  {id:"ct7",  topic:"Critical Thinking", level:"C2", q:"'Appeal to authority' fallacy:", qbn:"Logical fallacy।",
+   options:["সঠিক বিশেষজ্ঞের মতামত","অপ্রাসঙ্গিক কর্তৃপক্ষের মতামত দিয়ে যুক্তি","তথ্যভিত্তিক যুক্তি","নৈতিক যুক্তি"], answer:1,
+   explain:"✅ Appeal to authority = using an irrelevant authority as evidence।"},
+  {id:"ct8",  topic:"Critical Thinking", level:"C1", q:"'Confirmation bias' means:", qbn:"Cognitive bias।",
+   options:["সব তথ্য বিবেচনা করা","নিজের বিশ্বাস সমর্থনকারী তথ্য খোঁজা","নিরপেক্ষ থাকা","সন্দেহপ্রবণ হওয়া"], answer:1,
+   explain:"✅ Confirmation bias = seeking information that confirms existing beliefs।"},
+  {id:"ct9",  topic:"Critical Thinking", level:"C2", q:"'Occam's Razor' principle states:", qbn:"Logical principle।",
+   options:["জটিল ব্যাখ্যাই সঠিক","সহজতম ব্যাখ্যাই সাধারণত সঠিক","সব ব্যাখ্যাই সমান","প্রমাণ ছাড়া সিদ্ধান্ত"], answer:1,
+   explain:"✅ Occam's Razor = the simplest explanation is usually correct।"},
+  {id:"ct10", topic:"Critical Thinking", level:"C1", q:"'Post hoc ergo propter hoc' fallacy means:", qbn:"Logical fallacy।",
+   options:["কারণ ও ফলাফল সঠিক","A-এর পরে B হলেই A কারণ এই ভুল ধারণা","তথ্যভিত্তিক যুক্তি","নৈতিক বিচার"], answer:1,
+   explain:"✅ Post hoc fallacy = assuming X caused Y just because X came before Y।"},
+
+  /* ── PRONUNCIATION & PHONETICS (20 questions) ── */
+  {id:"ph1",  topic:"Phonetics", level:"C1", q:"The word 'colonel' is pronounced:", qbn:"Pronunciation।",
+   options:["/kɒlənəl/","/kɜːrnəl/","/koʊlənəl/","/kɒlənɛl/"], answer:1,
+   explain:"✅ Colonel = /kɜːrnəl/ — 'l' বাদে উচ্চারিত হয়, সম্পূর্ণ irregular।"},
+  {id:"ph2",  topic:"Phonetics", level:"C1", q:"Which word has a silent 'b'?", qbn:"Silent letter।",
+   options:["Bomb","Bread","Brief","Brain"], answer:0,
+   explain:"✅ Bomb = /bɒm/ — শেষের 'b' silent। Thumb, comb, lamb-এও।"},
+  {id:"ph3",  topic:"Phonetics", level:"C2", q:"'Paradigm' is pronounced:", qbn:"Pronunciation।",
+   options:["/pærədɪɡm/","/pærədaɪm/","/pærədɪm/","/pærəɡɪm/"], answer:1,
+   explain:"✅ Paradigm = /pærədaɪm/ — 'g' silent।"},
+  {id:"ph4",  topic:"Phonetics", level:"C1", q:"Which word breaks the 'i before e' rule?", qbn:"Spelling rule exception।",
+   options:["Believe","Their","Piece","Achieve"], answer:1,
+   explain:"✅ Their = 'ei' (exception to 'i before e' rule)।"},
+  {id:"ph5",  topic:"Phonetics", level:"C2", q:"'Epitome' is pronounced:", qbn:"Pronunciation।",
+   options:["/ˈepɪtoʊm/","/ɪˈpɪtəmi/","/ˈepɪtəʊm/","/ˈepɪtɒm/"], answer:1,
+   explain:"✅ Epitome = /ɪˈpɪtəmi/ — শেষ 'e' উচ্চারিত হয়।"},
+  {id:"ph6",  topic:"Phonetics", level:"C1", q:"Which pair of words are 'minimal pairs'?", qbn:"Phonetics term।",
+   options:["Cat/Dog","Ship/Sheep","Run/Fun","Big/Bag"], answer:3,
+   explain:"✅ Minimal pairs = শুধু একটি phoneme আলাদা: Big /bɪɡ/ vs Bag /bæɡ/।"},
+  {id:"ph7",  topic:"Phonetics", level:"C2", q:"'Synecdoche' is pronounced:", qbn:"Pronunciation।",
+   options:["/sɪˈnekdəki/","/saɪˈnekdoʊk/","/sɪnˈdoʊki/","/ˈsɪnɪkdoʊk/"], answer:0,
+   explain:"✅ Synecdoche = /sɪˈnekdəki/ — literary term।"},
+  {id:"ph8",  topic:"Phonetics", level:"C1", q:"'Diphthong' refers to:", qbn:"Phonetics term।",
+   options:["একটি স্বরধ্বনি","দুটি স্বরধ্বনির সমন্বয়","ব্যঞ্জনধ্বনি","নীরব অক্ষর"], answer:1,
+   explain:"✅ Diphthong = a combination of two vowel sounds in one syllable: /aɪ/, /eɪ/।"},
+  {id:"ph9",  topic:"Phonetics", level:"C2", q:"'Schwa' is:", qbn:"Phonetics term।",
+   options:["জোর দেওয়া স্বর","সবচেয়ে সাধারণ/দুর্বল English স্বরধ্বনি /ə/","ব্যঞ্জনধ্বনি","নীরব অক্ষর"], answer:1,
+   explain:"✅ Schwa /ə/ = the most common vowel sound in English (unstressed)।"},
+  {id:"ph10", topic:"Phonetics", level:"C1", q:"'Liaison' in pronunciation means:", qbn:"Phonetics term।",
+   options:["নীরব থাকা","শব্দের শেষ ধ্বনি পরবর্তী শব্দের সাথে যুক্ত করা","জোরে বলা","বিরতি দেওয়া"], answer:1,
+   explain:"✅ Liaison = linking final sound of one word to initial sound of next।"},
+
+  /* ── LANGUAGE & DISCOURSE (20 questions) ── */
+  {id:"ld1",  topic:"Language", level:"C1", q:"A 'collocation' is:", qbn:"Linguistics term।",
+   options:["বিরল শব্দ","স্বাভাবিকভাবে একসাথে ব্যবহৃত শব্দের জুটি","বিপরীত শব্দ","সমার্থক শব্দ"], answer:1,
+   explain:"✅ Collocation = words that naturally go together: 'make a decision'।"},
+  {id:"ld2",  topic:"Language", level:"C1", q:"'Register' in linguistics means:", qbn:"Linguistics term।",
+   options:["শব্দভান্ডার","পরিস্থিতি অনুযায়ী ভাষার ব্যবহার","ব্যাকরণ","উচ্চারণ"], answer:1,
+   explain:"✅ Register = the variety of language used for a particular purpose/situation।"},
+  {id:"ld3",  topic:"Language", level:"C2", q:"'Pragmatics' in linguistics studies:", qbn:"Linguistics branch।",
+   options:["শব্দের গঠন","প্রসঙ্গে ভাষার অর্থ","ধ্বনি","বাক্যগঠন"], answer:1,
+   explain:"✅ Pragmatics = how context influences interpretation of meaning।"},
+  {id:"ld4",  topic:"Language", level:"C1", q:"'Code-switching' refers to:", qbn:"Linguistics term।",
+   options:["একটি ভাষায় কথা বলা","কথোপকথনে একাধিক ভাষা পরিবর্তন করা","অনুবাদ","নতুন শব্দ তৈরি"], answer:1,
+   explain:"✅ Code-switching = alternating between languages in conversation।"},
+  {id:"ld5",  topic:"Language", level:"C2", q:"'Morpheme' is:", qbn:"Linguistics term।",
+   options:["একটি বাক্য","অর্থের ক্ষুদ্রতম একক","একটি স্বরধ্বনি","একটি ব্যঞ্জনধ্বনি"], answer:1,
+   explain:"✅ Morpheme = the smallest meaningful unit of language।"},
+  {id:"ld6",  topic:"Language", level:"C1", q:"'Deixis' means:", qbn:"Linguistics term।",
+   options:["অনুবাদ","প্রসঙ্গ নির্ভর অর্থ (this, here, now)","ব্যাকরণ","শব্দভান্ডার"], answer:1,
+   explain:"✅ Deixis = words whose interpretation depends on context (this, here, I)।"},
+  {id:"ld7",  topic:"Language", level:"C2", q:"'Phoneme' is:", qbn:"Linguistics term।",
+   options:["অর্থের একক","ধ্বনির ক্ষুদ্রতম স্বতন্ত্র একক","বাক্যের একক","শব্দের একক"], answer:1,
+   explain:"✅ Phoneme = smallest unit of sound that distinguishes meaning।"},
+  {id:"ld8",  topic:"Language", level:"C1", q:"'Euphemism' is:", qbn:"Language term।",
+   options:["কঠোর ভাষা","অপ্রীতিকর বিষয় নরম ভাষায় বলা","ব্যঙ্গ","অতিরঞ্জন"], answer:1,
+   explain:"✅ Euphemism = a mild expression for something unpleasant।"},
+  {id:"ld9",  topic:"Language", level:"C2", q:"'Cataphora' means:", qbn:"Linguistics term।",
+   options:["পূর্বে উল্লিখিত বিষয় উল্লেখ","পরে আসবে এমন বিষয় আগে উল্লেখ","অনুবাদ","শব্দের অর্থ"], answer:1,
+   explain:"✅ Cataphora = a reference that points forward (e.g., 'Here is the news...')."},
+  {id:"ld10", topic:"Language", level:"C1", q:"'Hedging' in academic language means:", qbn:"Academic term।",
+   options:["নিশ্চিতভাবে বলা","অনিশ্চয়তা প্রকাশ করে সতর্কতার সাথে বলা","বিরোধিতা করা","উদ্ধৃতি দেওয়া"], answer:1,
+   explain:"✅ Hedging = using cautious language to avoid overcommitting।"},
+];
+
+/* ══════════════════════════════════════════════
+   SUBLEVEL SUPPORT — ?cat=Grammar&level=C1
+══════════════════════════════════════════════ */
+const urlParams  = new URLSearchParams(window.location.search);
+const subCat     = urlParams.get('cat');
+const subLevel   = urlParams.get('level');
+const isSublevel = !!subCat || !!subLevel;
+
+function shuffle(arr){ return arr.sort(()=>Math.random()-.5); }
+
+function buildPool(){
+  let pool = QUIZ_BANK;
+  if(subCat)   pool = pool.filter(q => q.topic === subCat);
+  if(subLevel) pool = pool.filter(q => q.level === subLevel);
+  return shuffle([...pool]);
+}
+
+let QUIZ = buildPool();
+const ALL_TOPICS = ["All", ...new Set(QUIZ_BANK.map(q=>q.topic))];
+
+/* ══════════════════════════════════
+   STATE
+══════════════════════════════════ */
+let activeTopic = subCat || "All";
+let order = [];
+let qIndex = 0;
+let answered = {};
+let correctCount = 0;
+let wrongCount = 0;
+let streak = 0;
+let bestStreak = 0;
+let currentUid = null;
+
+function poolQ(){
+  let pool = QUIZ_BANK;
+  if(subLevel) pool = pool.filter(q=>q.level===subLevel);
+  if(activeTopic !== "All") pool = pool.filter(q=>q.topic===activeTopic);
+  return shuffle([...pool]);
+}
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+/* ══════════════════════════════════
+   BUILD PILLS
+══════════════════════════════════ */
+function buildPills(){
+  if(isSublevel){ document.getElementById("cat-pills").style.display="none"; return; }
+  const wrap = document.getElementById("cat-pills");
+  wrap.innerHTML = ALL_TOPICS.map(t => {
+    const count = t==="All" ? QUIZ_BANK.length : QUIZ_BANK.filter(q=>q.topic===t).length;
+    return `<div class="pill ${t===activeTopic?'active':''}" data-topic="${t}">
+      ${t} <span class="pill-count">${count}</span>
+    </div>`;
+  }).join("");
+  wrap.querySelectorAll(".pill").forEach(el=>{
+    el.addEventListener("click", ()=>{
+      activeTopic = el.dataset.topic;
+      buildPills();
+      startQuiz();
+    });
+  });
+}
+
+/* ══════════════════════════════════
+   QUIZ FLOW
+══════════════════════════════════ */
+function startQuiz(){
+  order = poolQ();
+  qIndex = 0;
+  answered = {};
+  correctCount = 0; wrongCount = 0; streak = 0; bestStreak = 0;
+  document.getElementById("quiz-card").style.display = "block";
+  document.getElementById("result-card").classList.remove("show");
+  updateStats();
+  renderQuestion();
+}
+
+function renderQuestion(){
+  if(!order.length){
+    document.getElementById("q-question").textContent = "এই topic-এ কোনো প্রশ্ন নেই।";
+    document.getElementById("q-options").innerHTML = "";
+    return;
+  }
+  const q = order[qIndex];
+  document.getElementById("q-counter").textContent = `Question ${qIndex+1} / ${order.length}`;
+  document.getElementById("q-topic").textContent = q.topic;
+  document.getElementById("q-question").innerHTML = `${q.q}<span class="qbn">${q.qbn}</span>`;
+  document.getElementById("q-prog").style.width = `${Math.round((qIndex)/order.length*100)}%`;
+
+  const optsWrap = document.getElementById("q-options");
+  optsWrap.innerHTML = q.options.map((opt,i)=>`
+    <div class="q-option" data-i="${i}">
+      <span class="opt-letter">${"ABCD"[i]}</span>
+      <span>${opt}</span>
+    </div>`).join("");
+
+  document.getElementById("q-explain").classList.remove("show");
+  document.getElementById("q-explain").innerHTML = "";
+  document.getElementById("btn-next").disabled = true;
+  document.getElementById("btn-next").textContent =
+    qIndex === order.length-1 ? "Finish Quiz 🏁" : "Next Question →";
+  document.getElementById("btn-skip").style.display = "inline-block";
+
+  const prevAns = answered[q.id];
+  optsWrap.querySelectorAll(".q-option").forEach(el=>{
+    if(prevAns){
+      lockOptions(q, prevAns.selected);
+    } else {
+      el.addEventListener("click", ()=> selectOption(q, parseInt(el.dataset.i)));
+    }
+  });
+}
+
+function selectOption(q, i){
+  const correct = i === q.answer;
+  answered[q.id] = {selected:i, correct};
+  if(correct){ correctCount++; streak++; bestStreak = Math.max(bestStreak, streak); toast("✅ সঠিক উত্তর!"); }
+  else { wrongCount++; streak = 0; toast("❌ ভুল হয়েছে, ব্যাখ্যা দেখো।"); }
+
+  lockOptions(q, i);
+  document.getElementById("q-explain").classList.add("show");
+  document.getElementById("q-explain").innerHTML = q.explain;
+  document.getElementById("btn-next").disabled = false;
+  document.getElementById("btn-skip").style.display = "none";
+  updateStats();
+}
+
+function lockOptions(q, selectedIdx){
+  const optsWrap = document.getElementById("q-options");
+  optsWrap.querySelectorAll(".q-option").forEach((el,i)=>{
+    el.classList.add("disabled");
+    el.replaceWith(el.cloneNode(true)); // remove click listeners
+  });
+  optsWrap.querySelectorAll(".q-option").forEach((el,i)=>{
+    if(i === q.answer) el.classList.add("correct");
+    if(i === selectedIdx && i !== q.answer) el.classList.add("incorrect");
+    if(i === selectedIdx) el.classList.add("selected");
+  });
+}
+
+function nextQuestion(){
+  if(qIndex < order.length - 1){
+    qIndex++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function skipQuestion(){
+  const q = order[qIndex];
+  if(!answered[q.id]){
+    answered[q.id] = {selected:-1, correct:false};
+    wrongCount++; streak = 0;
+    updateStats();
+  }
+  nextQuestion();
+}
+
+function showResult(){
+  document.getElementById("quiz-card").style.display = "none";
+  const card = document.getElementById("result-card");
+  card.classList.add("show");
+
+  const total = order.length;
+  const pct = total ? Math.round(correctCount/total*100) : 0;
+
+  document.getElementById("r-score").textContent = pct + "%";
+  document.getElementById("r-correct").textContent = correctCount;
+  document.getElementById("r-wrong").textContent = wrongCount;
+  document.getElementById("r-streak").textContent = bestStreak;
+
+  let emoji, title, sub;
+  if(pct >= 80){ emoji="🏆"; title="অসাধারণ! Truly Advanced!"; sub="তুমি C1-C2 level-এ দুর্দান্ত করছো। তুমি truly fluent!"; }
+  else if(pct >= 50){ emoji="👍"; title="ভালো হয়েছে!"; sub="C1-C2 কঠিন — আরেকটু practice করলে আরও ভালো হবে!"; }
+  else { emoji="💪"; title="Keep Practicing!"; sub:"চিন্তা নেই, এটা সবচেয়ে কঠিন level — আবার চেষ্টা করো!"; }
+
+  document.getElementById("r-emoji").textContent = emoji;
+  document.getElementById("r-title").textContent = title;
+  document.getElementById("r-sub").textContent = sub;
+
+  /* ── Category breakdown ── */
+  const catStats = {};
+  for(const [id, ans] of Object.entries(answered)){
+    const q = order.find(x=>x.id===id);
+    if(!q) continue;
+    if(!catStats[q.topic]) catStats[q.topic] = {correct:0, total:0};
+    catStats[q.topic].total++;
+    if(ans.correct) catStats[q.topic].correct++;
+  }
+  const catEl = document.getElementById("r-cat-breakdown");
+  if(catEl){
+    const rows = Object.entries(catStats).map(([cat,d])=>{
+      const p2 = Math.round(d.correct/d.total*100);
+      const color = p2>=80?"var(--emerald)":p2>=50?"var(--gold)":"var(--rose)";
+      return `<div style="display:flex;align-items:center;gap:10px;padding:.5rem 0;border-bottom:1px solid var(--border);">
+        <span style="min-width:130px;font-size:12px;color:var(--sub);">${cat}</span>
+        <div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:20px;overflow:hidden;">
+          <div style="width:${p2}%;height:100%;background:${color};border-radius:20px;"></div>
+        </div>
+        <span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:${color};min-width:40px;text-align:right;">${p2}%</span>
+      </div>`;
+    }).join("");
+    catEl.innerHTML = rows
+      ? `<div style="margin-top:1.2rem;"><div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:.6rem;">Topic Breakdown</div>${rows}</div>`
+      : "";
+  }
+
+  /* ── Wrong questions ── */
+  const wrongEl = document.getElementById("r-wrong-words");
+  if(wrongEl){
+    const wrongs = Object.entries(answered)
+      .filter(([,a])=>!a.correct)
+      .map(([id])=>{ const q=order.find(x=>x.id===id); return q?q.topic:null; })
+      .filter(Boolean);
+    wrongEl.innerHTML = wrongCount > 0
+      ? `<div style="margin-top:1rem;"><div style="font-size:11px;font-weight:700;color:var(--rose);letter-spacing:1px;text-transform:uppercase;margin-bottom:.5rem;">❌ দুর্বল topics: ${[...new Set(wrongs)].join(", ")}</div></div>`
+      : `<div style="margin-top:1rem;color:var(--emerald);font-size:13px;">🎉 Perfect score — তুমি সত্যিই C1-C2 level!</div>`;
+  }
+
+  updateStats();
+  saveScoreToFirestore(correctCount, total, pct);
+}
+
+/* ══════════════════════════════════════════════════════
+   FIRESTORE — FULL ANALYTICS
+══════════════════════════════════════════════════════ */
+async function saveScoreToFirestore(correct, total, pct){
+  if(!currentUid || !total) return;
+  const merge = {merge:true};
+  const uRef  = doc(db,"users",currentUid);
+
+  const sessionLevel = subLevel || "C1-C2";
+  const sessionCat   = subCat || activeTopic || "All";
+
+  const catBreakdown = {};
+  const wrongList    = [];
+
+  for(const [id, ans] of Object.entries(answered)){
+    const q = order.find(x=>x.id===id);
+    if(!q) continue;
+    if(!catBreakdown[q.topic]) catBreakdown[q.topic] = {correct:0,total:0};
+    catBreakdown[q.topic].total++;
+    if(ans.correct) catBreakdown[q.topic].correct++;
+    else wrongList.push({topic:q.topic, level:q.level, qid:q.id});
+  }
+
+  /* 1. Session log */
+  addDoc(collection(db,"users",currentUid,"scores"), {
+    quizType:"advanced", correct, total, pct,
+    wrong:wrongCount, bestStreak,
+    level:sessionLevel, category:sessionCat,
+    catBreakdown, wrongCount:wrongList.length,
+    createdAt:serverTimestamp()
+  }).catch(()=>{});
+
+  /* 2. Overall advanced stats */
+  setDoc(doc(db,"users",currentUid,"quizStats","advanced"), {
+    totalCorrect  : increment(correct),
+    totalWrong    : increment(wrongCount),
+    totalQuestions: increment(total),
+    sessions      : increment(1),
+    totalXP       : increment(correct*15),
+    lastPlayed    : serverTimestamp()
+  }, merge).catch(()=>{});
+
+  /* 3. Level-specific (C1/C2) */
+  const lvKey = sessionLevel==="C1"?"advanced_c1":sessionLevel==="C2"?"advanced_c2":"advanced_mixed";
+  setDoc(doc(db,"users",currentUid,"quizStats",lvKey),{
+    totalCorrect  : increment(correct),
+    totalWrong    : increment(wrongCount),
+    totalQuestions: increment(total),
+    sessions      : increment(1),
+    lastPlayed    : serverTimestamp()
+  }, merge).catch(()=>{});
+
+  /* 4. Per-topic progress */
+  for(const [topic, data] of Object.entries(catBreakdown)){
+    const key = "adv_"+topic.replace(/\s+/g,"_").toLowerCase();
+    setDoc(doc(db,"users",currentUid,"categoryProgress",key),{
+      topic, quizType:"advanced",
+      totalCorrect  : increment(data.correct),
+      totalWrong    : increment(data.total-data.correct),
+      totalQuestions: increment(data.total),
+      lastPlayed    : serverTimestamp()
+    }, merge).catch(()=>{});
+  }
+
+  /* 5. Wrong questions tracking */
+  for(const w of wrongList){
+    const key = `adv_${w.qid}`;
+    setDoc(doc(db,"users",currentUid,"wrongQuestions",key),{
+      qid:w.qid, topic:w.topic, level:w.level, quizType:"advanced",
+      wrongCount: increment(1),
+      lastSeen  : serverTimestamp()
+    }, merge).catch(()=>{});
+  }
+
+  /* 6. Root user doc */
+  updateDoc(uRef,{
+    xp            : increment(correct*15),
+    totalCorrect  : increment(correct),
+    totalQuestions: increment(total),
+    sessions      : increment(1)
+  }).catch(()=>{});
+
+  getDoc(uRef).then(snap=>{
+    const d = snap.exists()?snap.data():{};
+    const updates={};
+    if(pct>(d.bestScore||0))         updates.bestScore=pct;
+    if(bestStreak>(d.bestStreak||0)) updates.bestStreak=bestStreak;
+    if(Object.keys(updates).length) updateDoc(uRef,updates).catch(()=>{});
+  }).catch(()=>{});
+}
+
+/* ══════════════════════════════════
+   STATS / PROGRESS
+══════════════════════════════════ */
+function updateStats(){
+  const total = order.length;
+  const done = Object.keys(answered).length;
+  const pctDone = total ? Math.round(done/total*100) : 0;
+  const accuracy = done ? Math.round(correctCount/done*100) : 0;
+
+  document.getElementById("h-score").textContent = correctCount;
+  document.getElementById("h-total").textContent = total;
+  document.getElementById("h-streak").textContent = bestStreak;
+
+  document.getElementById("prog-bar").style.width = pctDone + "%";
+  document.getElementById("prog-label").textContent = `${done} / ${total} answered`;
+  document.getElementById("prog-pct").textContent = pctDone + "% complete";
+  document.getElementById("prog-acc").textContent = `Accuracy: ${accuracy}%`;
+
+  document.getElementById("pp-grid").innerHTML = [
+    {val:correctCount, label:"সঠিক উত্তর"},
+    {val:wrongCount,   label:"ভুল উত্তর"},
+    {val:bestStreak,   label:"Best Streak"},
+    {val:accuracy+"%", label:"Accuracy"},
+  ].map(s=>`<div class="pp-item"><div class="pp-val">${s.val}</div><div class="pp-label">${s.label}</div></div>`).join("");
+}
+
+/* ══════════════════════════════════
+   EVENTS
+══════════════════════════════════ */
+document.getElementById("btn-next").addEventListener("click", nextQuestion);
+document.getElementById("btn-skip").addEventListener("click", skipQuestion);
+document.getElementById("btn-retry").addEventListener("click", startQuiz);
+document.getElementById("btn-logout").onclick = async ()=> {
+  await signOut(auth);
+  window.location.href="index.html";
+};
+
+/* ══════════════════════════════════
+   AUTH + INIT
+══════════════════════════════════ */
+const yr = new Date().getFullYear();
+document.getElementById("footer-year").textContent  = yr;
+document.getElementById("footer-year2").textContent = yr;
+
+/* highlight active sublevel tab */
+(function(){
+  const p = new URLSearchParams(window.location.search);
+  const cat=p.get('cat'), lv=p.get('level');
+  document.querySelectorAll("#sublevel-tabs .level-tab").forEach(a=>{
+    const ap=new URLSearchParams(a.href.split('?')[1]||'');
+    const ac=ap.get('cat'), al=ap.get('level');
+    if(cat && ac===cat) a.classList.add('active');
+    else if(!cat && lv && al===lv) a.classList.add('active');
+    else if(!cat && !lv && !ac && !al) a.classList.add('active');
+  });
+})();
+
+requireAuth(async user => {
+  currentUid = user.uid;
+  const snap = await getDoc(doc(db,"users",user.uid));
+  const d = snap.exists() ? snap.data() : {};
+
+  const name  = d.displayName || user.displayName || "Learner";
+  const photo = d.photoURL    || user.photoURL    || "";
+  document.getElementById("nav-name").textContent = name;
+  const av = document.getElementById("nav-avatar");
+  if(photo) av.innerHTML = `<img src="${safeUrl(photo)}" style="width:100%;height:100%;object-fit:cover;">`;
+  else av.textContent = name[0]?.toUpperCase() || "?";
+
+  buildPills();
+  startQuiz();
+});
+</script>
+</body>
+</html>

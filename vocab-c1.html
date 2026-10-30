@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C1 Vocabulary — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c14;--s1:#0f1623;--s2:#161f30;--s3:#1d2840;
+  --border:rgba(255,255,255,.07);--text:#eef2ff;--muted:#6b7fa3;
+  --c1:#38bdf8;--c2:#a78bfa;--green:#34d399;--red:#f87171;--gold:#fbbf24;
+  --r:14px;--rs:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans Bengali',sans-serif;min-height:100vh}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 55% 40% at 5% 10%,rgba(56,189,248,.09),transparent 60%),
+    radial-gradient(ellipse 50% 50% at 95% 90%,rgba(167,139,250,.09),transparent 60%);
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem 1.4rem;background:rgba(8,12,20,.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:99;
+}
+.back-btn{
+  display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);
+  border:1px solid var(--border);color:var(--muted);padding:.45rem .9rem;
+  border-radius:10px;text-decoration:none;font-size:13px;font-weight:600;transition:.2s;cursor:pointer;
+}
+.back-btn:hover{background:rgba(255,255,255,.08);color:var(--text);}
+.topbar-center{
+  font-family:'Baloo Da 2',cursive;font-size:1rem;font-weight:800;
+  background:linear-gradient(135deg,#38bdf8,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* VIEWS */
+.view{display:none;position:relative;z-index:1;}
+.view.active{display:block;}
+
+/* ══════════════════════════════════
+   VIEW 1: LEVEL MAP
+══════════════════════════════════ */
+#view-map .wrap{max-width:680px;margin:0 auto;padding:2rem 1.25rem 5rem;}
+
+.map-hero{text-align:center;margin-bottom:2rem;}
+.map-hero-tag{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 16px;border-radius:20px;margin-bottom:.75rem;
+  background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:var(--green);
+}
+.map-hero h1{
+  font-family:'Baloo Da 2',cursive;font-size:clamp(1.6rem,5vw,2.2rem);font-weight:800;line-height:1.2;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.3rem;
+}
+.map-hero p{font-size:13px;color:var(--muted);}
+
+/* overall progress bar */
+.overall-prog{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);
+  padding:1rem 1.2rem;margin-bottom:1.5rem;
+}
+.op-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;}
+.op-label{font-size:13px;font-weight:600;color:var(--text);}
+.op-val{font-family:'Baloo Da 2',cursive;font-size:1rem;font-weight:700;color:var(--c1);}
+.op-bar{height:8px;background:rgba(255,255,255,.06);border-radius:6px;overflow:hidden;}
+.op-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .6s cubic-bezier(.4,0,.2,1);}
+.op-stats{display:flex;gap:16px;margin-top:.7rem;}
+.op-stat{font-size:11px;color:var(--muted);}
+.op-stat b{color:var(--text);}
+
+/* level grid */
+.level-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:12px;
+}
+.lcard{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);
+  padding:1.1rem .9rem;cursor:pointer;transition:all .22s;
+  position:relative;overflow:hidden;text-align:center;
+}
+.lcard:hover:not(.locked){background:var(--s2);border-color:rgba(255,255,255,.15);transform:translateY(-3px);}
+.lcard.locked{opacity:.45;cursor:not-allowed;}
+.lcard.done{border-color:rgba(52,211,153,.3);}
+.lcard.done::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),transparent);}
+.lcard.current{border-color:rgba(56,189,248,.5);box-shadow:0 0 0 2px rgba(56,189,248,.1);}
+.lcard.current::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c1),var(--c2));}
+
+.lcard-num{font-family:'Baloo Da 2',cursive;font-size:1.4rem;font-weight:800;line-height:1;margin-bottom:4px;}
+.lcard.done .lcard-num{color:var(--green);}
+.lcard.current .lcard-num{color:var(--c1);}
+.lcard.locked .lcard-num{color:var(--muted);}
+.lcard:not(.done):not(.current):not(.locked) .lcard-num{color:var(--muted);}
+
+.lcard-label{font-size:11px;color:var(--muted);line-height:1.3;}
+.lcard-words{font-size:10px;color:var(--muted);margin-top:3px;}
+.lcard-badge{
+  position:absolute;top:6px;right:6px;font-size:11px;
+}
+.lcard-prog{
+  margin-top:8px;height:3px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;
+}
+.lcard-prog-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--c1));border-radius:3px;}
+
+/* ══════════════════════════════════
+   VIEW 2: LEARN (flashcard)
+══════════════════════════════════ */
+#view-learn .wrap{max-width:520px;margin:0 auto;padding:1.75rem 1.25rem 5rem;}
+
+/* learn header */
+.lh{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.25rem;
+}
+.lh-title{font-family:'Baloo Da 2',cursive;font-size:1rem;font-weight:700;color:var(--c1);}
+.lh-count{font-size:12px;color:var(--muted);}
+
+/* step tabs */
+.steps{display:flex;gap:6px;margin-bottom:1.4rem;}
+.step-dot{
+  flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.07);transition:background .3s;
+}
+.step-dot.done-s{background:var(--green);}
+.step-dot.active-s{background:var(--c1);}
+
+/* FLASHCARD */
+.fc{
+  perspective:1000px;margin-bottom:1.25rem;cursor:pointer;
+}
+.fc-inner{
+  position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);
+  border-radius:var(--r);
+}
+.fc.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-front,.fc-back{
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--r);
+  padding:2rem 1.5rem;min-height:230px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.fc-front::before,.fc-back::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+}
+.fc-back{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  transform:rotateY(180deg);
+}
+.fc-back::before{background:linear-gradient(90deg,var(--green),var(--c1));}
+.fc-cat{
+  font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;
+  background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);color:var(--c1);
+  margin-bottom:.9rem;
+}
+.fc-word{font-family:'Baloo Da 2',cursive;font-size:clamp(2rem,8vw,3rem);font-weight:800;line-height:1;color:var(--text);margin-bottom:.35rem;}
+.fc-phonetic{font-size:14px;color:var(--c1);letter-spacing:.03em;margin-bottom:.2rem;}
+.fc-hint{font-size:12px;color:var(--muted);margin-top:.5rem;}
+.fc-tap{font-size:12px;color:var(--muted);margin-top:1rem;opacity:.6;}
+
+.fc-meaning{font-family:'Baloo Da 2',cursive;font-size:2rem;font-weight:800;color:var(--green);margin-bottom:.6rem;}
+.fc-example{
+  font-size:13px;color:var(--muted);text-align:center;line-height:1.6;
+  padding:.6rem .9rem;background:rgba(255,255,255,.03);border-radius:8px;
+  border-left:2px solid rgba(56,189,248,.3);text-align:left;
+}
+.fc-example em{color:var(--c1);font-style:normal;}
+
+/* nav buttons */
+.fc-nav{display:flex;gap:10px;justify-content:center;margin-bottom:1rem;}
+.fc-btn{
+  flex:1;padding:.75rem;border:none;border-radius:12px;font-family:'Noto Sans Bengali',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;max-width:160px;
+}
+.fc-btn-skip{background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);}
+.fc-btn-skip:hover{background:rgba(255,255,255,.1);color:var(--text);}
+.fc-btn-got{background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(52,211,153,.08));border:1px solid rgba(52,211,153,.3);color:var(--green);}
+.fc-btn-got:hover{background:rgba(52,211,153,.22);}
+.fc-btn-next{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;}
+.fc-btn-next:hover{opacity:.9;transform:translateY(-1px);}
+
+.fc-progress{font-size:12px;color:var(--muted);text-align:center;margin-bottom:1.25rem;}
+.fc-prog-bar{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin-bottom:.5rem;}
+.fc-prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .35s;}
+
+/* QUICK CHECK (mini quiz after flashcards) */
+.qc-header{text-align:center;margin-bottom:1.5rem;}
+.qc-header h2{font-family:'Baloo Da 2',cursive;font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:.3rem;}
+.qc-header p{font-size:13px;color:var(--muted);}
+.qc-card{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.75rem 1.4rem;margin-bottom:1.1rem;text-align:center;position:relative;overflow:hidden;
+}
+.qc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c2),var(--c5,#f472b6));}
+.qc-q{font-size:12px;color:var(--muted);margin-bottom:.5rem;}
+.qc-word{font-family:'Baloo Da 2',cursive;font-size:2rem;font-weight:800;color:var(--text);margin-bottom:.4rem;}
+.qc-phonetic{font-size:13px;color:var(--c1);margin-bottom:.3rem;}
+.qc-task{font-size:13px;color:var(--muted);}
+.qc-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:1rem;}
+.qc-opt{
+  background:var(--s1);border:1px solid var(--border);border-radius:var(--rs);
+  padding:.8rem .7rem;font-family:'Noto Sans Bengali',sans-serif;font-size:13px;
+  color:var(--text);cursor:pointer;transition:all .18s;text-align:center;line-height:1.4;
+}
+.qc-opt:hover:not(:disabled){background:var(--s2);border-color:rgba(255,255,255,.18);}
+.qc-opt:disabled{cursor:default;}
+.qc-opt.correct{background:rgba(52,211,153,.12);border-color:var(--green);color:var(--green);font-weight:600;}
+.qc-opt.wrong{background:rgba(248,113,113,.1);border-color:var(--red);color:var(--red);}
+.qc-opt.reveal{background:rgba(56,189,248,.1);border-color:var(--c1);color:var(--c1);font-weight:600;}
+.qc-fb{min-height:24px;text-align:center;font-size:14px;font-weight:600;margin-bottom:.9rem;}
+.qc-fb.ok{color:var(--green)}.qc-fb.no{color:var(--red);}
+.btn-qnext{
+  width:100%;padding:.75rem;background:linear-gradient(135deg,var(--c1),var(--c2));
+  color:#fff;border:none;border-radius:12px;font-family:'Noto Sans Bengali',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;transition:.2s;display:none;
+}
+.btn-qnext:hover{opacity:.9;}
+.qc-counter{text-align:center;font-size:12px;color:var(--muted);margin-top:.7rem;}
+
+/* COMPLETE screen */
+.complete{
+  text-align:center;padding:2.5rem 1.5rem;
+  background:var(--s1);border:1px solid rgba(52,211,153,.3);border-radius:var(--r);
+  position:relative;overflow:hidden;
+}
+.complete::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--c1));}
+.c-em{font-size:3.5rem;margin-bottom:.6rem;}
+.c-title{font-family:'Baloo Da 2',cursive;font-size:1.8rem;font-weight:800;color:var(--green);margin-bottom:.3rem;}
+.c-sub{font-size:14px;color:var(--muted);margin-bottom:1.25rem;}
+.c-stats{display:flex;gap:10px;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap;}
+.c-stat{
+  background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;
+  padding:.7rem 1.1rem;min-width:90px;
+}
+.c-stat-v{font-family:'Baloo Da 2',cursive;font-size:1.4rem;font-weight:700;}
+.c-stat-l{font-size:11px;color:var(--muted);margin-top:2px;}
+.c-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.c-btn-next{
+  background:linear-gradient(135deg,var(--green),var(--c1));color:#fff;border:none;
+  border-radius:30px;padding:.75rem 2rem;font-family:'Noto Sans Bengali',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;transition:.2s;
+}
+.c-btn-next:hover{transform:translateY(-2px);opacity:.9;}
+.c-btn-map{
+  background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border);
+  border-radius:30px;padding:.75rem 1.5rem;font-family:'Noto Sans Bengali',sans-serif;
+  font-size:14px;font-weight:600;cursor:pointer;transition:.2s;
+}
+.c-btn-map:hover{background:rgba(255,255,255,.1);color:var(--text);}
+
+/* confetti */
+@keyframes conffall{0%{transform:translateY(-10px) rotate(0);opacity:1}100%{transform:translateY(80px) rotate(360deg);opacity:0}}
+.conf{position:absolute;width:8px;height:8px;border-radius:2px;animation:conffall .9s ease forwards;}
+
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.anim{animation:fu .4s ease both;}
+
+@media(max-width:480px){.level-grid{grid-template-columns:repeat(3,1fr)}.qc-opts{grid-template-columns:1fr}}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="topbar">
+  <button class="back-btn" id="topbar-back">← Vocabulary</button>
+  <span class="topbar-center" id="topbar-title">C1 Vocabulary</span>
+  <span style="width:80px"></span>
+</div>
+
+<!-- ── VIEW: MAP ── -->
+<div class="view active" id="view-map">
+  <div class="wrap">
+    <div class="map-hero">
+      <div class="map-hero-tag">📖 C1 · Advanced · 86 শব্দ</div>
+      <h1>C1 Vocabulary শেখো</h1>
+      <p>5টি Level — প্রতিটিতে সর্বোচ্চ ২০টি করে শব্দ। একটি শেষ করো, পরেরটি unlock হবে।</p>
+    </div>
+    <div class="overall-prog" id="overall-prog">
+      <div class="op-row">
+        <span class="op-label">মোট অগ্রগতি</span>
+        <span class="op-val" id="op-val">0 / 86</span>
+      </div>
+      <div class="op-bar"><div class="op-fill" id="op-fill" style="width:0%"></div></div>
+      <div class="op-stats">
+        <span class="op-stat">✅ সম্পন্ন: <b id="op-done">0</b> Level</span>
+        <span class="op-stat">⏳ বাকি: <b id="op-rem">23</b> Level</span>
+        <span class="op-stat">⚡ XP: <b id="op-xp">0</b></span>
+      </div>
+    </div>
+    <div class="level-grid" id="level-grid"></div>
+  </div>
+</div>
+
+<!-- ── VIEW: LEARN ── -->
+<div class="view" id="view-learn">
+  <div class="wrap">
+    <div class="lh">
+      <span class="lh-title" id="lh-title">Level 1</span>
+      <span class="lh-count" id="lh-count"></span>
+    </div>
+    <div class="steps" id="steps">
+      <div class="step-dot active-s" id="step0"></div>
+      <div class="step-dot" id="step1"></div>
+      <div class="step-dot" id="step2"></div>
+    </div>
+    <div id="learn-content"></div>
+  </div>
+</div>
+
+<script type="module">
+import {
+  auth, db, requireAuth,
+  doc, getDoc, setDoc, serverTimestamp, onAuthStateChanged
+} from "./js/firebase-config.js";
+import { VOCAB_C1 } from "./js/vocab-c1.js";
+
+/* ── CONFIG ── */
+const WORDS_PER_LEVEL = 20;
+const TOTAL = VOCAB_C1.length;
+const TOTAL_LEVELS = Math.ceil(TOTAL / WORDS_PER_LEVEL);
+const XP_PER_LEVEL = 30;
+
+/* ── STATE ── */
+let currentUser = null;
+let userProgress = {}; // { levelsDone: Set, xp: 0, ... }
+
+/* words for level N (1-based) */
+function levelWords(n) {
+  const start = (n - 1) * WORDS_PER_LEVEL;
+  return VOCAB_C1.slice(start, start + WORDS_PER_LEVEL);
+}
+
+/* ── FIREBASE ── */
+async function loadProgress() {
+  if (!currentUser) return;
+  try {
+    const snap = await getDoc(doc(db, 'users', currentUser.uid));
+    const d = snap.exists() ? snap.data() : {};
+    const done = d.vocab_c1_levels_done || [];
+    userProgress = {
+      levelsDone: new Set(done),
+      xp: d.xp || 0,
+      totalWordsDone: done.length * WORDS_PER_LEVEL,
+    };
+  } catch(e) { console.warn(e); userProgress = { levelsDone: new Set(), xp: 0, totalWordsDone: 0 }; }
+}
+
+async function saveLevel(n) {
+  if (!currentUser) return;
+  try {
+    userProgress.levelsDone.add(n);
+    const done = [...userProgress.levelsDone];
+    userProgress.xp += XP_PER_LEVEL;
+    userProgress.totalWordsDone = done.length * WORDS_PER_LEVEL;
+    if (done.length === TOTAL_LEVELS) {
+      await setDoc(doc(db, 'users', currentUser.uid), {
+        vocab_c1_levels_done: done,
+        xp: userProgress.xp,
+        passed_c1: true,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+    } else {
+      await setDoc(doc(db, 'users', currentUser.uid), {
+        vocab_c1_levels_done: done,
+        xp: userProgress.xp,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
+    }
+  } catch(e) { console.warn(e); }
+}
+
+/* ── VIEW SWITCH ── */
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ── LEVEL MAP ── */
+function renderMap() {
+  const done = userProgress.levelsDone;
+  const total = done.size * WORDS_PER_LEVEL;
+  const pct = Math.round((total / TOTAL) * 100);
+  document.getElementById('op-val').textContent  = total + ' / ' + TOTAL;
+  document.getElementById('op-fill').style.width = pct + '%';
+  document.getElementById('op-done').textContent = done.size;
+  document.getElementById('op-rem').textContent  = TOTAL_LEVELS - done.size;
+  document.getElementById('op-xp').textContent   = userProgress.xp;
+
+  const grid = document.getElementById('level-grid');
+  grid.innerHTML = '';
+
+  for (let n = 1; n <= TOTAL_LEVELS; n++) {
+    const isDone    = done.has(n);
+    const isLocked  = n > 1 && !done.has(n - 1);
+    const isCurrent = !isDone && !isLocked;
+
+    const words = levelWords(n);
+    const cats  = [...new Set(words.map(w => w.category))];
+    const catLabel = cats.slice(0,2).join(', ') + (cats.length > 2 ? '…' : '');
+
+    const card = document.createElement('div');
+    card.className = 'lcard' + (isDone ? ' done' : '') + (isLocked ? ' locked' : '') + (isCurrent ? ' current' : '');
+
+    card.innerHTML = `
+      <div class="lcard-badge">${isDone ? '✅' : isLocked ? '🔒' : '▶'}</div>
+      <div class="lcard-num">L${n}</div>
+      <div class="lcard-label">${catLabel}</div>
+      <div class="lcard-words">${WORDS_PER_LEVEL} শব্দ</div>
+      <div class="lcard-prog"><div class="lcard-prog-fill" style="width:${isDone ? 100 : 0}%"></div></div>`;
+
+    if (!isLocked) {
+      card.addEventListener('click', () => startLevel(n));
+    }
+    grid.appendChild(card);
+  }
+  document.getElementById('topbar-back').onclick = () => location.href = 'vocab-dashboard.html';
+  document.getElementById('topbar-title').textContent = 'C1 Vocabulary';
+}
+
+/* ── START LEVEL ── */
+function startLevel(n) {
+  showView('view-learn');
+  document.getElementById('topbar-title').textContent = 'Level ' + n + ' / ' + TOTAL_LEVELS;
+  document.getElementById('topbar-back').onclick = () => { showView('view-map'); renderMap(); };
+
+  const words = levelWords(n);
+  document.getElementById('lh-title').textContent = 'Level ' + n + ' — Flashcards';
+  document.getElementById('lh-count').textContent = WORDS_PER_LEVEL + ' শব্দ';
+  setStep(0);
+  startFlashcards(words, n);
+}
+
+function setStep(i) {
+  for (let s = 0; s < 3; s++) {
+    const el = document.getElementById('step' + s);
+    el.className = 'step-dot' + (s < i ? ' done-s' : s === i ? ' active-s' : '');
+  }
+}
+
+/* ── FLASHCARDS ── */
+function startFlashcards(words, levelN) {
+  let idx = 0;
+  let gotIt = new Set();
+  setStep(0);
+  document.getElementById('lh-title').textContent = 'Level ' + levelN + ' — শব্দ শেখো';
+
+  function render() {
+    if (idx >= words.length) { startQuickCheck(words, levelN); return; }
+    const w = words[idx];
+    const pct = Math.round((idx / words.length) * 100);
+    const content = document.getElementById('learn-content');
+    content.innerHTML = `
+      <div class="fc-prog-bar"><div class="fc-prog-fill" id="fcpf" style="width:${pct}%"></div></div>
+      <div class="fc-progress">${idx + 1} / ${words.length} শব্দ</div>
+      <div class="fc anim" id="fc">
+        <div class="fc-inner" id="fc-inner">
+          <div class="fc-front">
+            <span class="fc-cat">${w.category}</span>
+            <div class="fc-word">${w.word}</div>
+            <div class="fc-phonetic">${w.phonetic}</div>
+            <div class="fc-tap">👆 tap করে অর্থ দেখো</div>
+          </div>
+          <div class="fc-back">
+            <div class="fc-meaning">${w.meaning}</div>
+            <div class="fc-example">📝 <em>${w.example}</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-nav" id="fcnav" style="display:none;">
+        <button class="fc-btn fc-btn-skip" id="fc-skip">আবার দেখবো</button>
+        <button class="fc-btn fc-btn-got" id="fc-got">বুঝেছি ✓</button>
+      </div>
+      <div class="fc-nav" id="fcnav2">
+        <button class="fc-btn fc-btn-next" id="fc-flip">উল্টাও →</button>
+      </div>`;
+
+    const fc = document.getElementById('fc');
+    document.getElementById('fc-flip').addEventListener('click', () => {
+      fc.classList.add('flipped');
+      document.getElementById('fcnav').style.display = 'flex';
+      document.getElementById('fcnav2').style.display = 'none';
+    });
+    document.getElementById('fc-inner').addEventListener('click', () => {
+      fc.classList.toggle('flipped');
+      const flipped = fc.classList.contains('flipped');
+      document.getElementById('fcnav').style.display = flipped ? 'flex' : 'none';
+      document.getElementById('fcnav2').style.display = flipped ? 'none' : 'flex';
+    });
+    document.getElementById('fc-got').addEventListener('click', () => { gotIt.add(idx); idx++; render(); });
+    document.getElementById('fc-skip').addEventListener('click', () => { idx++; render(); });
+  }
+  render();
+}
+
+/* ── QUICK CHECK ── */
+function startQuickCheck(words, levelN) {
+  setStep(1);
+  document.getElementById('lh-title').textContent = 'Level ' + levelN + ' — Quick Check';
+  // 4 random questions from this level
+  const qs = shuffle([...words]).slice(0, Math.min(4, words.length));
+  let qi = 0, correct = 0;
+
+  function renderQ() {
+    if (qi >= qs.length) { showComplete(words, levelN, correct, qs.length); return; }
+    const w = qs[qi];
+    // distractors from same level
+    const others = shuffle(words.filter(x => x.meaning !== w.meaning).map(x => x.meaning));
+    const opts = shuffle([w.meaning, ...others.slice(0, 3)]);
+    const content = document.getElementById('learn-content');
+    content.innerHTML = `
+      <div class="qc-header anim">
+        <h2>Quick Check 🧠</h2>
+        <p>শব্দগুলো মনে আছে তো?</p>
+      </div>
+      <div class="qc-card anim">
+        <div class="qc-q">এই শব্দের বাংলা অর্থ কী?</div>
+        <div class="qc-word">${w.word}</div>
+        <div class="qc-phonetic">${w.phonetic}</div>
+      </div>
+      <div class="qc-opts" id="qc-opts"></div>
+      <div class="qc-fb" id="qc-fb"></div>
+      <button class="btn-qnext" id="btn-qnext" onclick="window._qnext && window._qnext()">পরবর্তী →</button>
+      <div class="qc-counter">${qi + 1} / ${qs.length}</div>`;
+
+    const od = document.getElementById('qc-opts');
+    opts.forEach(o => {
+      const b = document.createElement('button');
+      b.className = 'qc-opt'; b.textContent = o;
+      b.addEventListener('click', () => {
+        if (b.disabled) return;
+        od.querySelectorAll('.qc-opt').forEach(x => x.disabled = true);
+        const fb = document.getElementById('qc-fb');
+        if (o === w.meaning) {
+          b.classList.add('correct'); fb.textContent = '✓ সঠিক!'; fb.className = 'qc-fb ok'; correct++;
+        } else {
+          b.classList.add('wrong'); fb.textContent = '✗ ভুল হয়েছে'; fb.className = 'qc-fb no';
+          od.querySelectorAll('.qc-opt').forEach(x => { if (x.textContent === w.meaning) x.classList.add('reveal'); });
+        }
+        document.getElementById('btn-qnext').style.display = 'block';
+      });
+      od.appendChild(b);
+    });
+    window._qnext = () => { qi++; renderQ(); };
+  }
+  renderQ();
+}
+
+/* ── COMPLETE ── */
+function showComplete(words, levelN, correct, total) {
+  setStep(2);
+  saveLevel(levelN);
+  const pct = Math.round((correct / total) * 100);
+  const em  = pct === 100 ? '🏆' : pct >= 75 ? '🎉' : '💪';
+  const nextLevel = levelN + 1;
+  const hasNext = nextLevel <= TOTAL_LEVELS;
+
+  const content = document.getElementById('learn-content');
+  content.innerHTML = `
+    <div class="complete anim" id="cmp">
+      <div class="c-em">${em}</div>
+      <div class="c-title">Level ${levelN} সম্পন্ন!</div>
+      <div class="c-sub">Quick Check: ${correct}/${total} সঠিক · +${XP_PER_LEVEL} XP অর্জন</div>
+      <div class="c-stats">
+        <div class="c-stat"><div class="c-stat-v" style="color:var(--green)">${WORDS_PER_LEVEL}</div><div class="c-stat-l">শব্দ শেখা</div></div>
+        <div class="c-stat"><div class="c-stat-v" style="color:var(--gold)">${XP_PER_LEVEL}</div><div class="c-stat-l">XP অর্জন</div></div>
+        <div class="c-stat"><div class="c-stat-v" style="color:var(--c1)">${userProgress.levelsDone.size}/${TOTAL_LEVELS}</div><div class="c-stat-l">Level সম্পন্ন</div></div>
+      </div>
+      <div class="c-btns">
+        ${hasNext ? `<button class="c-btn-next" id="btn-cnext">Level ${nextLevel} শুরু করো →</button>` : `<button class="c-btn-next" style="background:linear-gradient(135deg,var(--gold),var(--c4,#fb923c))">🏆 A1 সম্পূর্ণ!</button>`}
+        <button class="c-btn-map" id="btn-cmap">Level Map ←</button>
+      </div>
+    </div>`;
+  spawnConfetti();
+  document.getElementById('btn-cmap').addEventListener('click', () => { showView('view-map'); renderMap(); });
+  if (hasNext) document.getElementById('btn-cnext').addEventListener('click', () => startLevel(nextLevel));
+}
+
+function spawnConfetti() {
+  const cmp = document.getElementById('cmp');
+  if (!cmp) return;
+  const colors = ['#38bdf8','#a78bfa','#34d399','#fbbf24','#f472b6','#fb923c'];
+  for (let i = 0; i < 18; i++) {
+    const c = document.createElement('div');
+    c.className = 'conf';
+    c.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*30}%;background:${colors[i%colors.length]};animation-delay:${Math.random()*.5}s;animation-duration:${.7+Math.random()*.6}s`;
+    cmp.appendChild(c);
+  }
+}
+
+function shuffle(a) {
+  const b = [...a];
+  for (let i = b.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [b[i], b[j]] = [b[j], b[i]];
+  }
+  return b;
+}
+
+/* ── INIT ── */
+onAuthStateChanged(auth, async user => {
+  currentUser = user;
+  await loadProgress();
+  renderMap();
+});
+
+// fallback if not using firebase auth (demo mode)
+if (!window._fbAuthInit) {
+  loadProgress().then(renderMap);
+}
+</script>
+</body>
+</html>

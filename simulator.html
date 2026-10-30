@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-life English — English Shekho</title>
+<meta name="robots" content="noindex">
+<meta name="es-guest" content="allowed">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  body{min-height:100vh;padding:var(--es-s3) var(--es-s3) 7rem;display:grid;place-items:start center}
+  .wrap{width:min(600px,100%)}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:var(--es-s3);margin-bottom:var(--es-s3)}
+  .top a{color:var(--es-sub);text-decoration:none;font-size:var(--es-fs-sm)}
+  .top select{background:var(--es-surface-2);color:var(--es-text);border:1px solid var(--es-border-strong);border-radius:var(--es-r-sm);padding:.35rem .6rem;font:inherit;min-height:40px}
+  h1{font-size:var(--es-fs-xl);margin:0} h2{font-size:var(--es-fs-lg);margin:0 0 var(--es-s2)}
+  .lead{color:var(--es-sub);margin:0 0 var(--es-s3)} .sub{color:var(--es-muted);font-size:var(--es-fs-sm)}
+  .card{padding:var(--es-s4);margin-bottom:var(--es-s3)}
+  .modes{display:grid;grid-template-columns:1fr 1fr;gap:var(--es-s2);margin:var(--es-s3) 0}
+  .mode{padding:.7rem;border-radius:var(--es-r-md);cursor:pointer;color:var(--es-sub);font:600 var(--es-fs-sm)/1.3 var(--es-font);background:var(--es-surface-1);border:1px solid var(--es-border-strong);text-align:left;min-height:44px}
+  .mode[aria-pressed="true"]{color:#fff;background:var(--es-grad-brand);border-color:transparent}
+  .mode small{display:block;font-weight:400;opacity:.85}
+  .grid{display:grid;gap:var(--es-s2)}
+  .sc{display:flex;gap:var(--es-s3);align-items:center;text-align:left;width:100%;padding:.8rem 1rem;border-radius:var(--es-r-md);cursor:pointer;color:var(--es-text);font:inherit;background:var(--es-surface-1);border:1px solid var(--es-border-strong);min-height:56px}
+  .sc:hover{border-color:var(--es-indigo-400)} .sc .ic{font-size:1.6rem} .sc b{display:block} .sc .bd{margin-left:auto}
+  .goals{list-style:none;margin:var(--es-s2) 0;padding:0;display:grid;gap:6px}
+  .goals li{display:flex;gap:8px;align-items:flex-start}
+  .goals li .mk{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;border:2px solid var(--es-border-strong);color:transparent}
+  .goals li.done .mk{background:var(--es-success);border-color:var(--es-success);color:#fff} .goals li.done{color:var(--es-success)}
+  .phr{display:flex;flex-wrap:wrap;gap:var(--es-s2);margin:var(--es-s2) 0}
+  .phr button{padding:.4rem .75rem;border-radius:var(--es-r-pill);background:var(--es-surface-2);border:1px solid var(--es-border-strong);color:var(--es-text);font:inherit;cursor:pointer;min-height:40px}
+  /* chat */
+  #log{display:flex;flex-direction:column;gap:var(--es-s2);margin:var(--es-s3) 0;max-height:46vh;overflow-y:auto;padding:2px}
+  .b{max-width:88%;padding:.6rem .8rem;border-radius:16px;line-height:1.55;word-break:break-word}
+  .b.p{align-self:flex-start;background:var(--es-surface-2);border:1px solid var(--es-border);border-bottom-left-radius:4px}
+  .b.l{align-self:flex-end;background:rgba(91,91,255,.22);border:1px solid rgba(124,131,255,.45);border-bottom-right-radius:4px}
+  .b .who{display:block;font-size:var(--es-fs-xs);color:var(--es-muted);margin-bottom:2px}
+  .b .tip{display:block;margin-top:6px;padding:.4rem .6rem;border-radius:10px;background:rgba(255,200,87,.1);border:1px solid rgba(255,200,87,.3);font-size:var(--es-fs-xs);color:var(--es-warm-400)}
+  .b button.say{margin-left:6px;background:none;border:0;cursor:pointer;color:var(--es-sub);font-size:1rem;min-height:32px;min-width:32px}
+  .typing{align-self:flex-start;color:var(--es-muted);font-size:var(--es-fs-sm)}
+  .notice{padding:.6rem .8rem;border-radius:var(--es-r-md);background:rgba(34,211,238,.09);border:1px solid rgba(34,211,238,.3);color:var(--es-cyan-300);font-size:var(--es-fs-sm);margin:var(--es-s2) 0}
+  .dock{position:sticky;bottom:0;padding:var(--es-s3);border-radius:var(--es-r-lg) var(--es-r-lg) 0 0;background:rgba(13,16,34,.97);border:1px solid var(--es-border-strong)}
+  .dock textarea{width:100%;min-height:64px;resize:vertical;padding:.7rem .9rem;color:var(--es-text);font:inherit;background:var(--es-surface-1);border:1px solid var(--es-border-strong);border-radius:var(--es-r-md)}
+  .dock textarea:focus{outline:none;border-color:var(--es-indigo-400);box-shadow:0 0 0 3px rgba(124,131,255,.25)}
+  .row{display:flex;gap:var(--es-s2);flex-wrap:wrap;align-items:center;margin-top:var(--es-s2)}
+  .row .grow{flex:1 1 120px}
+  .mic{width:48px;height:48px;border-radius:50%;border:0;cursor:pointer;font-size:1.3rem;color:#fff;background:var(--es-grad-brand)}
+  .mic[aria-pressed="true"]{background:linear-gradient(135deg,#fb7185,#e11d48);animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.5)}50%{box-shadow:0 0 0 10px rgba(251,113,133,0)}}
+  .err{padding:.6rem .8rem;border-radius:var(--es-r-md);background:rgba(251,113,133,.09);border:1px solid rgba(251,113,133,.35);margin-top:var(--es-s2);font-size:var(--es-fs-sm)}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:var(--es-s2);margin:var(--es-s3) 0}
+  .tile{padding:.7rem;border-radius:var(--es-r-md);background:var(--es-surface-1);border:1px solid var(--es-border);text-align:center} .tile b{display:block;font-size:var(--es-fs-2xl);line-height:1.1} .tile span{color:var(--es-sub);font-size:var(--es-fs-xs)}
+  .mis{padding:.6rem .8rem;margin:var(--es-s2) 0;border-radius:var(--es-r-md);background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.25)}
+  .mis s{color:var(--es-danger)} .mis ins{color:var(--es-success);text-decoration:none;font-weight:700}
+  .actions{display:flex;gap:var(--es-s2);flex-wrap:wrap;margin-top:var(--es-s3)} .actions .es-btn{flex:1 1 140px}
+  .es-btn--sm{min-height:40px}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><a href="dashboard.html">← Dashboard</a><h1>🎭 Real-life English</h1><label class="sub">স্তর <select id="lvl" aria-label="স্তর"></select></label></div>
+  <div id="view"></div>
+  <div id="sr" class="es-sr-only" role="status" aria-live="polite"></div>
+</main>
+<script type="module" src="simulator/ui.js"></script>
+</body>
+</html>

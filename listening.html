@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Listening Center — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;--surface3:#101828;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--gold2:#e0a820;
+  --teal:#2dd4bf;--rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;
+  --orange:#fb923c;--muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(129,140,248,.025),transparent 60%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:52px 52px;}
+.wrap{max-width:1160px;margin:auto;padding:1.6rem 1.4rem 0;position:relative;z-index:1;}
+
+/* ─── TOPBAR ─── */
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+  background:rgba(8,14,26,.8);border:1px solid var(--border);border-radius:18px;padding:.9rem 1.4rem;
+  backdrop-filter:blur(24px);box-shadow:0 4px 32px rgba(0,0,0,.4);position:sticky;top:16px;z-index:100;}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));
+  border:1px solid rgba(245,200,66,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  box-shadow:0 0 18px rgba(245,200,66,.12);flex-shrink:0;}
+.logo-text h1{font-size:1.55rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--sub);
+  text-decoration:none;transition:.2s;border:1px solid transparent;}
+.nav-link:hover{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  display:flex;align-items:center;justify-content:center;font-size:1rem;overflow:hidden;
+  border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;transition:.2s;box-shadow:0 0 14px rgba(245,200,66,.1);}
+.user-avatar:hover{border-color:var(--gold);box-shadow:0 0 22px rgba(245,200,66,.25);}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);color:var(--rose);
+  padding:.4rem .9rem;border-radius:10px;cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* ─── HERO ─── */
+.hero{border-radius:24px;padding:2.2rem 2.4rem;margin-bottom:1.8rem;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#080e18,#0a1220);border:1px solid rgba(255,255,255,.07);box-shadow:0 8px 48px rgba(0,0,0,.45);}
+.hero-stripe{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);}
+.hero-orb1{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.1),transparent 70%);top:-100px;left:-80px;pointer-events:none;}
+.hero-orb2{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.09),transparent 70%);bottom:-80px;right:-60px;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.7rem;opacity:.8;}
+.hero h2{font-size:2.1rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;line-height:1.15;}
+.hero h2 span{background:linear-gradient(135deg,#f5c842,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--sub);font-size:13.5px;line-height:1.7;max-width:500px;font-family:'Noto Sans Bengali',sans-serif;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.hstat{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.75rem 1.2rem;text-align:center;min-width:78px;transition:.2s;position:relative;overflow:hidden;}
+.hstat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5;}
+.hstat:hover{border-color:rgba(245,200,66,.25);transform:translateY(-2px);}
+.hstat-v{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+/* ─── SECTION TITLE ─── */
+.section-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ─── AUDIO PLAYER ─── */
+.player-card{background:var(--surface2);border:1px solid var(--border);border-radius:22px;
+  padding:1.8rem 2rem;margin-bottom:1.8rem;position:relative;overflow:hidden;}
+.player-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);}
+.pc-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:.6rem;opacity:.8;}
+.pc-title{font-size:1.2rem;font-weight:800;margin-bottom:.3rem;}
+.pc-meta{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:1.4rem;display:flex;gap:12px;flex-wrap:wrap;}
+.pc-meta span{display:flex;align-items:center;gap:4px;}
+
+/* waveform visual */
+.audio-wave{display:flex;align-items:center;gap:2.5px;height:44px;margin-bottom:1.2rem;cursor:pointer;}
+.aw-bar{border-radius:3px;background:rgba(245,200,66,.25);transition:.15s;flex-shrink:0;}
+.aw-bar.played{background:var(--gold);}
+.aw-bar.active{background:var(--teal);animation:wvPulse .4s ease-in-out infinite alternate;}
+@keyframes wvPulse{from{opacity:.7;}to{opacity:1;}}
+
+/* progress */
+.audio-progress-wrap{margin-bottom:1rem;}
+.audio-track{height:5px;background:rgba(255,255,255,.07);border-radius:20px;overflow:hidden;cursor:pointer;margin-bottom:.4rem;}
+.audio-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#f5c842,#2dd4bf);transition:width .3s linear;width:0%;}
+.audio-times{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);}
+
+/* controls */
+.audio-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.ac-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:.2s;}
+.ac-btn:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.12);}
+.ac-play{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.12));
+  border:2px solid rgba(245,200,66,.35);font-size:1.3rem;box-shadow:0 0 20px rgba(245,200,66,.15);}
+.ac-play:hover{box-shadow:0 0 32px rgba(245,200,66,.28);transform:scale(1.06);}
+.ac-speed{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);color:var(--indigo);
+  padding:.4rem .85rem;border-radius:10px;cursor:pointer;font-size:11.5px;font-weight:700;font-family:'JetBrains Mono',monospace;transition:.2s;}
+.ac-speed:hover{background:rgba(129,140,248,.16);}
+.ac-vol{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.vol-slider{width:70px;accent-color:var(--gold);cursor:pointer;}
+
+/* ─── TRANSCRIPT PANEL ─── */
+.transcript-panel{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:14px;
+  padding:1.2rem 1.3rem;margin-top:1.2rem;}
+.tp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;flex-wrap:wrap;gap:.5rem;}
+.tp-title{font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:1px;text-transform:uppercase;}
+.tp-toggle{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--sub);
+  padding:.3rem .75rem;border-radius:8px;cursor:pointer;font-size:11px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;}
+.tp-toggle:hover{background:rgba(255,255,255,.08);color:var(--text);}
+.transcript-text{font-size:13.5px;line-height:2;color:var(--sub);}
+.transcript-text .word{cursor:pointer;border-radius:4px;padding:1px 3px;transition:.15s;}
+.transcript-text .word:hover{background:rgba(245,200,66,.15);color:var(--gold);}
+.transcript-text .word.highlight{background:rgba(45,212,191,.15);color:var(--teal);}
+
+/* ─── LESSON CARDS ─── */
+.lesson-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:1.8rem;}
+.lesson-card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;
+  padding:1.3rem;cursor:pointer;transition:.3s;position:relative;overflow:hidden;}
+.lesson-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:0;transition:.3s;}
+.lesson-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.35);}
+.lesson-card:hover::after{opacity:.8;}
+.lesson-card.active-lesson{border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.04);}
+.lesson-card.completed{border-color:rgba(45,212,191,.2);}
+.lc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem;}
+.lc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.lc-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;}
+.lc-title{font-size:13.5px;font-weight:800;margin-bottom:.3rem;}
+.lc-desc{font-size:12px;color:var(--muted);line-height:1.6;font-family:'Noto Sans Bengali',sans-serif;margin-bottom:.8rem;}
+.lc-footer{display:flex;align-items:center;justify-content:space-between;}
+.lc-dur{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:4px;}
+.lc-xp{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);font-weight:700;}
+.lc-check{width:20px;height:20px;border-radius:50%;background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.3);
+  display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#2dd4bf;}
+
+/* ─── CATEGORY TABS ─── */
+.cat-tabs{display:flex;gap:8px;margin-bottom:1.4rem;flex-wrap:wrap;}
+.cat-tab{padding:.5rem 1.1rem;border-radius:12px;font-size:12.5px;font-weight:600;
+  border:1px solid var(--border);background:var(--surface2);color:var(--sub);cursor:pointer;transition:.2s;}
+.cat-tab:hover{border-color:rgba(245,200,66,.25);color:var(--text);}
+.cat-tab.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.28);color:var(--gold);}
+
+/* ─── COMPREHENSION QUIZ ─── */
+.quiz-panel{background:var(--surface2);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;margin-bottom:1.8rem;display:none;}
+.quiz-panel.show{display:block;}
+.qp-head{padding:1rem 1.3rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+.qp-title{font-weight:800;font-size:14.5px;}
+.qp-progress{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);}
+.qp-body{padding:1.3rem;}
+.q-text{font-size:14px;font-weight:700;margin-bottom:1rem;line-height:1.5;}
+.q-options{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
+.q-opt{padding:.75rem 1rem;border-radius:13px;border:1px solid var(--border);background:rgba(255,255,255,.025);
+  cursor:pointer;font-size:13px;transition:.2s;font-weight:500;}
+.q-opt:hover{border-color:rgba(245,200,66,.25);background:rgba(245,200,66,.04);}
+.q-opt.correct{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.3);color:#34d399;}
+.q-opt.wrong{background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.q-opt.selected{border-color:rgba(245,200,66,.35);background:rgba(245,200,66,.06);}
+.q-feedback{font-size:12.5px;padding:.7rem .9rem;border-radius:11px;margin-top:.5rem;display:none;font-family:'Noto Sans Bengali',sans-serif;line-height:1.6;}
+.q-feedback.show{display:block;}
+.q-feedback.correct{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:#34d399;}
+.q-feedback.wrong{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+.qp-actions{display:flex;gap:8px;padding:1rem 1.3rem;border-top:1px solid var(--border);}
+.btn-next-q{background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(245,200,66,.08));
+  border:1px solid rgba(245,200,66,.3);color:var(--gold);padding:.55rem 1.3rem;border-radius:11px;
+  cursor:pointer;font-weight:700;font-family:'Outfit',sans-serif;font-size:13px;transition:.2s;}
+.btn-next-q:hover{background:rgba(245,200,66,.22);}
+.btn-skip-q{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--sub);
+  padding:.55rem 1.1rem;border-radius:11px;cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:13px;transition:.2s;}
+.btn-skip-q:hover{background:rgba(255,255,255,.07);color:var(--text);}
+
+/* ─── PROGRESS ─── */
+.progress-panel{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.4rem 1.6rem;margin-bottom:1.8rem;}
+.pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:1rem;}
+.pp-item{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:13px;padding:.9rem;text-align:center;}
+.pp-val{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pp-label{font-size:10.5px;color:var(--muted);margin-top:2px;font-family:'Noto Sans Bengali',sans-serif;}
+.prog-track{height:7px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin:.7rem 0 .4rem;}
+.prog-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#f5c842,#2dd4bf);transition:width .8s ease;box-shadow:0 0 10px rgba(245,200,66,.25);}
+.prog-meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;}
+
+/* ─── HISTORY ─── */
+.history-list{display:flex;flex-direction:column;gap:8px;margin-bottom:2rem;}
+.history-item{background:var(--surface2);border:1px solid var(--border);border-radius:14px;
+  padding:1rem 1.2rem;display:flex;align-items:center;gap:12px;transition:.2s;cursor:pointer;}
+.history-item:hover{border-color:rgba(245,200,66,.15);padding-left:1.5rem;}
+.hi-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.hi-info{flex:1;}
+.hi-title{font-size:13px;font-weight:700;margin-bottom:1px;}
+.hi-meta{font-size:10.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.hi-score{font-size:1.05rem;font-weight:800;color:var(--gold);}
+
+/* ─── FOOTER ─── */
+footer{margin-top:3rem;border-top:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),rgba(45,212,191,.35),transparent);}
+.footer-inner{max-width:1160px;margin:auto;padding:2.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;}
+.footer-brand .brand-name{font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.9rem;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:11px;color:#2a3545;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.copyright-text span{color:#374151;}
+.footer-col h4{font-size:.9rem;font-weight:700;color:var(--sub);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.dev-card{background:linear-gradient(135deg,rgba(245,200,66,.04),rgba(45,212,191,.04));border:1px solid rgba(245,200,66,.12);border-radius:14px;padding:1.1rem;}
+.dev-name{font-size:1.05rem;font-weight:800;color:#f0f4f8;margin-bottom:.1rem;}
+.dev-title{font-size:10px;color:var(--gold);letter-spacing:.8px;margin-bottom:.8rem;font-family:'JetBrains Mono',monospace;}
+.dev-contact{display:flex;flex-direction:column;gap:.45rem;}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);}
+.contact-row a{color:var(--sub);text-decoration:none;transition:.15s;}
+.contact-row a:hover{color:var(--gold);}
+.contact-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:rgba(255,255,255,.05);}
+.social-links{display:flex;flex-direction:column;gap:.55rem;}
+.social-link{display:flex;align-items:center;gap:10px;padding:.55rem .85rem;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid var(--border);text-decoration:none;color:var(--sub);font-size:12px;transition:.2s;}
+.social-link:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);color:#f0f4f8;transform:translateX(3px);}
+.sl-icon{font-size:.9rem;width:20px;text-align:center;}
+.sl-label{font-weight:600;}
+.sl-handle{color:var(--muted);font-size:10.5px;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{max-width:1160px;margin:auto;padding:.8rem 1.4rem 1.3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;border-top:1px solid rgba(255,255,255,.04);font-size:11px;color:#2d3748;font-family:'JetBrains Mono',monospace;}
+.footer-bottom a{color:#374151;text-decoration:none;}
+.footer-bottom a:hover{color:var(--muted);}
+.footer-heart{color:var(--rose);}
+
+@media(max-width:800px){.footer-inner{grid-template-columns:1fr;gap:1.6rem;}.nav-links{display:none;}}
+@media(max-width:600px){.topbar{flex-direction:column;align-items:flex-start;}.hero h2{font-size:1.6rem;}.wrap{padding:1rem .9rem 0;}.footer-bottom{flex-direction:column;align-items:flex-start;}}
+
+.toast{position:fixed;top:20px;right:20px;background:#0c1322;color:#f0f4f8;padding:.9rem 1.2rem;border-radius:14px;border-left:3px solid #f5c842;z-index:9999;opacity:0;transform:translateY(-16px);transition:.3s;font-size:13.5px;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.toast.show{opacity:1;transform:translateY(0);}
+
+/* ── Phase 9: word card, practice panel, level tabs ── */
+.wordcard{position:sticky;bottom:12px;z-index:60;margin:12px 0;padding:12px 14px;border-radius:14px;background:rgba(19,23,49,.97);border:1px solid rgba(124,131,255,.45);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.wordcard[hidden]{display:none}
+.wc-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wc-word{font-size:1.25rem;font-weight:800}
+.wc-ph{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.85rem}
+.wc-mean{margin:6px 0 0;color:var(--gold)}
+.wc-ctx{margin:6px 0 0;color:var(--sub);font-size:.85rem}
+.wc-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.pbtn{padding:7px 13px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--text);font:600 13px/1.2 inherit;cursor:pointer}
+.pbtn.main{background:linear-gradient(135deg,#5b5bff,#8b5cf6);border-color:transparent;color:#fff}
+.pbtn:disabled{opacity:.55;cursor:default}
+.pinput{padding:7px 10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--text);font:inherit}
+.practice-panel{margin:18px 0;padding:16px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.02)}
+.practice-panel .pp-title{font-weight:800;margin-bottom:10px}
+.pp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.cz-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--border);line-height:1.9}
+.cz-in{width:9ch;min-width:7ch;text-align:center}
+.cz-in.ok{border-color:#34d399;background:rgba(52,211,153,.12)} .cz-in.close{border-color:#f5c842;background:rgba(245,200,66,.12)} .cz-in.bad{border-color:#fb7185;background:rgba(251,113,133,.12)}
+.cz-fb{flex-basis:100%;font-size:.85rem;color:var(--sub)}
+.cz-sum{margin-top:12px;font-weight:700}
+.pw-row{padding:10px 0;border-bottom:1px solid var(--border)}
+.pw-sent{color:var(--sub);font-size:.85rem;margin-top:4px}
+.lvl-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text"><h1>English Shekho</h1><p>ENGLISH LEARNING PLATFORM · A1 TO C2</p></div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" data-action="go-profile">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div><div class="hero-orb1"></div><div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">👂 Listening Center</div>
+        <h2>শুনে শিখুন <span>Fluently</span> 👂</h2>
+        <p class="hero-sub">Audio lessons, story listening, conversation practice — native speaker-দের কথা শুনে English বোঝার দক্ষতা বাড়ান।</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-v" id="h-listened">0</div><div class="hstat-l">Lessons</div></div>
+        <div class="hstat"><div class="hstat-v" id="h-minutes">0</div><div class="hstat-l">Minutes</div></div>
+        <div class="hstat"><div class="hstat-v" id="h-xp">0</div><div class="hstat-l">XP Earned</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOW PLAYING -->
+  <div class="section-title">▶️ Now Playing</div>
+  <div class="player-card" id="player-card">
+    <div class="pc-eyebrow" id="pc-eyebrow">Audio Lesson · A1</div>
+    <div class="pc-title" id="pc-title">Daily Greetings & Introductions</div>
+    <div class="pc-meta">
+      <span>⏱ <span id="pc-dur">3:24</span></span>
+      <span>📚 <span id="pc-cat">Conversation</span></span>
+      <span>⚡ <span id="pc-xp">+50 XP</span></span>
+    </div>
+
+    <!-- Waveform -->
+    <div class="audio-wave" id="audio-wave" id="audio-wave-click"></div>
+
+    <!-- Progress -->
+    <div class="audio-progress-wrap">
+      <div class="audio-track" id="audio-track-click">
+        <div class="audio-fill" id="audio-fill"></div>
+      </div>
+      <div class="audio-times">
+        <span id="time-current">0:00</span>
+        <span id="time-total">0:00</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="audio-controls">
+      <button class="ac-btn" data-action="skip-back" title="Rewind 10s">⏮ 10s</button>
+      <button class="ac-btn ac-play" id="play-btn" data-action="play-pause">▶</button>
+      <button class="ac-btn" data-action="skip-fwd" title="Forward 10s">10s ⏭</button>
+      <button class="ac-speed" id="speed-btn" data-action="cycle-speed">1×</button>
+      <div class="ac-vol">
+        🔊 <input type="range" class="vol-slider" id="vol-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)">
+      </div>
+    </div>
+
+    <!-- Transcript -->
+    <div class="transcript-panel">
+      <div class="tp-head">
+        <div class="tp-title">📝 Transcript</div>
+        <button class="tp-toggle" id="tp-toggle-btn" data-action="toggle-transcript">Hide</button>
+      </div>
+      <div class="transcript-text" id="transcript-text"></div>
+    </div>
+  </div>
+
+  <!-- COMPREHENSION QUIZ -->
+  <div class="quiz-panel" id="quiz-panel">
+    <div class="qp-head">
+      <div class="qp-title">🧠 Comprehension Quiz</div>
+      <div class="qp-progress" id="qp-progress">Q 1 / 3</div>
+    </div>
+    <div class="qp-body" id="qp-body"></div>
+    <div class="qp-actions">
+      <button class="btn-next-q" id="btn-next-q" data-action="next-q" style="display:none;">Next →</button>
+      <button class="btn-skip-q" data-action="skip-q">Skip</button>
+    </div>
+  </div>
+
+  <!-- PHASE 9: PRACTICE FROM THIS LESSON -->
+  <div class="wordcard" id="wordcard" hidden aria-live="polite"></div>
+  <div class="practice-panel" id="practice-panel">
+    <div class="pp-title">🎯 এই পাঠ থেকে অনুশীলন</div>
+    <div class="pp-tabs">
+      <button type="button" class="pbtn" data-action="open-cloze">✍️ শুনে শূন্যস্থান পূরণ</button>
+      <button type="button" class="pbtn" data-action="open-words">🔊 কঠিন শব্দ ও উচ্চারণ</button>
+    </div>
+    <div id="practice-body"><span style="color:var(--sub);font-size:.9rem">উপরের পাঠটি একবার শুনুন, তারপর একটি অনুশীলন বেছে নিন। Transcript-এর যেকোনো শব্দে চাপলে উচ্চারণ ও অর্থ দেখাবে।</span></div>
+  </div>
+
+  <!-- CATEGORY FILTER -->
+  <div class="section-title">📂 Lesson Library</div>
+  <div class="cat-tabs" id="cat-tabs"></div>
+  <div class="lesson-grid" id="lesson-grid"></div>
+
+  <!-- PROGRESS -->
+  <div class="section-title">📊 Listening Progress</div>
+  <div class="progress-panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;">
+      <div style="font-weight:700;font-size:15px;">Overall Completion</div>
+      <div id="prog-label" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);">0 / 0 lessons</div>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog-bar" style="width:0%"></div></div>
+    <div class="prog-meta"><span id="prog-pct">0% complete</span><span id="prog-tip">Start listening! 👂</span></div>
+    <div class="pp-grid" id="pp-grid"></div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="section-title">🕐 Listening History</div>
+  <div class="history-list" id="history-list"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import {
+  requireAuth, auth, db,
+  doc, getDoc, updateDoc,
+  collection, addDoc, getDocs,
+  query, orderBy, limit, where,
+  serverTimestamp, increment,
+  signOut
+} from "./js/firebase-config.js";
+import { saveWord } from "./learning/word-save.js";
+import { lookup, findSentence, normalizeWord } from "./learning/word-bank.js";
+import { pickBlanks, checkAnswer, practiceWords } from "./learning/listening-tools.js";
+import { safeImageUrl } from "./learning/reading-tools.js";
+import { isoDay } from "./learning/srs.js";
+
+/* ══════════════════════════════════════
+   LESSON DATA
+══════════════════════════════════════ */
+import { LESSONS, CATEGORIES } from "./js/listening-data.js";
+
+
+/* ══════════════════════════════════════
+   STATE
+══════════════════════════════════════ */
+let currentUser    = null;
+let currentLesson  = LESSONS[0];
+let activeCat      = "All";
+let completedLessons = new Set();
+// audioEl replaced by Web Speech TTS
+let isPlaying      = false;
+let speeds         = [0.5, 0.75, 1, 1.25, 1.5, 2];   // 0.5× / 0.75× = slow mode
+let speedIdx       = 2;
+let waveIntervals  = [];
+let currentQ       = 0;
+let quizAnswered   = false;
+let totalListened  = 0;
+let totalMinutes   = 0;
+let totalXP        = 0;
+let showTranscript = true;
+
+/* ══════════════════════════════════════
+   TOAST
+══════════════════════════════════════ */
+function toast(msg, type="success"){
+  const t = document.getElementById("toast");
+  if(!t) return;
+  t.textContent = msg;
+  t.style.borderLeftColor = type==="error"?"#fb7185":type==="info"?"#818cf8":"#f5c842";
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2800);
+}
+
+/* ══════════════════════════════════════
+   AUDIO PLAYER
+══════════════════════════════════════ */
+function buildWaveform(){
+  const wave = document.getElementById("audio-wave");
+  wave.innerHTML = "";
+  const count = 60;
+  for(let i=0;i<count;i++){
+    const bar = document.createElement("div");
+    const h = 6 + Math.random()*30;
+    bar.className = "aw-bar";
+    bar.style.cssText = `height:${h}px;width:3px;`;
+    bar.dataset.idx = i;
+    wave.appendChild(bar);
+  }
+}
+
+function updateWaveform(pct){
+  const bars = document.querySelectorAll(".aw-bar");
+  const played = Math.floor(pct * bars.length);
+  bars.forEach((b,i)=>{
+    b.classList.remove("played","active");
+    if(i < played-1)   b.classList.add("played");
+    if(i === played-1) b.classList.add("active");
+  });
+}
+
+function loadLesson(lesson){
+  currentLesson = lesson;
+  currentQ = 0; quizAnswered = false;
+
+  // Update player info
+  document.getElementById("pc-eyebrow").textContent = `Audio Lesson · ${lesson.level}`;
+  document.getElementById("pc-title").textContent   = lesson.title;
+  document.getElementById("pc-dur").textContent     = lesson.dur;
+  document.getElementById("pc-cat").textContent     = lesson.category;
+  document.getElementById("pc-xp").textContent      = `+${lesson.xp} XP`;
+
+  // Rebuild waveform
+  buildWaveform();
+
+  // Stop any ongoing TTS
+  stopTTS();
+  document.getElementById("time-total").textContent = lesson.dur;
+
+  // Build transcript
+  buildTranscript(lesson.transcript);
+  { const pb = document.getElementById("practice-body"); if (pb) pb.textContent = "উপরের পাঠটি একবার শুনুন, তারপর একটি অনুশীলন বেছে নিন।"; const wc = document.getElementById("wordcard"); if (wc) wc.hidden = true; }
+
+  // Build quiz
+  buildQuiz(lesson.quiz);
+  document.getElementById("quiz-panel").classList.remove("show");
+
+  // Highlight active lesson card
+  document.querySelectorAll(".lesson-card").forEach(c=>{
+    c.classList.toggle("active-lesson", c.dataset.id === lesson.id);
+  });
+
+  window.scrollTo({top:0, behavior:"smooth"});
+  toast(`Now playing: ${lesson.title}`,"info");
+}
+
+function buildTranscript(lines){
+  const el = document.getElementById("transcript-text");
+  el.textContent = "";
+  lines.forEach((line, li) => {
+    line.split(" ").forEach((word, wi) => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.dataset.line = li; span.dataset.wi = wi;              // (was a second data-word → the index replaced the word)
+      span.dataset.action = "word-info";
+      span.dataset.word = word.replace(/[^a-zA-Z'’-]/g, "");
+      span.textContent = word + " ";
+      el.appendChild(span);
+    });
+    el.appendChild(document.createElement("br"));
+  });
+}
+
+function speakWord(word){
+  if(!word) return;
+  const u = new SpeechSynthesisUtterance(word);
+  u.lang="en-US"; u.rate=0.85;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+window.speakWord = speakWord;
+
+function toggleTranscript(){
+  showTranscript = !showTranscript;
+  const el = document.getElementById("transcript-text");
+  const btn = document.getElementById("tp-toggle-btn");
+  el.style.display = showTranscript ? "" : "none";
+  btn.textContent  = showTranscript ? "Hide" : "Show";
+}
+window.toggleTranscript = toggleTranscript;
+
+/* ══════════════════════════════════════
+   WEB SPEECH API — REAL TTS PLAYER
+══════════════════════════════════════ */
+let ttsUtterance  = null;
+let ttsLines      = [];       // flat array of all lines
+let ttsLineIdx    = 0;        // current line being spoken
+let ttsStartTime  = 0;        // Date.now() when playback started
+let ttsElapsed    = 0;        // seconds elapsed (tracked manually)
+let ttsTimer      = null;     // interval for progress bar
+let ttsVolume     = 1;
+let ttsPaused     = false;
+
+function fmtTime(s){ return `${Math.floor(s/60)}:${String(Math.max(0,s)%60).toString().padStart(2,"0")}`; }
+
+/* Check browser support */
+function ttsSupported(){
+  if(!window.speechSynthesis){ toast("⚠️ আপনার browser TTS support করে না।","error"); return false; }
+  return true;
+}
+
+/* Load all lines for current lesson */
+function prepTTS(){
+  ttsLines   = currentLesson.transcript;
+  ttsLineIdx = 0;
+  ttsElapsed = 0;
+  ttsPaused  = false;
+  speechSynthesis.cancel();
+}
+
+/* Speak from current line index */
+function speakFromLine(idx){
+  if(idx >= ttsLines.length){ onTTSEnd(); return; }
+  ttsLineIdx = idx;
+
+  // Highlight current line in transcript
+  highlightLine(idx);
+
+  ttsUtterance = new SpeechSynthesisUtterance(ttsLines[idx]);
+  ttsUtterance.lang   = "en-US";
+  ttsUtterance.rate   = speeds[speedIdx];
+  ttsUtterance.volume = ttsVolume;
+
+  // Pick a good English voice if available
+  const voices = speechSynthesis.getVoices();
+  const enVoice = voices.find(v=>v.lang==="en-US"&&v.name.toLowerCase().includes("google"))
+                ||voices.find(v=>v.lang==="en-US")
+                ||voices.find(v=>v.lang.startsWith("en"));
+  if(enVoice) ttsUtterance.voice = enVoice;
+
+  ttsUtterance.onend = ()=>{
+    if(!ttsPaused) speakFromLine(idx+1);
+  };
+  ttsUtterance.onerror = (e)=>{
+    if(e.error !== "interrupted") speakFromLine(idx+1);
+  };
+
+  speechSynthesis.speak(ttsUtterance);
+}
+
+/* Highlight spoken line and word in transcript */
+function highlightLine(idx){
+  document.querySelectorAll(".word").forEach(w=>{
+    const li = parseInt(w.dataset.line);
+    w.classList.toggle("highlight", li === idx);
+  });
+  // Scroll to highlighted line
+  const first = document.querySelector(`.word[data-line="${idx}"]`);
+  if(first) first.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+/* Called when all lines done */
+function onTTSEnd(){
+  isPlaying = false;
+  ttsPaused = false;
+  clearInterval(ttsTimer);
+  document.getElementById("play-btn").textContent = "▶";
+  document.getElementById("audio-fill").style.width = "100%";
+  document.querySelectorAll(".word").forEach(w=>w.classList.remove("highlight"));
+  updateWaveform(1);
+  onLessonComplete();
+}
+
+/* Start progress bar ticker */
+function startProgressTicker(){
+  clearInterval(ttsTimer);
+  const dur = currentLesson.durSec;
+  ttsTimer = setInterval(()=>{
+    if(!isPlaying) return;
+    ttsElapsed = Math.min(ttsElapsed+1, dur);
+    const pct = ttsElapsed / dur;
+    document.getElementById("audio-fill").style.width = (pct*100)+"%";
+    document.getElementById("time-current").textContent = fmtTime(ttsElapsed);
+    updateWaveform(pct);
+    if(ttsElapsed >= dur) clearInterval(ttsTimer);
+  }, 1000);
+}
+
+/* ── CONTROLS ── */
+function togglePlay(){
+  if(!ttsSupported()) return;
+
+  if(!isPlaying && !ttsPaused){
+    // Fresh start
+    prepTTS();
+    isPlaying = true;
+    ttsPaused = false;
+    document.getElementById("play-btn").textContent = "⏸";
+    document.getElementById("time-total").textContent = currentLesson.dur;
+    startProgressTicker();
+    // Wait for voices to load on first call
+    if(speechSynthesis.getVoices().length === 0){
+      speechSynthesis.addEventListener("voiceschanged", ()=>speakFromLine(0), {once:true});
+    } else {
+      speakFromLine(0);
+    }
+  } else if(isPlaying && !ttsPaused){
+    // Pause
+    speechSynthesis.pause();
+    ttsPaused = true;
+    isPlaying = false;
+    clearInterval(ttsTimer);
+    document.getElementById("play-btn").textContent = "▶";
+    toast("⏸ Paused","info");
+  } else if(ttsPaused){
+    // Resume
+    speechSynthesis.resume();
+    ttsPaused = false;
+    isPlaying = true;
+    document.getElementById("play-btn").textContent = "⏸";
+    startProgressTicker();
+    toast("▶ Resumed","info");
+  }
+}
+window.togglePlay = togglePlay;
+
+function skipForward(){
+  if(!ttsSupported()) return;
+  const next = Math.min(ttsLineIdx+1, ttsLines.length-1);
+  speechSynthesis.cancel();
+  ttsPaused = false;
+  if(isPlaying) speakFromLine(next);
+  else { ttsLineIdx = next; highlightLine(next); }
+  ttsElapsed = Math.min(ttsElapsed+10, currentLesson.durSec);
+  document.getElementById("time-current").textContent = fmtTime(ttsElapsed);
+  document.getElementById("audio-fill").style.width = (ttsElapsed/currentLesson.durSec*100)+"%";
+}
+
+function skipBackward(){
+  if(!ttsSupported()) return;
+  const prev = Math.max(ttsLineIdx-1, 0);
+  speechSynthesis.cancel();
+  ttsPaused = false;
+  if(isPlaying) speakFromLine(prev);
+  else { ttsLineIdx = prev; highlightLine(prev); }
+  ttsElapsed = Math.max(ttsElapsed-10, 0);
+  document.getElementById("time-current").textContent = fmtTime(ttsElapsed);
+  document.getElementById("audio-fill").style.width = (ttsElapsed/currentLesson.durSec*100)+"%";
+}
+
+function seekAudio(e){
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct  = Math.max(0, Math.min(1,(e.clientX-rect.left)/rect.width));
+  const targetLine = Math.floor(pct * ttsLines.length);
+  ttsElapsed = Math.floor(pct * currentLesson.durSec);
+  document.getElementById("audio-fill").style.width = (pct*100)+"%";
+  document.getElementById("time-current").textContent = fmtTime(ttsElapsed);
+  updateWaveform(pct);
+  if(isPlaying){
+    speechSynthesis.cancel();
+    ttsPaused = false;
+    speakFromLine(targetLine);
+  } else {
+    ttsLineIdx = targetLine;
+    highlightLine(targetLine);
+  }
+}
+
+function cycleSpeed(){
+  speedIdx = (speedIdx+1) % speeds.length;
+  const s  = speeds[speedIdx];
+  document.getElementById("speed-btn").textContent = s+"×";
+  // Apply immediately if playing
+  if(isPlaying){
+    const line = ttsLineIdx;
+    speechSynthesis.cancel();
+    ttsPaused = false;
+    speakFromLine(line);
+  }
+  toast(`Speed: ${s}×`,"info");
+}
+
+function setVolume(v){
+  ttsVolume = parseFloat(v);
+  // Will apply on next utterance
+}
+
+// Stop speech when lesson changes
+function stopTTS(){
+  speechSynthesis.cancel();
+  clearInterval(ttsTimer);
+  isPlaying = false;
+  ttsPaused = false;
+  ttsElapsed = 0;
+  ttsLineIdx = 0;
+  document.getElementById("play-btn").textContent = "▶";
+  document.getElementById("audio-fill").style.width = "0%";
+  document.getElementById("time-current").textContent = "0:00";
+  document.querySelectorAll(".word").forEach(w=>w.classList.remove("highlight"));
+}
+
+window.skipForward  = skipForward;
+window.skipBackward = skipBackward;
+window.seekAudio    = seekAudio;
+window.cycleSpeed   = cycleSpeed;
+window.setVolume    = setVolume;
+
+/* ══════════════════════════════════════
+   LESSON COMPLETE → Firebase
+══════════════════════════════════════ */
+async function onLessonComplete(){
+  markListened();
+  if(!currentUser || completedLessons.has(currentLesson.id)) {
+    // Show quiz even if already completed
+    document.getElementById("quiz-panel").classList.add("show");
+    loadQuestion(0);
+    return;
+  }
+  completedLessons.add(currentLesson.id);
+  const xp = currentLesson.xp;
+  const mins = Math.round(currentLesson.durSec / 60);
+
+  try {
+    await addDoc(collection(db,"listening_sessions"),{
+      uid:         currentUser.uid,
+      displayName: currentUser.displayName||"",
+      lessonId:    currentLesson.id,
+      lessonTitle: currentLesson.title,
+      category:    currentLesson.category,
+      level:       currentLesson.level,
+      durationMin: mins,
+      xpEarned:    xp,
+      completedAt: serverTimestamp()
+    });
+    await updateDoc(doc(db,"users",currentUser.uid),{
+      xp:               increment(xp),
+      listenCount:      increment(1),
+      listeningMinutes: increment(mins)
+    });
+
+    totalListened++;
+    totalMinutes += mins;
+    totalXP      += xp;
+    updateHeroStats();
+    updateProgress();
+    await loadHistory();
+    toast(`✅ Lesson complete! +${xp} XP 🎉`);
+  } catch(e){ toast("❌ Save failed: "+e.message,"error"); }
+
+  // Show quiz
+  document.getElementById("quiz-panel").classList.add("show");
+  loadQuestion(0);
+  document.getElementById("quiz-panel").scrollIntoView({behavior:"smooth"});
+}
+
+/* ══════════════════════════════════════
+   QUIZ
+══════════════════════════════════════ */
+function buildQuiz(questions){
+  document.getElementById("qp-progress").textContent = `Q 1 / ${questions.length}`;
+  loadQuestion(0);
+}
+
+function loadQuestion(idx){
+  const questions = currentLesson.quiz;
+  if(idx >= questions.length){ showQuizComplete(); return; }
+  currentQ = idx; quizAnswered = false;
+  const q = questions[idx];
+  document.getElementById("qp-progress").textContent = `Q ${idx+1} / ${questions.length}`;
+  document.getElementById("btn-next-q").style.display = "none";
+  document.getElementById("qp-body").innerHTML = `
+    <div class="q-text">${q.q}</div>
+    <div class="q-options">
+      ${q.opts.map((opt,i)=>`<div class="q-opt" data-idx="${i}" data-action="answer-q" data-idx="${i}">${opt}</div>`).join("")}
+    </div>
+    <div class="q-feedback" id="q-feedback"></div>`;
+}
+
+function answerQ(idx){
+  if(quizAnswered) return;
+  quizAnswered = true;
+  const q    = currentLesson.quiz[currentQ];
+  const opts = document.querySelectorAll(".q-opt");
+  const fb   = document.getElementById("q-feedback");
+  opts[idx].classList.add("selected");
+  if(idx === q.ans){
+    opts[idx].classList.add("correct");
+    fb.textContent = "✅ সঠিক! "+q.exp;
+    fb.className   = "q-feedback show correct";
+    toast("✅ Correct! +5 XP","success");
+  } else {
+    opts[idx].classList.add("wrong");
+    opts[q.ans].classList.add("correct");
+    fb.textContent = "❌ ভুল। সঠিক উত্তর: "+q.opts[q.ans]+" — "+q.exp;
+    fb.className   = "q-feedback show wrong";
+  }
+  document.getElementById("btn-next-q").style.display = "inline-flex";
+}
+window.answerQ = answerQ;
+
+function nextQuestion(){ loadQuestion(currentQ+1); }
+window.nextQuestion = nextQuestion;
+
+function skipQuestion(){ loadQuestion(currentQ+1); }
+window.skipQuestion = skipQuestion;
+
+function showQuizComplete(){
+  document.getElementById("qp-body").innerHTML = `
+    <div style="text-align:center;padding:1.5rem;">
+      <div style="font-size:2rem;margin-bottom:.6rem;">🏆</div>
+      <div style="font-weight:800;font-size:15px;margin-bottom:.4rem;">Quiz Complete!</div>
+      <div style="font-size:13px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;">পরের lesson শুরু করুন।</div>
+    </div>`;
+  document.getElementById("btn-next-q").style.display = "none";
+}
+
+/* ══════════════════════════════════════
+   LESSON GRID
+══════════════════════════════════════ */
+function buildLessons(){
+  const tabs = document.getElementById("cat-tabs");
+  tabs.innerHTML = CATEGORIES.map(c=>`<div class="cat-tab ${c===activeCat?'active':''}" data-cat="${c}">${c}</div>`).join("");
+  tabs.querySelectorAll(".cat-tab").forEach(t=>{
+    t.addEventListener("click",()=>{
+      activeCat = t.dataset.cat;
+      tabs.querySelectorAll(".cat-tab").forEach(x=>x.classList.remove("active"));
+      t.classList.add("active");
+      renderLessonGrid();
+    });
+  });
+  buildLevelTabs();
+  renderLessonGrid();
+}
+
+function renderLessonGrid(){
+  const list = LESSONS.filter(l => (activeCat==="All" || l.category===activeCat) && (activeLvl==="All" || l.level===activeLvl));
+  const grid = document.getElementById("lesson-grid");
+  if (!list.length) { grid.textContent = "এই ফিল্টারে কোনো পাঠ নেই।"; return; }
+  grid.innerHTML = list.map(l=>`
+    <div class="lesson-card ${l.id===currentLesson.id?'active-lesson':''} ${completedLessons.has(l.id)?'completed':''}"
+      data-id="${l.id}" style="border-color:${l.border};">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${l.border.replace('.25','.8')},transparent);opacity:.7;"></div>
+      <div class="lc-top">
+        <div class="lc-icon" style="background:${l.color};border:1px solid ${l.border};">${l.icon}</div>
+        <span class="lc-badge" style="background:${l.color};border:1px solid ${l.border};color:#fff;">${l.level}</span>
+      </div>
+      <div class="lc-title">${l.title}</div>
+      <div class="lc-desc">${l.category}</div>
+      <div class="lc-footer">
+        <span class="lc-dur">⏱ ${l.dur}</span>
+        <span class="lc-xp">+${l.xp} XP</span>
+        ${completedLessons.has(l.id)?'<div class="lc-check">✓</div>':''}
+      </div>
+    </div>`).join("");
+
+  grid.querySelectorAll(".lesson-card").forEach(card=>{
+    card.addEventListener("click",()=>{
+      stopTTS();
+      loadLesson(LESSONS.find(l=>l.id===card.dataset.id));
+    });
+  });
+}
+
+
+/* ═══════════════ PHASE 9: word card + practice from the lesson ═══════════════ */
+const $$ = (id) => document.getElementById(id);
+const bnum = (n) => String(n).replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+const mk = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const pbtn = (text, fn, cls = "") => { const b = mk("button", "pbtn " + cls, text); b.type = "button"; b.onclick = fn; return b; };
+let DICT = null;
+async function getDict() {
+  if (DICT) return DICT;
+  try { const r = await fetch("data/dictionary.json", { cache: "force-cache" }); DICT = r.ok ? (await r.json()).words : {}; }
+  catch { DICT = {}; }
+  return DICT;
+}
+let myLevel = "A1";
+
+function speakLine(text, rate = 0.8) {
+  if (!("speechSynthesis" in window)) { toast("এই ব্রাউজারে উচ্চারণ শোনা যায় না।", "error"); return; }
+  const u = new SpeechSynthesisUtterance(text); u.lang = "en-US"; u.rate = rate;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+
+async function doSave(btn, { word, meaning, example, level }) {
+  btn.disabled = true;
+  try {
+    const res = await saveWord({ word, meaning, example, level, src: "listening" });
+    btn.textContent = res === "exists" ? "✓ আগে থেকেই আছে" : "✓ রিভিউতে যোগ হয়েছে";
+  } catch (e) {
+    console.warn("save word failed", e);
+    btn.disabled = false;
+    toast(e.message === "meaning_required" ? "আগে শব্দটির অর্থ লিখুন।" : "সেভ করা যায়নি, আবার চেষ্টা করুন।", "error");
+  }
+}
+
+async function openWordCard(rawWord, lineText) {
+  const w = normalizeWord(rawWord);
+  if (!w || w.length < 2) return;
+  speakWord(w);
+  const card = $$("wordcard"); card.hidden = false; card.textContent = "";
+  const dict = await getDict();
+  const hit = lookup(dict, w);
+  const top = mk("div", "wc-top");
+  top.append(mk("span", "wc-word", hit ? hit.word : w));
+  if (hit && hit.phonetic) top.appendChild(mk("span", "wc-ph", hit.phonetic));
+  top.appendChild(pbtn("🔊", () => speakWord(w)));
+  const close = pbtn("✕", () => { card.hidden = true; }); close.setAttribute("aria-label", "বন্ধ করুন"); close.style.marginLeft = "auto";
+  top.appendChild(close);
+  card.appendChild(top);
+  const ctx = lineText ? mk("p", "wc-ctx", "“" + lineText + "”") : null;
+  const row = mk("div", "wc-row");
+  if (hit) {
+    card.appendChild(mk("p", "wc-mean", hit.meaning));
+    if (ctx) card.appendChild(ctx);
+    const add = pbtn("➕ Smart Review-এ যোগ করুন", () => doSave(add, { word: hit.word, meaning: hit.meaning, example: lineText, level: hit.level }), "main");
+    row.appendChild(add);
+  } else {
+    card.appendChild(mk("p", "wc-mean", "এই শব্দের অর্থ আমাদের অভিধানে নেই। নিজে লিখে রাখতে পারেন:"));
+    if (ctx) card.appendChild(ctx);
+    const inp = mk("input", "pinput"); inp.placeholder = "বাংলা অর্থ"; inp.maxLength = 60; inp.setAttribute("aria-label", "বাংলা অর্থ");
+    const add = pbtn("➕ যোগ করুন", () => doSave(add, { word: w, meaning: inp.value, example: lineText, level: myLevel }), "main");
+    row.append(inp, add);
+  }
+  card.appendChild(row);
+}
+
+/* ── ✍️ listen & fill the missing word ── */
+function renderCloze() {
+  const body = $$("practice-body"); body.textContent = "";
+  if (showTranscript) toggleTranscript();                       // the transcript would give the answers away
+  const items = pickBlanks(currentLesson.transcript, 5);
+  if (!items.length) { body.appendChild(mk("p", null, "এই পাঠে এই অনুশীলনের উপযোগী বাক্য নেই।")); return; }
+  body.appendChild(mk("p", "wc-ctx", "🔊 চেপে বাক্যটি শুনুন, তারপর ফাঁকা জায়গায় শব্দটি লিখুন। (Transcript লুকানো আছে)"));
+  const rows = items.map((it, i) => {
+    const row = mk("div", "cz-row");
+    row.appendChild(pbtn("🔊", () => speakLine(it.text, 0.8)));
+    const inp = mk("input", "pinput cz-in"); inp.setAttribute("aria-label", `ফাঁকা ${bnum(i + 1)}`); inp.autocomplete = "off"; inp.autocapitalize = "none"; inp.spellcheck = false;
+    inp.style.width = Math.max(7, it.answer.length + 2) + "ch";
+    row.append(mk("span", null, it.before), inp, mk("span", null, it.after));
+    const fb = mk("div", "cz-fb"); row.appendChild(fb);
+    body.appendChild(row);
+    return { it, inp, fb, row };
+  });
+  const sum = mk("div", "cz-sum"); sum.setAttribute("aria-live", "polite");
+  const check = pbtn("✔ যাচাই করুন", async () => {
+    let ok = 0, close = 0; const dict = await getDict();
+    rows.forEach(({ it, inp, fb, row }) => {
+      const r = checkAnswer(inp.value, it.answer);
+      inp.disabled = true; inp.className = "pinput cz-in " + (r === "correct" ? "ok" : r === "close" ? "close" : "bad");
+      fb.textContent = r === "correct" ? "✅ ঠিক!" : r === "close" ? `🟡 প্রায় ঠিক, বানান: ${it.answer}` : `❌ সঠিক শব্দ: ${it.answer}`;
+      if (r === "correct") ok++; else if (r === "close") close++;
+      if (r !== "correct") {
+        const hit = lookup(dict, it.answer);
+        if (hit) { const add = pbtn("➕ রিভিউতে যোগ", () => doSave(add, { word: hit.word, meaning: hit.meaning, example: it.text, level: hit.level })); row.appendChild(add); }
+      }
+    });
+    check.disabled = true;
+    sum.textContent = ok === rows.length ? `🎉 দারুণ! ${bnum(ok)}টির সবগুলোই ঠিক।` : `${bnum(ok + close)}/${bnum(rows.length)} ঠিক হয়েছে${close ? ` (${bnum(close)}টি প্রায় ঠিক)` : ""}। ভুল শব্দগুলো আবার শুনে দেখুন।`;
+  }, "main");
+  const again = pbtn("↺ নতুন শব্দ নিয়ে আবার", renderCloze);
+  const act = mk("div", "wc-row"); act.append(check, again);
+  body.append(act, sum);
+}
+
+/* ── 🔊 hardest words of the lesson ── */
+async function renderPracticeWords() {
+  const body = $$("practice-body"); body.textContent = "লোড হচ্ছে…";
+  const dict = await getDict();
+  const words = practiceWords(currentLesson.transcript, dict, myLevel, 8);
+  body.textContent = "";
+  if (!words.length) { body.appendChild(mk("p", null, "এই পাঠে আলাদা করে অনুশীলনের মতো কঠিন শব্দ নেই।")); return; }
+  body.appendChild(mk("p", "wc-ctx", "এই পাঠের সবচেয়ে কঠিন শব্দগুলো। শুনুন, বলুন, আর দরকারি শব্দ রিভিউতে রাখুন।"));
+  words.forEach((w) => {
+    const row = mk("div", "pw-row");
+    const top = mk("div", "wc-top");
+    top.append(mk("span", "wc-word", w.word));
+    if (w.phonetic) top.appendChild(mk("span", "wc-ph", w.phonetic));
+    top.appendChild(pbtn("🔊", () => speakWord(w.word)));
+    top.appendChild(pbtn("🐢", () => speakLine(w.word, 0.5)));
+    row.appendChild(top);
+    const act = mk("div", "wc-row");
+    let getMeaning = () => w.meaning;
+    if (w.meaning) row.appendChild(mk("div", "wc-mean", w.meaning));
+    else { const inp = mk("input", "pinput"); inp.placeholder = "বাংলা অর্থ লিখুন"; inp.maxLength = 60; inp.setAttribute("aria-label", "বাংলা অর্থ"); act.appendChild(inp); getMeaning = () => inp.value; }
+    const add = pbtn("➕ রিভিউতে যোগ", () => doSave(add, { word: w.word, meaning: getMeaning(), example: w.sentence, level: w.level || myLevel }));
+    act.appendChild(add);
+    row.appendChild(act);
+    row.appendChild(mk("div", "pw-sent", "“" + w.sentence + "”"));
+    body.appendChild(row);
+  });
+}
+
+/* ── level filter (starts on the learner's own level) ── */
+let activeLvl = "All";
+function buildLevelTabs() {
+  let host = $$("lvl-tabs");
+  if (!host) { host = mk("div", "lvl-tabs"); host.id = "lvl-tabs"; $$("cat-tabs").after(host); }
+  host.textContent = "";
+  ["All", "A1", "A2", "B1", "B2", "C1", "C2"].forEach((l) => {
+    const b = mk("div", "cat-tab" + (l === activeLvl ? " active" : ""), l);
+    b.onclick = () => { activeLvl = l; buildLevelTabs(); renderLessonGrid(); };
+    host.appendChild(b);
+  });
+}
+
+/* remember today's listening practice for the daily plan (works for re-listens too) */
+async function markListened() {
+  if (!currentUser) return;
+  try { await updateDoc(doc(db, "users", currentUser.uid), { "planHistory.listening": isoDay() }); }
+  catch (e) { console.warn("plan history not saved", e); }
+}
+
+/* ══════════════════════════════════════
+   PROGRESS + STATS
+══════════════════════════════════════ */
+function updateHeroStats(){
+  document.getElementById("h-listened").textContent = totalListened;
+  document.getElementById("h-minutes").textContent  = totalMinutes;
+  document.getElementById("h-xp").textContent       = totalXP;
+}
+
+function updateProgress(){
+  const total = LESSONS.length;
+  const done  = completedLessons.size;
+  const pct   = Math.round(done/total*100);
+  document.getElementById("prog-bar").style.width  = pct+"%";
+  document.getElementById("prog-label").textContent = `${done} / ${total} lessons`;
+  document.getElementById("prog-pct").textContent   = pct+"% complete";
+  document.getElementById("prog-tip").textContent   =
+    pct>=100?"🏆 All lessons complete!":pct>=75?"Almost there! 🔥":pct>=50?"Halfway! 💪":"Keep listening! 👂";
+
+  document.getElementById("pp-grid").innerHTML = [
+    {val:done,         label:"Lessons Done"},
+    {val:totalMinutes+"m", label:"Minutes Listened"},
+    {val:totalXP,      label:"XP Earned"},
+    {val:pct+"%",      label:"Completion"},
+  ].map(s=>`<div class="pp-item"><div class="pp-val">${s.val}</div><div class="pp-label">${s.label}</div></div>`).join("");
+}
+
+/* ══════════════════════════════════════
+   HISTORY — Firebase
+══════════════════════════════════════ */
+function fmtAgo(ts){
+  if(!ts) return "";
+  const d = ts.toDate?ts.toDate():new Date(ts);
+  const diff = Math.floor((Date.now()-d)/1000);
+  if(diff<60)    return "এইমাত্র";
+  if(diff<3600)  return Math.floor(diff/60)+" মিনিট আগে";
+  if(diff<86400) return Math.floor(diff/3600)+" ঘণ্টা আগে";
+  return Math.floor(diff/86400)+" দিন আগে";
+}
+
+async function loadHistory(){
+  if(!currentUser) return;
+  const el = document.getElementById("history-list");
+  el.innerHTML = `<div style="color:var(--muted);font-size:13px;padding:1rem;text-align:center;font-family:'Noto Sans Bengali',sans-serif;">Loading...</div>`;
+  try {
+    const snap = await getDocs(query(
+      collection(db,"listening_sessions"),
+      where("uid","==",currentUser.uid),
+      orderBy("completedAt","desc"),
+      limit(8)
+    ));
+    if(snap.empty){
+      el.innerHTML=`<div style="color:var(--muted);font-size:13px;text-align:center;padding:1.5rem;font-family:'Noto Sans Bengali',sans-serif;">এখনো কোনো lesson complete হয়নি।</div>`;
+      return;
+    }
+    el.innerHTML = snap.docs.map(d=>{
+      const s = d.data();
+      const lesson = LESSONS.find(l=>l.id===s.lessonId);
+      return `<div class="history-item">
+        <div class="hi-icon" style="background:${lesson?.color||'rgba(245,200,66,.1)'};border:1px solid ${lesson?.border||'rgba(245,200,66,.2)'};">${lesson?.icon||'👂'}</div>
+        <div class="hi-info">
+          <div class="hi-title">${s.lessonTitle}</div>
+          <div class="hi-meta">${fmtAgo(s.completedAt)} · ${s.durationMin||0} min · ${s.category}</div>
+        </div>
+        <div class="hi-score">+${s.xpEarned||0} XP</div>
+      </div>`;
+    }).join("");
+  } catch(e){
+    el.innerHTML=`<div style="color:var(--muted);font-size:13px;padding:1rem;">Could not load history.</div>`;
+  }
+}
+
+/* ══════════════════════════════════════
+   INIT
+══════════════════════════════════════ */
+const yr = new Date().getFullYear();
+document.getElementById("footer-year").textContent  = yr;
+document.getElementById("footer-year2").textContent = yr;
+
+document.getElementById("btn-logout").onclick = async()=>{
+  await signOut(auth);
+  window.location.href="index.html";
+};
+
+requireAuth(async user=>{
+  currentUser = user;
+  document.getElementById("nav-name").textContent = user.displayName||(user.email?user.email.split("@")[0]:"Guest");
+  const av = document.getElementById("nav-avatar");
+  const safePhoto = safeImageUrl(user.photoURL);
+  if(safePhoto){av.style.backgroundImage=`url("${safePhoto}")`;av.style.backgroundSize="cover";av.textContent="";}
+
+  // Load user stats
+  try {
+    const snap = await getDoc(doc(db,"users",user.uid));
+    if(snap.exists()){
+      const d = snap.data();
+      totalListened = d.listenCount      || 0;
+      totalMinutes  = d.listeningMinutes || 0;
+      totalXP       = d.xp              || 0;
+      const lv = d.learningProfile && d.learningProfile.level;
+      if (["A1","A2","B1","B2","C1","C2"].includes(lv)) { myLevel = lv; activeLvl = lv; }   // start on the learner's own level
+    }
+  } catch(e){ console.warn(e); }
+
+  updateHeroStats();
+  updateProgress();
+  buildWaveform();
+  buildTranscript(currentLesson.transcript);
+  buildQuiz(currentLesson.quiz);
+  document.getElementById("time-total").textContent = currentLesson.dur;
+  buildLessons();
+  await loadHistory();
+});
+
+/* ── Event Delegation ── */
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  const action = el.dataset.action;
+
+  switch(action){
+    case "go-profile":       window.location.href = "profile.html"; break;
+    case "play-pause":       togglePlay(); break;
+    case "skip-back":        skipBackward(); break;
+    case "skip-fwd":         skipForward(); break;
+    case "cycle-speed":      cycleSpeed(); break;
+    case "toggle-transcript":toggleTranscript(); break;
+    case "next-q":           nextQuestion(); break;
+    case "skip-q":           skipQuestion(); break;
+    case "speak-word":       speakWord(el.dataset.word||""); break;
+    case "word-info":        openWordCard(el.dataset.word||"", currentLesson.transcript[parseInt(el.dataset.line||"0")]||""); break;
+    case "open-cloze":       renderCloze(); break;
+    case "open-words":       renderPracticeWords(); break;
+    case "answer-q": {
+      const idx = parseInt(el.dataset.idx||"0");
+      answerQ(idx); break;
+    }
+  }
+});
+
+/* ── Seek listeners (need real MouseEvent) ── */
+document.addEventListener("DOMContentLoaded", function(){
+  const wave  = document.getElementById("audio-wave");
+  const track = document.getElementById("audio-track-click");
+  if(wave)  wave.addEventListener("click",  seekAudio);
+  if(track) track.addEventListener("click", seekAudio);
+});
+</script>
+</body>
+</html>

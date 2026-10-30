@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Story Writing — Writing Lab — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/writing-lab.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text"><h1>English Shekho</h1><p>ENGLISH LEARNING PLATFORM · A1 TO C2</p></div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" data-action="go-profile">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div class="breadcrumb">
+    <a href="writing-lab.html">✍️ Writing Lab</a>
+    <span class="bc-sep">›</span><span>Story Writing</span>
+  </div>
+  <div class="task-tabs" id="task-tabs"></div>
+  <div id="prompt"></div>
+  <div class="editor-layout">
+    <div class="hints-panel">
+      <div class="hints-head">📖 Story Tips</div>
+      <div class="hints-body" id="hints"></div>
+    </div>
+    <div class="editor-panel">
+      <div class="editor-toolbar">
+          <button class="etool-btn" data-action="bold"><b>B</b></button>
+          <button class="etool-btn" data-action="quote">❝❞</button>
+          <button class="etool-btn" data-action="para">¶ Para</button>
+          <div class="etool-sep"></div>
+          <button class="etool-btn" data-action="clear">🗑 Clear</button>
+        <div class="word-counter">Words: <span id="word-count">0</span></div>
+      </div>
+      <textarea class="editor-textarea" id="main-editor" placeholder="Once upon a time..." style="min-height:320px;"></textarea>
+      <div class="editor-footer">
+        <div class="ef-left">লক্ষ্য: ৮০–২০০ শব্দ
+          <label class="ef-public"><input type="checkbox" id="public-checkbox"> 🌍 Community-তে public করো</label>
+        </div>
+        <div class="ef-actions">
+          <button class="btn-save" data-action="save">💾 Save Draft</button>
+          <button class="btn-check" data-action="check">🤖 Writing Check</button>
+          <button class="btn-submit" data-action="submit">Submit ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="feedback-panel" id="feedback-panel"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { setupCommonPage, initEditor, setupEditorToolbar } from "./js/writing-common.js";
+
+/* ══════════════════════════════════════
+   DATA — Story Writing Tasks
+══════════════════════════════════════ */
+const TASKS = [
+  {id:"st1", label:"A Lost Child", level:"B1", words:"100–150", xp:125,
+   prompt:"একটি হারিয়ে যাওয়া শিশু এবং তাকে খুঁজে পাওয়ার গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> Setting ও characters introduce করুন।"},
+     {icon:"⚡", text:"<b>Conflict:</b> সমস্যা তৈরি করুন।"},
+     {icon:"🌟", text:"<b>Resolution:</b> সমস্যার সমাধান দিন।"},
+     {icon:"✨", text:"<b>Ending:</b> একটি শিক্ষামূলক বার্তা দিন।"},
+   ],
+   usefulWords:["wandered","frightened","searched","relieved","crowded","tearful","reunited","grateful"]},
+  {id:"st2", label:"An Unexpected Journey", level:"B2", words:"150–200", xp:175,
+   prompt:"একটি অপ্রত্যাশিত যাত্রার গল্প লিখুন যা আপনার জীবন পরিবর্তন করেছিল।",
+   hints:[
+     {icon:"🗺️", text:"Vivid description দিয়ে setting তৈরি করুন।"},
+     {icon:"🎭", text:"Characters-এর emotions স্পষ্ট করুন।"},
+     {icon:"📈", text:"Suspense ও tension তৈরি করুন।"},
+     {icon:"💭", text:"Reflection দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["unexpected","destiny","encounter","transformed","realized","adventure","profound","unforgettable"]},
+  {id:"st3", label:"The Day the Power Went Out", level:"A2", words:"80–130", xp:100,
+   prompt:"এমন একটি দিনের গল্প লিখুন যেদিন সারাদিন বিদ্যুৎ ছিল না।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> দিনটি কীভাবে শুরু হলো এবং কখন বিদ্যুৎ চলে গেল তা বলুন।"},
+     {icon:"😅", text:"<b>Middle:</b> বিদ্যুৎ না থাকায় কী কী সমস্যা ও মজার ঘটনা ঘটল।"},
+     {icon:"💡", text:"<b>Ending:</b> বিদ্যুৎ ফিরে আসার পর কেমন লাগল তা বলুন।"},
+   ],
+   usefulWords:["candle","darkness","generator","neighbors","stuffy","flashlight","restored","relief"]},
+  {id:"st4", label:"A Strange Dream", level:"B1", words:"120–170", xp:150,
+   prompt:"একটি অদ্ভুত স্বপ্নের গল্প লিখুন যা পরে বাস্তবে কিছুটা সত্যি হয়েছিল।",
+   hints:[
+     {icon:"🌙", text:"<b>Beginning:</b> স্বপ্নটি কোথায় শুরু হলো এবং কী দেখলেন তা বর্ণনা করুন।"},
+     {icon:"🎭", text:"<b>Middle:</b> স্বপ্নে কী কী অস্বাভাবিক ঘটনা ঘটল তা vivid ভাষায় লিখুন।"},
+     {icon:"😲", text:"<b>Twist:</b> ঘুম ভাঙার পর কীভাবে কিছুটা মিলে গেল তা বলুন।"},
+     {icon:"✨", text:"<b>Ending:</b> এই অভিজ্ঞতা থেকে কী শিখলেন তা বলুন।"},
+   ],
+   usefulWords:["mysterious","vivid","suddenly","coincidence","eerie","woke up","reality","astonished"]},
+  {id:"st5", label:"The New Student", level:"A2", words:"90–140", xp:110,
+   prompt:"একজন নতুন ছাত্র/ছাত্রী ক্লাসে এসেছে — তাকে নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> নতুন student-টি কেমন দেখতে এবং প্রথম দিনে কেমন লাগছিল তা বলুন।"},
+     {icon:"🤝", text:"<b>Middle:</b> তার সাথে কীভাবে পরিচয় হলো এবং বন্ধুত্ব শুরু হলো।"},
+     {icon:"⚡", text:"<b>Conflict (optional):</b> কোনো ছোট misunderstanding বা challenge যুক্ত করুন।"},
+     {icon:"✨", text:"<b>Ending:</b> গল্পটি একটি ইতিবাচক পরিণতিতে শেষ করুন।"},
+   ],
+   usefulWords:["nervous","introduce","classmate","friendly","welcomed","shy","confident","belonging"]},
+  {id:"st6", label:"A Kind Stranger", level:"A2", words:"90–140", xp:110,
+   prompt:"একজন অপরিচিত ব্যক্তি কীভাবে আপনাকে একটি কঠিন পরিস্থিতিতে সাহায্য করেছিল তা নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> কী কঠিন পরিস্থিতিতে পড়েছিলেন তা বর্ণনা করুন।"},
+     {icon:"🤲", text:"<b>Middle:</b> অপরিচিত ব্যক্তি কীভাবে সাহায্য করল তা বলুন।"},
+     {icon:"😊", text:"<b>Feelings:</b> তার সাহায্যের পর আপনার কেমন লেগেছিল তা প্রকাশ করুন।"},
+     {icon:"✨", text:"<b>Ending:</b> এই অভিজ্ঞতা থেকে কী শিক্ষা পেলেন তা বলুন।"},
+   ],
+   usefulWords:["stranger","helpless","kindness","gratitude","unexpected","assistance","touched","humanity"]},
+  {id:"st7", label:"The Day I Won a Competition", level:"A2", words:"90–140", xp:110,
+   prompt:"আপনি যেদিন একটি প্রতিযোগিতায় জিতেছিলেন সেই দিনের গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> প্রতিযোগিতাটি কী ছিল এবং কীভাবে প্রস্তুতি নিয়েছিলেন।"},
+     {icon:"😰", text:"<b>Middle:</b> প্রতিযোগিতার দিনের অনুভূতি ও ঘটনা বর্ণনা করুন।"},
+     {icon:"🏆", text:"<b>Climax:</b> ফলাফল ঘোষণার মুহূর্তটি বর্ণনা করুন।"},
+     {icon:"✨", text:"<b>Ending:</b> জয়ের পর কেমন লেগেছিল এবং কী শিখলেন তা বলুন।"},
+   ],
+   usefulWords:["competition","nervous","practice","determination","announced","victory","proud","achievement"]},
+  {id:"st8", label:"A Mystery in the Old House", level:"B2", words:"150–200", xp:175,
+   prompt:"একটি পুরনো বাড়িতে ঘটে যাওয়া একটি রহস্যময় ঘটনা নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🏚️", text:"<b>Setting:</b> পুরনো বাড়িটি কেমন এবং কোথায় তা বিস্তারিত বর্ণনা করুন।"},
+     {icon:"🔍", text:"<b>Mystery:</b> কী রহস্যময় ঘটনা বা শব্দ লক্ষ্য করলেন তা বলুন।"},
+     {icon:"📈", text:"<b>Climax:</b> Suspense বাড়িয়ে রহস্যের সমাধানের দিকে এগিয়ে যান।"},
+     {icon:"✨", text:"<b>Ending:</b> রহস্যের সমাধান এবং একটি twist দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["abandoned","creaking","shadow","investigate","eerie","secret","revealed","startled"]},
+  {id:"st9", label:"The Talking Parrot", level:"A2", words:"80–130", xp:100,
+   prompt:"একটি কথা বলতে পারা টিয়া পাখি নিয়ে একটি মজার গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> পাখিটি কোথায় পাওয়া গেল এবং প্রথম কথা বলায় কী হলো।"},
+     {icon:"😂", text:"<b>Middle:</b> পাখিটি কী কী মজার কথা বলত তা বলুন।"},
+     {icon:"⚡", text:"<b>Twist:</b> একটি অপ্রত্যাশিত ঘটনা যুক্ত করুন।"},
+     {icon:"✨", text:"<b>Ending:</b> গল্পটি একটি মজার বা শিক্ষামূলক উপায়ে শেষ করুন।"},
+   ],
+   usefulWords:["parrot","mimic","surprised","clever","amusing","cage","repeat","laughter"]},
+  {id:"st10", label:"A Rainy Day Adventure", level:"A2", words:"80–130", xp:100,
+   prompt:"একটি বৃষ্টির দিনে ঘটে যাওয়া একটি অ্যাডভেঞ্চার নিয়ে গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> দিনটি কীভাবে শুরু হলো এবং বৃষ্টি কখন শুরু হলো।"},
+     {icon:"⚡", text:"<b>Middle:</b> বৃষ্টির কারণে কী অপ্রত্যাশিত ঘটনা ঘটল।"},
+     {icon:"🌈", text:"<b>Climax:</b> সমস্যার সমাধান কীভাবে হলো।"},
+     {icon:"✨", text:"<b>Ending:</b> দিনটি কেমন স্মরণীয় হয়ে রইল তা বলুন।"},
+   ],
+   usefulWords:["downpour","puddle","shelter","drenched","umbrella","thunder","adventure","memorable"]},
+  {id:"st11", label:"The Race Against Time", level:"B1", words:"120–170", xp:150,
+   prompt:"সময়ের বিরুদ্ধে একটি দৌড়ের (race against time) গল্প লিখুন — যেমন কাউকে বাঁচানো বা কোথাও পৌঁছানো।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> পরিস্থিতি ও কেন তাড়াহুড়ো প্রয়োজন তা বলুন।"},
+     {icon:"⚡", text:"<b>Middle:</b> কী কী বাধা এসেছিল তা বর্ণনা করুন।"},
+     {icon:"📈", text:"<b>Climax:</b> শেষ মুহূর্তের tension তৈরি করুন।"},
+     {icon:"✨", text:"<b>Ending:</b> ফলাফল ও অনুভূতি দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["urgent","desperate","obstacle","rushed","relief","deadline","tension","succeeded"]},
+  {id:"st12", label:"Friendship Beyond Boundaries", level:"B2", words:"150–200", xp:175,
+   prompt:"ভিন্ন দেশ বা সংস্কৃতির দুই ব্যক্তির মধ্যে গড়ে ওঠা বন্ধুত্ব নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> তাদের প্রথম দেখা কীভাবে হলো তা বলুন।"},
+     {icon:"🌍", text:"<b>Middle:</b> ভাষা বা সংস্কৃতির পার্থক্য তারা কীভাবে কাটিয়ে উঠল।"},
+     {icon:"❤️", text:"<b>Climax:</b> তাদের বন্ধুত্ব পরীক্ষার মুখে পড়ল এমন একটি ঘটনা।"},
+     {icon:"✨", text:"<b>Ending:</b> বন্ধুত্বের গুরুত্ব নিয়ে একটি বার্তা দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["culture","barrier","bond","understanding","diverse","connection","respect","cherish"]},
+  {id:"st13", label:"The Generous Beggar", level:"A2", words:"80–130", xp:100,
+   prompt:"একজন ভিক্ষুক যিনি নিজের কাছে যা ছিল তা অন্যকে দিয়ে দিলেন — এই নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> ভিক্ষুকটি কে এবং তার পরিস্থিতি বর্ণনা করুন।"},
+     {icon:"❤️", text:"<b>Middle:</b> তিনি কীভাবে এবং কাকে কিছু দিলেন তা বলুন।"},
+     {icon:"😲", text:"<b>Reaction:</b> এটি দেখে অন্যরা কীভাবে প্রতিক্রিয়া করল।"},
+     {icon:"✨", text:"<b>Ending:</b> এই ঘটনা থেকে কী শিক্ষা পাওয়া গেল তা বলুন।"},
+   ],
+   usefulWords:["generous","selfless","poverty","kindness","inspired","humble","touched","compassion"]},
+  {id:"st14", label:"A Trip to the Village", level:"A2", words:"90–140", xp:110,
+   prompt:"শহর থেকে গ্রামে একটি ভ্রমণ নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> কেন এবং কীভাবে গ্রামে গেলেন তা বলুন।"},
+     {icon:"🌾", text:"<b>Middle:</b> গ্রামের পরিবেশ, মানুষ ও activities বর্ণনা করুন।"},
+     {icon:"😊", text:"<b>Highlight:</b> একটি বিশেষ মুহূর্তের কথা বলুন।"},
+     {icon:"✨", text:"<b>Ending:</b> শহরে ফিরে এসে অনুভূতি কেমন ছিল তা বলুন।"},
+   ],
+   usefulWords:["countryside","fields","fresh air","villagers","simplicity","peaceful","tradition","nostalgia"]},
+  {id:"st15", label:"The Brave Firefighter", level:"B1", words:"120–170", xp:150,
+   prompt:"একজন সাহসী ফায়ারফাইটার (firefighter) এর একটি জীবন বাঁচানোর গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> আগুন লাগার ঘটনা ও পরিস্থিতি বর্ণনা করুন।"},
+     {icon:"🔥", text:"<b>Middle:</b> ফায়ারফাইটার কীভাবে সাহসিকতার সাথে কাজ করল তা বলুন।"},
+     {icon:"📈", text:"<b>Climax:</b> সবচেয়ে বিপজ্জনক মুহূর্তটি বর্ণনা করুন।"},
+     {icon:"✨", text:"<b>Ending:</b> উদ্ধারের পর মানুষের প্রতিক্রিয়া ও কৃতজ্ঞতা দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["courageous","rescue","flames","danger","trapped","heroic","gratitude","emergency"]},
+  {id:"st16", label:"The Secret Treasure Map", level:"B2", words:"150–200", xp:175,
+   prompt:"একটি পুরনো গুপ্ত ধনের মানচিত্র (treasure map) খুঁজে পাওয়া নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> মানচিত্রটি কোথায় এবং কীভাবে পাওয়া গেল তা বলুন।"},
+     {icon:"🗺️", text:"<b>Middle:</b> এটি অনুসরণ করে কী কী challenge এলো তা বর্ণনা করুন।"},
+     {icon:"📈", text:"<b>Climax:</b> ধনের কাছে পৌঁছানোর মুহূর্তের suspense তৈরি করুন।"},
+     {icon:"✨", text:"<b>Ending:</b> একটি twist বা শিক্ষা দিয়ে শেষ করুন (ধন আশানুরূপ না হতে পারে)।"},
+   ],
+   usefulWords:["mysterious","clue","buried","explore","excitement","discovery","challenge","twist"]},
+  {id:"st17", label:"An Honest Woodcutter", level:"A2", words:"80–130", xp:100,
+   prompt:"একজন সৎ কাঠুরিয়া (woodcutter) এর গল্প লিখুন যিনি সততার জন্য পুরস্কৃত হলেন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> কাঠুরিয়াটি কে এবং তার দৈনন্দিন জীবন বর্ণনা করুন।"},
+     {icon:"⚡", text:"<b>Middle:</b> তার সাথে কী ঘটল (যেমন: কুড়াল হারিয়ে যাওয়া) তা বলুন।"},
+     {icon:"✅", text:"<b>Climax:</b> তিনি কীভাবে সততা দেখালেন তা বলুন।"},
+     {icon:"✨", text:"<b>Ending:</b> তার সততার পুরস্কার কী হলো তা বলুন।"},
+   ],
+   usefulWords:["honest","woodcutter","reward","temptation","truthful","grateful","moral","integrity"]},
+  {id:"st18", label:"The Power of a Smile", level:"B1", words:"100–150", xp:125,
+   prompt:"একটি ছোট হাসি (smile) কীভাবে কারো দিন পরিবর্তন করে দিল তা নিয়ে একটি গল্প লিখুন।",
+   hints:[
+     {icon:"🎬", text:"<b>Beginning:</b> একজন মানুষের একটি কঠিন বা মন খারাপ থাকা দিনের বর্ণনা দিন।"},
+     {icon:"😊", text:"<b>Middle:</b> কেউ একজন তার দিকে হাসল এবং কী হলো তা বলুন।"},
+     {icon:"💭", text:"<b>Reflection:</b> এই ছোট ঘটনা তার মনে কী প্রভাব ফেলল।"},
+     {icon:"✨", text:"<b>Ending:</b> একটি ইতিবাচক বার্তা দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["gloomy","stranger","warmth","comfort","uplifted","gesture","kindness","positivity"]},
+];
+
+/* ══════════════════════════════════════
+   PAGE INIT
+══════════════════════════════════════ */
+initEditor(TASKS);
+setupEditorToolbar("story");
+setupCommonPage();
+
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  if(el.dataset.action === "go-profile") window.location.href = "profile.html";
+});
+</script>
+</body>
+</html>

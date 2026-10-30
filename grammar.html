@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grammar Hub — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#04080f;
+  --surface:#080e1a;
+  --surface2:#0c1322;
+  --surface3:#101828;
+  --border:rgba(255,255,255,.055);
+  --gold:#f5c842;
+  --gold2:#e0a820;
+  --teal:#2dd4bf;
+  --rose:#fb7185;
+  --indigo:#818cf8;
+  --emerald:#34d399;
+  --orange:#fb923c;
+  --muted:#64748b;
+  --sub:#94a3b8;
+  --text:#f0f4f8;
+}
+
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(129,140,248,.025),transparent 60%);
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+
+.wrap{max-width:1160px;margin:auto;padding:1.6rem 1.4rem 0;position:relative;z-index:1;}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+  background:rgba(8,14,26,.8);border:1px solid var(--border);
+  border-radius:18px;padding:.9rem 1.4rem;
+  backdrop-filter:blur(24px);box-shadow:0 4px 32px rgba(0,0,0,.4);
+  position:sticky;top:16px;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));
+  border:1px solid rgba(245,200,66,.3);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  box-shadow:0 0 18px rgba(245,200,66,.12);flex-shrink:0;
+}
+.logo-text h1{
+  font-size:1.55rem;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-.5px;
+}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{
+  padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;
+  color:var(--sub);text-decoration:none;transition:.2s;border:1px solid transparent;
+}
+.nav-link:hover{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  overflow:hidden;border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;
+  transition:.2s;box-shadow:0 0 14px rgba(245,200,66,.1);
+}
+.user-avatar:hover{border-color:var(--gold);box-shadow:0 0 22px rgba(245,200,66,.25);}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{
+  border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);
+  color:var(--rose);padding:.4rem .9rem;border-radius:10px;
+  cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;
+}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* ─── HERO ─── */
+.hero{
+  border-radius:24px;padding:2.2rem 2.4rem;margin-bottom:1.8rem;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#080e18,#0a1220);
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:0 8px 48px rgba(0,0,0,.45);
+}
+.hero-stripe{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);}
+.hero-orb1{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.1),transparent 70%);top:-100px;left:-80px;pointer-events:none;}
+.hero-orb2{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.09),transparent 70%);bottom:-80px;right:-60px;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--indigo);letter-spacing:2px;text-transform:uppercase;margin-bottom:.7rem;opacity:.8;}
+.hero h2{font-size:2.1rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;line-height:1.15;}
+.hero h2 span{background:linear-gradient(135deg,#818cf8,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--sub);font-size:13.5px;line-height:1.7;max-width:520px;font-family:'Noto Sans Bengali',sans-serif;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.hstat{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.75rem 1.2rem;text-align:center;min-width:90px;transition:.2s;position:relative;overflow:hidden;}
+.hstat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--indigo),transparent);opacity:.5;}
+.hstat:hover{border-color:rgba(129,140,248,.25);transform:translateY(-2px);}
+.hstat-v{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#818cf8,#f5c842);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+/* ─── SECTION TITLE ─── */
+.section-title{
+  font-size:11px;font-weight:700;color:var(--muted);margin-bottom:1rem;
+  display:flex;align-items:center;gap:10px;
+  letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;
+}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+.topic-count-badge{
+  background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);
+  color:var(--indigo);padding:3px 10px;border-radius:20px;
+  font-size:10px;letter-spacing:.5px;text-transform:none;
+}
+
+/* ─── SEARCH + FILTER BAR ─── */
+.search-bar{
+  display:flex;gap:10px;margin-bottom:1.8rem;flex-wrap:wrap;
+}
+.search-input-wrap{
+  flex:1;min-width:200px;position:relative;
+}
+.search-input{
+  width:100%;background:var(--surface2);border:1px solid var(--border);
+  border-radius:14px;padding:.75rem 1.1rem .75rem 2.8rem;
+  color:var(--text);font-family:'Outfit',sans-serif;font-size:13.5px;
+  outline:none;transition:.2s;
+}
+.search-input:focus{border-color:rgba(129,140,248,.4);box-shadow:0 0 0 3px rgba(129,140,248,.08);}
+.search-input::placeholder{color:var(--muted);}
+.search-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.95rem;pointer-events:none;}
+.filter-tabs{display:flex;gap:6px;flex-wrap:wrap;}
+.ftab{
+  padding:.55rem 1rem;border-radius:11px;font-size:12px;font-weight:600;
+  border:1px solid var(--border);background:var(--surface2);
+  color:var(--sub);cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.ftab:hover{border-color:rgba(129,140,248,.3);color:var(--indigo);}
+.ftab.active{background:rgba(129,140,248,.1);border-color:rgba(129,140,248,.3);color:var(--indigo);}
+
+/* ─── GRAMMAR TOPIC CARDS ─── */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:1.8rem;}
+.cat-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:18px;padding:1.3rem 1.35rem;
+  display:flex;flex-direction:column;gap:.8rem;
+  position:relative;overflow:hidden;transition:.25s;
+}
+.cat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--accent);opacity:0;transition:.25s;
+}
+.cat-card:not(.cat-soon):hover{transform:translateY(-3px);border-color:rgba(255,255,255,.12);box-shadow:0 12px 30px rgba(0,0,0,.35);}
+.cat-card:not(.cat-soon):hover::before{opacity:.85;}
+.cat-card.cat-soon{opacity:.55;}
+
+.cat-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.cat-emoji-box{
+  width:46px;height:46px;border-radius:13px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  background:var(--accent-soft);border:1px solid var(--accent-border);
+}
+.cat-level-badge{
+  font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.6px;text-transform:capitalize;
+  border:1px solid var(--border);color:var(--sub);background:rgba(255,255,255,.03);white-space:nowrap;
+}
+.cat-level-badge.lvl-beginner{color:#2dd4bf;border-color:rgba(45,212,191,.25);background:rgba(45,212,191,.08);}
+.cat-level-badge.lvl-intermediate{color:#fb923c;border-color:rgba(251,146,60,.25);background:rgba(251,146,60,.08);}
+.cat-level-badge.lvl-advanced{color:#a78bfa;border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.08);}
+
+.cat-name{font-size:1.05rem;font-weight:800;letter-spacing:-.2px;}
+.cat-desc{font-size:12px;color:var(--sub);line-height:1.65;font-family:'Noto Sans Bengali',sans-serif;flex:1;}
+
+.cat-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:.65rem 1rem;border-radius:12px;
+  font-size:12.5px;font-weight:700;text-decoration:none;
+  background:var(--accent-soft);border:1px solid var(--accent-border);
+  color:var(--accent);transition:.2s;
+}
+.cat-btn:hover{filter:brightness(1.25);}
+.cat-btn-soon{
+  background:rgba(255,255,255,.025);border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;
+}
+.cat-btn-soon:hover{color:var(--sub);border-color:rgba(255,255,255,.1);}
+
+/* ─── QUICK REFERENCE CARDS ─── */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:1.8rem;}
+.ref-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:16px;padding:1.2rem;
+  position:relative;overflow:hidden;transition:.2s;
+}
+.ref-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--rc-color,linear-gradient(90deg,#818cf8,#f5c842));opacity:.7;}
+.ref-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.09);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.rc-head{display:flex;align-items:center;gap:10px;margin-bottom:.8rem;}
+.rc-icon{font-size:1.3rem;}
+.rc-title{font-size:13px;font-weight:800;}
+.rc-rows{display:flex;flex-direction:column;gap:4px;}
+.rc-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:11.5px;padding:.3rem .5rem;border-radius:7px;
+  background:rgba(255,255,255,.02);
+}
+.rc-key{color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;}
+.rc-val{color:var(--text);font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;}
+
+/* ─── FOOTER ─── */
+footer{margin-top:3rem;border-top:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),rgba(45,212,191,.35),transparent);}
+.footer-inner{max-width:1160px;margin:auto;padding:2.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;}
+.footer-brand .brand-name{font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.9rem;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:11px;color:#2a3545;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.copyright-text span{color:#374151;}
+.footer-col h4{font-size:.9rem;font-weight:700;color:var(--sub);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.dev-card{background:linear-gradient(135deg,rgba(245,200,66,.04),rgba(45,212,191,.04));border:1px solid rgba(245,200,66,.12);border-radius:14px;padding:1.1rem;}
+.dev-name{font-size:1.05rem;font-weight:800;color:#f0f4f8;margin-bottom:.1rem;}
+.dev-title{font-size:10px;color:var(--gold);letter-spacing:.8px;margin-bottom:.8rem;font-family:'JetBrains Mono',monospace;}
+.dev-contact{display:flex;flex-direction:column;gap:.45rem;}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);}
+.contact-row a{color:var(--sub);text-decoration:none;transition:.15s;}
+.contact-row a:hover{color:var(--gold);}
+.contact-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:rgba(255,255,255,.05);}
+.social-links{display:flex;flex-direction:column;gap:.55rem;}
+.social-link{display:flex;align-items:center;gap:10px;padding:.55rem .85rem;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid var(--border);text-decoration:none;color:var(--sub);font-size:12px;transition:.2s;}
+.social-link:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);color:#f0f4f8;transform:translateX(3px);}
+.sl-icon{font-size:.9rem;width:20px;text-align:center;}
+.sl-label{font-weight:600;}
+.sl-handle{color:var(--muted);font-size:10.5px;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{max-width:1160px;margin:auto;padding:.8rem 1.4rem 1.3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;border-top:1px solid rgba(255,255,255,.04);font-size:11px;color:#2d3748;font-family:'JetBrains Mono',monospace;}
+.footer-bottom a{color:#374151;text-decoration:none;}
+.footer-bottom a:hover{color:var(--muted);}
+.footer-heart{color:var(--rose);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:800px){.footer-inner{grid-template-columns:1fr;gap:1.6rem;}.nav-links{display:none;}}
+@media(max-width:600px){.topbar{flex-direction:column;align-items:flex-start;}.hero h2{font-size:1.6rem;}.footer-bottom{flex-direction:column;align-items:flex-start;}.wrap{padding:1rem .9rem 0;}.ref-grid{grid-template-columns:1fr;}}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;top:20px;right:20px;background:#0c1322;color:#f0f4f8;padding:.9rem 1.2rem;border-radius:14px;border-left:3px solid #818cf8;z-index:9999;opacity:0;transform:translateY(-16px);transition:.3s;font-size:13.5px;box-shadow:0 8px 32px rgba(0,0,0,.5);max-width:320px;}
+.toast.show{opacity:1;transform:translateY(0);}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>ENGLISH LEARNING PLATFORM · A1 TO C2</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" onclick="location.href='profile.html'">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">📘 Grammar Hub</div>
+        <h2>Master <span>English Grammar</span> 📖</h2>
+        <p class="hero-sub">Tense, Article, Modal, Preposition থেকে Sentence Transformation — সব Grammar Topic এক জায়গায়। প্রতিটি Topic-এ বাংলায় বিস্তারিত ব্যাখ্যা, Formula এবং Real-life উদাহরণ আছে।</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-v" id="h-total">16</div>
+          <div class="hstat-l">Total Topics</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-ready">10</div>
+          <div class="hstat-l">Ready Guides</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-soon">6</div>
+          <div class="hstat-l">Coming Soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH + FILTER -->
+  <div class="search-bar">
+    <div class="search-input-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search-input" placeholder="Grammar topic খুঁজুন... e.g. Tenses, Modal Verbs">
+    </div>
+    <div class="filter-tabs" id="filter-tabs">
+      <div class="ftab active" data-filter="all">All</div>
+      <div class="ftab" data-filter="beginner">Beginner</div>
+      <div class="ftab" data-filter="intermediate">Intermediate</div>
+      <div class="ftab" data-filter="advanced">Advanced</div>
+    </div>
+  </div>
+
+  <!-- TOPIC GRID -->
+  <div class="section-title">📂 Grammar Topics <span class="topic-count-badge" id="rt-count">16 Topics</span></div>
+  <div class="cat-grid" id="cat-grid"></div>
+
+  <!-- QUICK REFERENCE -->
+  <div class="section-title">⚡ Quick Reference</div>
+  <div class="ref-grid" id="ref-grid"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম। A1 থেকে C2 পর্যন্ত vocabulary, grammar, speaking এবং live chat সুবিধা।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span><br><span>Unauthorized reproduction</span><br><span>is strictly prohibited.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════
+   GRAMMAR TOPICS (Grammar Hub)
+═══════════════════════════════ */
+const CATEGORIES = [
+  /* ── Ready (full lesson page available) ── */
+  { id:"tenses", emoji:"⏰", name:"Tenses", level:"beginner", color:"#2dd4bf",
+    desc:"Present, Past ও Future Tense-এর সব Structure, Formula এবং বাস্তব জীবনের উদাহরণ একসাথে।",
+    page:"grammar-tenses.html" },
+  { id:"articles", emoji:"📌", name:"Articles", level:"beginner", color:"#f5c842",
+    desc:"A, An, The এবং Zero Article ব্যবহারের নিয়ম খুব সহজ ভাষায় ব্যাখ্যা করা হয়েছে।",
+    page:"grammar-articles.html" },
+  { id:"pronouns", emoji:"👤", name:"Pronouns", level:"beginner", color:"#818cf8",
+    desc:"Personal, Possessive, Reflexive ও Demonstrative Pronoun-এর পূর্ণ তালিকা ও ব্যবহার।",
+    page:"grammar-pronouns.html" },
+  { id:"partsOfSpeech", emoji:"🧩", name:"Parts of Speech", level:"beginner", color:"#2dd4bf",
+    desc:"Noun থেকে Interjection — ৮টি Parts of Speech চেনার ও বাক্যে ব্যবহারের সহজ কৌশল।",
+    page:"grammar-parts-of-speech.html" },
+  { id:"sentence", emoji:"❓", name:"Sentence Structure", level:"beginner", color:"#fbbf24",
+    desc:"Sentence-এর মূল অংশ, SVO Pattern, Phrase ও Clause-এর পার্থক্য সহজভাবে শিখুন।",
+    page:"grammar-sentence.html" },
+  { id:"modals", emoji:"🔧", name:"Modal Verbs", level:"intermediate", color:"#fb923c",
+    desc:"Can, Could, Must, Should, May, Might — প্রতিটি Modal Verb-এর অর্থ ও সঠিক ব্যবহার।",
+    page:"grammar-modals.html" },
+  { id:"prepositions", emoji:"📍", name:"Prepositions", level:"intermediate", color:"#34d399",
+    desc:"In, On, At, By, With সহ গুরুত্বপূর্ণ সব Preposition-এর প্র্যাকটিক্যাল ব্যবহার।",
+    page:"grammar-prepositions.html" },
+  { id:"passive", emoji:"🔄", name:"Active & Passive", level:"intermediate", color:"#f472b6",
+    desc:"Active Voice থেকে Passive Voice-এ পরিবর্তনের নিয়ম, সব Tense-এর Formula সহ।",
+    page:"grammar-voice.html" },
+  { id:"narration", emoji:"💬", name:"Narration", level:"advanced", color:"#60a5fa",
+    desc:"Direct ও Indirect Speech-এ Tense, Pronoun ও Reporting Verb পরিবর্তনের নিয়ম।",
+    page:"grammar-narration.html" },
+  { id:"conditionals", emoji:"🔀", name:"Conditionals", level:"advanced", color:"#a78bfa",
+    desc:"Zero, First, Second ও Third Conditional — If Clause-এর সব নিয়ম ও উদাহরণ।",
+    page:"grammar-conditionals.html" },
+
+  /* ── Coming Soon ── */
+  { id:"degrees", emoji:"📊", name:"Degrees of Comparison", level:"intermediate", color:"#38bdf8",
+    desc:"Positive, Comparative ও Superlative Degree-এর মধ্যে রূপান্তরের নিয়ম ও উদাহরণ।",
+    page:null },
+  { id:"sva", emoji:"✅", name:"Subject-Verb Agreement", level:"intermediate", color:"#4ade80",
+    desc:"Subject অনুযায়ী Verb-এর সঠিক Form নির্বাচনের গুরুত্বপূর্ণ নিয়মাবলি।",
+    page:null },
+  { id:"punctuation", emoji:"✏️", name:"Punctuation Rules", level:"beginner", color:"#fb7185",
+    desc:"Full Stop, Comma, Capital Letter সহ লেখায় বিরামচিহ্নের সঠিক ব্যবহার।",
+    page:null },
+  { id:"tagq", emoji:"🏷️", name:"Tag Questions", level:"intermediate", color:"#c084fc",
+    desc:"বাক্যের শেষে ছোট প্রশ্ন (Tag) যুক্ত করার নিয়ম — Positive ও Negative ফর্ম।",
+    page:null },
+  { id:"transformation", emoji:"🔁", name:"Sentence Transformation", level:"advanced", color:"#f87171",
+    desc:"Affirmative-Negative, Simple-Complex-Compound রূপান্তরের কৌশল ও Formula।",
+    page:null },
+  { id:"gerund", emoji:"🌀", name:"Gerund & Infinitive", level:"advanced", color:"#22d3ee",
+    desc:"Verb + ing (Gerund) এবং To + Verb (Infinitive)-এর ব্যবহার ও পার্থক্য।",
+    page:null },
+];
+
+/* ═══════════════════════════════
+   QUICK REFERENCE CARDS
+═══════════════════════════════ */
+const REF_CARDS = [
+  {
+    title:"Tense Cheat Sheet", icon:"⏰",
+    color:"linear-gradient(90deg,#2dd4bf,#06b6d4)",
+    rows:[
+      {key:"Present Simple",    val:"V1 / V1+s"},
+      {key:"Past Simple",       val:"V2"},
+      {key:"Future Simple",     val:"will + V1"},
+      {key:"Present Perfect",   val:"have/has + V3"},
+      {key:"Past Perfect",      val:"had + V3"},
+    ]
+  },
+  {
+    title:"Modal Quick Ref", icon:"🔧",
+    color:"linear-gradient(90deg,#fb923c,#f59e0b)",
+    rows:[
+      {key:"Ability",           val:"can / could"},
+      {key:"Permission",        val:"may / can"},
+      {key:"Obligation",        val:"must / have to"},
+      {key:"Advice",            val:"should / ought to"},
+      {key:"Possibility",       val:"might / could"},
+    ]
+  },
+  {
+    title:"Article Rules", icon:"📌",
+    color:"linear-gradient(90deg,#f5c842,#fbbf24)",
+    rows:[
+      {key:"First mention",     val:"a / an"},
+      {key:"Known/specific",    val:"the"},
+      {key:"General plural",    val:"no article"},
+      {key:"Proper nouns",      val:"no article"},
+      {key:"Vowel sound",       val:"an"},
+    ]
+  },
+  {
+    title:"Passive Voice", icon:"🔄",
+    color:"linear-gradient(90deg,#f472b6,#ec4899)",
+    rows:[
+      {key:"Present Simple",    val:"is/are + V3"},
+      {key:"Past Simple",       val:"was/were + V3"},
+      {key:"Present Perfect",   val:"has/have been + V3"},
+      {key:"Future",            val:"will be + V3"},
+      {key:"Present Cont.",     val:"is/are being + V3"},
+    ]
+  },
+  {
+    title:"WH Words", icon:"❓",
+    color:"linear-gradient(90deg,#818cf8,#6366f1)",
+    rows:[
+      {key:"Person",            val:"who / whom"},
+      {key:"Thing",             val:"what / which"},
+      {key:"Place",             val:"where"},
+      {key:"Time",              val:"when"},
+      {key:"Reason",            val:"why"},
+      {key:"Manner",            val:"how"},
+    ]
+  },
+  {
+    title:"Conditional Types", icon:"🔀",
+    color:"linear-gradient(90deg,#a78bfa,#8b5cf6)",
+    rows:[
+      {key:"Zero",              val:"if + Pres, Pres"},
+      {key:"First",             val:"if + Pres, will"},
+      {key:"Second",            val:"if + Past, would"},
+      {key:"Third",             val:"if + P.Perf, would have"},
+    ]
+  },
+];
+
+/* ═══════════════════════════════
+   BUILD UI
+═══════════════════════════════ */
+let currentFilter = "all";
+let searchQuery   = "";
+
+function hexToRgba(hex, alpha){
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+/* build topic card grid */
+function buildCats(){
+  const grid = document.getElementById("cat-grid");
+
+  const filtered = currentFilter === "all"
+    ? CATEGORIES
+    : CATEGORIES.filter(c => c.level === currentFilter);
+
+  const searched = searchQuery
+    ? filtered.filter(c => c.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    : filtered;
+
+  grid.innerHTML = searched.map(cat => {
+    const ready = !!cat.page;
+    const accentStyle = `--accent:${cat.color};--accent-soft:${hexToRgba(cat.color,.14)};--accent-border:${hexToRgba(cat.color,.32)};`;
+    return `
+    <div class="cat-card ${ready ? '' : 'cat-soon'}" data-cat="${cat.id}" style="${accentStyle}">
+      <div class="cat-top">
+        <div class="cat-emoji-box">${cat.emoji}</div>
+        <span class="cat-level-badge lvl-${cat.level}">${cat.level}</span>
+      </div>
+      <div class="cat-name">${cat.name}</div>
+      <div class="cat-desc">${cat.desc}</div>
+      ${ready
+        ? `<a href="${cat.page}" class="cat-btn">Lesson শুরু করুন <span>→</span></a>`
+        : `<div class="cat-btn cat-btn-soon" data-soon="1">🔒 Coming Soon</div>`}
+    </div>`;
+  }).join("") || `<div style="color:var(--muted);font-size:13px;grid-column:1/-1;text-align:center;padding:2rem;">কোনো topic পাওয়া যায়নি।</div>`;
+
+  document.getElementById("rt-count").textContent = `${searched.length} Topics`;
+
+  grid.querySelectorAll("[data-soon]").forEach(el => {
+    el.addEventListener("click", () => showToast("🚧 এই Topic-টির Lesson Page শীঘ্রই যুক্ত হবে!"));
+  });
+}
+
+/* build quick reference cards */
+function buildRefCards(){
+  const grid = document.getElementById("ref-grid");
+  grid.innerHTML = REF_CARDS.map(rc => `
+    <div class="ref-card" style="--rc-color:${rc.color};">
+      <div class="rc-head"><span class="rc-icon">${rc.icon}</span><span class="rc-title">${rc.title}</span></div>
+      <div class="rc-rows">
+        ${rc.rows.map(r=>`<div class="rc-row"><span class="rc-key">${r.key}</span><span class="rc-val">${r.val}</span></div>`).join("")}
+      </div>
+    </div>`).join("");
+}
+
+/* toast */
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),3000);
+}
+
+/* filter tabs */
+document.getElementById("filter-tabs").addEventListener("click", e=>{
+  const tab = e.target.closest(".ftab");
+  if(!tab) return;
+  currentFilter = tab.dataset.filter;
+  document.querySelectorAll(".ftab").forEach(t=>t.classList.remove("active"));
+  tab.classList.add("active");
+  buildCats();
+});
+
+/* search */
+document.getElementById("search-input").addEventListener("input", e=>{
+  searchQuery = e.target.value.trim();
+  buildCats();
+});
+
+/* logout */
+document.getElementById("btn-logout").onclick = ()=>{ window.location.href="index.html"; };
+
+/* footer year */
+const y = new Date().getFullYear();
+document.getElementById("footer-year").textContent  = y;
+document.getElementById("footer-year2").textContent = y;
+
+/* init */
+document.getElementById("h-total").textContent = CATEGORIES.length;
+document.getElementById("h-ready").textContent = CATEGORIES.filter(c=>c.page).length;
+document.getElementById("h-soon").textContent  = CATEGORIES.filter(c=>!c.page).length;
+
+buildCats();
+buildRefCards();
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find My Level — English Shekho</title>
+<meta name="robots" content="noindex">
+<meta name="es-guest" content="allowed">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  body{min-height:100vh;display:grid;place-items:start center;padding:var(--es-s4)}
+  .wrap{width:min(580px,100%);margin-top:clamp(0rem,4vh,2rem)}
+  .top{display:flex;justify-content:space-between;align-items:center;color:var(--es-sub);font-size:var(--es-fs-sm);margin-bottom:var(--es-s3)}
+  .top a{color:var(--es-muted)}
+  h1{font-size:var(--es-fs-2xl);line-height:1.3;margin:0 0 var(--es-s2)}
+  .lead{color:var(--es-sub);margin:0 0 var(--es-s4)}
+  ul.tips{margin:0 0 var(--es-s5);padding-left:1.2rem;color:var(--es-sub);font-size:var(--es-fs-sm)}
+  .tag{display:inline-block;margin-bottom:var(--es-s3)}
+  .stem{font-size:var(--es-fs-xl);line-height:1.5;margin:0 0 var(--es-s4);font-weight:600}
+  .stem.word{font-size:var(--es-fs-3xl);text-align:center;margin:var(--es-s4) 0}
+  .opts{display:grid;gap:var(--es-s3)}
+  .opt{text-align:left;padding:.9rem 1rem;border-radius:var(--es-r-md);cursor:pointer;color:var(--es-text);font:500 var(--es-fs-md)/1.3 var(--es-font);
+    background:var(--es-surface-1);border:1px solid var(--es-border-strong);transition:border-color var(--es-dur-1),transform var(--es-dur-2) var(--es-ease),background var(--es-dur-1)}
+  .opt:hover{transform:translateY(-2px);border-color:var(--es-indigo-400)}
+  .opt:disabled{opacity:.6;cursor:default;transform:none}
+  .dk{margin-top:var(--es-s4);text-align:center}
+  .big{font-size:4rem;font-weight:800;line-height:1;text-align:center;margin:var(--es-s3) 0}
+  .stats{display:flex;gap:var(--es-s3);justify-content:center;flex-wrap:wrap;margin:var(--es-s3) 0 var(--es-s5)}
+  .pick{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--es-s2);margin:var(--es-s3) 0 var(--es-s5)}
+  .pick .opt{text-align:center;padding:.7rem .4rem}
+  .pick .opt[aria-checked="true"]{background:rgba(91,91,255,.2);border-color:var(--es-indigo-400);box-shadow:0 0 0 2px rgba(124,131,255,.3)}
+  .pick .opt .rec{display:block;font-size:var(--es-fs-xs);color:var(--es-warm-400)}
+  .row{display:flex;gap:var(--es-s3);flex-wrap:wrap;justify-content:center}
+  .err{min-height:1.3em;color:var(--es-danger);font-size:var(--es-fs-sm);margin-top:var(--es-s2);text-align:center}
+  .note{font-size:var(--es-fs-xs);color:var(--es-muted);margin-top:var(--es-s4)}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<main class="wrap es-card">
+  <div class="top"><span id="counter" aria-live="polite"></span><a href="dashboard.html">পরে করব</a></div>
+  <div class="es-progress" id="bar" style="--value:0%;margin-bottom:var(--es-s5)" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div>
+  <div id="stage"><p class="lead">লোড হচ্ছে…</p></div>
+  <p class="err" id="err" role="alert"></p>
+  <p class="note">এটা পরীক্ষা নয়, শুধু একটি সুপারিশ। ফলাফল পছন্দ না হলে নিজেই level বেছে নিতে পারবেন।</p>
+</main>
+
+<script type="module">
+import { requireAuth, db, doc, updateDoc, serverTimestamp } from "./js/firebase-config.js";
+import { LEVELS, createState, nextItem, record, isDone, result, CONFIG } from "./learning/placement-engine.js";
+
+const $ = (id) => document.getElementById(id);
+const bn = (n) => String(n).replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const shuffle = (a) => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const LEVEL_NAMES = { A1: "একদম নতুন", A2: "প্রাথমিক", B1: "মাঝারি", B2: "ভালো", C1: "উন্নত", C2: "প্রায় native" };
+const CONF = { high: "উচ্চ আস্থা", medium: "মাঝারি আস্থা", low: "কম আস্থা (আরও প্রশ্নের উত্তর দিলে নির্ভুল হবে)" };
+
+let bank = [], state = null, uid = null, current = null, startLevel = "unsure", profile = null;
+
+async function loadBank() {
+  const res = await fetch("data/placement-bank.json", { cache: "force-cache" });
+  if (!res.ok) throw new Error("bank");
+  bank = (await res.json()).items;
+}
+
+function intro() {
+  const s = $("stage"); s.textContent = "";
+  s.append(el("h1", null, "Find My Level 🎯"), el("p", "lead", "প্রায় ১২–১৮টি ছোট প্রশ্নে আপনার English level আন্দাজ করা হবে। প্রশ্ন আপনার উত্তর অনুযায়ী সহজ বা কঠিন হবে।"));
+  const ul = el("ul", "tips");
+  ["প্রায় ৩ মিনিট লাগবে", "উত্তর না জানলে “জানি না” চাপুন, অনুমান করার দরকার নেই", "নম্বর কাটা যাবে না, আর ফলাফলের পরেও level আপনিই ঠিক করবেন"].forEach((t) => ul.appendChild(el("li", null, t)));
+  const go = el("button", "es-btn es-btn--lg", "শুরু করি →"); go.type = "button"; go.style.width = "100%";
+  go.onclick = () => { state = createState(startLevel); ask(); };
+  s.append(ul, go);
+  $("counter").textContent = "";
+}
+
+function ask() {
+  $("err").textContent = "";
+  if (isDone(state)) return finish();
+  current = nextItem(state, bank);
+  if (!current) return finish();
+  const n = state.answers.length + 1;
+  $("counter").textContent = `প্রশ্ন ${bn(n)}`;
+  const pct = Math.min(95, Math.round((n - 1) / 15 * 100));
+  const bar = $("bar"); bar.style.setProperty("--value", pct + "%"); bar.setAttribute("aria-valuenow", String(pct));
+  const s = $("stage"); s.textContent = "";
+  const isVocab = current.type === "vocab";
+  s.append(el("span", "es-badge tag", isVocab ? "📚 শব্দের অর্থ" : "📘 সঠিক উত্তর বেছে নিন"));
+  if (isVocab) { s.append(el("p", "lead", "এই শব্দটির বাংলা অর্থ কী?")); const w = el("p", "stem word", current.stem); w.lang = "en"; s.append(w); }
+  else { const q = el("p", "stem", current.stem); q.lang = "en"; s.append(q); }
+  const box = el("div", "opts"); box.setAttribute("role", "group");
+  const btns = [];
+  const lock = () => btns.forEach((b) => (b.disabled = true));
+  shuffle([current.correct, ...current.wrong]).forEach((text) => {
+    const b = el("button", "opt", text); b.type = "button"; if (!isVocab) b.lang = "en";
+    b.onclick = () => { lock(); record(state, current, text === current.correct); ask(); };
+    btns.push(b); box.appendChild(b);
+  });
+  s.appendChild(box);
+  const dk = el("div", "dk"); const d = el("button", "es-btn es-btn--ghost es-btn--sm", "জানি না"); d.type = "button";
+  d.onclick = () => { lock(); record(state, current, false); ask(); };
+  dk.appendChild(d); s.appendChild(dk);
+  (btns[0] || d).blur();
+}
+
+function finish() {
+  const r = result(state);
+  $("counter").textContent = "";
+  const bar = $("bar"); bar.style.setProperty("--value", "100%"); bar.setAttribute("aria-valuenow", "100");
+  let chosen = r.level;
+  const s = $("stage"); s.textContent = "";
+  s.append(el("p", "lead", "আপনার জন্য সুপারিশ"));
+  const big = el("div", "big es-gradient-text", r.level); big.setAttribute("aria-label", "সুপারিশকৃত level " + r.level);
+  s.append(big, el("p", "lead", `${LEVEL_NAMES[r.level]} · ${CONF[r.confidence]}`));
+  const st = el("div", "stats");
+  const vt = r.byType.vocab || { c: 0, n: 0 }, gt = r.byType.grammar || { c: 0, n: 0 };
+  st.append(el("span", "es-badge es-badge--info", `📚 Vocabulary ${bn(vt.c)}/${bn(vt.n)}`), el("span", "es-badge es-badge--info", `📘 Grammar ${bn(gt.c)}/${bn(gt.n)}`), el("span", "es-badge", `${bn(r.answered)}টি প্রশ্ন`));
+  s.appendChild(st);
+  s.appendChild(el("p", "lead", "এই level-এ শুরু করবেন, নাকি অন্য কোনোটা বেছে নেবেন? সিদ্ধান্ত আপনার।"));
+  const pick = el("div", "pick"); pick.setAttribute("role", "radiogroup");
+  const paint = () => pick.querySelectorAll(".opt").forEach((b) => b.setAttribute("aria-checked", b.dataset.id === chosen ? "true" : "false"));
+  LEVELS.forEach((l) => {
+    const b = el("button", "opt", l); b.type = "button"; b.dataset.id = l; b.setAttribute("role", "radio");
+    if (l === r.level) b.appendChild(el("span", "rec", "সুপারিশ"));
+    b.onclick = () => { chosen = l; paint(); };
+    pick.appendChild(b);
+  });
+  paint(); s.appendChild(pick);
+  const row = el("div", "row");
+  const save = el("button", "es-btn es-btn--lg", "এই level-এ শুরু করি 🚀"); save.type = "button";
+  const again = el("button", "es-btn es-btn--ghost", "আবার টেস্ট দিন"); again.type = "button";
+  again.onclick = () => intro();
+  save.onclick = async () => {
+    save.disabled = true; $("err").textContent = "";
+    try {
+      await updateDoc(doc(db, "users", uid), {
+        "learningProfile.level": chosen,
+        "learningProfile.levelPending": false,
+        "learningProfile.levelSource": chosen === r.level ? "placement" : "placement-adjusted",
+        placement: { version: 1, recommended: r.level, chosen, answered: r.answered, correct: r.correct, confidence: r.confidence, takenAt: serverTimestamp() },
+      });
+      location.replace("dashboard.html");
+    } catch (e) { console.warn("save placement failed", e); $("err").textContent = "সেভ করা যায়নি। Internet পরীক্ষা করে আবার চেষ্টা করুন।"; save.disabled = false; }
+  };
+  row.append(save, again); s.appendChild(row);
+}
+
+requireAuth(async (user, d = {}) => {
+  uid = user.uid; profile = d.learningProfile;
+  if (!profile) { location.replace("onboarding.html"); return; }    // need a profile to attach the level to
+  startLevel = profile.levelPending ? "unsure" : profile.level;
+  try { await loadBank(); intro(); }
+  catch { $("stage").textContent = ""; $("err").textContent = "প্রশ্ন লোড করা যায়নি। Internet পরীক্ষা করে পেজটি রিফ্রেশ করুন।"; }
+});
+</script>
+</body>
+</html>

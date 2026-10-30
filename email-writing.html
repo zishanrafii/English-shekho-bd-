@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Writing — Writing Lab — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/writing-lab.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text"><h1>English Shekho</h1><p>ENGLISH LEARNING PLATFORM · A1 TO C2</p></div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" data-action="go-profile">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div class="breadcrumb">
+    <a href="writing-lab.html">✍️ Writing Lab</a>
+    <span class="bc-sep">›</span><span>Email Writing</span>
+  </div>
+  <div class="task-tabs" id="task-tabs"></div>
+  <div id="prompt"></div>
+  <div class="editor-layout">
+    <div class="hints-panel">
+      <div class="hints-head">📧 Email Structure</div>
+      <div class="hints-body" id="hints"></div>
+    </div>
+    <div class="editor-panel">
+      <div class="editor-toolbar">
+          <button class="etool-btn" data-action="subject-email">Subject</button>
+          <button class="etool-btn" data-action="dear-email">Dear</button>
+          <button class="etool-btn" data-action="regards-email">Regards</button>
+          <div class="etool-sep"></div>
+          <button class="etool-btn" data-action="clear">🗑 Clear</button>
+        <div class="word-counter">Words: <span id="word-count">0</span></div>
+      </div>
+      <textarea class="editor-textarea" id="main-editor" placeholder="Subject: ...
+
+Dear [Name],
+
+...
+
+Regards,
+[Your Name]" style="min-height:300px;"></textarea>
+      <div class="editor-footer">
+        <div class="ef-left">লক্ষ্য: ৫০–১৫০ শব্দ
+          <label class="ef-public"><input type="checkbox" id="public-checkbox"> 🌍 Community-তে public করো</label>
+        </div>
+        <div class="ef-actions">
+          <button class="btn-save" data-action="save">💾 Save Draft</button>
+          <button class="btn-check" data-action="check">🤖 Writing Check</button>
+          <button class="btn-submit" data-action="submit">Submit ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="feedback-panel" id="feedback-panel"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { setupCommonPage, initEditor, setupEditorToolbar } from "./js/writing-common.js";
+
+/* ══════════════════════════════════════
+   DATA — Email Writing Tasks
+══════════════════════════════════════ */
+const TASKS = [
+  {id:"em1", label:"Job Application", level:"B1", words:"80–130", xp:125,
+   prompt:"একটি software company-তে junior developer পদের জন্য application email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject line:</b> Application for Junior Developer Position"},
+     {icon:"👋", text:"<b>Opening:</b> 'Dear Hiring Manager,' দিয়ে শুরু করুন।"},
+     {icon:"💼", text:"নিজের skills ও experience সংক্ষেপে বলুন।"},
+     {icon:"🤝", text:"<b>Closing:</b> 'I look forward to hearing from you.'"},
+   ],
+   usefulWords:["application","position","experience","qualified","attached","sincerely","opportunity","contribute"]},
+  {id:"em2", label:"Complaint Email", level:"B1", words:"80–120", xp:125,
+   prompt:"আপনি online-এ একটি product order করেছেন কিন্তু ভুল product এসেছে। Company-কে email করুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Wrong Item Received — Order #[number]"},
+     {icon:"😤", text:"সমস্যাটি clearly ও politely বর্ণনা করুন।"},
+     {icon:"✅", text:"আপনি কী চান তা স্পষ্ট করুন (refund/replacement)।"},
+     {icon:"🕐", text:"একটি deadline উল্লেখ করুন।"},
+   ],
+   usefulWords:["received","incorrect","order","replacement","refund","inconvenience","resolve","promptly"]},
+  {id:"em3", label:"Informal Email to Friend", level:"A2", words:"60–100", xp:75,
+   prompt:"আপনার বন্ধুকে আপনার নতুন school সম্পর্কে একটি informal email লিখুন।",
+   hints:[
+     {icon:"👋", text:"<b>Greeting:</b> 'Hi [Name],' অথবা 'Hey [Name]!'"},
+     {icon:"😊", text:"Casual, friendly tone ব্যবহার করুন।"},
+     {icon:"📖", text:"School, teachers, friends সম্পর্কে বলুন।"},
+     {icon:"❓", text:"বন্ধুকে একটি প্রশ্ন করুন।"},
+   ],
+   usefulWords:["amazing","settled in","subjects","miss","excited","can't wait","by the way","catch up"]},
+  {id:"em4", label:"Leave Application to Teacher", level:"A2", words:"50–90", xp:75,
+   prompt:"অসুস্থতার কারণে ৩ দিন ছুটির জন্য আপনার class teacher-কে একটি email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Leave Application Due to Illness"},
+     {icon:"👋", text:"<b>Opening:</b> 'Dear Sir/Madam,' দিয়ে শুরু করুন।"},
+     {icon:"🤒", text:"কেন ছুটি প্রয়োজন এবং কতদিনের জন্য তা স্পষ্ট করে বলুন।"},
+     {icon:"🙏", text:"<b>Closing:</b> অনুরোধের সাথে ধন্যবাদ জানান।"},
+   ],
+   usefulWords:["unwell","absence","grant leave","recover","inconvenience","grateful","attached","resume"]},
+  {id:"em5", label:"Email to a Hotel for Booking", level:"B1", words:"80–120", xp:125,
+   prompt:"একটি hotel-এ ২ রাতের জন্য room booking করতে একটি email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Room Reservation Inquiry — [Dates]"},
+     {icon:"🏨", text:"কতদিনের জন্য, কতটি room এবং কোন ধরনের room চান তা বলুন।"},
+     {icon:"❓", text:"Price, facilities (WiFi, breakfast) নিয়ে প্রশ্ন করুন।"},
+     {icon:"🤝", text:"<b>Closing:</b> দ্রুত reply পাওয়ার আশা প্রকাশ করুন।"},
+   ],
+   usefulWords:["reservation","availability","accommodation","check-in","check-out","facilities","confirm","inquiry"]},
+  {id:"em6", label:"Email Inviting a Friend to an Event", level:"A2", words:"60–100", xp:80,
+   prompt:"আপনার birthday party-তে একজন বন্ধুকে আসার জন্য একটি email লিখুন।",
+   hints:[
+     {icon:"👋", text:"<b>Greeting:</b> Friendly tone-এ শুরু করুন।"},
+     {icon:"🎉", text:"Event-এর তারিখ, সময় ও স্থান উল্লেখ করুন।"},
+     {icon:"😊", text:"কেন তাকে আসা উচিত তা বলুন।"},
+     {icon:"📩", text:"<b>Closing:</b> দ্রুত confirm করতে বলুন।"},
+   ],
+   usefulWords:["invite","celebration","venue","looking forward","RSVP","surprise","join us","memorable"]},
+  {id:"em7", label:"Email Requesting a Recommendation Letter", level:"B1", words:"80–120", xp:125,
+   prompt:"আপনার একজন শিক্ষককে scholarship application-এর জন্য একটি recommendation letter চেয়ে email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Request for a Letter of Recommendation"},
+     {icon:"👋", text:"<b>Opening:</b> Polite ভাবে নিজের পরিচয় ও context দিন।"},
+     {icon:"📝", text:"কেন এই letter প্রয়োজন এবং deadline কখন তা উল্লেখ করুন।"},
+     {icon:"🙏", text:"<b>Closing:</b> সময় দেওয়ার জন্য ধন্যবাদ জানান।"},
+   ],
+   usefulWords:["recommendation","scholarship","appreciate","deadline","achievements","grateful","request","submit"]},
+  {id:"em8", label:"Email Apologizing for Being Late", level:"A2", words:"60–100", xp:80,
+   prompt:"একটি meeting-এ late হওয়ার জন্য আপনার বসকে একটি apology email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Apology for Being Late to the Meeting"},
+     {icon:"😔", text:"<b>Opening:</b> সরাসরি ক্ষমা চেয়ে শুরু করুন।"},
+     {icon:"💬", text:"সংক্ষেপে কারণ ব্যাখ্যা করুন (যেমন: traffic, emergency)।"},
+     {icon:"✅", text:"<b>Closing:</b> এটি আর হবে না — এই assurance দিন।"},
+   ],
+   usefulWords:["apologize","sincerely","delay","inconvenience","unavoidable","punctual","assure","understanding"]},
+  {id:"em9", label:"Email Proposing a Meeting to a Colleague", level:"B1", words:"80–120", xp:125,
+   prompt:"একটি প্রজেক্ট নিয়ে আলোচনার জন্য আপনার colleague-কে একটি meeting-এর প্রস্তাব দিয়ে email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Meeting Request — [Project Name]"},
+     {icon:"👋", text:"<b>Opening:</b> Professional ভাবে শুরু করুন।"},
+     {icon:"🗓️", text:"Meeting-এর সম্ভাব্য তারিখ, সময় ও আলোচ্য বিষয় উল্লেখ করুন।"},
+     {icon:"🤝", text:"<b>Closing:</b> তার সুবিধামতো সময় জানাতে অনুরোধ করুন।"},
+   ],
+   usefulWords:["schedule","agenda","availability","discuss","collaborate","proposal","convenient","confirm"]},
+  {id:"em10", label:"Email to a Landlord About a Repair", level:"A2", words:"60–100", xp:80,
+   prompt:"আপনার বাসার একটি সমস্যা (যেমন: পানির লাইন লিক) ঠিক করার জন্য বাড়িওয়ালাকে email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Request for Repair — [Issue]"},
+     {icon:"👋", text:"<b>Opening:</b> Polite ভাবে সমস্যাটি জানান।"},
+     {icon:"🔧", text:"সমস্যাটি কতদিন ধরে আছে এবং কী প্রভাব ফেলছে তা বলুন।"},
+     {icon:"🙏", text:"<b>Closing:</b> দ্রুত ঠিক করার অনুরোধ করুন।"},
+   ],
+   usefulWords:["repair","leak","inconvenience","maintenance","promptly","issue","resolve","appreciate"]},
+  {id:"em11", label:"Email Resigning from a Job", level:"B1", words:"80–120", xp:125,
+   prompt:"একটি company থেকে পদত্যাগের (resignation) জন্য একটি email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Resignation — [Your Name]"},
+     {icon:"👋", text:"<b>Opening:</b> সরাসরি resignation-এর কথা জানান এবং last working day উল্লেখ করুন।"},
+     {icon:"🙏", text:"কাজের সুযোগের জন্য কৃতজ্ঞতা প্রকাশ করুন।"},
+     {icon:"🤝", text:"<b>Closing:</b> smooth transition-এ সাহায্যের আগ্রহ প্রকাশ করুন।"},
+   ],
+   usefulWords:["resignation","notice period","grateful","opportunity","transition","colleagues","professional","appreciate"]},
+  {id:"em12", label:"Email to a University Requesting Admission Information", level:"B1", words:"80–120", xp:125,
+   prompt:"একটি university-তে admission সম্পর্কে তথ্য জানতে একটি email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Inquiry About Admission — [Program Name]"},
+     {icon:"👋", text:"<b>Opening:</b> নিজের পরিচয় এবং কোন program-এ আগ্রহী তা বলুন।"},
+     {icon:"❓", text:"Eligibility, deadline, ও tuition fee নিয়ে প্রশ্ন করুন।"},
+     {icon:"🤝", text:"<b>Closing:</b> দ্রুত reply পাওয়ার আশা প্রকাশ করুন।"},
+   ],
+   usefulWords:["admission","eligibility","deadline","tuition","program","inquiry","prospective","requirements"]},
+  {id:"em13", label:"Email Thanking Someone for Their Help", level:"A2", words:"50–90", xp:75,
+   prompt:"কেউ আপনাকে কোনো কাজে সাহায্য করেছে — তাকে ধন্যবাদ জানিয়ে একটি email লিখুন।",
+   hints:[
+     {icon:"👋", text:"<b>Opening:</b> Warm greeting দিয়ে শুরু করুন।"},
+     {icon:"🙏", text:"কীভাবে তারা সাহায্য করেছে তা specific ভাবে উল্লেখ করুন।"},
+     {icon:"😊", text:"এটি আপনার জন্য কতটা গুরুত্বপূর্ণ ছিল তা বলুন।"},
+     {icon:"❤️", text:"<b>Closing:</b> আবার ধন্যবাদ জানিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["grateful","appreciate","support","kindness","valuable","thankful","helpful","generosity"]},
+  {id:"em14", label:"Email to a Travel Agency for a Tour Package", level:"B1", words:"80–120", xp:125,
+   prompt:"একটি travel agency-কে একটি tour package সম্পর্কে জানতে email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Inquiry About Tour Package — [Destination]"},
+     {icon:"👋", text:"<b>Opening:</b> কোথায় যেতে চান এবং কতদিনের জন্য তা বলুন।"},
+     {icon:"❓", text:"Package-এ কী কী include আছে (hotel, food, transport) তা জানতে চান।"},
+     {icon:"🤝", text:"<b>Closing:</b> Price ও booking process জানতে চেয়ে শেষ করুন।"},
+   ],
+   usefulWords:["package","itinerary","accommodation","budget","inclusive","booking","destination","inquiry"]},
+  {id:"em15", label:"Email Asking for a Deadline Extension", level:"B1", words:"70–110", xp:100,
+   prompt:"একটি assignment-এর জন্য সময় বাড়ানোর (deadline extension) অনুরোধ করে শিক্ষককে email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Request for Extension — [Assignment Name]"},
+     {icon:"👋", text:"<b>Opening:</b> Polite ভাবে কারণ উল্লেখ করুন।"},
+     {icon:"🙏", text:"কতদিন বেশি সময় প্রয়োজন তা স্পষ্ট করে বলুন।"},
+     {icon:"✅", text:"<b>Closing:</b> সময়মতো জমা দেওয়ার assurance দিন।"},
+   ],
+   usefulWords:["extension","deadline","submit","circumstances","apologize","grant","assignment","understanding"]},
+  {id:"em16", label:"Email to a Newspaper Editor about a Local Problem", level:"B2", words:"100–150", xp:150,
+   prompt:"আপনার এলাকার একটি সমস্যা (যেমন: রাস্তার বাজে অবস্থা) নিয়ে একটি newspaper editor-কে email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Concern Regarding [Issue] in [Area]"},
+     {icon:"👋", text:"<b>Opening:</b> সমস্যাটি ও এলাকা সংক্ষেপে উল্লেখ করুন।"},
+     {icon:"⚠️", text:"সমস্যাটি মানুষের জীবনে কী প্রভাব ফেলছে তা বর্ণনা করুন।"},
+     {icon:"🎯", text:"<b>Closing:</b> কর্তৃপক্ষের দৃষ্টি আকর্ষণের অনুরোধ করুন।"},
+   ],
+   usefulWords:["concern","authorities","residents","attention","publish","issue","inconvenience","urgent"]},
+  {id:"em17", label:"Email Congratulating a Friend on Their Success", level:"A2", words:"50–90", xp:75,
+   prompt:"আপনার বন্ধু একটি পরীক্ষায় ভালো result করেছে — তাকে অভিনন্দন জানিয়ে email লিখুন।",
+   hints:[
+     {icon:"👋", text:"<b>Opening:</b> Excited tone-এ শুরু করুন।"},
+     {icon:"🎉", text:"তার সাফল্য সম্পর্কে specific কিছু বলুন।"},
+     {icon:"😊", text:"তার hard work-এর প্রশংসা করুন।"},
+     {icon:"🤝", text:"<b>Closing:</b> ভবিষ্যতের জন্য শুভকামনা জানান।"},
+   ],
+   usefulWords:["congratulations","proud","well done","achievement","hard work","celebrate","success","deserve"]},
+  {id:"em18", label:"Email to Customer Support about a Refund", level:"B1", words:"80–120", xp:125,
+   prompt:"একটি defective product-এর জন্য refund চেয়ে customer support-কে email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Refund Request — Order #[number]"},
+     {icon:"👋", text:"<b>Opening:</b> Order details ও সমস্যা উল্লেখ করুন।"},
+     {icon:"⚠️", text:"Product-টি কীভাবে defective তা বর্ণনা করুন।"},
+     {icon:"✅", text:"<b>Closing:</b> Refund process সম্পর্কে জানতে চান।"},
+   ],
+   usefulWords:["defective","refund","order number","faulty","return policy","compensation","resolve","prompt"]},
+  {id:"em19", label:"Email Introducing Yourself to a New Team", level:"A2", words:"60–100", xp:80,
+   prompt:"একটি নতুন কাজে join করার পর team-কে introduce করতে একটি email লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Subject:</b> Introduction — [Your Name]"},
+     {icon:"👋", text:"<b>Opening:</b> নিজের নাম ও position উল্লেখ করুন।"},
+     {icon:"💼", text:"আপনার background ও experience সংক্ষেপে বলুন।"},
+     {icon:"🤝", text:"<b>Closing:</b> Team-এর সাথে কাজ করার আগ্রহ প্রকাশ করুন।"},
+   ],
+   usefulWords:["introduce","background","excited","collaborate","team","role","experience","look forward"]},
+];
+
+/* ══════════════════════════════════════
+   PAGE INIT
+══════════════════════════════════════ */
+initEditor(TASKS);
+setupEditorToolbar("email");
+setupCommonPage();
+
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  if(el.dataset.action === "go-profile") window.location.href = "profile.html";
+});
+</script>
+</body>
+</html>

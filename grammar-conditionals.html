@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conditionals — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --accent:#34d399;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(52,211,153,.07),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(52,211,153,.04),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;
+  background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(52,211,153,.1));
+  border:1px solid rgba(52,211,153,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;background:linear-gradient(135deg,#34d399,#6ee7b7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;
+  color:var(--sub);text-decoration:none;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);transition:.2s;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(52,211,153,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(52,211,153,.15),rgba(110,231,183,.15));
+  border:2px solid rgba(52,211,153,.2);display:flex;align-items:center;
+  justify-content:center;font-size:.9rem;overflow:hidden;cursor:pointer;flex-shrink:0;}
+
+.layout{display:flex;height:calc(100vh - 57px);}
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid var(--border);
+  overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(52,211,153,.2);border-radius:3px;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;
+  border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;margin-bottom:2px;}
+.sb-item:hover{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.1);}
+.sb-item.active{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.25);color:var(--accent);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+.lvl-b2{background:rgba(251,113,133,.1);color:#fb7185;border:1px solid rgba(251,113,133,.2);}
+
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(52,211,153,.15);border-radius:3px;}
+
+.lesson-header{margin-bottom:2rem;}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#34d399,#6ee7b7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:.8rem;}
+.lmeta{font-size:12px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,linear-gradient(90deg,var(--accent),#6ee7b7));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* Conditional type badge cards */
+.cond-heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:1.4rem;}
+.c-hero{border-radius:16px;padding:1rem .8rem;text-align:center;border:1px solid;cursor:pointer;transition:.2s;}
+.c-hero:hover{transform:translateY(-2px);}
+.c-num{font-size:1.8rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:.2rem;}
+.c-name{font-size:11px;font-weight:700;margin-bottom:.2rem;}
+.c-bn{font-size:10px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.4;}
+
+.formula{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.18);border-radius:14px;padding:1rem 1.4rem;margin-bottom:1rem;}
+.formula-label{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.formula-text{font-size:.95rem;color:var(--text);line-height:1.9;font-family:'JetBrains Mono',monospace;}
+.hl{color:var(--accent);font-weight:700;}
+.hl2{color:var(--teal);font-weight:700;}
+.hl3{color:var(--rose);font-weight:700;}
+.hl4{color:var(--gold);font-weight:700;}
+.hl5{color:var(--indigo);font-weight:700;}
+
+/* IF clause + Result clause visual layout */
+.cond-split{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem;}
+.cond-clause{border-radius:14px;padding:.9rem 1.1rem;border:1px solid;}
+.cond-clause.if-part{background:rgba(52,211,153,.05);border-color:rgba(52,211,153,.2);}
+.cond-clause.result-part{background:rgba(45,212,191,.05);border-color:rgba(45,212,191,.2);}
+.cond-clause-label{font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.if-part .cond-clause-label{color:var(--accent);}
+.result-part .cond-clause-label{color:var(--teal);}
+.cond-clause-text{font-size:13px;font-weight:600;line-height:1.5;}
+.cond-clause-bn{font-size:11.5px;color:var(--muted);margin-top:.3rem;font-family:'Noto Sans Bengali',sans-serif;}
+
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(52,211,153,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-tag{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;border-radius:20px;margin-left:8px;font-weight:700;background:rgba(52,211,153,.1);color:var(--accent);}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{background:rgba(52,211,153,.08);color:var(--accent);font-weight:700;padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(52,211,153,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--text);font-weight:600;}
+.gtable td:nth-child(2){color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;}
+.gtable td:nth-child(3){color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:12px;}
+.gtable td:nth-child(4){color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+
+/* Reality meter */
+.reality-meter{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
+.r-row{display:flex;align-items:center;gap:10px;}
+.r-label{font-size:12px;font-weight:700;width:110px;font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+.r-bar-bg{flex:1;height:8px;background:rgba(255,255,255,.04);border-radius:20px;overflow:hidden;}
+.r-bar-fill{height:100%;border-radius:20px;}
+.r-pct{font-size:11px;color:var(--muted);width:60px;text-align:right;font-family:'Noto Sans Bengali',sans-serif;}
+
+.tip{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--accent);}
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+.practice-q{background:rgba(52,211,153,.04);border:1px solid rgba(52,211,153,.15);border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.6rem;}
+.pq-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.pq-opt{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:'Outfit',sans-serif;}
+.pq-opt:hover{border-color:rgba(52,211,153,.3);color:var(--accent);}
+.pq-opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);}
+.pq-opt.wrong{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.pq-feedback{font-size:13px;padding:.5rem .8rem;border-radius:8px;display:none;font-family:'Noto Sans Bengali',sans-serif;margin-top:.4rem;}
+.pq-feedback.show{display:block;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:var(--emerald);}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;align-items:center;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.btn-prev:hover,.btn-next:hover{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(110,231,183,.08));border-color:rgba(52,211,153,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#34d399,#6ee7b7);color:#000;border:none;border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#34d399,#6ee7b7);transition:width .3s;}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--border);}
+  .main{padding:1.2rem 1rem 3rem;}
+  .cond-split{grid-template-columns:1fr;}
+  .cond-heroes{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">🌿 Conditionals</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section-label">Conditionals</div>
+    <div class="sb-item active" data-id="overview" onclick="show('overview',0)">
+      <span class="sb-dot" style="background:#34d399"></span><span class="sb-text">Overview</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="zero" onclick="show('zero',1)">
+      <span class="sb-dot" style="background:#2dd4bf"></span><span class="sb-text">Zero Conditional</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="first" onclick="show('first',2)">
+      <span class="sb-dot" style="background:#f5c842"></span><span class="sb-text">First Conditional</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="second" onclick="show('second',3)">
+      <span class="sb-dot" style="background:#fb923c"></span><span class="sb-text">Second Conditional</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="third" onclick="show('third',4)">
+      <span class="sb-dot" style="background:#fb7185"></span><span class="sb-text">Third Conditional</span><span class="sb-lvl lvl-b2">B2</span>
+    </div>
+    <div class="sb-item" data-id="mixed" onclick="show('mixed',5)">
+      <span class="sb-dot" style="background:#818cf8"></span><span class="sb-text">Mixed Conditional</span><span class="sb-lvl lvl-b2">B2</span>
+    </div>
+    <div class="sb-item" data-id="compare" onclick="show('compare',6)">
+      <span class="sb-dot" style="background:#34d399"></span><span class="sb-text">Quick Compare</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="practice" onclick="show('practice',7)">
+      <span class="sb-dot" style="background:#6ee7b7"></span><span class="sb-text">Practice Quiz</span>
+    </div>
+  </div>
+
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const PANELS={
+
+'overview':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → Overview</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2–B2</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Conditionals — শর্তমূলক বাক্য</span></div>
+  <div class="lesson-desc">"If" দিয়ে শুরু হওয়া বাক্যগুলো Conditional। এগুলো বলে: "যদি X হয়, তাহলে Y হবে।" বাস্তবতার মাত্রা অনুযায়ী ৫ ধরনের Conditional আছে।</div>
+</div>
+
+<div class="cond-heroes">
+  <div class="c-hero" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25)" onclick="show('zero',1)">
+    <div class="c-num" style="color:#2dd4bf">0</div>
+    <div class="c-name" style="color:#2dd4bf">Zero</div>
+    <div class="c-bn">সর্বদা সত্য / বৈজ্ঞানিক সত্য</div>
+  </div>
+  <div class="c-hero" style="background:rgba(245,200,66,.08);border-color:rgba(245,200,66,.25)" onclick="show('first',2)">
+    <div class="c-num" style="color:#f5c842">1st</div>
+    <div class="c-name" style="color:#f5c842">First</div>
+    <div class="c-bn">বাস্তব সম্ভাবনা ভবিষ্যতে</div>
+  </div>
+  <div class="c-hero" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25)" onclick="show('second',3)">
+    <div class="c-num" style="color:#fb923c">2nd</div>
+    <div class="c-name" style="color:#fb923c">Second</div>
+    <div class="c-bn">কাল্পনিক / অবাস্তব বর্তমান</div>
+  </div>
+  <div class="c-hero" style="background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.25)" onclick="show('third',4)">
+    <div class="c-num" style="color:#fb7185">3rd</div>
+    <div class="c-name" style="color:#fb7185">Third</div>
+    <div class="c-bn">অতীতে যা হয়নি তার আফসোস</div>
+  </div>
+  <div class="c-hero" style="background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.25)" onclick="show('mixed',5)">
+    <div class="c-num" style="color:#818cf8">Mix</div>
+    <div class="c-name" style="color:#818cf8">Mixed</div>
+    <div class="c-bn">অতীত + বর্তমান মিশ্রণ</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">📊 বাস্তবতার মাত্রা — Reality Scale</div>
+  <div class="reality-meter">
+    <div class="r-row">
+      <div class="r-label" style="color:#2dd4bf">Zero</div>
+      <div class="r-bar-bg"><div class="r-bar-fill" style="width:100%;background:linear-gradient(90deg,#2dd4bf,#34d399)"></div></div>
+      <div class="r-pct">১০০% সত্য</div>
+    </div>
+    <div class="r-row">
+      <div class="r-label" style="color:#f5c842">First</div>
+      <div class="r-bar-bg"><div class="r-bar-fill" style="width:70%;background:linear-gradient(90deg,#f5c842,#fb923c)"></div></div>
+      <div class="r-pct">সম্ভব (~70%)</div>
+    </div>
+    <div class="r-row">
+      <div class="r-label" style="color:#fb923c">Second</div>
+      <div class="r-bar-bg"><div class="r-bar-fill" style="width:30%;background:linear-gradient(90deg,#fb923c,#fb7185)"></div></div>
+      <div class="r-pct">অসম্ভব (~30%)</div>
+    </div>
+    <div class="r-row">
+      <div class="r-label" style="color:#fb7185">Third</div>
+      <div class="r-bar-bg"><div class="r-bar-fill" style="width:5%;background:#fb7185"></div></div>
+      <div class="r-pct">ঘটেনি (0%)</div>
+    </div>
+    <div class="r-row">
+      <div class="r-label" style="color:#818cf8">Mixed</div>
+      <div class="r-bar-bg"><div class="r-bar-fill" style="width:15%;background:linear-gradient(90deg,#818cf8,#fb7185)"></div></div>
+      <div class="r-pct">মিশ্র (~15%)</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">📌 দ্রুত চিনে নাও</div>
+  <table class="gtable">
+    <tr><th>Type</th><th>If Clause</th><th>Main Clause</th><th>বাংলা</th></tr>
+    <tr><td>Zero</td><td>Present Simple</td><td>Present Simple</td><td>সত্য নিয়ম</td></tr>
+    <tr><td>First</td><td>Present Simple</td><td>will + V1</td><td>ভবিষ্যৎ সম্ভাবনা</td></tr>
+    <tr><td>Second</td><td>Past Simple</td><td>would + V1</td><td>কাল্পনিক</td></tr>
+    <tr><td>Third</td><td>Past Perfect</td><td>would have + V3</td><td>অতীতের আফসোস</td></tr>
+    <tr><td>Mixed</td><td>Past Perfect</td><td>would + V1</td><td>অতীত→বর্তমান</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>If clause এ কখনো "will" ব্যবহার করবে না!</strong><br>
+  ❌ "If it <strong>will rain</strong>, I will stay home." → ✅ "If it <strong>rains</strong>, I will stay home."<br>
+  If clause সবসময় present বা past tense নেয়, কখনো will/would নয়।</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="btn-prev" href="grammar-narration.html">← Narration</a>
+  <button class="btn-next" onclick="show('zero',1)">Zero Conditional →</button>
+</div>`,
+
+'zero':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → Zero Conditional</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 12 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Zero Conditional</span></div>
+  <div class="lesson-desc">সর্বদা সত্য এমন বিষয় বোঝাতে — বৈজ্ঞানিক সত্য, সাধারণ নিয়ম, স্বাভাবিক ফলাফল। এখানে "if" মানে "whenever" (যখনই)।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#2dd4bf,var(--accent))">
+  <div class="card-title">📐 Formula</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text">If + <span class="hl2">Present Simple</span>, &nbsp;<span class="hl">Present Simple</span></div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Reversed Order (result আগে)</div>
+    <div class="formula-text"><span class="hl">Present Simple</span> + if + <span class="hl2">Present Simple</span> &nbsp;<span style="color:var(--muted);font-size:.85rem">(কমা লাগে না)</span></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">🔬 বৈজ্ঞানিক সত্য / নিয়ম</div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause (শর্ত)</div>
+      <div class="cond-clause-text">If you <b>heat</b> water to 100°C,</div>
+      <div class="cond-clause-bn">যদি পানি ১০০° তে গরম করো,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result Clause (ফলাফল)</div>
+      <div class="cond-clause-text">it <b>boils</b>.</div>
+      <div class="cond-clause-bn">তা ফুটতে শুরু করে।</div>
+    </div>
+  </div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause</div>
+      <div class="cond-clause-text">If you <b>mix</b> red and blue,</div>
+      <div class="cond-clause-bn">যদি লাল ও নীল মেশাও,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result Clause</div>
+      <div class="cond-clause-text">you <b>get</b> purple.</div>
+      <div class="cond-clause-bn">বেগুনি রঙ হয়।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 আরও উদাহরণ</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">If plants <b>don't get</b> water, they <b>die</b>. <span class="ex-tag">প্রকৃতির নিয়ম</span></div><div class="ex-bn">গাছ পানি না পেলে মরে যায়।</div></div>
+    <div class="ex"><div class="ex-en">If I <b>eat</b> too much, I <b>feel</b> sick. <span class="ex-tag">সাধারণ অভিজ্ঞতা</span></div><div class="ex-bn">বেশি খেলে আমার অসুস্থ লাগে।</div></div>
+    <div class="ex"><div class="ex-en">Water <b>freezes</b> if the temperature <b>drops</b> below 0°C. <span class="ex-tag">result আগে</span></div><div class="ex-bn">তাপমাত্রা শূন্যের নিচে গেলে পানি জমে যায়।</div></div>
+    <div class="ex"><div class="ex-en">If you <b>press</b> this button, the machine <b>starts</b>. <span class="ex-tag">কার্যকরণ সম্পর্ক</span></div><div class="ex-bn">এই বাটন চাপলে মেশিন চালু হয়।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Zero Conditional এ "if" এর বদলে "when/whenever" ব্যবহার করা যায়।</strong><br>
+  "If you heat ice, it melts." = "<strong>When</strong> you heat ice, it melts."<br>
+  অর্থ একই — কারণ এটা সবসময় সত্য।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('overview',0)">← Overview</button>
+  <button class="btn-next" onclick="show('first',2)">First Conditional →</button>
+</div>`,
+
+'first':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → First Conditional</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>First Conditional</span></div>
+  <div class="lesson-desc">বাস্তব ও সম্ভব এমন ভবিষ্যৎ পরিস্থিতি বোঝাতে। শর্তটা পূরণ হলে ফলাফল হওয়ার সত্যিকারের সম্ভাবনা আছে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#f5c842,var(--accent))">
+  <div class="card-title">📐 Formula</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text">If + <span class="hl4">Present Simple</span>, &nbsp;<span class="hl">will + V1</span></div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Variations — result clause এ</div>
+    <div class="formula-text">... <span class="hl">can / may / might / must / should</span> + V1<br><span style="color:var(--muted);font-size:.85rem">(will এর পরিবর্তে modal verb ব্যবহার করা যায়)</span></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--gold))">
+  <div class="card-title">🌤️ সম্ভব পরিস্থিতি</div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause (সম্ভব শর্ত)</div>
+      <div class="cond-clause-text">If it <b>rains</b> tomorrow,</div>
+      <div class="cond-clause-bn">যদি আগামীকাল বৃষ্টি হয়,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result (সম্ভব ফলাফল)</div>
+      <div class="cond-clause-text">I <b>will stay</b> home.</div>
+      <div class="cond-clause-bn">আমি বাসায় থাকব।</div>
+    </div>
+  </div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause</div>
+      <div class="cond-clause-text">If you <b>study</b> hard,</div>
+      <div class="cond-clause-bn">যদি কঠোর পরিশ্রম করো,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result</div>
+      <div class="cond-clause-text">you <b>will pass</b> the exam.</div>
+      <div class="cond-clause-bn">তুমি পরীক্ষায় পাস করবে।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">💬 Modal Variations</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">If you <b>finish</b> early, you <b>can leave</b>. <span class="ex-tag">can = permission</span></div><div class="ex-bn">তাড়াতাড়ি শেষ করলে চলে যেতে পারবে।</div></div>
+    <div class="ex"><div class="ex-en">If she <b>calls</b>, I <b>might go</b>. <span class="ex-tag">might = uncertain</span></div><div class="ex-bn">সে ডাকলে হয়তো যাব।</div></div>
+    <div class="ex"><div class="ex-en">If you <b>feel</b> sick, you <b>should see</b> a doctor. <span class="ex-tag">should = advice</span></div><div class="ex-bn">অসুস্থ লাগলে ডাক্তার দেখাও।</div></div>
+    <div class="ex"><div class="ex-en">If you <b>don't hurry</b>, you <b>will miss</b> the bus. <span class="ex-tag">negative if</span></div><div class="ex-bn">তাড়াতাড়ি না করলে বাস মিস করবে।</div></div>
+    <div class="ex"><div class="ex-en"><b>Unless</b> you <b>study</b>, you <b>won't pass</b>. <span class="ex-tag">unless = if...not</span></div><div class="ex-bn">না পড়লে পাস করবে না। (unless = if not)</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>If clause এ "will" দেওয়া সবচেয়ে সাধারণ ভুল:</strong><br>
+  ❌ "If it <strong>will rain</strong>, I will stay home."<br>
+  ✅ "If it <strong>rains</strong>, I will stay home."<br>
+  If clause এ present simple ব্যবহার করো — even though ভবিষ্যতের কথা বলছো।</div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>"Unless" = "If... not"</strong><br>
+  "Unless you hurry" = "If you <strong>don't</strong> hurry" — দুটো একই অর্থ।<br>
+  Unless এর পরে সবসময় positive verb আসে (not ব্যবহার করো না)।<br>
+  ❌ "Unless you <strong>don't</strong> study..." → ✅ "Unless you <strong>study</strong>..."</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('zero',1)">← Zero Conditional</button>
+  <button class="btn-next" onclick="show('second',3)">Second Conditional →</button>
+</div>`,
+
+'second':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → Second Conditional</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Second Conditional</span></div>
+  <div class="lesson-desc">বর্তমান বা ভবিষ্যতে অবাস্তব / কাল্পনিক পরিস্থিতি। হয়তো সম্ভব, কিন্তু বক্তা মনে করেন এটা হওয়ার সম্ভাবনা খুব কম।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb923c,var(--accent))">
+  <div class="card-title">📐 Formula</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text">If + <span class="hl3">Past Simple</span>, &nbsp;<span class="hl">would + V1</span></div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Special: "were" for all subjects</div>
+    <div class="formula-text">If I / he / she / it + <span class="hl4">were</span> ... &nbsp;<span style="color:var(--muted);font-size:.85rem">(formal/subjunctive — "was" also accepted informally)</span></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--orange))">
+  <div class="card-title">💭 কাল্পনিক পরিস্থিতি</div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause (অবাস্তব শর্ত)</div>
+      <div class="cond-clause-text">If I <b>had</b> a million dollars,</div>
+      <div class="cond-clause-bn">যদি আমার এক মিলিয়ন ডলার থাকত,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result (কাল্পনিক ফলাফল)</div>
+      <div class="cond-clause-text">I <b>would travel</b> the world.</div>
+      <div class="cond-clause-bn">আমি পৃথিবী ঘুরতাম।</div>
+    </div>
+  </div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause</div>
+      <div class="cond-clause-text">If she <b>were</b> taller,</div>
+      <div class="cond-clause-bn">যদি সে লম্বা হত,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result</div>
+      <div class="cond-clause-text">she <b>would become</b> a model.</div>
+      <div class="cond-clause-bn">সে মডেল হত।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">💬 উদাহরণ সংকলন</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">If I <b>were</b> you, I <b>would apologize</b>. <span class="ex-tag">পরামর্শ দেওয়া</span></div><div class="ex-bn">আমি তোমার জায়গায় হলে ক্ষমা চাইতাম।</div></div>
+    <div class="ex"><div class="ex-en">If she <b>knew</b> the answer, she <b>would tell</b> us. <span class="ex-tag">বর্তমানে জানে না</span></div><div class="ex-bn">সে উত্তর জানলে বলত। (কিন্তু জানে না।)</div></div>
+    <div class="ex"><div class="ex-en">If I <b>spoke</b> French, I <b>could work</b> in Paris. <span class="ex-tag">could = ability</span></div><div class="ex-bn">ফরাসি জানলে প্যারিসে কাজ করতে পারতাম।</div></div>
+    <div class="ex"><div class="ex-en">What <b>would</b> you do if you <b>won</b> the lottery? <span class="ex-tag">প্রশ্ন</span></div><div class="ex-bn">লটারি জিতলে তুমি কী করতে?</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>First বনাম Second — কোনটা ব্যবহার করব?</strong><br>
+  "If I <strong>find</strong> a job, I <strong>will move</strong>." → First: বাস্তবে চাকরি খুঁজছি, সম্ভাবনা আছে।<br>
+  "If I <strong>found</strong> a job, I <strong>would move</strong>." → Second: কাল্পনিক, সহজে হবে না বলে মনে করছি।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('first',2)">← First Conditional</button>
+  <button class="btn-next" onclick="show('third',4)">Third Conditional →</button>
+</div>`,
+
+'third':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → Third Conditional</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b2" style="padding:4px 12px">B2</span><span class="lmeta">⚡ 125 XP</span><span class="lmeta">⏱️ 18 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Third Conditional</span></div>
+  <div class="lesson-desc">অতীতের একটি ঘটনা যা ঘটেনি — তা ঘটলে কী হত সেটা কল্পনা করা। এটা regret (আফসোস) এবং criticism বোঝাতে সবচেয়ে বেশি ব্যবহৃত হয়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb7185,var(--accent))">
+  <div class="card-title">📐 Formula</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text">If + <span class="hl3">Past Perfect (had + V3)</span>, &nbsp;<span class="hl">would have + V3</span></div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Contraction (spoken English)</div>
+    <div class="formula-text">If I'<span class="hl4">d</span> studied → I'<span class="hl">d</span> have passed<br><span style="color:var(--muted);font-size:.85rem">'d = had (if clause) এবং 'd = would (result clause)</span></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--orange))">
+  <div class="card-title">😔 আফসোসের পরিস্থিতি</div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause (অতীতে হয়নি)</div>
+      <div class="cond-clause-text">If I <b>had studied</b> harder,</div>
+      <div class="cond-clause-bn">যদি আরও বেশি পড়তাম, (কিন্তু পড়িনি)</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result (হত কিন্তু হয়নি)</div>
+      <div class="cond-clause-text">I <b>would have passed</b> the exam.</div>
+      <div class="cond-clause-bn">পরীক্ষায় পাস করতাম।</div>
+    </div>
+  </div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ If Clause</div>
+      <div class="cond-clause-text">If she <b>had taken</b> the medicine,</div>
+      <div class="cond-clause-bn">যদি সে ওষুধ খেত,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Result</div>
+      <div class="cond-clause-text">she <b>would have recovered</b> faster.</div>
+      <div class="cond-clause-bn">সে তাড়াতাড়ি সুস্থ হত।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--rose))">
+  <div class="card-title">💬 আরও উদাহরণ</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">If I <b>had left</b> earlier, I <b>wouldn't have missed</b> the train. <span class="ex-tag">negative</span></div><div class="ex-bn">আগে রওনা দিলে ট্রেন মিস হত না।</div></div>
+    <div class="ex"><div class="ex-en">If you <b>had told</b> me, I <b>could have helped</b> you. <span class="ex-tag">could have</span></div><div class="ex-bn">বললে সাহায্য করতে পারতাম।</div></div>
+    <div class="ex"><div class="ex-en">She <b>would have called</b> if she <b>had known</b>. <span class="ex-tag">result আগে</span></div><div class="ex-bn">জানলে সে call করত।</div></div>
+    <div class="ex"><div class="ex-en">If it <b>hadn't rained</b>, we <b>would have gone</b> to the picnic. <span class="ex-tag">negative if</span></div><div class="ex-bn">বৃষ্টি না হলে পিকনিকে যেতাম।</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>'d ব্যবহারে সাবধান!</strong><br>
+  "If I'<strong>d</strong> known" — এখানে 'd = <strong>had</strong> (if clause)<br>
+  "I'<strong>d</strong> have done it" — এখানে 'd = <strong>would</strong> (result clause)<br>
+  দুটো clause এ 'd দেখলে আলাদা অর্থ বোঝে।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('second',3)">← Second Conditional</button>
+  <button class="btn-next" onclick="show('mixed',5)">Mixed Conditional →</button>
+</div>`,
+
+'mixed':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → Mixed Conditional</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b2" style="padding:4px 12px">B2</span><span class="lmeta">⚡ 150 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Mixed Conditional</span></div>
+  <div class="lesson-desc">দুটো ভিন্ন সময়ের শর্ত ও ফলাফল একসাথে মেলানো হয়। সবচেয়ে কঠিন কিন্তু সবচেয়ে সমৃদ্ধ structure — দুটো common প্যাটার্ন আছে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#818cf8,var(--accent))">
+  <div class="card-title">📐 দুটো Pattern</div>
+  <div class="formula">
+    <div class="formula-label">Type A — Past Condition → Present Result (সবচেয়ে সাধারণ)</div>
+    <div class="formula-text">If + <span class="hl5">Past Perfect</span>, &nbsp;<span class="hl">would + V1</span><br><span style="color:var(--muted);font-size:.85rem">অতীতের ঘটনা আজও বর্তমানকে প্রভাবিত করছে</span></div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Type B — Present Condition → Past Result (কম সাধারণ)</div>
+    <div class="formula-text">If + <span class="hl3">Past Simple</span>, &nbsp;<span class="hl4">would have + V3</span><br><span style="color:var(--muted);font-size:.85rem">এখন যে অবস্থায় নেই, তা থাকলে অতীতে কী হত</span></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#818cf8)">
+  <div class="card-title">🔀 Type A — অতীত → বর্তমান</div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ Past Condition (হয়নি)</div>
+      <div class="cond-clause-text">If I <b>had studied</b> medicine,</div>
+      <div class="cond-clause-bn">যদি চিকিৎসা বিজ্ঞান পড়তাম, (পড়িনি)</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Present Result (এখনো নেই)</div>
+      <div class="cond-clause-text">I <b>would be</b> a doctor now.</div>
+      <div class="cond-clause-bn">এখন আমি ডাক্তার হতাম।</div>
+    </div>
+  </div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ Past Condition</div>
+      <div class="cond-clause-text">If he <b>hadn't wasted</b> his savings,</div>
+      <div class="cond-clause-bn">যদি সঞ্চয় নষ্ট না করত,</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Present Result</div>
+      <div class="cond-clause-text">he <b>would have</b> money now.</div>
+      <div class="cond-clause-bn">এখন তার কাছে টাকা থাকত।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),#818cf8)">
+  <div class="card-title">🔀 Type B — বর্তমান → অতীত</div>
+  <div class="cond-split">
+    <div class="cond-clause if-part">
+      <div class="cond-clause-label">✦ Present Condition (নেই এখন)</div>
+      <div class="cond-clause-text">If I <b>were</b> braver,</div>
+      <div class="cond-clause-bn">যদি আমি সাহসী হতাম, (নই)</div>
+    </div>
+    <div class="cond-clause result-part">
+      <div class="cond-clause-label">✦ Past Result (হয়নি)</div>
+      <div class="cond-clause-text">I <b>would have asked</b> her out.</div>
+      <div class="cond-clause-bn">তাকে ডেটে যেতে বলতাম।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">📊 তুলনামূলক চার্ট</div>
+  <table class="gtable">
+    <tr><th>Type</th><th>If Clause</th><th>Result Clause</th><th>কী বোঝায়</th></tr>
+    <tr><td>3rd Cond.</td><td>had + V3</td><td>would have + V3</td><td>অতীত→অতীত আফসোস</td></tr>
+    <tr><td>Mixed A</td><td>had + V3</td><td>would + V1</td><td>অতীত→বর্তমান প্রভাব</td></tr>
+    <tr><td>Mixed B</td><td>Past Simple</td><td>would have + V3</td><td>বর্তমান→অতীত</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Mixed কখন বুঝবে?</strong><br>
+  যদি দেখো if clause আর result clause এর সময় আলাদা — একটা past, আরেকটা present — তাহলে Mixed Conditional।<br>
+  "If I <strong>had taken</strong> that job" (past) → "I <strong>would be</strong> rich now" (present) → Mixed A।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('third',4)">← Third Conditional</button>
+  <button class="btn-next" onclick="show('compare',6)">Quick Compare →</button>
+</div>`,
+
+'compare':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → Quick Compare</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Quick Compare — সব Conditional একসাথে</span></div>
+  <div class="lesson-desc">একই বিষয় পাঁচ ধরনের Conditional দিয়ে বলা হলে কীভাবে অর্থ পরিবর্তন হয় তা দেখো।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">🌧️ একই প্রসঙ্গ — Rain &amp; Umbrella</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en"><span class="ex-tag" style="margin-left:0">Zero</span> If it <b>rains</b>, the ground <b>gets</b> wet.</div>
+      <div class="ex-bn">বৃষ্টি হলে মাটি ভেজে — সত্য সবসময়।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en"><span class="ex-tag" style="margin-left:0;background:rgba(245,200,66,.1);color:#f5c842">1st</span> If it <b>rains</b> tomorrow, I <b>will take</b> an umbrella.</div>
+      <div class="ex-bn">কাল বৃষ্টি হলে ছাতা নেব — সম্ভব।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en"><span class="ex-tag" style="margin-left:0;background:rgba(251,146,60,.1);color:#fb923c">2nd</span> If it <b>rained</b> every day, I <b>would buy</b> a raincoat.</div>
+      <div class="ex-bn">প্রতিদিন বৃষ্টি হলে রেইনকোট কিনতাম — কাল্পনিক।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en"><span class="ex-tag" style="margin-left:0;background:rgba(251,113,133,.1);color:#fb7185">3rd</span> If it <b>had rained</b> yesterday, I <b>would have stayed</b> home.</div>
+      <div class="ex-bn">গতকাল বৃষ্টি হলে বাসায় থাকতাম — হয়নি, আফসোস।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en"><span class="ex-tag" style="margin-left:0;background:rgba(129,140,248,.1);color:#818cf8">Mixed</span> If it <b>had rained</b> yesterday, the roads <b>would be</b> slippery now.</div>
+      <div class="ex-bn">গতকাল বৃষ্টি হলে এখনো রাস্তা পিচ্ছিল থাকত — অতীত → বর্তমান।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">📐 Master Formula Table</div>
+  <table class="gtable">
+    <tr><th>Type</th><th>IF Clause</th><th>Result Clause</th><th>বাস্তবতা</th></tr>
+    <tr><td style="color:#2dd4bf">Zero</td><td>V1 (simple)</td><td>V1 (simple)</td><td>সর্বদা সত্য</td></tr>
+    <tr><td style="color:#f5c842">First</td><td>V1 (simple)</td><td>will + V1</td><td>সম্ভব ভবিষ্যৎ</td></tr>
+    <tr><td style="color:#fb923c">Second</td><td>V2 (past)</td><td>would + V1</td><td>কাল্পনিক বর্তমান</td></tr>
+    <tr><td style="color:#fb7185">Third</td><td>had + V3</td><td>would have + V3</td><td>অতীতে ঘটেনি</td></tr>
+    <tr><td style="color:#818cf8">Mixed A</td><td>had + V3</td><td>would + V1</td><td>অতীত→বর্তমান</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>দ্রুত চেনার trick:</strong><br>
+  Result clause দেখো — <strong>will</strong> আছে? → 1st। <strong>would + V1</strong>? → 2nd বা Mixed। <strong>would have + V3</strong>? → 3rd বা Mixed B।<br>
+  তারপর if clause দেখো কোন tense আছে।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('mixed',5)">← Mixed Conditional</button>
+  <button class="btn-quiz-big" onclick="show('practice',7)">✍️ Practice Quiz</button>
+  <button class="btn-next" onclick="show('practice',7)">Practice →</button>
+</div>`,
+
+'practice':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Conditionals → Practice</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>✍️ Conditionals Practice Quiz</span></div>
+  <div class="lesson-desc">সঠিক conditional form বেছে নাও — কোন ধরনের conditional সেটাও বোঝার চেষ্টা করো।</div>
+</div>
+<div id="quiz-wrap"></div>
+<div class="lesson-nav" style="margin-top:1.5rem">
+  <button class="btn-prev" onclick="show('compare',6)">← Quick Compare</button>
+  <button class="btn-quiz-big" onclick="resetQuiz()">🔄 আবার চেষ্টা করো</button>
+  <a class="btn-next" href="grammar-parts-of-speech.html">Parts of Speech →</a>
+</div>`
+};
+
+const QUIZ=[
+  {q:'If you heat ice, it ___ (Zero Conditional)',
+   opts:['melted','will melt','melts','would melt'], ans:'melts', exp:'Zero: If + V1, V1 — সার্বজনীন সত্য'},
+  {q:'If it ___ tomorrow, we will cancel the match. (1st Conditional)',
+   opts:['rained','rains','will rain','would rain'], ans:'rains', exp:'First: If + Present Simple, will + V1 — if clause এ will নয়'},
+  {q:'If I ___ rich, I would buy a big house. (2nd Conditional)',
+   opts:['am','was','were','will be'], ans:'were', exp:'Second: If + Past Simple/were — কাল্পনিক পরিস্থিতি'},
+  {q:'If she had studied harder, she ___ the exam. (3rd Conditional)',
+   opts:['would pass','will pass','would have passed','had passed'], ans:'would have passed', exp:'Third: would have + V3 — অতীতের আফসোস'},
+  {q:'___ you don\'t hurry, you will miss the bus. (1st Conditional variation)',
+   opts:['If','Unless','When','Whether'], ans:'Unless', exp:'Unless = if...not — "না করলে" অর্থে'},
+  {q:'If I were you, I ___ more carefully. (2nd Conditional)',
+   opts:['will drive','drove','would drive','had driven'], ans:'would drive', exp:'Second: would + V1 — পরামর্শ দেওয়ার ক্ষেত্রে'},
+  {q:'If he had taken the medicine, he ___ better now. (Mixed Conditional)',
+   opts:['would feel','would have felt','will feel','feels'], ans:'would feel', exp:'Mixed A: had + V3 → would + V1 — অতীত→বর্তমান'},
+  {q:'Water ___ if you drop it below 0°C. (Zero Conditional)',
+   opts:['froze','will freeze','freezes','would freeze'], ans:'freezes', exp:'Zero Conditional: V1 — সর্বদা সত্য'},
+  {q:'If they ___ the map, they wouldn\'t have got lost. (3rd Conditional)',
+   opts:['checked','had checked','have checked','would check'], ans:'had checked', exp:'Third: If + had + V3 — অতীতে ঘটেনি'},
+  {q:'If I spoke Chinese, I ___ in Beijing. (2nd Conditional)',
+   opts:['will work','would work','would have worked','had worked'], ans:'would work', exp:'Second: would + V1 — বর্তমানে অবাস্তব'},
+  {q:'If you ___ any problems, call me immediately. (1st Conditional)',
+   opts:['had','have','will have','would have'], ans:'have', exp:'First: If + Present Simple — ভবিষ্যতে সম্ভব পরিস্থিতি'},
+  {q:'"If I had known about the party, I would have come." — এটা কোন Conditional?',
+   opts:['Zero','First','Second','Third'], ans:'Third', exp:'Third: had known (Past Perf) + would have come — অতীতের আফসোস'},
+];
+
+let score=0,done=false;
+function renderQuiz(){
+  score=0;done=false;
+  const w=document.getElementById('quiz-wrap');
+  if(!w)return;
+  w.innerHTML=QUIZ.map((q,i)=>`
+    <div class="practice-q" id="pq-${i}">
+      <div class="pq-text">${i+1}. ${q.q}</div>
+      <div class="pq-options">${q.opts.map(o=>`<button class="pq-opt" onclick="checkQ(${i},'${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>
+      <div class="pq-feedback" id="pf-${i}"></div>
+    </div>`).join('')+`<div id="score-wrap"></div>`;
+}
+window.checkQ=(i,sel)=>{
+  const q=QUIZ[i];
+  const el=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  el.querySelectorAll('.pq-opt').forEach(b=>{
+    b.onclick=null;
+    if(b.textContent===q.ans)b.classList.add('correct');
+    else if(b.textContent===sel&&sel!==q.ans)b.classList.add('wrong');
+  });
+  fb.className='pq-feedback show '+(sel===q.ans?'correct':'wrong');
+  fb.textContent=(sel===q.ans?'✅ সঠিক! ':'❌ ভুল। ')+q.exp;
+  if(sel===q.ans)score++;
+  if([...document.querySelectorAll('.pq-feedback.show')].length===QUIZ.length&&!done){
+    done=true;
+    const pct=Math.round(score/QUIZ.length*100);
+    document.getElementById('score-wrap').innerHTML=`
+      <div style="background:rgba(52,211,153,.07);border:1px solid rgba(52,211,153,.2);border-radius:18px;padding:1.5rem;text-align:center;margin-top:1rem;">
+        <div style="font-size:2.5rem;font-weight:900;color:var(--accent)">${score}/${QUIZ.length}</div>
+        <div style="font-size:1rem;color:var(--sub);margin:.3rem 0;font-family:'Noto Sans Bengali',sans-serif">${pct>=80?'🎉 অসাধারণ!':pct>=60?'👍 ভালো!':'💪 আরো চেষ্টা করো!'}</div>
+        <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Accuracy: ${pct}% · XP Earned: ${Math.round(pct*1.5)} XP</div>
+      </div>`;
+  }
+};
+window.resetQuiz=()=>{score=0;done=false;renderQuiz();};
+
+const ORDER=['overview','zero','first','second','third','mixed','compare','practice'];
+window.show=(id,idx)=>{
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));
+  document.getElementById('prog').style.width=Math.round(idx/(ORDER.length-1)*100)+'%';
+  document.getElementById('main').innerHTML=PANELS[id]();
+  document.getElementById('main').scrollTop=0;
+  if(id==='practice')renderQuiz();
+};
+
+show('overview',0);
+</script>
+</body>
+</html>

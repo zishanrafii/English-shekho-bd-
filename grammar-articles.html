@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(245,200,66,.06),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.05),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+/* ── TOPBAR ── */
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;
+  background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(245,200,66,.2),rgba(45,212,191,.1));
+  border:1px solid rgba(245,200,66,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;
+  color:var(--sub);text-decoration:none;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);transition:.2s;cursor:pointer;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(245,200,66,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  border:2px solid rgba(245,200,66,.2);display:flex;align-items:center;
+  justify-content:center;font-size:.9rem;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.nav-av img{width:100%;height:100%;object-fit:cover;}
+
+/* ── LAYOUT ── */
+.layout{display:flex;height:calc(100vh - 57px);}
+
+/* ── SIDEBAR ── */
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid var(--border);
+  overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(245,200,66,.2);border-radius:3px;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;
+  font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;
+  border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;margin-bottom:2px;}
+.sb-item:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.1);}
+.sb-item.active{background:rgba(245,200,66,.1);border-color:rgba(245,200,66,.25);color:var(--gold);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;
+  border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+.lvl-b2{background:rgba(251,113,133,.1);color:#fb7185;border:1px solid rgba(251,113,133,.2);}
+
+/* ── MAIN ── */
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(245,200,66,.15);border-radius:3px;}
+
+/* ── LESSON HEADER ── */
+.lesson-header{margin-bottom:2rem;}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;
+  font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:6px;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;
+  font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:.8rem;}
+.lmeta{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);
+  background:rgba(255,255,255,.03);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+/* ── CARD ── */
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;
+  padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--card-accent,linear-gradient(90deg,var(--gold),var(--teal)));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;
+  font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ── ARTICLE HERO ── */
+.article-heroes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.4rem;}
+.art-hero{border-radius:18px;padding:1.6rem 1.2rem;text-align:center;position:relative;overflow:hidden;border:1px solid;}
+.art-hero.a{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.2);}
+.art-hero.an{background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.2);}
+.art-hero.the{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);}
+.art-hero.zero{background:rgba(129,140,248,.06);border-color:rgba(129,140,248,.2);}
+.art-word{font-size:3rem;font-weight:900;margin-bottom:.4rem;letter-spacing:-.5px;}
+.art-hero.a .art-word{color:#34d399;}
+.art-hero.an .art-word{color:#2dd4bf;}
+.art-hero.the .art-word{color:#f5c842;}
+.art-hero.zero .art-word{color:#818cf8;}
+.art-label{font-size:11px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.art-desc{font-size:12px;color:var(--sub);margin-top:.4rem;font-family:'Noto Sans Bengali',sans-serif;line-height:1.5;}
+
+/* ── FORMULA ── */
+.formula{background:rgba(245,200,66,.06);border:1px solid rgba(245,200,66,.18);
+  border-radius:14px;padding:1rem 1.4rem;margin-bottom:1rem;}
+.formula-label{font-size:10px;color:var(--gold);font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.formula-text{font-size:1rem;color:var(--text);line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.hl{color:var(--gold);font-weight:700;}
+.hl2{color:var(--teal);font-weight:700;}
+.hl3{color:var(--rose);font-weight:700;}
+.hl4{color:var(--indigo);font-weight:700;}
+
+/* ── EXAMPLES ── */
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);
+  border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(245,200,66,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-tag{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;
+  border-radius:20px;margin-left:8px;font-weight:700;
+  background:rgba(245,200,66,.1);color:var(--gold);}
+
+/* ── TABLE ── */
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{background:rgba(245,200,66,.08);color:var(--gold);font-weight:700;
+  padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;
+  letter-spacing:.6px;border-bottom:1px solid rgba(245,200,66,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--text);font-weight:600;}
+.gtable .correct{color:var(--emerald);font-weight:700;}
+.gtable .wrong{color:var(--rose);}
+
+/* ── SOUND BOXES ── */
+.sound-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:.8rem;}
+.sound-box{border-radius:14px;padding:1rem;border:1px solid;}
+.sound-box.vowel{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.2);}
+.sound-box.consonant{background:rgba(251,113,133,.06);border-color:rgba(251,113,133,.2);}
+.sound-box h4{font-size:12px;font-weight:700;margin-bottom:.5rem;}
+.sound-box.vowel h4{color:var(--emerald);}
+.sound-box.consonant h4{color:var(--rose);}
+.sound-chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+.sound-chip{font-size:12px;padding:.25rem .7rem;border-radius:20px;
+  font-family:'JetBrains Mono',monospace;font-weight:600;}
+.sound-box.vowel .sound-chip{background:rgba(52,211,153,.1);color:var(--emerald);}
+.sound-box.consonant .sound-chip{background:rgba(251,113,133,.1);color:var(--rose);}
+
+/* ── TIP / WARN ── */
+.tip{background:rgba(245,200,66,.06);border:1px solid rgba(245,200,66,.2);
+  border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--gold);}
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);
+  border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-icon{font-size:1.2rem;flex-shrink:0;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+/* ── SIGNAL ── */
+.signal-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem;}
+.signal{background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.18);
+  color:var(--teal);padding:.3rem .85rem;border-radius:20px;font-size:12.5px;
+  font-family:'JetBrains Mono',monospace;font-weight:600;}
+
+/* ── ZERO ARTICLE CATEGORIES ── */
+.zero-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:.5rem;}
+.zero-card{background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.15);
+  border-radius:14px;padding:1rem;}
+.zero-card h4{font-size:12px;font-weight:700;color:var(--indigo);margin-bottom:.5rem;}
+.zero-card p{font-size:12px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;line-height:1.5;}
+.zero-card .example{font-size:12px;color:var(--text);font-style:italic;margin-top:.3rem;
+  font-family:'JetBrains Mono',monospace;}
+
+/* ── PRACTICE ── */
+.practice-q{background:rgba(245,200,66,.04);border:1px solid rgba(245,200,66,.15);
+  border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.6rem;font-family:'Noto Sans Bengali',sans-serif;}
+.pq-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.pq-opt{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;
+  font-size:13px;font-weight:600;transition:.2s;font-family:'JetBrains Mono',monospace;}
+.pq-opt:hover{border-color:rgba(245,200,66,.3);color:var(--gold);}
+.pq-opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);}
+.pq-opt.wrong{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.pq-feedback{font-size:13px;padding:.5rem .8rem;border-radius:8px;display:none;
+  font-family:'Noto Sans Bengali',sans-serif;margin-top:.4rem;}
+.pq-feedback.show{display:block;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:var(--emerald);}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+/* ── NAV ── */
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;align-items:center;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;
+  border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03);
+  color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;
+  font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.btn-prev:hover,.btn-next:hover{background:rgba(245,200,66,.08);border-color:rgba(245,200,66,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(245,200,66,.12),rgba(45,212,191,.08));
+  border-color:rgba(245,200,66,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#f5c842,#e0a820);color:#000;border:none;
+  border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:.2s;display:flex;align-items:center;gap:.5rem;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+/* ── PROGRESS ── */
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--teal));transition:width .3s;}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--border);}
+  .main{padding:1.2rem 1rem 3rem;}
+  .article-heroes{grid-template-columns:1fr 1fr;}
+  .sound-grid{grid-template-columns:1fr;}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">📌 Articles</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" id="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-section-label">Articles</div>
+    <div class="sb-item active" data-id="a-an" onclick="show('a-an',0)">
+      <span class="sb-dot" style="background:#34d399"></span>
+      <span class="sb-text">A / An — Indefinite</span>
+      <span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="the" onclick="show('the',1)">
+      <span class="sb-dot" style="background:#f5c842"></span>
+      <span class="sb-text">The — Definite</span>
+      <span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="zero" onclick="show('zero',2)">
+      <span class="sb-dot" style="background:#818cf8"></span>
+      <span class="sb-text">Zero Article</span>
+      <span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="compare" onclick="show('compare',3)">
+      <span class="sb-dot" style="background:#fb923c"></span>
+      <span class="sb-text">Article Comparison</span>
+      <span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="practice" onclick="show('practice',4)">
+      <span class="sb-dot" style="background:#2dd4bf"></span>
+      <span class="sb-text">Practice Quiz</span>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const PANELS={
+
+/* ══ A / AN ══ */
+'a-an':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Articles → A / An</div>
+  <div class="lesson-meta">
+    <span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span>
+    <span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span>
+  </div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>A / An — Indefinite Articles</span></div>
+  <div class="lesson-desc">A এবং An হলো Indefinite Article। এগুলো ব্যবহার করা হয় অনির্দিষ্ট, অপরিচিত বা নতুন কোনো কিছুর আগে। বাংলায় সরাসরি অনুবাদ নেই — তবে "একটি" বা "কোনো একটি" বোঝায়।</div>
+</div>
+
+<div class="article-heroes">
+  <div class="art-hero a"><div class="art-word">A</div><div class="art-label">Consonant Sound এর আগে</div><div class="art-desc">a book, a car, a university</div></div>
+  <div class="art-hero an"><div class="art-word">An</div><div class="art-label">Vowel Sound এর আগে</div><div class="art-desc">an apple, an hour, an MBA</div></div>
+  <div class="art-hero zero" style="background:rgba(52,211,153,.04);border-color:rgba(52,211,153,.15)"><div class="art-word" style="color:#34d399;font-size:2rem">Rule</div><div class="art-label">Sound দেখো, Spelling নয়!</div><div class="art-desc">উচ্চারণ অনুযায়ী A বা An বেছে নাও</div></div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#34d399,#2dd4bf)">
+  <div class="card-title">🔊 Sound Rule — সবচেয়ে গুরুত্বপূর্ণ</div>
+  <div class="tip"><span class="tip-icon">💡</span>
+    <div class="tip-text"><strong>Spelling নয় — উচ্চারণ দেখো!</strong><br>
+    শব্দের প্রথম <strong>sound</strong> যদি vowel sound (আ/এ/ই/ও/উ) হয় → <strong>An</strong><br>
+    শব্দের প্রথম <strong>sound</strong> যদি consonant sound হয় → <strong>A</strong></div>
+  </div>
+  <div class="sound-grid">
+    <div class="sound-box vowel">
+      <h4>🔵 AN + Vowel Sound</h4>
+      <div class="sound-chips">
+        <span class="sound-chip">an apple 🍎</span>
+        <span class="sound-chip">an egg 🥚</span>
+        <span class="sound-chip">an ice cream 🍦</span>
+        <span class="sound-chip">an orange 🍊</span>
+        <span class="sound-chip">an umbrella ☂️</span>
+        <span class="sound-chip">an hour ⏰</span>
+        <span class="sound-chip">an honest man</span>
+        <span class="sound-chip">an MBA</span>
+        <span class="sound-chip">an X-ray</span>
+      </div>
+    </div>
+    <div class="sound-box consonant">
+      <h4>🔴 A + Consonant Sound</h4>
+      <div class="sound-chips">
+        <span class="sound-chip">a book 📚</span>
+        <span class="sound-chip">a car 🚗</span>
+        <span class="sound-chip">a university</span>
+        <span class="sound-chip">a European</span>
+        <span class="sound-chip">a useful tool</span>
+        <span class="sound-chip">a one-way street</span>
+        <span class="sound-chip">a year</span>
+        <span class="sound-chip">a hotel</span>
+        <span class="sound-chip">a house</span>
+      </div>
+    </div>
+  </div>
+  <div class="warn" style="margin-top:1rem"><span class="warn-icon">⚠️</span>
+    <div class="warn-text">
+      <strong>"University"</strong> — U দিয়ে শুরু কিন্তু উচ্চারণ "ইউ" (consonant sound) → <strong>a university</strong> ✅<br>
+      <strong>"Hour"</strong> — H দিয়ে শুরু কিন্তু উচ্চারণ "আওয়ার" (vowel sound) → <strong>an hour</strong> ✅<br>
+      <strong>"MBA"</strong> — M দিয়ে শুরু কিন্তু উচ্চারণ "এম" (vowel sound) → <strong>an MBA</strong> ✅
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--orange))">
+  <div class="card-title">📌 কখন A / An ব্যবহার করবেন</div>
+  <table class="gtable">
+    <tr><th>ব্যবহার</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>প্রথমবার উল্লেখ</td><td>I saw <span class="hl">a</span> dog. The dog was big.</td><td>প্রথমে a, পরে the</td></tr>
+    <tr><td>পেশা/পরিচয়</td><td>She is <span class="hl">a</span> doctor.</td><td>সে একজন ডাক্তার।</td></tr>
+    <tr><td>জাতি/ধর্মের অন্তর্ভুক্তি</td><td>He is <span class="hl">a</span> Muslim.</td><td>সে একজন মুসলিম।</td></tr>
+    <tr><td>সংখ্যা ১ বোঝাতে</td><td>Give me <span class="hl">a</span> moment.</td><td>একটু সময় দাও।</td></tr>
+    <tr><td>Exclamation-এ</td><td>What <span class="hl">a</span> beautiful day!</td><td>কী সুন্দর দিন!</td></tr>
+    <tr><td>Singular countable noun</td><td>I need <span class="hl">a</span> pen.</td><td>আমার একটা কলম দরকার।</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She is <b>a</b> teacher. <span class="ex-tag">পেশা</span></div><div class="ex-bn">সে একজন শিক্ষিকা।</div></div>
+    <div class="ex"><div class="ex-en">I have <b>a</b> cat and <b>an</b> aquarium. <span class="ex-tag">প্রথমবার</span></div><div class="ex-bn">আমার একটা বিড়াল ও একটা অ্যাকোয়ারিয়াম আছে।</div></div>
+    <div class="ex"><div class="ex-en">He is <b>an</b> engineer. <span class="ex-tag">পেশা</span></div><div class="ex-bn">সে একজন প্রকৌশলী।</div></div>
+    <div class="ex"><div class="ex-en">What <b>a</b> wonderful idea! <span class="ex-tag">Exclamation</span></div><div class="ex-bn">কী অসাধারণ ধারণা!</div></div>
+    <div class="ex"><div class="ex-en">It takes <b>an</b> hour to get there. <span class="ex-tag">সময়</span></div><div class="ex-bn">সেখানে যেতে এক ঘণ্টা লাগে।</div></div>
+    <div class="ex"><div class="ex-en">She wants to be <b>a</b> pilot. <span class="ex-tag">ইচ্ছা</span></div><div class="ex-bn">সে একজন পাইলট হতে চায়।</div></div>
+  </div>
+</div>
+
+<div class="warn"><span class="warn-icon">⚠️</span>
+  <div class="warn-text"><strong>A/An শুধু Singular Countable Noun এর আগে আসে!</strong><br>
+  ভুল: "a water", "a rice", "a furniture" — এগুলো Uncountable Noun, তাই A/An হবে না।<br>
+  সঠিক: "a glass of water", "a bowl of rice", "a piece of furniture"।</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="btn-prev" href="grammar-tenses.html">← Tenses</a>
+  <button class="btn-quiz-big" onclick="show('practice',4)">✍️ Practice করো</button>
+  <button class="btn-next" onclick="show('the',1)">The — Definite →</button>
+</div>`,
+
+/* ══ THE ══ */
+'the':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Articles → The</div>
+  <div class="lesson-meta">
+    <span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span>
+    <span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span>
+  </div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>The — Definite Article</span></div>
+  <div class="lesson-desc">"The" হলো Definite Article। এটি ব্যবহার করা হয় নির্দিষ্ট, পরিচিত বা আগে থেকে উল্লেখিত কোনো কিছুর আগে। Singular এবং Plural — উভয়ের আগেই "the" আসতে পারে।</div>
+</div>
+
+<div class="article-heroes" style="grid-template-columns:1fr">
+  <div class="art-hero the" style="padding:1.2rem"><div class="art-word">The</div><div class="art-label">Definite Article — নির্দিষ্ট কিছুর আগে</div><div class="art-desc">Singular ও Plural উভয়ের আগে ব্যবহার হয়</div></div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--orange))">
+  <div class="card-title">📌 কখন THE ব্যবহার করবেন</div>
+  <table class="gtable">
+    <tr><th>ব্যবহার</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>আগে উল্লেখিত</td><td>I bought a book. <span class="hl">The</span> book is great.</td><td>বইটি চমৎকার।</td></tr>
+    <tr><td>একমাত্র জিনিস</td><td><span class="hl">The</span> sun, <span class="hl">the</span> moon, <span class="hl">the</span> earth</td><td>সূর্য, চাঁদ, পৃথিবী</td></tr>
+    <tr><td>Superlative-এর আগে</td><td>She is <span class="hl">the</span> best student.</td><td>সে সেরা ছাত্রী।</td></tr>
+    <tr><td>Ordinal numbers</td><td><span class="hl">The</span> first, <span class="hl">the</span> second</td><td>প্রথম, দ্বিতীয়</td></tr>
+    <tr><td>নদী/সাগর/পর্বত শ্রেণি</td><td><span class="hl">The</span> Padma, <span class="hl">the</span> Himalayas</td><td>পদ্মা নদী, হিমালয়</td></tr>
+    <tr><td>দেশের দল/সরকার</td><td><span class="hl">The</span> USA, <span class="hl">the</span> Netherlands</td><td>যুক্তরাষ্ট্র</td></tr>
+    <tr><td>Musical instruments</td><td>She plays <span class="hl">the</span> guitar.</td><td>সে গিটার বাজায়।</td></tr>
+    <tr><td>সবাই চেনে এমন</td><td>Can you open <span class="hl">the</span> door?</td><td>দরজাটা খুলবে?</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--indigo))">
+  <div class="card-title">🚫 কখন THE ব্যবহার করবেন না</div>
+  <table class="gtable">
+    <tr><th>ব্যবহার করবেন না</th><th>ভুল ❌</th><th>সঠিক ✅</th></tr>
+    <tr><td>ভাষার নাম</td><td class="wrong">the English</td><td class="correct">English is fun.</td></tr>
+    <tr><td>খেলাধুলার নাম</td><td class="wrong">I play the cricket.</td><td class="correct">I play cricket.</td></tr>
+    <tr><td>খাবার/পানীয়</td><td class="wrong">I like the rice.</td><td class="correct">I like rice.</td></tr>
+    <tr><td>একক পর্বত</td><td class="wrong">the Everest</td><td class="correct">Mount Everest</td></tr>
+    <tr><td>মহাদেশ</td><td class="wrong">the Asia</td><td class="correct">Asia</td></tr>
+    <tr><td>বেশিরভাগ শহর/দেশ</td><td class="wrong">the Bangladesh</td><td class="correct">Bangladesh</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">I saw a dog. <b>The</b> dog was very friendly.</div><div class="ex-bn">আমি একটা কুকুর দেখলাম। কুকুরটা খুব বন্ধুত্বপূর্ণ ছিল।</div></div>
+    <div class="ex"><div class="ex-en"><b>The</b> sun rises in the east.</div><div class="ex-bn">সূর্য পূর্বে ওঠে। (একমাত্র)</div></div>
+    <div class="ex"><div class="ex-en">She is <b>the</b> most talented student in class.</div><div class="ex-bn">সে ক্লাসের সবচেয়ে প্রতিভাবান ছাত্রী।</div></div>
+    <div class="ex"><div class="ex-en"><b>The</b> Padma flows through Bangladesh.</div><div class="ex-bn">পদ্মা নদী বাংলাদেশের মধ্য দিয়ে বহে।</div></div>
+    <div class="ex"><div class="ex-en">He plays <b>the</b> piano beautifully.</div><div class="ex-bn">সে সুন্দরভাবে পিয়ানো বাজায়।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>A/An → The কীভাবে পরিবর্তন হয়?</strong><br>
+  প্রথমবার কোনো কিছু উল্লেখ করলে → <strong>A/An</strong><br>
+  দ্বিতীয়বার একই জিনিস উল্লেখ করলে → <strong>The</strong><br>
+  উদাহরণ: "I bought <strong>a</strong> book yesterday. <strong>The</strong> book was really interesting."</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('a-an',0)">← A / An</button>
+  <button class="btn-quiz-big" onclick="show('practice',4)">✍️ Practice করো</button>
+  <button class="btn-next" onclick="show('zero',2)">Zero Article →</button>
+</div>`,
+
+/* ══ ZERO ARTICLE ══ */
+'zero':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Articles → Zero Article</div>
+  <div class="lesson-meta">
+    <span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span>
+    <span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span>
+  </div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Zero Article — কোনো Article নেই</span></div>
+  <div class="lesson-desc">Zero Article মানে কোনো article (a/an/the) ব্যবহার না করা। এটা ঠিক ততটাই গুরুত্বপূর্ণ — কারণ ভুল জায়গায় article বসালে বাক্য ভুল হয়।</div>
+</div>
+
+<div class="article-heroes" style="grid-template-columns:1fr">
+  <div class="art-hero zero"><div class="art-word">∅</div><div class="art-label">Zero Article — কোনো Article নেই</div><div class="art-desc">Plural nouns, Uncountable nouns, Proper nouns এবং আরও অনেক ক্ষেত্রে</div></div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--indigo),var(--rose))">
+  <div class="card-title">📌 কখন কোনো Article ব্যবহার করবেন না</div>
+  <div class="zero-grid">
+    <div class="zero-card">
+      <h4>📚 ভাষা</h4>
+      <p>ভাষার নামের আগে কোনো article নেই</p>
+      <div class="example">She speaks Bengali.<br>He learns English.</div>
+    </div>
+    <div class="zero-card">
+      <h4>🍚 Uncountable Nouns (সাধারণভাবে)</h4>
+      <p>Water, rice, milk, sugar, love, happiness</p>
+      <div class="example">I like rice.<br>Love is beautiful.</div>
+    </div>
+    <div class="zero-card">
+      <h4>⚽ খেলাধুলা</h4>
+      <p>খেলার নামের আগে article নেই</p>
+      <div class="example">I play cricket.<br>She loves football.</div>
+    </div>
+    <div class="zero-card">
+      <h4>🌍 মহাদেশ/দেশ/শহর</h4>
+      <p>বেশিরভাগ proper noun</p>
+      <div class="example">I live in Dhaka.<br>She visited Japan.</div>
+    </div>
+    <div class="zero-card">
+      <h4>📅 দিন/মাস/ছুটির দিন</h4>
+      <p>Monday, January, Eid, Christmas</p>
+      <div class="example">See you on Monday.<br>Eid is in June.</div>
+    </div>
+    <div class="zero-card">
+      <h4>🎓 বিষয়/শাস্ত্র</h4>
+      <p>Subject name এর আগে</p>
+      <div class="example">I study Mathematics.<br>She teaches History.</div>
+    </div>
+    <div class="zero-card">
+      <h4>🍽️ Meals</h4>
+      <p>খাবারের সময়ের নাম</p>
+      <div class="example">We have breakfast at 8.<br>Dinner is ready.</div>
+    </div>
+    <div class="zero-card">
+      <h4>🚌 Transport (by)</h4>
+      <p>by + transport এর আগে</p>
+      <div class="example">I go by bus.<br>She travels by train.</div>
+    </div>
+    <div class="zero-card">
+      <h4>📦 Plural সাধারণ অর্থে</h4>
+      <p>সাধারণভাবে কোনো শ্রেণী বোঝাতে</p>
+      <div class="example">Dogs are loyal.<br>Books are important.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">∅ <b>Water</b> is essential for life.</div><div class="ex-bn">পানি জীবনের জন্য অপরিহার্য। (Uncountable)</div></div>
+    <div class="ex"><div class="ex-en">I go to school by ∅ <b>bus</b>.</div><div class="ex-bn">আমি বাসে স্কুলে যাই।</div></div>
+    <div class="ex"><div class="ex-en">∅ <b>Honesty</b> is the best policy.</div><div class="ex-bn">সততাই সর্বোত্তম নীতি।</div></div>
+    <div class="ex"><div class="ex-en">She studies ∅ <b>Medicine</b> at university.</div><div class="ex-bn">সে বিশ্ববিদ্যালয়ে মেডিসিন পড়ে।</div></div>
+    <div class="ex"><div class="ex-en">∅ <b>Dogs</b> make great pets.</div><div class="ex-bn">কুকুর চমৎকার পোষা প্রাণী। (সাধারণ অর্থে)</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>The vs Zero Article:</strong><br>
+  "I love <strong>∅ music</strong>" → সঙ্গীত সাধারণভাবে ভালোবাসি (zero article)<br>
+  "I love <strong>the</strong> music in this film" → এই ফিল্মের নির্দিষ্ট সঙ্গীত (the)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('the',1)">← The</button>
+  <button class="btn-quiz-big" onclick="show('practice',4)">✍️ Practice করো</button>
+  <button class="btn-next" onclick="show('compare',3)">Comparison →</button>
+</div>`,
+
+/* ══ COMPARE ══ */
+'compare':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Articles → Comparison</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Article Comparison Guide</span></div>
+  <div class="lesson-desc">A/An, The এবং Zero Article — কখন কোনটা, একসাথে দেখো।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--indigo))">
+  <div class="card-title">🔄 A/An vs The vs Zero</div>
+  <table class="gtable">
+    <tr><th>পরিস্থিতি</th><th>A/An</th><th>The</th><th>Zero (∅)</th></tr>
+    <tr><td>প্রথমবার উল্লেখ</td><td class="correct">✅ I saw a cat</td><td class="wrong">❌</td><td class="wrong">❌</td></tr>
+    <tr><td>দ্বিতীয়বার উল্লেখ</td><td class="wrong">❌</td><td class="correct">✅ The cat ran away</td><td class="wrong">❌</td></tr>
+    <tr><td>সাধারণ অর্থে plural</td><td class="wrong">❌</td><td class="wrong">❌</td><td class="correct">✅ Cats are cute</td></tr>
+    <tr><td>একমাত্র জিনিস</td><td class="wrong">❌</td><td class="correct">✅ The sun</td><td class="wrong">❌</td></tr>
+    <tr><td>Uncountable (সাধারণ)</td><td class="wrong">❌</td><td class="wrong">❌</td><td class="correct">✅ Water is life</td></tr>
+    <tr><td>Uncountable (নির্দিষ্ট)</td><td class="wrong">❌</td><td class="correct">✅ The water in the glass</td><td class="wrong">❌</td></tr>
+    <tr><td>পেশা</td><td class="correct">✅ She is a doctor</td><td class="wrong">❌</td><td class="wrong">❌</td></tr>
+    <tr><td>ভাষা/বিষয়</td><td class="wrong">❌</td><td class="wrong">❌</td><td class="correct">✅ She speaks English</td></tr>
+    <tr><td>Musical instrument</td><td class="wrong">❌</td><td class="correct">✅ She plays the guitar</td><td class="wrong">❌</td></tr>
+    <tr><td>খেলাধুলা</td><td class="wrong">❌</td><td class="wrong">❌</td><td class="correct">✅ He plays cricket</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--gold))">
+  <div class="card-title">⚡ Quick Memory Trick</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">❓ নতুন/অপরিচিত?</div><div class="ex-bn">→ <strong style="color:var(--emerald)">A/An</strong> ব্যবহার করো</div></div>
+    <div class="ex"><div class="ex-en">❓ নির্দিষ্ট/পরিচিত?</div><div class="ex-bn">→ <strong style="color:var(--gold)">The</strong> ব্যবহার করো</div></div>
+    <div class="ex"><div class="ex-en">❓ সাধারণ/Uncountable/Proper Noun?</div><div class="ex-bn">→ <strong style="color:var(--indigo)">Zero (∅)</strong> ব্যবহার করো</div></div>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('zero',2)">← Zero Article</button>
+  <button class="btn-next" onclick="show('practice',4)">Practice →</button>
+</div>`,
+
+/* ══ PRACTICE ══ */
+'practice':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Articles → Practice</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>✍️ Article Practice Quiz</span></div>
+  <div class="lesson-desc">সঠিক article বেছে নাও। প্রতিটি প্রশ্নের জন্য A, An, The, বা No Article (∅) বেছে নাও।</div>
+</div>
+
+<div id="quiz-wrap"></div>
+
+<div class="lesson-nav" style="margin-top:1.5rem">
+  <button class="btn-prev" onclick="show('compare',3)">← Comparison</button>
+  <button class="btn-quiz-big" onclick="resetQuiz()">🔄 আবার চেষ্টা করো</button>
+  <a class="btn-next" href="grammar-pronouns.html">Pronouns →</a>
+</div>`
+};
+
+/* ── QUIZ DATA ── */
+const QUIZ=[
+  {q:'She is ___ doctor.',         opts:['a','an','the','∅'],  ans:'a',   exp:'"Doctor" পেশা + consonant sound → a'},
+  {q:'I need ___ umbrella.',       opts:['a','an','the','∅'],  ans:'an',  exp:'"Umbrella" vowel sound দিয়ে শুরু → an'},
+  {q:'___ sun rises in the east.', opts:['A','An','The','∅'],  ans:'The', exp:'সূর্য একমাত্র, সবাই চেনে → The'},
+  {q:'She speaks ___ English.',    opts:['a','an','the','∅'],  ans:'∅',   exp:'ভাষার নামের আগে কোনো article নেই → ∅'},
+  {q:'I play ___ cricket.',        opts:['a','an','the','∅'],  ans:'∅',   exp:'খেলার নামের আগে কোনো article নেই → ∅'},
+  {q:'___ water is essential for life.',opts:['A','An','The','∅'],ans:'∅', exp:'Uncountable noun সাধারণ অর্থে → ∅'},
+  {q:'He plays ___ piano.',        opts:['a','an','the','∅'],  ans:'the', exp:'Musical instrument এর আগে The → the'},
+  {q:'I saw ___ elephant at the zoo.',opts:['a','an','the','∅'],ans:'an', exp:'"Elephant" vowel sound দিয়ে শুরু → an'},
+  {q:'She is ___ best student.',   opts:['a','an','the','∅'],  ans:'the', exp:'Superlative adjective এর আগে The → the'},
+  {q:'I go to school by ___ bus.', opts:['a','an','the','∅'],  ans:'∅',   exp:'"By + transport" এ কোনো article নেই → ∅'},
+  {q:'___ Padma is a long river.', opts:['A','An','The','∅'],  ans:'The', exp:'নদীর নামের আগে The → The'},
+  {q:'It is ___ honest mistake.',  opts:['a','an','the','∅'],  ans:'an',  exp:'"Honest" H silent, vowel sound → an'},
+];
+
+let score=0, done=false;
+
+function renderQuiz(){
+  score=0; done=false;
+  const w=document.getElementById('quiz-wrap');
+  if(!w) return;
+  w.innerHTML=QUIZ.map((q,i)=>`
+    <div class="practice-q" id="pq-${i}">
+      <div class="pq-text">${i+1}. ${q.q.replace('___','<span style="color:var(--gold);font-weight:800">___</span>')}</div>
+      <div class="pq-options">
+        ${q.opts.map(o=>`<button class="pq-opt" onclick="checkQ(${i},'${o}')">${o}</button>`).join('')}
+      </div>
+      <div class="pq-feedback" id="pf-${i}"></div>
+    </div>`).join('')+`<div id="score-wrap"></div>`;
+}
+
+window.checkQ=(i,sel)=>{
+  const q=QUIZ[i];
+  const el=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  el.querySelectorAll('.pq-opt').forEach(b=>{
+    b.onclick=null;
+    if(b.textContent.trim()===q.ans) b.classList.add('correct');
+    else if(b.textContent.trim()===sel && sel!==q.ans) b.classList.add('wrong');
+  });
+  fb.className='pq-feedback show '+(sel===q.ans?'correct':'wrong');
+  fb.textContent=(sel===q.ans?'✅ সঠিক! ':'❌ ভুল। ')+q.exp;
+  if(sel===q.ans) score++;
+  const allDone=[...document.querySelectorAll('.pq-feedback.show')].length===QUIZ.length;
+  if(allDone && !done){
+    done=true;
+    const sw=document.getElementById('score-wrap');
+    const pct=Math.round(score/QUIZ.length*100);
+    sw.innerHTML=`<div style="background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.2);border-radius:18px;padding:1.5rem;text-align:center;margin-top:1rem;">
+      <div style="font-size:2.5rem;font-weight:900;color:var(--gold)">${score}/${QUIZ.length}</div>
+      <div style="font-size:1rem;color:var(--sub);margin:.3rem 0;font-family:'Noto Sans Bengali',sans-serif">${pct>=80?'🎉 অসাধারণ!':pct>=60?'👍 ভালো করেছো!':'💪 আরেকটু চেষ্টা করো!'}</div>
+      <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Accuracy: ${pct}% · XP Earned: ${Math.round(pct/2)} XP</div>
+    </div>`;
+  }
+};
+
+window.resetQuiz=()=>{ score=0; done=false; renderQuiz(); };
+
+/* ── SHOW ── */
+const ORDER=['a-an','the','zero','compare','practice'];
+window.show=(id,idx)=>{
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));
+  document.getElementById('prog').style.width=Math.round(idx/(ORDER.length-1)*100)+'%';
+  document.getElementById('main').innerHTML=PANELS[id]();
+  document.getElementById('main').scrollTop=0;
+  if(id==='practice') renderQuiz();
+};
+
+show('a-an',0);
+
+document.querySelector('.main')?.addEventListener('scroll',function(){
+  const s=this.scrollTop,h=this.scrollHeight-this.clientHeight;
+  if(h>0){
+    const idx=ORDER.indexOf(document.querySelector('.sb-item.active')?.dataset.id||'a-an');
+    const base=Math.round(idx/(ORDER.length-1)*100);
+    const extra=Math.round(s/h*(100/(ORDER.length-1)));
+    document.getElementById('prog').style.width=Math.min(100,base+extra)+'%';
+  }
+});
+</script>
+</body>
+</html>

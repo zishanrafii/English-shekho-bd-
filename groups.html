@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Groups — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;--surface3:#101828;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;--rose:#fb7185;
+  --indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;--muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);background-size:52px 52px;}
+.wrap{max-width:1160px;margin:auto;padding:1.6rem 1.4rem 0;position:relative;z-index:1;}
+
+/* TOPBAR */
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;gap:1rem;flex-wrap:wrap;background:rgba(8,14,26,.8);border:1px solid var(--border);border-radius:18px;padding:.9rem 1.4rem;backdrop-filter:blur(24px);box-shadow:0 4px 32px rgba(0,0,0,.4);position:sticky;top:16px;z-index:100;}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));border:1px solid rgba(245,200,66,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.logo-text h1{font-size:1.55rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;}
+.logo-text p{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--sub);text-decoration:none;transition:.2s;border:1px solid transparent;}
+.nav-link:hover{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.nav-link.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.28);color:var(--gold);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));display:flex;align-items:center;justify-content:center;font-size:1rem;overflow:hidden;border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);color:var(--rose);padding:.4rem .9rem;border-radius:10px;cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* HERO */
+.hero{border-radius:24px;padding:2.2rem 2.4rem;margin-bottom:1.8rem;position:relative;overflow:hidden;background:linear-gradient(135deg,#080e18,#0a1220);border:1px solid rgba(255,255,255,.07);box-shadow:0 8px 48px rgba(0,0,0,.45);}
+.hero-stripe{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);}
+.hero-orb1{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.1),transparent 70%);top:-100px;left:-80px;pointer-events:none;}
+.hero-orb2{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.09),transparent 70%);bottom:-80px;right:-60px;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.7rem;opacity:.8;}
+.hero h2{font-size:2.1rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;line-height:1.15;}
+.hero h2 span{background:linear-gradient(135deg,#f5c842,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--sub);font-size:13.5px;line-height:1.7;max-width:500px;font-family:'Noto Sans Bengali',sans-serif;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.hstat{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.75rem 1.2rem;text-align:center;min-width:78px;}
+.hstat-v{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+/* SECTION TITLE */
+.section-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* CREATE GROUP FORM */
+.create-form{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.4rem;margin-bottom:1.8rem;}
+.create-form-grid{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;}
+.cf-field{display:flex;flex-direction:column;gap:6px;}
+.cf-label{font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.8px;text-transform:uppercase;}
+.cf-input{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:.7rem 1rem;color:var(--text);font-size:13.5px;font-family:'Outfit',sans-serif;outline:none;transition:.2s;}
+.cf-input:focus{border-color:rgba(245,200,66,.3);}
+.cf-desc{grid-column:1/-1;}
+.btn-create{padding:.75rem 1.6rem;border-radius:13px;font-weight:700;font-size:13.5px;cursor:pointer;font-family:'Outfit',sans-serif;background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.12));border:1px solid rgba(245,200,66,.3);color:var(--gold);transition:.2s;white-space:nowrap;}
+.btn-create:hover{background:linear-gradient(135deg,rgba(245,200,66,.26),rgba(45,212,191,.2));}
+.btn-create:disabled{opacity:.45;cursor:not-allowed;}
+
+/* TABS */
+.tab-row{display:flex;gap:8px;margin-bottom:1.6rem;}
+.tab-btn{padding:.55rem 1.2rem;border-radius:13px;font-size:12.5px;font-weight:700;border:1px solid var(--border);background:var(--surface2);color:var(--sub);cursor:pointer;transition:.2s;}
+.tab-btn:hover{border-color:rgba(245,200,66,.25);color:var(--text);}
+.tab-btn.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.3);color:var(--gold);}
+
+/* GROUP GRID */
+.group-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:2.2rem;}
+.group-card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.3rem;position:relative;overflow:hidden;transition:.25s;cursor:pointer;}
+.group-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gc-color,rgba(245,200,66,.4));opacity:.5;}
+.group-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.3);border-color:rgba(245,200,66,.2);}
+.gc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.7rem;}
+.gc-icon{font-size:1.7rem;width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border:1px solid var(--border);}
+.gc-members{font-size:11px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:5px;}
+.gc-name{font-size:1.05rem;font-weight:800;margin-bottom:.3rem;}
+.gc-desc{font-size:12.5px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;line-height:1.6;margin-bottom:.9rem;min-height:38px;}
+.gc-topic{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--sub);margin-bottom:.9rem;display:inline-block;}
+.gc-join-btn{width:100%;padding:.55rem;border-radius:12px;font-weight:700;font-size:12.5px;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--sub);}
+.gc-join-btn.joined{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);}
+.gc-join-btn.join{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.3);color:var(--gold);}
+.gc-join-btn:hover:not(:disabled){filter:brightness(1.1);}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:13px;font-family:'Noto Sans Bengali',sans-serif;grid-column:1/-1;}
+
+/* CHAT PANEL */
+.chat-panel{background:var(--surface2);border:1px solid var(--border);border-radius:18px;display:none;flex-direction:column;height:520px;margin-bottom:1.8rem;}
+.chat-panel.show{display:flex;}
+.cp-header{display:flex;align-items:center;gap:12px;padding:.9rem 1.2rem;border-bottom:1px solid var(--border);}
+.cp-icon{font-size:1.4rem;}
+.cp-name{font-size:15px;font-weight:800;}
+.cp-members{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.cp-close{margin-left:auto;width:32px;height:32px;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;}
+.cp-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:8px;}
+.cp-loading{color:var(--muted);font-size:12.5px;text-align:center;padding:2rem;font-family:'Noto Sans Bengali',sans-serif;}
+.msg{display:flex;gap:9px;}
+.msg.own{flex-direction:row-reverse;}
+.msg-avatar{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--indigo);flex-shrink:0;overflow:hidden;}
+.msg-avatar img{width:100%;height:100%;object-fit:cover;}
+.msg-body{}
+.msg-name{font-size:10.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:2px;}
+.msg.own .msg-name{text-align:right;}
+.msg-bubble{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px 12px 12px 4px;padding:.55rem .9rem;font-size:13.5px;line-height:1.55;word-break:break-word;}
+.msg.own .msg-bubble{border-radius:12px 12px 4px 12px;background:linear-gradient(135deg,rgba(45,212,191,.12),rgba(129,140,248,.1));border-color:rgba(45,212,191,.18);}
+.msg-time{font-size:9.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+.msg.own .msg-time{text-align:right;}
+.date-div{text-align:center;font-size:10.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin:.4rem 0;}
+.cp-input-bar{display:flex;align-items:flex-end;gap:10px;padding:.8rem 1.1rem;border-top:1px solid var(--border);}
+.cp-input-bar textarea{flex:1;resize:none;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;color:var(--text);font-size:13.5px;font-family:'Noto Sans Bengali',sans-serif;outline:none;max-height:100px;line-height:1.5;}
+.cp-input-bar textarea:focus{border-color:rgba(45,212,191,.3);}
+.cp-send-btn{width:42px;height:42px;border-radius:13px;border:1px solid rgba(45,212,191,.3);background:linear-gradient(135deg,rgba(45,212,191,.16),rgba(129,140,248,.1));color:var(--teal);font-size:1.1rem;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.cp-send-btn:hover:not(:disabled){background:linear-gradient(135deg,rgba(45,212,191,.26),rgba(129,140,248,.16));}
+.cp-send-btn:disabled{opacity:.4;cursor:not-allowed;}
+.not-member-banner{background:rgba(245,200,66,.06);border:1px solid rgba(245,200,66,.2);border-radius:12px;padding:.9rem 1.2rem;font-size:13px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;text-align:center;margin:.5rem .8rem;}
+
+/* FOOTER */
+footer{margin-top:3rem;border-top:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),rgba(45,212,191,.35),transparent);}
+.footer-inner{max-width:1160px;margin:auto;padding:2.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;}
+.footer-brand .brand-name{font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.9rem;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:11px;color:#2a3545;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.copyright-text span{color:#374151;}
+.footer-col h4{font-size:.9rem;font-weight:700;color:var(--sub);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.dev-card{background:linear-gradient(135deg,rgba(245,200,66,.04),rgba(45,212,191,.04));border:1px solid rgba(245,200,66,.12);border-radius:14px;padding:1.1rem;}
+.dev-name{font-size:1.05rem;font-weight:800;color:#f0f4f8;margin-bottom:.1rem;}
+.dev-title{font-size:10px;color:var(--gold);letter-spacing:.8px;margin-bottom:.8rem;font-family:'JetBrains Mono',monospace;}
+.dev-contact{display:flex;flex-direction:column;gap:.45rem;}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);}
+.contact-row a{color:var(--sub);text-decoration:none;}
+.contact-row a:hover{color:var(--gold);}
+.contact-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:rgba(255,255,255,.05);}
+.social-links{display:flex;flex-direction:column;gap:.55rem;}
+.social-link{display:flex;align-items:center;gap:10px;padding:.55rem .85rem;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid var(--border);text-decoration:none;color:var(--sub);font-size:12px;transition:.2s;}
+.social-link:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);color:#f0f4f8;transform:translateX(3px);}
+.sl-icon{font-size:.9rem;width:20px;text-align:center;}
+.sl-label{font-weight:600;}
+.sl-handle{color:var(--muted);font-size:10.5px;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{max-width:1160px;margin:auto;padding:.8rem 1.4rem 1.3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;border-top:1px solid rgba(255,255,255,.04);font-size:11px;color:#2d3748;font-family:'JetBrains Mono',monospace;}
+.footer-bottom a{color:#374151;text-decoration:none;}
+.footer-heart{color:var(--rose);}
+
+.toast{position:fixed;top:20px;right:20px;background:#0c1322;color:#f0f4f8;padding:.9rem 1.2rem;border-radius:14px;border-left:3px solid #f5c842;z-index:9999;opacity:0;transform:translateY(-16px);transition:.3s;font-size:13.5px;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:800px){.footer-inner{grid-template-columns:1fr;gap:1.6rem;}.nav-links{display:none;}.group-grid{grid-template-columns:1fr;}.create-form-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.wrap{padding:1rem .9rem 0;}.topbar{flex-direction:column;align-items:flex-start;}.hero h2{font-size:1.6rem;}}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>ENGLISH LEARNING PLATFORM · A1 TO C2</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+        <a href="friends.html" class="nav-link">Friends</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="groups.html" class="nav-link active">Study Groups</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" onclick="location.href='profile.html'">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">👥 Study Together · Group Learning</div>
+        <h2>Join a <span>Study Group</span> 🎓</h2>
+        <p class="hero-sub">নিজের study group বানাও বা অন্যদের group-এ যোগ দাও। Group chat-এ একসাথে grammar, vocab আর speaking practice করো।</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-v" id="h-total">0</div>
+          <div class="hstat-l">Total Groups</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-mine">0</div>
+          <div class="hstat-l">Joined</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE GROUP -->
+  <div class="section-title">➕ নতুন Group তৈরি করো</div>
+  <div class="create-form">
+    <div class="create-form-grid">
+      <div class="cf-field">
+        <label class="cf-label">Group Name</label>
+        <input class="cf-input" type="text" id="group-name" placeholder="e.g. A2 Grammar Masters" maxlength="50">
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">Topic / Level</label>
+        <input class="cf-input" type="text" id="group-topic" placeholder="e.g. B1-B2" maxlength="20" style="width:120px;">
+      </div>
+      <div class="cf-field cf-desc" style="grid-column:1/-1;">
+        <label class="cf-label">Description</label>
+        <input class="cf-input" type="text" id="group-desc" placeholder="Group-এর লক্ষ্য ও নিয়ম সংক্ষেপে লিখুন..." maxlength="120">
+      </div>
+      <button class="btn-create" id="btn-create-group">🚀 Group তৈরি করো</button>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-row">
+    <button class="tab-btn active" data-tab="all">🌍 সব Groups</button>
+    <button class="tab-btn" data-tab="mine">📌 আমার Groups</button>
+  </div>
+
+  <!-- ACTIVE GROUP CHAT PANEL (shown when a group is opened) -->
+  <div class="chat-panel" id="chat-panel">
+    <div class="cp-header">
+      <div class="cp-icon" id="cp-icon">👥</div>
+      <div>
+        <div class="cp-name" id="cp-name">Group</div>
+        <div class="cp-members" id="cp-members">0 members</div>
+      </div>
+      <button class="cp-close" id="cp-close" title="Close">✕</button>
+    </div>
+    <div class="cp-messages" id="cp-messages">
+      <div class="cp-loading">লোড হচ্ছে...</div>
+    </div>
+    <div id="cp-input-area">
+      <div class="cp-input-bar">
+        <textarea id="cp-input" placeholder="Group-এ message লিখুন..." rows="1"></textarea>
+        <button class="cp-send-btn" id="cp-send" disabled>➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP LIST -->
+  <div class="section-title" id="group-section-title">👥 সব Groups</div>
+  <div class="group-grid" id="group-grid">
+    <div class="empty-state">লোড হচ্ছে...</div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { safeUrl,
+  auth, db, signOut, requireAuth,
+  doc, getDoc, setDoc, getDocs, updateDoc, deleteDoc,
+  collection, query, orderBy, limit, where,
+  addDoc, serverTimestamp, onSnapshot,
+  arrayUnion, esc, fmtTime, fmtDate
+} from "./js/firebase-config.js";
+
+/* ══════════════════════════════════
+   GROUP ICONS
+══════════════════════════════════ */
+const ICONS = ["📚","🎯","🧠","✍️","🗣️","👂","📝","🏆","💬","🌟","⚡","🔥"];
+const COLORS = ["rgba(245,200,66,.4)","rgba(45,212,191,.4)","rgba(129,140,248,.4)","rgba(52,211,153,.4)","rgba(251,146,60,.4)","rgba(251,113,133,.4)"];
+
+/* ══════════════════════════════════
+   STATE
+══════════════════════════════════ */
+let currentUser  = null;
+let groups       = [];
+let activeTab    = "all";
+let activeGroupId = null;
+let unsubMessages = null;
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+/* ══════════════════════════════════
+   LOAD GROUPS
+══════════════════════════════════ */
+async function loadGroups(){
+  try{
+    const snap = await getDocs(query(collection(db,"studyGroups"), orderBy("createdAt","desc"), limit(50)));
+    groups = snap.docs.map(d=>({ id:d.id, ...d.data() }));
+    document.getElementById("h-total").textContent = groups.length;
+    document.getElementById("h-mine").textContent  = groups.filter(g=> isJoined(g)).length;
+    renderGroups();
+  }catch(e){
+    document.getElementById("group-grid").innerHTML = `<div class="empty-state">Group লোড করতে সমস্যা হয়েছে।</div>`;
+  }
+}
+
+function isJoined(g){
+  return currentUser && (g.members||[]).includes(currentUser.uid);
+}
+
+/* ══════════════════════════════════
+   RENDER GROUPS
+══════════════════════════════════ */
+function renderGroups(){
+  const grid = document.getElementById("group-grid");
+  const filtered = activeTab === "mine"
+    ? groups.filter(g=> isJoined(g))
+    : groups;
+
+  document.getElementById("group-section-title").textContent =
+    activeTab === "mine" ? "📌 আমার Groups" : "👥 সব Groups";
+
+  if(!filtered.length){
+    grid.innerHTML = `<div class="empty-state">${activeTab==="mine" ? "তুমি এখনো কোনো group-এ join করোনি।" : "এখনো কোনো study group নেই — প্রথম হয়ে তৈরি করো! 🚀"}</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(g=>{
+    const joined = isJoined(g);
+    const isOwner = currentUser && g.createdBy === currentUser.uid;
+    const iconIdx = Math.abs(g.id.charCodeAt(0) + g.id.charCodeAt(1)) % ICONS.length;
+    const colorIdx = Math.abs(g.id.charCodeAt(0)) % COLORS.length;
+
+    return `
+      <div class="group-card" data-open="${g.id}" style="--gc-color:${COLORS[colorIdx]};">
+        <div class="gc-top">
+          <div class="gc-icon">${ICONS[iconIdx]}</div>
+          <div class="gc-members">👥 ${(g.members||[]).length}</div>
+        </div>
+        <div class="gc-name">${esc(g.name||"Unnamed Group")}</div>
+        <div class="gc-desc">${esc(g.description||"")}</div>
+        ${g.topic ? `<span class="gc-topic">${esc(g.topic)}</span>` : ""}
+        <button class="gc-join-btn ${joined?'joined':'join'}" data-join="${g.id}" onclick="event.stopPropagation()">
+          ${joined ? (isOwner ? "✅ Admin (Joined)" : "✅ Joined") : "➕ Join Group"}
+        </button>
+        ${joined && !isOwner ? `<button class="gc-join-btn" data-leave="${g.id}" onclick="event.stopPropagation()" style="margin-top:6px;color:var(--rose);border-color:rgba(251,113,133,.2);">Leave</button>` : ""}
+        ${isOwner ? `<button class="gc-join-btn" data-delete="${g.id}" onclick="event.stopPropagation()" style="margin-top:6px;color:var(--rose);border-color:rgba(251,113,133,.2);">🗑 Delete Group</button>` : ""}
+      </div>`;
+  }).join("");
+
+  grid.querySelectorAll("[data-open]").forEach(card=>{
+    card.addEventListener("click", ()=> openGroupChat(card.dataset.open));
+  });
+  grid.querySelectorAll("[data-join]").forEach(btn=>{
+    btn.addEventListener("click", ()=> joinGroup(btn.dataset.join));
+  });
+  grid.querySelectorAll("[data-leave]").forEach(btn=>{
+    btn.addEventListener("click", ()=> leaveGroup(btn.dataset.leave));
+  });
+  grid.querySelectorAll("[data-delete]").forEach(btn=>{
+    btn.addEventListener("click", ()=> deleteGroup(btn.dataset.delete));
+  });
+}
+
+/* ══════════════════════════════════
+   JOIN / LEAVE / DELETE
+══════════════════════════════════ */
+async function joinGroup(id){
+  if(!currentUser) return;
+  const g = groups.find(g=>g.id===id);
+  if(!g || isJoined(g)) return;
+  try{
+    await updateDoc(doc(db,"studyGroups",id), { members: arrayUnion(currentUser.uid) });
+    g.members = [...(g.members||[]), currentUser.uid];
+    document.getElementById("h-mine").textContent = groups.filter(g=>isJoined(g)).length;
+    toast(`✅ "${g.name}" group-এ join করা হয়েছে!`);
+    renderGroups();
+  }catch(e){ toast("⚠️ Join করতে সমস্যা হয়েছে।"); }
+}
+
+async function leaveGroup(id){
+  if(!currentUser || !confirm("এই group ছেড়ে যেতে চাও?")) return;
+  const g = groups.find(g=>g.id===id);
+  if(!g) return;
+  try{
+    const newMembers = (g.members||[]).filter(m=>m!==currentUser.uid);
+    await updateDoc(doc(db,"studyGroups",id), { members: newMembers });
+    g.members = newMembers;
+    if(activeGroupId === id){ closeChat(); }
+    document.getElementById("h-mine").textContent = groups.filter(g=>isJoined(g)).length;
+    toast("Group ছেড়ে দেওয়া হয়েছে।");
+    renderGroups();
+  }catch(e){ toast("⚠️ Leave করতে সমস্যা হয়েছে।"); }
+}
+
+async function deleteGroup(id){
+  if(!currentUser || !confirm("এই group delete করতে চাও? সব messages মুছে যাবে।")) return;
+  try{
+    await deleteDoc(doc(db,"studyGroups",id));
+    groups = groups.filter(g=>g.id!==id);
+    if(activeGroupId === id) closeChat();
+    document.getElementById("h-total").textContent = groups.length;
+    document.getElementById("h-mine").textContent  = groups.filter(g=>isJoined(g)).length;
+    toast("Group delete করা হয়েছে।");
+    renderGroups();
+  }catch(e){ toast("⚠️ Delete করতে সমস্যা হয়েছে।"); }
+}
+
+/* ══════════════════════════════════
+   CREATE GROUP
+══════════════════════════════════ */
+document.getElementById("btn-create-group").addEventListener("click", async ()=>{
+  const name  = document.getElementById("group-name").value.trim();
+  const topic = document.getElementById("group-topic").value.trim();
+  const desc  = document.getElementById("group-desc").value.trim();
+  if(!name){ toast("⚠️ Group-এর নাম দিন।"); return; }
+  if(!currentUser) return;
+  const btn = document.getElementById("btn-create-group");
+  btn.disabled = true;
+  try{
+    const ref = await addDoc(collection(db,"studyGroups"), {
+      name, topic, description:desc,
+      createdBy: currentUser.uid,
+      creatorName: currentUser.displayName,
+      members: [currentUser.uid],
+      createdAt: serverTimestamp()
+    });
+    const newGroup = { id:ref.id, name, topic, description:desc,
+      createdBy:currentUser.uid, creatorName:currentUser.displayName,
+      members:[currentUser.uid] };
+    groups.unshift(newGroup);
+    document.getElementById("group-name").value = "";
+    document.getElementById("group-topic").value = "";
+    document.getElementById("group-desc").value = "";
+    document.getElementById("h-total").textContent = groups.length;
+    document.getElementById("h-mine").textContent  = groups.filter(g=>isJoined(g)).length;
+    toast(`🎉 "${name}" group তৈরি হয়েছে!`);
+    renderGroups();
+    openGroupChat(ref.id);
+  }catch(e){ toast("⚠️ Group তৈরি করতে সমস্যা হয়েছে।"); }
+  btn.disabled = false;
+});
+
+/* ══════════════════════════════════
+   GROUP CHAT
+══════════════════════════════════ */
+function openGroupChat(id){
+  const g = groups.find(g=>g.id===id);
+  if(!g) return;
+  const joined = isJoined(g);
+  activeGroupId = id;
+
+  const iconIdx = Math.abs(g.id.charCodeAt(0)+g.id.charCodeAt(1)) % ICONS.length;
+  document.getElementById("cp-icon").textContent    = ICONS[iconIdx];
+  document.getElementById("cp-name").textContent    = g.name;
+  document.getElementById("cp-members").textContent = `${(g.members||[]).length} members`;
+  document.getElementById("chat-panel").classList.add("show");
+  document.getElementById("chat-panel").scrollIntoView({behavior:"smooth",block:"start"});
+
+  const inputArea = document.getElementById("cp-input-area");
+  if(!joined){
+    inputArea.innerHTML = `<div class="not-member-banner">💬 Chat-এ অংশ নিতে আগে group-এ join করো।</div>`;
+  } else {
+    inputArea.innerHTML = `
+      <div class="cp-input-bar">
+        <textarea id="cp-input" placeholder="Group-এ message লিখুন... (Enter = send)" rows="1"></textarea>
+        <button class="cp-send-btn" id="cp-send" disabled>➤</button>
+      </div>`;
+    const input = document.getElementById("cp-input");
+    const send  = document.getElementById("cp-send");
+    input.addEventListener("input", ()=>{
+      input.style.height = "auto";
+      input.style.height = Math.min(input.scrollHeight, 100) + "px";
+      send.disabled = !input.value.trim();
+    });
+    input.addEventListener("keydown", e=>{
+      if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); if(!send.disabled) sendGroupMessage(); }
+    });
+    send.addEventListener("click", sendGroupMessage);
+  }
+
+  if(unsubMessages) unsubMessages();
+  loadGroupMessages(id);
+}
+
+function closeChat(){
+  if(unsubMessages){ unsubMessages(); unsubMessages=null; }
+  document.getElementById("chat-panel").classList.remove("show");
+  activeGroupId = null;
+}
+
+document.getElementById("cp-close").addEventListener("click", closeChat);
+
+function loadGroupMessages(groupId){
+  const area = document.getElementById("cp-messages");
+  area.innerHTML = `<div class="cp-loading">লোড হচ্ছে...</div>`;
+
+  const q = query(collection(db,"studyGroups",groupId,"messages"), orderBy("createdAt","asc"), limit(100));
+  unsubMessages = onSnapshot(q, snap=>{
+    const wasBottom = area.scrollHeight - area.scrollTop - area.clientHeight < 80;
+    area.innerHTML = "";
+    if(snap.empty){
+      area.innerHTML = `<div class="cp-loading">এখনো কোনো message নেই — প্রথম হয়ে বলো! 👋</div>`;
+      return;
+    }
+    let lastDate = "";
+    snap.forEach(d=>{
+      const m = d.data();
+      const dateStr = m.createdAt ? fmtDate(m.createdAt) : "";
+      if(dateStr && dateStr !== lastDate){
+        const div = document.createElement("div");
+        div.className = "date-div";
+        div.textContent = dateStr;
+        area.appendChild(div);
+        lastDate = dateStr;
+      }
+      area.appendChild(buildMsgEl(m));
+    });
+    if(wasBottom || snap.size <= 5) area.scrollTop = area.scrollHeight;
+  });
+}
+
+function buildMsgEl(m){
+  const isOwn = currentUser && m.uid === currentUser.uid;
+  const wrap = document.createElement("div");
+  wrap.className = "msg" + (isOwn?" own":"");
+  const photo = m.photoURL || "";
+  const avatarInner = photo ? `<img src="${safeUrl(photo)}">` : `<span>${(m.displayName||"?")[0].toUpperCase()}</span>`;
+  const time = m.createdAt ? fmtTime(m.createdAt) : "";
+  wrap.innerHTML = `
+    <div class="msg-avatar">${avatarInner}</div>
+    <div class="msg-body">
+      <div class="msg-name">${esc(m.displayName||"User")}</div>
+      <div class="msg-bubble">${esc(m.text||"")}</div>
+      <div class="msg-time">${time}</div>
+    </div>`;
+  return wrap;
+}
+
+async function sendGroupMessage(){
+  if(!currentUser || !activeGroupId) return;
+  const input = document.getElementById("cp-input");
+  const text  = input.value.trim();
+  if(!text) return;
+  const send = document.getElementById("cp-send");
+  send.disabled = true;
+  input.value = "";
+  input.style.height = "auto";
+  try{
+    await addDoc(collection(db,"studyGroups",activeGroupId,"messages"), {
+      uid:         currentUser.uid,
+      displayName: currentUser.displayName,
+      photoURL:    currentUser.photoURL || "",
+      text,
+      createdAt:   serverTimestamp()
+    });
+  }catch(e){
+    toast("⚠️ Message পাঠাতে সমস্যা হয়েছে।");
+    input.value = text;
+  }
+  send.disabled = !input.value.trim();
+}
+
+/* ══════════════════════════════════
+   TABS
+══════════════════════════════════ */
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    activeTab = btn.dataset.tab;
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    renderGroups();
+  });
+});
+
+/* ══════════════════════════════════
+   AUTH + INIT
+══════════════════════════════════ */
+const yr = new Date().getFullYear();
+document.getElementById("footer-year").textContent  = yr;
+document.getElementById("footer-year2").textContent = yr;
+
+document.getElementById("btn-logout").onclick = async ()=>{
+  await signOut(auth);
+  window.location.href="index.html";
+};
+
+requireAuth(async user => {
+  const snap = await getDoc(doc(db,"users",user.uid));
+  const d = snap.exists() ? snap.data() : {};
+
+  currentUser = {
+    uid: user.uid,
+    displayName: d.displayName || user.displayName || "Learner",
+    photoURL: d.photoURL || user.photoURL || ""
+  };
+
+  const name  = currentUser.displayName;
+  const photo = currentUser.photoURL;
+  document.getElementById("nav-name").textContent = name;
+  const av = document.getElementById("nav-avatar");
+  if(photo) av.innerHTML = `<img src="${safeUrl(photo)}" style="width:100%;height:100%;object-fit:cover;">`;
+  else av.textContent = name[0]?.toUpperCase() || "?";
+
+  await loadGroups();
+});
+</script>
+</body>
+</html>

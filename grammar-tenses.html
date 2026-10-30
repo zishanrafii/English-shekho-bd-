@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenses — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;--surface3:#101828;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(129,140,248,.07),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(245,200,66,.05),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+/* ── TOPBAR ── */
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;
+  background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(245,200,66,.1));
+  border:1px solid rgba(129,140,248,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;
+  background:linear-gradient(135deg,#818cf8,#f5c842);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;
+  color:var(--sub);text-decoration:none;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);transition:.2s;cursor:pointer;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(129,140,248,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  border:2px solid rgba(245,200,66,.2);display:flex;align-items:center;
+  justify-content:center;font-size:.9rem;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.nav-av img{width:100%;height:100%;object-fit:cover;}
+
+/* ── LAYOUT ── */
+.layout{display:flex;height:calc(100vh - 57px);}
+
+/* ── SIDEBAR ── */
+.sidebar{width:260px;flex-shrink:0;border-right:1px solid var(--border);
+  overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(129,140,248,.2);border-radius:3px;}
+.sb-section{margin-bottom:.4rem;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;
+  font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;
+  border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;
+  margin-bottom:2px;}
+.sb-item:hover{background:rgba(129,140,248,.06);border-color:rgba(129,140,248,.1);}
+.sb-item.active{background:rgba(129,140,248,.1);border-color:rgba(129,140,248,.25);color:var(--indigo);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;
+  border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+.lvl-b2{background:rgba(251,113,133,.1);color:#fb7185;border:1px solid rgba(251,113,133,.2);}
+.lvl-c1{background:rgba(129,140,248,.1);color:#818cf8;border:1px solid rgba(129,140,248,.2);}
+.sb-done{color:var(--emerald);font-size:.75rem;margin-left:auto;}
+
+/* ── MAIN CONTENT ── */
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(129,140,248,.15);border-radius:3px;}
+
+/* ── LESSON HEADER ── */
+.lesson-header{margin-bottom:2rem;position:relative;}
+.lesson-header::before{content:'';position:absolute;top:0;left:-2.2rem;right:-2.2rem;height:3px;
+  background:linear-gradient(90deg,transparent,var(--indigo) 30%,var(--gold) 70%,transparent);}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;
+  font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:6px;padding-top:.8rem;}
+.lesson-badge{display:inline-flex;align-items:center;gap:6px;margin-bottom:.8rem;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#818cf8,#f5c842);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;
+  font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem;}
+.lmeta{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  padding:4px 12px;border-radius:20px;}
+
+/* ── CARDS ── */
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;
+  padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--card-accent,linear-gradient(90deg,var(--indigo),var(--gold)));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;
+  font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ── FORMULA BOX ── */
+.formula{background:rgba(129,140,248,.07);border:1px solid rgba(129,140,248,.18);
+  border-radius:14px;padding:1rem 1.4rem;margin-bottom:1.2rem;font-family:'JetBrains Mono',monospace;}
+.formula-label{font-size:10px;color:var(--indigo);font-weight:700;letter-spacing:.8px;
+  text-transform:uppercase;margin-bottom:.4rem;}
+.formula-text{font-size:1rem;color:var(--text);line-height:1.8;}
+.formula-text .hl{color:var(--gold);font-weight:700;}
+.formula-text .hl2{color:var(--teal);font-weight:700;}
+.formula-text .hl3{color:var(--rose);font-weight:700;}
+.formula-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem;}
+.formula-chip{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  padding:.25rem .8rem;border-radius:20px;font-size:12px;color:var(--sub);}
+
+/* ── EXAMPLES ── */
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);
+  border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(129,140,248,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-type{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;
+  border-radius:20px;margin-left:8px;font-weight:700;}
+.ex-pos{background:rgba(52,211,153,.1);color:var(--emerald);}
+.ex-neg{background:rgba(251,113,133,.1);color:var(--rose);}
+.ex-q{background:rgba(245,200,66,.1);color:var(--gold);}
+
+/* ── TABLE ── */
+.gtable{width:100%;border-collapse:collapse;margin:1rem 0;font-size:13px;}
+.gtable th{background:rgba(129,140,248,.08);color:var(--sub);font-weight:700;
+  padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;
+  letter-spacing:.6px;border-bottom:1px solid rgba(129,140,248,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--text);font-weight:600;}
+.gtable td:nth-child(2){color:var(--indigo);font-family:'JetBrains Mono',monospace;font-size:12.5px;}
+.gtable td:nth-child(3){color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding:1rem 0;margin:1rem 0;}
+.timeline-line{position:absolute;left:50%;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,transparent,rgba(129,140,248,.3),transparent);transform:translateX(-50%);}
+.tl-item{display:flex;gap:1rem;margin-bottom:1.2rem;align-items:flex-start;}
+.tl-item:nth-child(even){flex-direction:row-reverse;}
+.tl-item:nth-child(even) .tl-content{text-align:right;}
+.tl-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;
+  border:2px solid var(--indigo);background:var(--bg);
+  box-shadow:0 0 10px rgba(129,140,248,.3);position:relative;z-index:1;}
+.tl-content{flex:1;background:rgba(255,255,255,.025);border:1px solid var(--border);
+  border-radius:12px;padding:.7rem 1rem;}
+.tl-time{font-size:10.5px;color:var(--indigo);font-family:'JetBrains Mono',monospace;font-weight:700;}
+.tl-text{font-size:13px;margin-top:.2rem;font-family:'Noto Sans Bengali',sans-serif;}
+
+/* ── TIP BOX ── */
+.tip{background:rgba(245,200,66,.06);border:1px solid rgba(245,200,66,.2);
+  border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;
+  display:flex;gap:.8rem;align-items:flex-start;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;margin-top:.05rem;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--gold);}
+
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-icon{font-size:1.2rem;flex-shrink:0;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+/* ── SIGNAL WORDS ── */
+.signal-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem;}
+.signal{background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.18);
+  color:var(--teal);padding:.3rem .85rem;border-radius:20px;font-size:12.5px;
+  font-family:'JetBrains Mono',monospace;font-weight:600;}
+
+/* ── COMPARISON TABLE ── */
+.compare-wrap{overflow-x:auto;}
+.compare-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:500px;}
+.compare-table th{background:rgba(129,140,248,.1);color:var(--indigo);font-weight:700;
+  padding:.6rem .8rem;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border:1px solid rgba(129,140,248,.12);}
+.compare-table td{padding:.55rem .8rem;border:1px solid rgba(255,255,255,.04);vertical-align:top;}
+.compare-table tr:nth-child(even) td{background:rgba(255,255,255,.015);}
+.compare-table .tense-name{color:var(--gold);font-weight:700;white-space:nowrap;}
+.compare-table .form{color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:11.5px;}
+.compare-table .use{color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;font-size:11.5px;}
+
+/* ── PRACTICE ── */
+.practice-q{background:rgba(245,200,66,.04);border:1px solid rgba(245,200,66,.15);
+  border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.8rem;}
+.pq-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);
+  color:var(--text);border-radius:10px;padding:.6rem 1rem;font-size:13.5px;
+  outline:none;transition:.2s;font-family:'Noto Sans Bengali',sans-serif;}
+.pq-input:focus{border-color:rgba(245,200,66,.35);}
+.pq-feedback{font-size:13px;margin-top:.5rem;padding:.5rem .8rem;border-radius:8px;
+  display:none;font-family:'Noto Sans Bengali',sans-serif;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:var(--emerald);}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+.btn-check{background:linear-gradient(135deg,rgba(129,140,248,.15),rgba(245,200,66,.1));
+  border:1px solid rgba(129,140,248,.3);color:var(--text);border-radius:10px;
+  padding:.45rem 1.1rem;font-size:13px;font-weight:600;cursor:pointer;margin-top:.5rem;
+  font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-check:hover{background:rgba(129,140,248,.25);}
+
+/* ── NAV BUTTONS ── */
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;
+  padding:.7rem 1.3rem;border-radius:14px;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;
+  font-size:13.5px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-prev:hover,.btn-next:hover{background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(129,140,248,.15),rgba(245,200,66,.08));
+  border-color:rgba(129,140,248,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#f5c842,#e0a820);color:#000;
+  border:none;border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;
+  cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;
+  display:flex;align-items:center;gap:.5rem;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+/* ── CHEAT SHEET ── */
+.cheat{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-top:.5rem;}
+.cheat-card{background:rgba(255,255,255,.02);border:1px solid var(--border);
+  border-radius:14px;padding:1rem 1.1rem;border-left:3px solid var(--indigo);}
+.cheat-tense{font-size:11px;font-weight:800;color:var(--indigo);font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem;}
+.cheat-form{font-size:13px;color:var(--text);font-family:'JetBrains Mono',monospace;margin-bottom:.2rem;}
+.cheat-use{font-size:11.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+
+/* ── PROGRESS BAR ── */
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--gold));
+  transition:width .3s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;border-right:none;border-bottom:1px solid var(--border);
+    max-height:220px;padding:.5rem;}
+  .main{padding:1.2rem 1rem 3rem;}
+  .lesson-title{font-size:1.5rem;}
+  .cheat{grid-template-columns:1fr;}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-strip"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">⏰ Tenses</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" id="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- ════ SIDEBAR ════ -->
+  <div class="sidebar">
+    <div class="sb-section">
+      <div class="sb-section-label">Present Tenses</div>
+      <div class="sb-item active" data-id="ps" onclick="loadLesson('ps')">
+        <span class="sb-dot" style="background:#34d399"></span>
+        <span class="sb-text">Present Simple</span>
+        <span class="sb-lvl lvl-a1">A1</span>
+      </div>
+      <div class="sb-item" data-id="pc" onclick="loadLesson('pc')">
+        <span class="sb-dot" style="background:#34d399"></span>
+        <span class="sb-text">Present Continuous</span>
+        <span class="sb-lvl lvl-a1">A1</span>
+      </div>
+      <div class="sb-item" data-id="pp" onclick="loadLesson('pp')">
+        <span class="sb-dot" style="background:#f5c842"></span>
+        <span class="sb-text">Present Perfect</span>
+        <span class="sb-lvl lvl-b1">B1</span>
+      </div>
+      <div class="sb-item" data-id="ppc" onclick="loadLesson('ppc')">
+        <span class="sb-dot" style="background:#fb923c"></span>
+        <span class="sb-text">Present Perfect Cont.</span>
+        <span class="sb-lvl lvl-b1">B1</span>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Past Tenses</div>
+      <div class="sb-item" data-id="pas" onclick="loadLesson('pas')">
+        <span class="sb-dot" style="background:#f5c842"></span>
+        <span class="sb-text">Past Simple</span>
+        <span class="sb-lvl lvl-a2">A2</span>
+      </div>
+      <div class="sb-item" data-id="pac" onclick="loadLesson('pac')">
+        <span class="sb-dot" style="background:#f5c842"></span>
+        <span class="sb-text">Past Continuous</span>
+        <span class="sb-lvl lvl-a2">A2</span>
+      </div>
+      <div class="sb-item" data-id="pap" onclick="loadLesson('pap')">
+        <span class="sb-dot" style="background:#fb923c"></span>
+        <span class="sb-text">Past Perfect</span>
+        <span class="sb-lvl lvl-b1">B1</span>
+      </div>
+      <div class="sb-item" data-id="papc" onclick="loadLesson('papc')">
+        <span class="sb-dot" style="background:#fb7185"></span>
+        <span class="sb-text">Past Perfect Cont.</span>
+        <span class="sb-lvl lvl-b2">B2</span>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Future Tenses</div>
+      <div class="sb-item" data-id="fw" onclick="loadLesson('fw')">
+        <span class="sb-dot" style="background:#f5c842"></span>
+        <span class="sb-text">Future Simple (Will)</span>
+        <span class="sb-lvl lvl-a2">A2</span>
+      </div>
+      <div class="sb-item" data-id="fg" onclick="loadLesson('fg')">
+        <span class="sb-dot" style="background:#f5c842"></span>
+        <span class="sb-text">Future (Going to)</span>
+        <span class="sb-lvl lvl-a2">A2</span>
+      </div>
+      <div class="sb-item" data-id="fc" onclick="loadLesson('fc')">
+        <span class="sb-dot" style="background:#fb923c"></span>
+        <span class="sb-text">Future Continuous</span>
+        <span class="sb-lvl lvl-b1">B1</span>
+      </div>
+      <div class="sb-item" data-id="fp" onclick="loadLesson('fp')">
+        <span class="sb-dot" style="background:#fb7185"></span>
+        <span class="sb-text">Future Perfect</span>
+        <span class="sb-lvl lvl-b2">B2</span>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">📋 Reference</div>
+      <div class="sb-item" data-id="cheat" onclick="loadLesson('cheat')">
+        <span class="sb-dot" style="background:#818cf8"></span>
+        <span class="sb-text">All Tenses Cheat Sheet</span>
+      </div>
+      <div class="sb-item" data-id="compare" onclick="loadLesson('compare')">
+        <span class="sb-dot" style="background:#818cf8"></span>
+        <span class="sb-text">Tense Comparison</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ MAIN ════ -->
+  <div class="main" id="main-content"></div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   LESSONS DATA
+══════════════════════════════════════════ */
+const LESSONS = {
+
+  /* ── PRESENT SIMPLE ── */
+  ps:{
+    id:'ps', prev:null, next:'pc',
+    title:'Present Simple Tense', titleBn:'বর্তমান সাধারণ কাল',
+    level:'A1', xp:50, time:'15 min',
+    desc:'Present Simple ব্যবহার করা হয় নিয়মিত অভ্যাস, সত্য তথ্য, এবং সাধারণ সত্য বোঝাতে। এটি English grammar এর সবচেয়ে গুরুত্বপূর্ণ tense।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">V1</span> (he/she/it → <span class="hl">V1+s/es</span>)'},
+      {label:'Negative (−)', text:'Subject + <span class="hl2">do/does</span> + <span class="hl3">not</span> + V1'},
+      {label:'Question (?)', text:'<span class="hl2">Do/Does</span> + Subject + V1 + ?'},
+    ],
+    examples:[
+      {en:'I <b>work</b> every day.',       bn:'আমি প্রতিদিন কাজ করি।',            type:'pos'},
+      {en:'She <b>speaks</b> English.',     bn:'সে English বলে।',                  type:'pos'},
+      {en:'They <b>do not play</b> football.', bn:'তারা ফুটবল খেলে না।',           type:'neg'},
+      {en:'He <b>does not like</b> coffee.', bn:'সে কফি পছন্দ করে না।',            type:'neg'},
+      {en:'<b>Do</b> you <b>speak</b> English?', bn:'তুমি কি English বলো?',         type:'q'},
+      {en:'<b>Does</b> she <b>live</b> here?', bn:'সে কি এখানে থাকে?',             type:'q'},
+    ],
+    uses:[
+      {title:'নিয়মিত অভ্যাস', ex:'I brush my teeth every morning.', bn:'আমি প্রতি সকালে দাঁত মাজি।'},
+      {title:'সাধারণ সত্য', ex:'The sun rises in the east.', bn:'সূর্য পূর্বে ওঠে।'},
+      {title:'স্থায়ী অবস্থা', ex:'She works at a hospital.', bn:'সে একটি হাসপাতালে কাজ করে।'},
+      {title:'সময়সূচী', ex:'The train leaves at 9 AM.', bn:'ট্রেন সকাল ৯টায় ছাড়ে।'},
+    ],
+    signals:['always','usually','often','sometimes','rarely','never','every day','every week','on Mondays'],
+    s_es_rules:[
+      {sub:'He / She / It', rule:'add -s', ex:'work → works, play → plays'},
+      {sub:'-s, -sh, -ch, -x, -o', rule:'add -es', ex:'go → goes, watch → watches'},
+      {sub:'consonant + y', rule:'y → ies', ex:'study → studies, cry → cries'},
+    ],
+    tip:'he/she/it-এর সাথে সবসময় verb-এ <strong>-s বা -es</strong> যোগ করতে হয়। এটা ভুলে গেলে বড় mistake হয়!',
+    warn:'Present Simple-এ কখনো ing ব্যবহার করবেন না। ভুল: <strong>"She is work every day"</strong> → সঠিক: <strong>"She works every day."</strong>',
+    practice:[
+      {q:'She ___ (study) English every day.', answer:'studies', hint:'He/She/It → verb+s/es'},
+      {q:'They ___ (not/watch) TV at night.', answer:"don't watch", hint:'They → do not + V1'},
+      {q:'___ he ___ (live) in Dhaka? (question)', answer:'Does he live', hint:'He → Does + Subject + V1'},
+    ]
+  },
+
+  /* ── PRESENT CONTINUOUS ── */
+  pc:{
+    id:'pc', prev:'ps', next:'pp',
+    title:'Present Continuous Tense', titleBn:'বর্তমান চলমান কাল',
+    level:'A1', xp:50, time:'15 min',
+    desc:'Present Continuous ব্যবহার করা হয় এই মুহূর্তে চলমান কাজ বোঝাতে। "এখন কী হচ্ছে" তা বলতে এই tense ব্যবহার করতে হয়।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">am/is/are</span> + <span class="hl2">V1+ing</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">am/is/are</span> + <span class="hl3">not</span> + V1+ing'},
+      {label:'Question (?)', text:'<span class="hl">Am/Is/Are</span> + Subject + V1+ing + ?'},
+    ],
+    examples:[
+      {en:'I <b>am reading</b> a book.',         bn:'আমি একটি বই পড়ছি।',            type:'pos'},
+      {en:'She <b>is cooking</b> dinner.',        bn:'সে রাতের খাবার রান্না করছে।',    type:'pos'},
+      {en:'They <b>are not studying</b>.',        bn:'তারা পড়ছে না।',                 type:'neg'},
+      {en:'He <b>is not working</b> today.',      bn:'সে আজ কাজ করছে না।',            type:'neg'},
+      {en:'<b>Are</b> you <b>listening</b>?',     bn:'তুমি কি শুনছো?',                type:'q'},
+      {en:'<b>Is</b> it <b>raining</b> outside?', bn:'বাইরে কি বৃষ্টি হচ্ছে?',       type:'q'},
+    ],
+    uses:[
+      {title:'এই মুহূর্তে চলমান', ex:'I am talking to you right now.', bn:'আমি এখন তোমার সাথে কথা বলছি।'},
+      {title:'অস্থায়ী অবস্থা', ex:'She is staying with her aunt this week.', bn:'সে এই সপ্তাহ তার খালার বাড়িতে আছে।'},
+      {title:'ভবিষ্যৎ পরিকল্পনা', ex:'We are leaving tomorrow.', bn:'আমরা কাল যাচ্ছি।'},
+      {title:'বিরক্তিকর অভ্যাস', ex:'He is always complaining!', bn:'সে সবসময় অভিযোগ করছে!'},
+    ],
+    signals:['now','right now','at the moment','currently','look!','listen!','today','this week','tonight'],
+    am_is_are:[
+      {sub:'I', aux:'am'},
+      {sub:'He / She / It', aux:'is'},
+      {sub:'You / We / They', aux:'are'},
+    ],
+    ing_rules:[
+      {rule:'সাধারণত', ex:'work → working, play → playing'},
+      {rule:'e দিয়ে শেষ → e বাদ দাও', ex:'come → coming, write → writing'},
+      {rule:'CVC (short vowel) → শেষ consonant double', ex:'run → running, sit → sitting'},
+      {rule:'ie → ying', ex:'lie → lying, die → dying'},
+    ],
+    tip:'Present Continuous এ কিছু verb সাধারণত ব্যবহার হয় না — এগুলোকে <strong>Stative Verbs</strong> বলে: know, like, love, hate, want, need, believe, understand।',
+    warn:'"I am knowing the answer" ভুল! সঠিক: <strong>"I know the answer."</strong> — Stative verbs সবসময় Present Simple-এ থাকে।',
+    practice:[
+      {q:'She ___ (watch) a movie right now.', answer:'is watching', hint:'She → is + V+ing'},
+      {q:'They ___ (not/sleep). They are studying.', answer:"aren't sleeping", hint:'They → are not + V+ing'},
+      {q:'___ you ___ (come) to the party tonight?', answer:'Are you coming', hint:'Are + Subject + V+ing?'},
+    ]
+  },
+
+  /* ── PRESENT PERFECT ── */
+  pp:{
+    id:'pp', prev:'pc', next:'ppc',
+    title:'Present Perfect Tense', titleBn:'বর্তমান পরিপূর্ণ কাল',
+    level:'B1', xp:100, time:'20 min',
+    desc:'Present Perfect ব্যবহার করা হয় অতীতের কাজ যা বর্তমানে প্রভাব ফেলে, অথবা কতবার কিছু হয়েছে তা বলতে। এটি Past Simple থেকে আলাদা।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">have/has</span> + <span class="hl2">V3 (Past Participle)</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">have/has</span> + <span class="hl3">not</span> + V3'},
+      {label:'Question (?)', text:'<span class="hl">Have/Has</span> + Subject + V3 + ?'},
+    ],
+    examples:[
+      {en:'I <b>have visited</b> London.',            bn:'আমি লন্ডন পরিদর্শন করেছি।',           type:'pos'},
+      {en:'She <b>has finished</b> her homework.',    bn:'সে তার হোমওয়ার্ক শেষ করেছে।',         type:'pos'},
+      {en:'I <b>have never eaten</b> sushi.',         bn:'আমি কখনো সুশি খাইনি।',                type:'neg'},
+      {en:'He <b>has not called</b> me yet.',         bn:'সে এখনো আমাকে call করেনি।',            type:'neg'},
+      {en:'<b>Have</b> you <b>seen</b> this movie?', bn:'তুমি কি এই সিনেমা দেখেছো?',            type:'q'},
+      {en:'<b>Has</b> she <b>arrived</b>?',          bn:'সে কি এসে গেছে?',                      type:'q'},
+    ],
+    uses:[
+      {title:'অতীত → বর্তমানে প্রভাব', ex:'I have lost my keys. (so I cannot enter)', bn:'আমার চাবি হারিয়ে গেছে। (তাই ঢুকতে পারছি না)'},
+      {title:'জীবনের অভিজ্ঞতা', ex:'Have you ever been to Japan?', bn:'তুমি কি কখনো জাপানে গেছো?'},
+      {title:'সংখ্যা/পরিমাণ', ex:'I have read this book three times.', bn:'আমি এই বইটি তিনবার পড়েছি।'},
+      {title:'Just/Already/Yet', ex:'She has just left. / He has already eaten.', bn:'সে এইমাত্র চলে গেছে।'},
+    ],
+    signals:['just','already','yet','ever','never','recently','lately','so far','since','for','how long'],
+    tip:'<strong>Since</strong> ব্যবহার হয় নির্দিষ্ট সময়ের সাথে: "since 2020", "since Monday" — <strong>For</strong> ব্যবহার হয় সময়ের পরিমাণের সাথে: "for 3 years", "for a long time"।',
+    warn:'Present Perfect vs Past Simple: <strong>"I have seen him yesterday"</strong> ভুল! Yesterday = নির্দিষ্ট অতীত সময় → Past Simple ব্যবহার করতে হবে: <strong>"I saw him yesterday."</strong>',
+    practice:[
+      {q:'She ___ (finish) her work. She can rest now.', answer:'has finished', hint:'She → has + V3'},
+      {q:'I ___ (never/eat) durian fruit.', answer:'have never eaten', hint:'I → have + never + V3'},
+      {q:'___ you ever ___ (visit) Cox\'s Bazar?', answer:"Have you ever visited", hint:'Have + Subject + ever + V3?'},
+    ]
+  },
+
+  /* ── PRESENT PERFECT CONTINUOUS ── */
+  ppc:{
+    id:'ppc', prev:'pp', next:'pas',
+    title:"Present Perfect Continuous", titleBn:'বর্তমান পরিপূর্ণ চলমান কাল',
+    level:'B1', xp:100, time:'20 min',
+    desc:'Present Perfect Continuous ব্যবহার করা হয় এমন কাজ বোঝাতে যা অতীতে শুরু হয়ে এখনো চলছে বা সদ্য শেষ হয়েছে — এবং এর প্রভাব এখনো আছে।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">have/has been</span> + <span class="hl2">V+ing</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">have/has</span> + <span class="hl3">not been</span> + V+ing'},
+      {label:'Question (?)', text:'<span class="hl">Have/Has</span> + Subject + <span class="hl2">been</span> + V+ing + ?'},
+    ],
+    examples:[
+      {en:'I <b>have been studying</b> for 3 hours.',   bn:'আমি ৩ ঘণ্টা ধরে পড়ছি।',              type:'pos'},
+      {en:'She <b>has been working</b> here since 2020.',bn:'সে ২০২০ সাল থেকে এখানে কাজ করছে।',  type:'pos'},
+      {en:'He <b>has not been sleeping</b> well lately.',bn:'সে সম্প্রতি ভালো ঘুমাচ্ছে না।',      type:'neg'},
+      {en:'<b>Have</b> you <b>been waiting</b> long?',   bn:'তুমি কি অনেকক্ষণ ধরে অপেক্ষা করছো?',type:'q'},
+    ],
+    uses:[
+      {title:'এখনো চলছে', ex:"I've been learning English for 2 years.", bn:'আমি ২ বছর ধরে English শিখছি।'},
+      {title:'সদ্য শেষ → ফলাফল দেখা যাচ্ছে', ex:"She's been crying. Her eyes are red.", bn:'সে কাঁদছিল। তার চোখ লাল।'},
+      {title:'কতক্ষণ ধরে?', ex:'How long have you been waiting?', bn:'তুমি কতক্ষণ ধরে অপেক্ষা করছো?'},
+    ],
+    signals:['for','since','how long','all day','all morning','lately','recently'],
+    tip:'Present Perfect vs Present Perfect Continuous:<br><strong>"I have read 3 chapters"</strong> (সংখ্যা/পরিমাণ, সম্পূর্ণ) <br><strong>"I have been reading"</strong> (প্রক্রিয়া, এখনো চলছে বা সদ্য শেষ)',
+    warn:'Stative verbs (know, love, want, believe) এর সাথে এই tense সাধারণত ব্যবহার হয় না।',
+    practice:[
+      {q:'I ___ (study) English for 3 hours.', answer:'have been studying', hint:'have been + V+ing'},
+      {q:'She ___ (teach) at this school since 2018.', answer:'has been teaching', hint:'has been + V+ing'},
+      {q:'How long ___ you ___ (wait)?', answer:'have you been waiting', hint:'Have + Subject + been + V+ing?'},
+    ]
+  },
+
+  /* ── PAST SIMPLE ── */
+  pas:{
+    id:'pas', prev:'ppc', next:'pac',
+    title:'Past Simple Tense', titleBn:'সরল অতীত কাল',
+    level:'A2', xp:75, time:'18 min',
+    desc:'Past Simple ব্যবহার করা হয় অতীতে সম্পূর্ণ হয়ে যাওয়া কাজ বোঝাতে — যখন কাজটি ঘটেছিল সেই নির্দিষ্ট সময় উল্লেখ থাকে বা বোঝা যায়।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">V2</span> (Regular: V+ed / Irregular: আলাদা রূপ)'},
+      {label:'Negative (−)', text:'Subject + <span class="hl2">did not</span> + <span class="hl3">V1</span>'},
+      {label:'Question (?)', text:'<span class="hl2">Did</span> + Subject + <span class="hl3">V1</span> + ?'},
+    ],
+    examples:[
+      {en:'I <b>visited</b> Dhaka last year.',       bn:'আমি গত বছর ঢাকা গিয়েছিলাম।',        type:'pos'},
+      {en:'She <b>cooked</b> a delicious meal.',      bn:'সে একটি সুস্বাদু খাবার রান্না করেছিল।', type:'pos'},
+      {en:'I <b>did not go</b> to school yesterday.', bn:'আমি গতকাল স্কুলে যাইনি।',           type:'neg'},
+      {en:'He <b>did not finish</b> his work.',       bn:'সে তার কাজ শেষ করেনি।',             type:'neg'},
+      {en:'<b>Did</b> you <b>call</b> him?',          bn:'তুমি কি তাকে call করেছিলে?',         type:'q'},
+      {en:'<b>Did</b> she <b>pass</b> the exam?',     bn:'সে কি পরীক্ষায় পাস করেছিল?',        type:'q'},
+    ],
+    uses:[
+      {title:'নির্দিষ্ট অতীত সময়', ex:'I met her in 2019.', bn:'আমি তার সাথে ২০১৯ সালে দেখা করেছিলাম।'},
+      {title:'পর পর ঘটনা', ex:'He woke up, brushed his teeth, and left.', bn:'সে উঠল, দাঁত মাজল, এবং চলে গেল।'},
+      {title:'অতীতে দীর্ঘমেয়াদী', ex:'She lived in London for 5 years.', bn:'সে ৫ বছর লন্ডনে বাস করেছিল।'},
+    ],
+    signals:['yesterday','last night','last week','last year','ago','in 2020','then','when','at that time'],
+    tip:'Regular verbs: শেষে <strong>-ed</strong> যোগ করো। কিন্তু Irregular verbs এর V2 আলাদা — যেমন: go → went, eat → ate, see → saw, take → took। এগুলো মুখস্থ করতে হয়!',
+    warn:'Negative ও Question-এ <strong>did</strong> ব্যবহার করলে মূল verb অবশ্যই V1 (base form) হবে। ভুল: <strong>"Did you went?"</strong> → সঠিক: <strong>"Did you go?"</strong>',
+    practice:[
+      {q:'She ___ (visit) her grandmother last Sunday.', answer:'visited', hint:'Regular verb → V+ed'},
+      {q:'I ___ (not/see) him at the party.', answer:"didn't see", hint:'did not + V1 (base form)'},
+      {q:'___ they ___ (win) the match?', answer:'Did they win', hint:'Did + Subject + V1?'},
+    ]
+  },
+
+  /* ── PAST CONTINUOUS ── */
+  pac:{
+    id:'pac', prev:'pas', next:'pap',
+    title:'Past Continuous Tense', titleBn:'অতীত চলমান কাল',
+    level:'A2', xp:75, time:'15 min',
+    desc:'Past Continuous ব্যবহার করা হয় অতীতে কোনো নির্দিষ্ট মুহূর্তে চলমান কাজ বোঝাতে। সাধারণত Past Simple এর সাথে ব্যবহার হয়।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">was/were</span> + <span class="hl2">V+ing</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">was/were</span> + <span class="hl3">not</span> + V+ing'},
+      {label:'Question (?)', text:'<span class="hl">Was/Were</span> + Subject + V+ing + ?'},
+    ],
+    examples:[
+      {en:'I <b>was reading</b> when she called.',      bn:'সে call করার সময় আমি পড়ছিলাম।',    type:'pos'},
+      {en:'They <b>were playing</b> football at 5 PM.', bn:'বিকেল ৫টায় তারা ফুটবল খেলছিল।',  type:'pos'},
+      {en:'She <b>was not sleeping</b> at midnight.',   bn:'মধ্যরাতে সে ঘুমাচ্ছিল না।',        type:'neg'},
+      {en:'<b>Were</b> you <b>watching</b> TV?',        bn:'তুমি কি টিভি দেখছিলে?',             type:'q'},
+    ],
+    uses:[
+      {title:'অতীতে চলমান + হঠাৎ ঘটনা', ex:'I was cooking when the phone rang.', bn:'আমি রান্না করছিলাম যখন ফোন বাজল।'},
+      {title:'একই সময়ে দুটো কাজ', ex:'She was studying while he was cooking.', bn:'সে পড়ছিল যখন সে রান্না করছিল।'},
+      {title:'নির্দিষ্ট সময়ে চলমান', ex:'At 8 PM, I was watching a movie.', bn:'রাত ৮টায় আমি সিনেমা দেখছিলাম।'},
+    ],
+    signals:['when','while','as','at that moment','at 5 o\'clock','all day yesterday'],
+    tip:'<strong>When + Past Simple</strong> = হঠাৎ ঘটনা<br><strong>While/As + Past Continuous</strong> = চলমান পটভূমি<br>যেমন: "I was reading <strong>while</strong> she was cooking." / "The phone rang <strong>when</strong> I was sleeping."',
+    warn:'Was/Were ব্যবহারে সতর্ক: I/He/She/It → <strong>was</strong>, You/We/They → <strong>were</strong>।',
+    practice:[
+      {q:'She ___ (study) when I arrived.', answer:'was studying', hint:'She → was + V+ing'},
+      {q:'They ___ (not/sleep) at midnight.', answer:"weren't sleeping", hint:'were not + V+ing'},
+      {q:'What ___ you ___ (do) at 7 PM?', answer:'were you doing', hint:'Were + Subject + V+ing?'},
+    ]
+  },
+
+  /* ── PAST PERFECT ── */
+  pap:{
+    id:'pap', prev:'pac', next:'papc',
+    title:'Past Perfect Tense', titleBn:'অতীত পরিপূর্ণ কাল',
+    level:'B1', xp:100, time:'20 min',
+    desc:'Past Perfect ব্যবহার করা হয় অতীতের দুটি ঘটনার মধ্যে কোনটি আগে ঘটেছিল তা বোঝাতে। "আরও আগে ঘটেছিল" বলতে এটি ব্যবহার হয়।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">had</span> + <span class="hl2">V3 (Past Participle)</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">had</span> + <span class="hl3">not</span> + V3'},
+      {label:'Question (?)', text:'<span class="hl">Had</span> + Subject + V3 + ?'},
+    ],
+    examples:[
+      {en:'When I arrived, she <b>had already left</b>.',  bn:'আমি যখন পৌঁছলাম, সে আগেই চলে গিয়েছিল।', type:'pos'},
+      {en:'He <b>had never seen</b> snow before.',         bn:'সে আগে কখনো বরফ দেখেনি।',              type:'pos'},
+      {en:'I <b>had not eaten</b>, so I was hungry.',      bn:'আমি খাইনি, তাই ক্ষুধার্ত ছিলাম।',      type:'neg'},
+      {en:'<b>Had</b> you <b>finished</b> before he came?', bn:'সে আসার আগে কি তুমি শেষ করেছিলে?',   type:'q'},
+    ],
+    uses:[
+      {title:'দুই অতীত ঘটনা — আগের টা', ex:'She had studied French before she moved to Paris.', bn:'প্যারিসে যাওয়ার আগে সে French পড়েছিল।'},
+      {title:'কারণ ব্যাখ্যা', ex:'He was tired because he had worked all night.', bn:'সে ক্লান্ত ছিল কারণ সারারাত কাজ করেছিল।'},
+      {title:'Reported speech', ex:'She said she had seen the movie.', bn:'সে বলল যে সে সিনেমাটি দেখেছিল।'},
+    ],
+    signals:['before','after','when','already','just','never','by the time','as soon as'],
+    tip:'Past Perfect সবসময় Past Simple-এর সাথে আসে। যে ঘটনা <strong>আগে</strong> ঘটেছে → Past Perfect, যে ঘটনা <strong>পরে</strong> ঘটেছে → Past Simple।',
+    warn:'"Had" সব subject-এর জন্য একই — I/He/She/We/They সবার জন্য <strong>had</strong>। "She hads" বলা যাবে না।',
+    practice:[
+      {q:'When I got home, my family ___ (already/eat) dinner.', answer:'had already eaten', hint:'had + already + V3'},
+      {q:'She ___ (not/see) that movie before last night.', answer:"hadn't seen", hint:'had not + V3'},
+      {q:'___ he ___ (leave) before you arrived?', answer:'Had he left', hint:'Had + Subject + V3?'},
+    ]
+  },
+
+  /* ── PAST PERFECT CONTINUOUS ── */
+  papc:{
+    id:'papc', prev:'pap', next:'fw',
+    title:'Past Perfect Continuous', titleBn:'অতীত পরিপূর্ণ চলমান কাল',
+    level:'B2', xp:125, time:'20 min',
+    desc:'Past Perfect Continuous ব্যবহার করা হয় এমন কাজ বোঝাতে যা অতীতে একটি নির্দিষ্ট সময়ের আগে থেকে শুরু হয়ে সেই সময় পর্যন্ত চলছিল।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">had been</span> + <span class="hl2">V+ing</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">had not been</span> + <span class="hl2">V+ing</span>'},
+      {label:'Question (?)', text:'<span class="hl">Had</span> + Subject + <span class="hl2">been</span> + V+ing + ?'},
+    ],
+    examples:[
+      {en:'She <b>had been working</b> for 8 hours when she fainted.', bn:'সে অজ্ঞান হওয়ার আগে ৮ ঘণ্টা কাজ করছিল।', type:'pos'},
+      {en:'I <b>had been waiting</b> for an hour before the bus came.', bn:'বাস আসার আগে আমি এক ঘণ্টা অপেক্ষা করছিলাম।', type:'pos'},
+      {en:'He <b>had not been sleeping</b> well before the exam.', bn:'পরীক্ষার আগে সে ভালো ঘুমাচ্ছিল না।', type:'neg'},
+      {en:'<b>Had</b> you <b>been studying</b> when she called?', bn:'সে call করার আগে কি তুমি পড়ছিলে?', type:'q'},
+    ],
+    uses:[
+      {title:'কতক্ষণ ধরে চলছিল', ex:'I had been studying for 3 hours when he arrived.', bn:'সে আসার সময় আমি ৩ ঘণ্টা ধরে পড়ছিলাম।'},
+      {title:'অতীত ঘটনার পূর্ববর্তী চলমান কাজ', ex:'Her eyes were red because she had been crying.', bn:'তার চোখ লাল ছিল কারণ সে কাঁদছিল।'},
+    ],
+    signals:['for','since','before','when','by the time','all morning','all day'],
+    tip:'Present Perfect Continuous vs Past Perfect Continuous:<br>• <strong>PPC</strong>: "I <u>have been</u> studying" (এখনো চলছে বা সদ্য শেষ)<br>• <strong>Past PC</strong>: "I <u>had been</u> studying" (অতীতে চলছিল)',
+    warn:'এটি B2 level এর tense — এটি সব জায়গায় ব্যবহার করার দরকার নেই। অনেক সময় Past Continuous দিয়েও কাজ চলে।',
+    practice:[
+      {q:'She ___ (study) for 2 hours before she took a break.', answer:'had been studying', hint:'had been + V+ing'},
+      {q:'He was tired because he ___ (run) for an hour.', answer:'had been running', hint:'had been + V+ing'},
+      {q:'How long ___ you ___ (wait) when the doctor arrived?', answer:'had you been waiting', hint:'Had + Subject + been + V+ing?'},
+    ]
+  },
+
+  /* ── FUTURE SIMPLE (WILL) ── */
+  fw:{
+    id:'fw', prev:'papc', next:'fg',
+    title:'Future Simple — Will', titleBn:'ভবিষ্যৎ সাধারণ কাল (Will)',
+    level:'A2', xp:75, time:'15 min',
+    desc:'Will ব্যবহার করা হয় স্বতঃস্ফূর্ত সিদ্ধান্ত, ভবিষ্যতের পূর্বাভাস, প্রতিশ্রুতি এবং অনুরোধ বোঝাতে।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">will</span> + <span class="hl2">V1</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">will</span> + <span class="hl3">not (won\'t)</span> + V1'},
+      {label:'Question (?)', text:'<span class="hl">Will</span> + Subject + V1 + ?'},
+    ],
+    examples:[
+      {en:'I <b>will help</b> you with that.',       bn:'আমি এটাতে তোমাকে সাহায্য করব।',  type:'pos'},
+      {en:'She <b>will be</b> a great teacher.',     bn:'সে একজন দুর্দান্ত শিক্ষক হবে।',  type:'pos'},
+      {en:'I <b>won\'t tell</b> anyone your secret.',bn:'আমি কাউকে তোমার রহস্য বলব না।',  type:'neg'},
+      {en:'<b>Will</b> you <b>marry</b> me?',        bn:'তুমি কি আমাকে বিয়ে করবে?',       type:'q'},
+    ],
+    uses:[
+      {title:'স্বতঃস্ফূর্ত সিদ্ধান্ত', ex:'"The phone is ringing." "I\'ll get it!"', bn:'"ফোন বাজছে।" "আমি ধরছি!"'},
+      {title:'ভবিষ্যৎ পূর্বাভাস', ex:'It will rain tomorrow.', bn:'আগামীকাল বৃষ্টি হবে।'},
+      {title:'প্রতিশ্রুতি', ex:'I will never leave you.', bn:'আমি তোমাকে কখনো ছেড়ে যাব না।'},
+      {title:'অনুরোধ/প্রস্তাব', ex:'Will you open the window?', bn:'তুমি কি জানালা খুলবে?'},
+    ],
+    signals:['tomorrow','next week','soon','in the future','I think','I believe','probably','maybe'],
+    tip:'<strong>Will vs Going to</strong>:<br>• Will = স্বতঃস্ফূর্ত সিদ্ধান্ত, পূর্বাভাস (মতামত)<br>• Going to = পরিকল্পিত সিদ্ধান্ত, নিশ্চিত পূর্বাভাস (প্রমাণ আছে)',
+    warn:'Will এর পরে সবসময় V1 (base form): "She will <strong>goes</strong>" ভুল → "She will <strong>go</strong>" সঠিক।',
+    practice:[
+      {q:'I think it ___ (rain) tomorrow.', answer:'will rain', hint:'will + V1'},
+      {q:'I ___ (not/tell) him about the surprise.', answer:"won't tell", hint:"will not + V1"},
+      {q:'___ you ___ (help) me with this?', answer:'Will you help', hint:'Will + Subject + V1?'},
+    ]
+  },
+
+  /* ── FUTURE GOING TO ── */
+  fg:{
+    id:'fg', prev:'fw', next:'fc',
+    title:'Future — Going To', titleBn:'পরিকল্পিত ভবিষ্যৎ',
+    level:'A2', xp:75, time:'15 min',
+    desc:'"Going to" ব্যবহার করা হয় পরিকল্পিত সিদ্ধান্ত এবং এমন পূর্বাভাস বোঝাতে যার প্রমাণ এখনই দেখা যাচ্ছে।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">am/is/are</span> + <span class="hl2">going to</span> + V1'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">am/is/are</span> + <span class="hl3">not going to</span> + V1'},
+      {label:'Question (?)', text:'<span class="hl">Am/Is/Are</span> + Subject + <span class="hl2">going to</span> + V1 + ?'},
+    ],
+    examples:[
+      {en:'I <b>am going to visit</b> my parents.',       bn:'আমি আমার বাবা-মাকে দেখতে যাব।',      type:'pos'},
+      {en:'Look! It <b>is going to rain</b>.',            bn:'দেখো! বৃষ্টি হতে চলেছে।',             type:'pos'},
+      {en:'She <b>is not going to quit</b> her job.',     bn:'সে তার চাকরি ছাড়বে না।',             type:'neg'},
+      {en:'<b>Are</b> you <b>going to attend</b> the meeting?', bn:'তুমি কি মিটিংয়ে যোগ দেবে?', type:'q'},
+    ],
+    uses:[
+      {title:'পরিকল্পনা/ইচ্ছা', ex:"I'm going to study medicine.", bn:'আমি medicine পড়ব।'},
+      {title:'নিশ্চিত পূর্বাভাস (প্রমাণ সহ)', ex:"She's going to have a baby. (she is pregnant)", bn:'সে শিশু জন্ম দেবে।'},
+    ],
+    signals:['tonight','next week','soon','this weekend','already decided'],
+    tip:'<strong>Will vs Going to</strong> quick guide:<br>"The phone rings → I\'ll get it!" (হঠাৎ সিদ্ধান্ত → will)<br>"I am going to call him after dinner." (আগে থেকে ঠিক করা → going to)',
+    warn:'"I am going to go" সঠিক, কিন্তু অনেকেই "I am going to went" বলে ভুল করে — Going to এর পরে সবসময় V1।',
+    practice:[
+      {q:'She ___ (study) in Canada next year. She already applied.', answer:'is going to study', hint:'is going to + V1'},
+      {q:'Look at those clouds! It ___ (rain).', answer:'is going to rain', hint:'is going to + V1'},
+      {q:'___ they ___ (move) to a new house?', answer:'Are they going to move', hint:'Are + Subject + going to + V1?'},
+    ]
+  },
+
+  /* ── FUTURE CONTINUOUS ── */
+  fc:{
+    id:'fc', prev:'fg', next:'fp',
+    title:'Future Continuous Tense', titleBn:'ভবিষ্যৎ চলমান কাল',
+    level:'B1', xp:100, time:'18 min',
+    desc:'Future Continuous ব্যবহার করা হয় ভবিষ্যতের একটি নির্দিষ্ট সময়ে চলমান কাজ বোঝাতে।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">will be</span> + <span class="hl2">V+ing</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">will not be</span> + <span class="hl2">V+ing</span>'},
+      {label:'Question (?)', text:'<span class="hl">Will</span> + Subject + <span class="hl2">be</span> + V+ing + ?'},
+    ],
+    examples:[
+      {en:'At 10 AM, I <b>will be working</b>.',        bn:'সকাল ১০টায় আমি কাজ করছব।',           type:'pos'},
+      {en:'This time tomorrow, she <b>will be flying</b>.',bn:'আগামীকাল এই সময়, সে বিমানে থাকবে।', type:'pos'},
+      {en:'I <b>won\'t be attending</b> the meeting.',  bn:'আমি মিটিংয়ে থাকব না।',               type:'neg'},
+      {en:'<b>Will</b> you <b>be working</b> tonight?', bn:'তুমি কি আজ রাতে কাজ করছব?',          type:'q'},
+    ],
+    uses:[
+      {title:'ভবিষ্যতে নির্দিষ্ট সময়ে চলমান', ex:'At this time next year, I will be studying at university.', bn:'আগামী বছর এই সময়, আমি বিশ্ববিদ্যালয়ে পড়ব।'},
+      {title:'ভদ্র প্রশ্ন', ex:'Will you be using the car tomorrow?', bn:'তুমি কি কাল গাড়ি ব্যবহার করবে?'},
+    ],
+    signals:['at this time tomorrow','at 5 PM','this time next week','in the middle of'],
+    tip:'Future Continuous প্রায়ই ভদ্র/নরম অনুরোধে ব্যবহার হয়। "Will you be joining us?" শোনা যায় "Will you join us?" এর চেয়ে বেশি polite।',
+    warn:'"Will be" এর পরে সবসময় V+ing। "I will be study" ভুল → "I will be <strong>studying</strong>" সঠিক।',
+    practice:[
+      {q:'At 9 PM, she ___ (watch) her favourite show.', answer:'will be watching', hint:'will be + V+ing'},
+      {q:'I ___ (not/work) this Saturday.', answer:"won't be working", hint:'will not be + V+ing'},
+      {q:'___ you ___ (use) the car tomorrow?', answer:'Will you be using', hint:'Will + Subject + be + V+ing?'},
+    ]
+  },
+
+  /* ── FUTURE PERFECT ── */
+  fp:{
+    id:'fp', prev:'fc', next:'cheat',
+    title:'Future Perfect Tense', titleBn:'ভবিষ্যৎ পরিপূর্ণ কাল',
+    level:'B2', xp:125, time:'18 min',
+    desc:'Future Perfect ব্যবহার করা হয় ভবিষ্যতের একটি নির্দিষ্ট সময়ের আগে সম্পন্ন হওয়া কাজ বোঝাতে।',
+    formulas:[
+      {label:'Positive (+)',  text:'Subject + <span class="hl">will have</span> + <span class="hl2">V3</span>'},
+      {label:'Negative (−)', text:'Subject + <span class="hl">will not have</span> + <span class="hl2">V3</span>'},
+      {label:'Question (?)', text:'<span class="hl">Will</span> + Subject + <span class="hl2">have</span> + V3 + ?'},
+    ],
+    examples:[
+      {en:'By 5 PM, I <b>will have finished</b> my work.', bn:'বিকেল ৫টার মধ্যে আমি কাজ শেষ করে ফেলব।', type:'pos'},
+      {en:'By next year, she <b>will have graduated</b>.', bn:'আগামী বছরের মধ্যে সে graduate করে যাবে।', type:'pos'},
+      {en:'I <b>won\'t have completed</b> it by Monday.',  bn:'সোমবারের মধ্যে আমি এটা শেষ করতে পারব না।', type:'neg'},
+      {en:'<b>Will</b> you <b>have finished</b> by then?', bn:'ততক্ষণে কি তুমি শেষ করে ফেলবে?',          type:'q'},
+    ],
+    uses:[
+      {title:'ভবিষ্যতের deadline এর আগে সম্পন্ন', ex:'By the time she arrives, I will have cooked dinner.', bn:'সে আসার আগেই আমি রাতের খাবার রান্না করে ফেলব।'},
+      {title:'ভবিষ্যতে duration', ex:'By 2030, I will have lived here for 10 years.', bn:'২০৩০ সালের মধ্যে আমি এখানে ১০ বছর বাস করব।'},
+    ],
+    signals:['by','by the time','before','by then','by next year','by 2030'],
+    tip:'"By" শব্দটি দেখলেই Future Perfect ব্যবহারের কথা মনে করো। "By the time + Past Simple, will have + V3।"',
+    warn:'Future Perfect তুলনামূলক কম ব্যবহার হয়। Natural English-এ প্রায়ই "by the time" + clause দিয়ে বোঝানো হয়।',
+    practice:[
+      {q:'By 6 PM, she ___ (finish) her presentation.', answer:'will have finished', hint:'will have + V3'},
+      {q:'By next year, I ___ (learn) 1000 English words.', answer:'will have learned', hint:'will have + V3'},
+      {q:'___ you ___ (complete) the project by Friday?', answer:'Will you have completed', hint:'Will + Subject + have + V3?'},
+    ]
+  },
+
+  /* ── CHEAT SHEET ── */
+  cheat:{
+    id:'cheat', prev:'fp', next:'compare',
+    title:'All Tenses — Cheat Sheet',
+    level:'All', xp:0, time:'Reference',
+    desc:'সব ১২টি English Tense এর সংক্ষিপ্ত রেফারেন্স। একনজরে দেখো।',
+  },
+
+  /* ── COMPARE ── */
+  compare:{
+    id:'compare', prev:'cheat', next:null,
+    title:'Tense Comparison Guide',
+    level:'All', xp:0, time:'Reference',
+    desc:'একই রকম tense গুলো কোথায় আলাদা — সেটা বোঝার জন্য এই comparison।',
+  }
+};
+
+const ORDER=['ps','pc','pp','ppc','pas','pac','pap','papc','fw','fg','fc','fp','cheat','compare'];
+
+/* ══ RENDER ══ */
+function loadLesson(id){
+  document.querySelectorAll('.sb-item').forEach(el=>{
+    el.classList.toggle('active', el.dataset.id===id);
+  });
+  const l=LESSONS[id];
+  if(!l) return;
+  const idx=ORDER.indexOf(id);
+  const pct=Math.round((idx/(ORDER.length-1))*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+
+  if(id==='cheat') { renderCheat(); return; }
+  if(id==='compare') { renderCompare(); return; }
+
+  const main=document.getElementById('main-content');
+  const lvlCls={'A1':'lvl-a1','A2':'lvl-a2','B1':'b1','B2':'b2','C1':'c1'};
+
+  let html=`
+    <div class="lesson-header">
+      <div class="lesson-breadcrumb">Grammar → Tenses → ${l.title}</div>
+      <div class="lesson-badge">
+        <span class="sb-lvl lvl-${l.level.toLowerCase()}">${l.level}</span>
+        <span class="lmeta">⚡ ${l.xp} XP</span>
+        <span class="lmeta">⏱️ ${l.time}</span>
+      </div>
+      <div class="lesson-title"><span>${l.title}</span></div>
+      <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;margin-bottom:.5rem;">${l.titleBn}</div>
+      <div class="lesson-desc">${l.desc}</div>
+    </div>`;
+
+  /* FORMULA */
+  html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--indigo),var(--teal));">
+    <div class="card-title">📐 Formula / Structure</div>`;
+  l.formulas.forEach(f=>{
+    html+=`<div class="formula">
+      <div class="formula-label">${f.label}</div>
+      <div class="formula-text">${f.text}</div>
+    </div>`;
+  });
+  html+=`</div>`;
+
+  /* EXAMPLES */
+  html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald));">
+    <div class="card-title">💬 Examples</div>
+    <div class="examples">`;
+  l.examples.forEach(e=>{
+    html+=`<div class="ex">
+      <div class="ex-en">${e.en} <span class="ex-type ex-${e.type}">${e.type==='pos'?'(+)':e.type==='neg'?'(−)':'(?)'}</span></div>
+      <div class="ex-bn">${e.bn}</div>
+    </div>`;
+  });
+  html+=`</div></div>`;
+
+  /* USES */
+  if(l.uses){
+    html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--orange));">
+      <div class="card-title">📌 কখন ব্যবহার করবেন</div>
+      <table class="gtable">
+        <tr><th>ব্যবহার</th><th>Example</th><th>বাংলা</th></tr>`;
+    l.uses.forEach(u=>{
+      html+=`<tr><td>${u.title}</td><td>${u.ex}</td><td>${u.bn}</td></tr>`;
+    });
+    html+=`</table></div>`;
+  }
+
+  /* SIGNAL WORDS */
+  if(l.signals){
+    html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--indigo));">
+      <div class="card-title">🔑 Signal Words (যেসব শব্দ দেখলে বুঝবেন)</div>
+      <div class="signal-grid">`;
+    l.signals.forEach(s=>{ html+=`<span class="signal">${s}</span>`; });
+    html+=`</div></div>`;
+  }
+
+  /* EXTRA RULES (s/es, am/is/are, ing etc.) */
+  if(l.s_es_rules){
+    html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--indigo));">
+      <div class="card-title">📏 -s / -es যোগের নিয়ম</div>
+      <table class="gtable"><tr><th>Subject</th><th>নিয়ম</th><th>উদাহরণ</th></tr>`;
+    l.s_es_rules.forEach(r=>{
+      html+=`<tr><td>${r.sub}</td><td>${r.rule}</td><td>${r.ex}</td></tr>`;
+    });
+    html+=`</table></div>`;
+  }
+
+  if(l.am_is_are){
+    html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--indigo));">
+      <div class="card-title">📏 Am / Is / Are</div>
+      <table class="gtable"><tr><th>Subject</th><th>Auxiliary</th></tr>`;
+    l.am_is_are.forEach(r=>{
+      html+=`<tr><td>${r.sub}</td><td>${r.aux}</td></tr>`;
+    });
+    html+=`</table></div>`;
+  }
+
+  if(l.ing_rules){
+    html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--orange),var(--gold));">
+      <div class="card-title">📏 -ing যোগের নিয়ম</div>
+      <table class="gtable"><tr><th>নিয়ম</th><th>উদাহরণ</th></tr>`;
+    l.ing_rules.forEach(r=>{
+      html+=`<tr><td>${r.rule}</td><td>${r.ex}</td></tr>`;
+    });
+    html+=`</table></div>`;
+  }
+
+  /* TIP */
+  if(l.tip){
+    html+=`<div class="tip"><span class="tip-icon">💡</span>
+      <div class="tip-text">${l.tip}</div></div>`;
+  }
+
+  /* WARN */
+  if(l.warn){
+    html+=`<div class="warn"><span class="warn-icon">⚠️</span>
+      <div class="warn-text">${l.warn}</div></div>`;
+  }
+
+  /* PRACTICE */
+  if(l.practice){
+    html+=`<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal));">
+      <div class="card-title">✍️ Practice করো</div>`;
+    l.practice.forEach((p,i)=>{
+      html+=`<div class="practice-q">
+        <div class="pq-text">${i+1}. ${p.q}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;">Hint: ${p.hint}</div>
+        <input class="pq-input" id="pq-${i}" placeholder="তোমার উত্তর লিখো..." onkeydown="if(event.key==='Enter')checkAns(${i},'${p.answer.replace(/'/g,"\\'")}')">
+        <br><button class="btn-check" onclick="checkAns(${i},'${p.answer.replace(/'/g,"\\'")}')">✓ Check</button>
+        <div class="pq-feedback" id="pf-${i}"></div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+
+  /* NAV */
+  html+=`<div class="lesson-nav">`;
+  if(l.prev){
+    html+=`<button class="btn-prev" onclick="loadLesson('${l.prev}')">← ${LESSONS[l.prev]?.title||'Previous'}</button>`;
+  }
+  html+=`<button class="btn-quiz-big" onclick="location.href='quiz-beginner.html'">🎯 Quiz নাও → ${l.xp} XP</button>`;
+  if(l.next){
+    html+=`<button class="btn-next" onclick="loadLesson('${l.next}')">${LESSONS[l.next]?.title||'Next'} →</button>`;
+  }
+  html+=`</div>`;
+
+  main.innerHTML=html;
+  main.scrollTop=0;
+}
+
+/* ── CHEAT SHEET ── */
+function renderCheat(){
+  const data=[
+    {tense:'Present Simple',        form:'V1 / V+s/es',         use:'নিয়মিত অভ্যাস, সত্য তথ্য',                 color:'#34d399'},
+    {tense:'Present Continuous',    form:'am/is/are + V+ing',   use:'এই মুহূর্তে চলমান',                        color:'#34d399'},
+    {tense:'Present Perfect',       form:'have/has + V3',       use:'অতীত → বর্তমানে প্রভাব, অভিজ্ঞতা',        color:'#fb923c'},
+    {tense:'Present Perfect Cont.', form:'have/has been + V+ing',use:'অতীত থেকে চলমান, সদ্য শেষ',             color:'#fb923c'},
+    {tense:'Past Simple',           form:'V2 / V+ed',           use:'নির্দিষ্ট অতীত ঘটনা',                     color:'#f5c842'},
+    {tense:'Past Continuous',       form:'was/were + V+ing',    use:'অতীতে নির্দিষ্ট সময়ে চলমান',             color:'#f5c842'},
+    {tense:'Past Perfect',          form:'had + V3',            use:'দুই অতীতের মধ্যে আগের ঘটনা',              color:'#fb7185'},
+    {tense:'Past Perfect Cont.',    form:'had been + V+ing',    use:'অতীতে কতক্ষণ ধরে চলছিল',                 color:'#fb7185'},
+    {tense:'Future Simple (Will)',   form:'will + V1',           use:'স্বতঃস্ফূর্ত সিদ্ধান্ত, পূর্বাভাস',       color:'#818cf8'},
+    {tense:'Future (Going to)',      form:'am/is/are going to + V1',use:'পরিকল্পনা, নিশ্চিত পূর্বাভাস',        color:'#818cf8'},
+    {tense:'Future Continuous',      form:'will be + V+ing',    use:'ভবিষ্যতে নির্দিষ্ট সময়ে চলমান',          color:'#818cf8'},
+    {tense:'Future Perfect',         form:'will have + V3',     use:'ভবিষ্যতের deadline এর আগে সম্পন্ন',        color:'#818cf8'},
+  ];
+  const main=document.getElementById('main-content');
+  let html=`<div class="lesson-header">
+    <div class="lesson-breadcrumb">Grammar → Tenses → Cheat Sheet</div>
+    <div class="lesson-title"><span>All Tenses — Cheat Sheet</span></div>
+    <div class="lesson-desc">সব ১২টি Tense একনজরে। Print করে রাখুন!</div>
+  </div>
+  <div class="cheat">`;
+  data.forEach(d=>{
+    html+=`<div class="cheat-card" style="border-left-color:${d.color}">
+      <div class="cheat-tense" style="color:${d.color}">${d.tense}</div>
+      <div class="cheat-form">${d.form}</div>
+      <div class="cheat-use">${d.use}</div>
+    </div>`;
+  });
+  html+=`</div>`;
+  html+=`<div class="lesson-nav" style="margin-top:2rem;">
+    <button class="btn-prev" onclick="loadLesson('fp')">← Future Perfect</button>
+    <button class="btn-next" onclick="loadLesson('compare')">Comparison Guide →</button>
+  </div>`;
+  main.innerHTML=html; main.scrollTop=0;
+}
+
+/* ── COMPARE ── */
+function renderCompare(){
+  const main=document.getElementById('main-content');
+  let html=`<div class="lesson-header">
+    <div class="lesson-breadcrumb">Grammar → Tenses → Comparison</div>
+    <div class="lesson-title"><span>Tense Comparison Guide</span></div>
+    <div class="lesson-desc">যে tense গুলো প্রায়ই গুলিয়ে যায় সেগুলো একসাথে দেখো।</div>
+  </div>`;
+
+  const comparisons=[
+    {
+      title:'Present Simple vs Present Continuous',
+      rows:[
+        ['Present Simple','She works every day.','নিয়মিত অভ্যাস'],
+        ['Present Continuous','She is working right now.','এই মুহূর্তে চলমান'],
+      ]
+    },
+    {
+      title:'Present Perfect vs Past Simple',
+      rows:[
+        ['Present Perfect','I have seen that movie.','অভিজ্ঞতা / বর্তমানে প্রভাব'],
+        ['Past Simple','I saw that movie yesterday.','নির্দিষ্ট অতীত সময়'],
+      ]
+    },
+    {
+      title:'Will vs Going to',
+      rows:[
+        ['Will','I\'ll answer the phone!','হঠাৎ সিদ্ধান্ত'],
+        ['Going to','I\'m going to call him after dinner.','পরিকল্পিত সিদ্ধান্ত'],
+      ]
+    },
+    {
+      title:'Past Simple vs Past Perfect',
+      rows:[
+        ['Past Simple','She left when I arrived.','পরের ঘটনা'],
+        ['Past Perfect','She had left before I arrived.','আগের ঘটনা'],
+      ]
+    },
+  ];
+
+  comparisons.forEach(c=>{
+    html+=`<div class="card">
+      <div class="card-title">🔄 ${c.title}</div>
+      <div class="compare-wrap"><table class="compare-table">
+        <tr><th>Tense</th><th>Example</th><th>ব্যবহার</th></tr>`;
+    c.rows.forEach(r=>{
+      html+=`<tr>
+        <td class="tense-name">${r[0]}</td>
+        <td class="form">${r[1]}</td>
+        <td class="use">${r[2]}</td>
+      </tr>`;
+    });
+    html+=`</table></div></div>`;
+  });
+
+  html+=`<div class="lesson-nav" style="margin-top:2rem;">
+    <button class="btn-prev" onclick="loadLesson('cheat')">← Cheat Sheet</button>
+    <button class="btn-quiz-big" onclick="location.href='quiz-beginner.html'">🎯 Tenses Quiz নাও</button>
+  </div>`;
+  main.innerHTML=html; main.scrollTop=0;
+}
+
+/* ── PRACTICE CHECK ── */
+window.checkAns=(i,correct)=>{
+  const inp=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  const ans=inp.value.trim().toLowerCase();
+  const cor=correct.toLowerCase();
+  fb.style.display='block';
+  if(ans===cor){
+    fb.className='pq-feedback correct';
+    fb.textContent='✅ সঠিক! Well done!';
+    inp.style.borderColor='rgba(52,211,153,.4)';
+  }else{
+    fb.className='pq-feedback wrong';
+    fb.textContent=`❌ ভুল। সঠিক উত্তর: "${correct}"`;
+    inp.style.borderColor='rgba(251,113,133,.4)';
+  }
+};
+
+/* ── INIT ── */
+loadLesson('ps');
+
+/* ── SCROLL PROGRESS ── */
+document.querySelector('.main')?.addEventListener('scroll',function(){
+  const s=this.scrollTop, h=this.scrollHeight-this.clientHeight;
+  if(h>0){
+    const idx=ORDER.indexOf(document.querySelector('.sb-item.active')?.dataset.id||'ps');
+    const base=Math.round((idx/(ORDER.length-1))*100);
+    const extra=Math.round((s/h)*(100/(ORDER.length-1)));
+    document.getElementById('progress-fill').style.width=Math.min(100,base+extra)+'%';
+  }
+});
+</script>
+</body>
+</html>

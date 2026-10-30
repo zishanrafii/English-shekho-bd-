@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>Admin Panel</h1>
+        <p>ENGLISH SHEKHO · MANAGEMENT CONSOLE</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="dashboard.html" class="nav-link">← Back to Site</a>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar">🛠️</div>
+        <div class="user-name" id="nav-name">Admin</div>
+        <button class="btn-logout" data-action="logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB NAV -->
+  <div class="admin-tabs">
+    <div class="admin-tab active" data-tab="overview">📊 Overview</div>
+    <div class="admin-tab" data-tab="users">👥 Users</div>
+    <div class="admin-tab" data-tab="content">📚 Content</div>
+  </div>
+
+  <!-- ════════════════════════════════
+       TAB: OVERVIEW (Analytics)
+  ════════════════════════════════ -->
+  <div class="tab-panel active" id="tab-overview">
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value" id="stat-total-users">—</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-value" id="stat-active-today">—</div>
+        <div class="stat-label">Active Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📖</div>
+        <div class="stat-value" id="stat-reading-sessions">—</div>
+        <div class="stat-label">Reading Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎧</div>
+        <div class="stat-value" id="stat-listening-sessions">—</div>
+        <div class="stat-label">Listening Sessions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">✍️</div>
+        <div class="stat-value" id="stat-writings">—</div>
+        <div class="stat-label">Writing Submissions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-value" id="stat-total-xp">—</div>
+        <div class="stat-label">Total XP Earned</div>
+      </div>
+    </div>
+
+    <div class="section-title">🏆 Top Learners <span class="badge-muted">By XP</span></div>
+    <div class="panel-card">
+      <div class="table-wrap">
+        <table class="admin-table" id="top-learners-table">
+          <thead><tr><th>#</th><th>Name</th><th>Email</th><th>XP</th><th>Level</th><th>Streak</th></tr></thead>
+          <tbody id="top-learners-body"><tr><td colspan="6" class="empty-row">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-title">📈 Recent Signups</div>
+    <div class="panel-card">
+      <div class="table-wrap">
+        <table class="admin-table" id="recent-signups-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Joined</th></tr></thead>
+          <tbody id="recent-signups-body"><tr><td colspan="3" class="empty-row">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /tab-overview -->
+
+  <!-- ════════════════════════════════
+       TAB: USERS (Management)
+  ════════════════════════════════ -->
+  <div class="tab-panel" id="tab-users">
+
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="user-search-input" placeholder="Name বা email দিয়ে খুঁজুন...">
+      </div>
+      <div class="filter-tabs" id="user-filter-tabs">
+        <div class="ftab active" data-filter="all">All</div>
+        <div class="ftab" data-filter="admin">Admin</div>
+        <div class="ftab" data-filter="banned">Banned</div>
+      </div>
+    </div>
+
+    <div class="section-title">👥 All Users <span class="badge-muted" id="user-count-badge">0</span></div>
+    <div class="panel-card">
+      <div class="table-wrap">
+        <table class="admin-table" id="users-table">
+          <thead><tr><th>User</th><th>Email</th><th>XP</th><th>Streak</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
+          <tbody id="users-body"><tr><td colspan="7" class="empty-row">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /tab-users -->
+
+  <!-- ════════════════════════════════
+       TAB: CONTENT (Management)
+  ════════════════════════════════ -->
+  <div class="tab-panel" id="tab-content">
+
+    <div class="content-subtabs">
+      <div class="csub-tab active" data-csub="passages">📖 Reading Passages</div>
+      <div class="csub-tab" data-csub="lessons">📘 Grammar Lessons</div>
+    </div>
+
+    <!-- PASSAGES SUB-TAB -->
+    <div class="csub-panel active" id="csub-passages">
+      <div class="content-toolbar">
+        <div class="section-title" style="margin:0;">📖 Reading Passages (Firestore) <span class="badge-muted" id="passage-count-badge">0</span></div>
+        <button class="btn-primary" data-action="new-passage">+ Notun Passage</button>
+      </div>
+      <div class="info-banner">
+        ℹ️ এখানে যা add করবেন তা <code>passages</code> Firestore collection-এ যাবে। বর্তমান Reading Center static <code>js/reading-data.js</code> file থেকে চলে — এখানের content আলাদা, future migration-এর জন্য প্রস্তুত করা।
+      </div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table class="admin-table" id="passages-table">
+            <thead><tr><th>Title</th><th>Category</th><th>Level</th><th>XP</th><th>Actions</th></tr></thead>
+            <tbody id="passages-body"><tr><td colspan="5" class="empty-row">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSONS SUB-TAB -->
+    <div class="csub-panel" id="csub-lessons">
+      <div class="content-toolbar">
+        <div class="section-title" style="margin:0;">📘 Grammar Lessons (Firestore) <span class="badge-muted" id="lesson-count-badge">0</span></div>
+        <button class="btn-primary" data-action="new-lesson">+ Notun Lesson</button>
+      </div>
+      <div class="info-banner">
+        ℹ️ এখানে যা add করবেন তা <code>grammar_lessons</code> Firestore collection-এ যাবে। বর্তমান Grammar Hub static HTML page থেকে চলে — এখানের content আলাদা, future migration-এর জন্য প্রস্তুত করা।
+      </div>
+      <div class="panel-card">
+        <div class="table-wrap">
+          <table class="admin-table" id="lessons-table">
+            <thead><tr><th>Title</th><th>Category</th><th>Level</th><th>Actions</th></tr></thead>
+            <tbody id="lessons-body"><tr><td colspan="4" class="empty-row">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-content -->
+
+</div><!-- end .wrap -->
+
+<!-- ════════════════════════════════
+     MODAL: Passage Editor
+════════════════════════════════ -->
+<div class="modal-overlay" id="passage-modal-overlay">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="passage-modal-title">Notun Passage</h3>
+      <div class="modal-close" data-action="close-passage-modal">✕</div>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pm-id">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-input" id="pm-title" placeholder="e.g. A Rainy Morning">
+
+      <div class="form-row">
+        <div>
+          <label class="form-label">Category</label>
+          <select class="form-input" id="pm-category">
+            <option value="Story">Story</option>
+            <option value="Article">Article</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Level</label>
+          <select class="form-input" id="pm-level">
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="C1">C1</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">XP Reward</label>
+          <input type="number" class="form-input" id="pm-xp" value="40" min="10" step="10">
+        </div>
+      </div>
+
+      <label class="form-label">Icon (emoji)</label>
+      <input type="text" class="form-input" id="pm-icon" placeholder="📖" maxlength="4">
+
+      <label class="form-label">Passage Text (এক প্যারাগ্রাফ এক লাইনে)</label>
+      <textarea class="form-textarea" id="pm-text" rows="6" placeholder="First paragraph here.&#10;Second paragraph here."></textarea>
+
+      <label class="form-label">Quiz Question</label>
+      <input type="text" class="form-input" id="pm-quiz-q" placeholder="What was the weather like?">
+
+      <label class="form-label">Options (কমা দিয়ে আলাদা করুন)</label>
+      <input type="text" class="form-input" id="pm-quiz-opts" placeholder="Sunny, Rainy, Snowy, Windy">
+
+      <div class="form-row">
+        <div>
+          <label class="form-label">Correct Option Index (0,1,2,3)</label>
+          <input type="number" class="form-input" id="pm-quiz-ans" min="0" max="3" value="0">
+        </div>
+      </div>
+
+      <label class="form-label">Explanation (বাংলায়)</label>
+      <input type="text" class="form-input" id="pm-quiz-exp" placeholder="প্যাসেজে বলা হয়েছে...">
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" data-action="close-passage-modal">বাতিল</button>
+      <button class="btn-primary" data-action="save-passage">💾 Save Passage</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     MODAL: Lesson Editor
+════════════════════════════════ -->
+<div class="modal-overlay" id="lesson-modal-overlay">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="lesson-modal-title">Notun Grammar Lesson</h3>
+      <div class="modal-close" data-action="close-lesson-modal">✕</div>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="lm-id">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-input" id="lm-title" placeholder="e.g. Degrees of Comparison">
+
+      <div class="form-row">
+        <div>
+          <label class="form-label">Category</label>
+          <input type="text" class="form-input" id="lm-category" placeholder="e.g. Tenses">
+        </div>
+        <div>
+          <label class="form-label">Level</label>
+          <select class="form-input" id="lm-level">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+      </div>
+
+      <label class="form-label">Icon (emoji)</label>
+      <input type="text" class="form-input" id="lm-icon" placeholder="📊" maxlength="4">
+
+      <label class="form-label">Explanation (বাংলায়)</label>
+      <textarea class="form-textarea" id="lm-explanation" rows="4" placeholder="এই গ্রামার টপিকের ব্যাখ্যা বাংলায় লিখুন..."></textarea>
+
+      <label class="form-label">Formula / Structure</label>
+      <input type="text" class="form-input" id="lm-formula" placeholder="e.g. Subject + Verb + er/ier + than">
+
+      <label class="form-label">Examples (এক লাইনে এক উদাহরণ)</label>
+      <textarea class="form-textarea" id="lm-examples" rows="3" placeholder="He is taller than his brother.&#10;She is the smartest student."></textarea>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" data-action="close-lesson-modal">বাতিল</button>
+      <button class="btn-primary" data-action="save-lesson">💾 Save Lesson</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     MODAL: Confirm Delete / Ban
+════════════════════════════════ -->
+<div class="modal-overlay" id="confirm-modal-overlay">
+  <div class="modal-box modal-small">
+    <div class="modal-head">
+      <h3 id="confirm-modal-title">নিশ্চিত করুন</h3>
+      <div class="modal-close" data-action="close-confirm-modal">✕</div>
+    </div>
+    <div class="modal-body">
+      <p id="confirm-modal-text" style="color:var(--sub);font-size:13.5px;line-height:1.6;"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" data-action="close-confirm-modal">বাতিল</button>
+      <button class="btn-danger" id="confirm-modal-action-btn">নিশ্চিত করুন</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

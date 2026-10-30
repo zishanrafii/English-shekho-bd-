@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paragraph Writing — Writing Lab — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/writing-lab.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text"><h1>English Shekho</h1><p>ENGLISH LEARNING PLATFORM · A1 TO C2</p></div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" data-action="go-profile">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div class="breadcrumb">
+    <a href="writing-lab.html">✍️ Writing Lab</a>
+    <span class="bc-sep">›</span><span>Paragraph Writing</span>
+  </div>
+  <div class="task-tabs" id="task-tabs"></div>
+  <div id="prompt"></div>
+  <div class="editor-layout">
+    <div class="hints-panel">
+      <div class="hints-head">💡 Hints & Tips</div>
+      <div class="hints-body" id="hints"></div>
+    </div>
+    <div class="editor-panel">
+      <div class="editor-toolbar">
+          <button class="etool-btn" data-action="bold"><b>B</b></button>
+          <button class="etool-btn" data-action="italic"><i>I</i></button>
+          <button class="etool-btn" data-action="quote">❝❞</button>
+          <div class="etool-sep"></div>
+          <button class="etool-btn" data-action="clear">🗑 Clear</button>
+        <div class="word-counter">Words: <span id="word-count">0</span></div>
+      </div>
+      <textarea class="editor-textarea" id="main-editor" placeholder="এখানে লিখুন..." style="min-height:260px;"></textarea>
+      <div class="editor-footer">
+        <div class="ef-left">লক্ষ্য: ৫০–১০০ শব্দ
+          <label class="ef-public"><input type="checkbox" id="public-checkbox"> 🌍 Community-তে public করো</label>
+        </div>
+        <div class="ef-actions">
+          <button class="btn-save" data-action="save">💾 Save Draft</button>
+          <button class="btn-check" data-action="check">🤖 Writing Check</button>
+          <button class="btn-submit" data-action="submit">Submit ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="feedback-panel" id="feedback-panel"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { setupCommonPage, initEditor, setupEditorToolbar } from "./js/writing-common.js";
+
+/* ══════════════════════════════════════
+   DATA — Paragraph Writing Tasks
+══════════════════════════════════════ */
+const TASKS = [
+  {id:"p1", label:"My Daily Routine", level:"A2", words:"50–80", xp:75,
+   prompt:"আপনার প্রতিদিনের routine নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💡", text:"<b>Topic sentence</b> দিয়ে শুরু করুন। যেমন: 'I follow a regular daily routine.'"},
+     {icon:"⏰", text:"সকাল থেকে রাত পর্যন্ত ধাপে ধাপে বলুন।"},
+     {icon:"🔗", text:"<b>Connectors</b> ব্যবহার করুন: First, Then, After that, Finally"},
+   ],
+   usefulWords:["wake up","breakfast","commute","routine","evening","exercise","dinner","sleep"]},
+  {id:"p2", label:"My Favourite Season", level:"A2", words:"50–80", xp:75,
+   prompt:"আপনার প্রিয় ঋতু সম্পর্কে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💡", text:"কোন ঋতু এবং কেন প্রিয় তা বলুন।"},
+     {icon:"🌿", text:"ঐ ঋতুতে কী করতে ভালো লাগে বর্ণনা করুন।"},
+     {icon:"✍️", text:"<b>Adjectives</b> দিয়ে বর্ণনা সুন্দর করুন।"},
+   ],
+   usefulWords:["pleasant","refreshing","colorful","chilly","humid","blossom","harvest","enjoyable"]},
+  {id:"p3", label:"Importance of Learning English", level:"B1", words:"70–100", xp:100,
+   prompt:"English শেখার গুরুত্ব নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💡", text:"কেন English শেখা দরকার তার ২–৩টি কারণ দিন।"},
+     {icon:"🌐", text:"Career, communication, global world-এর কথা উল্লেখ করুন।"},
+     {icon:"🎯", text:"শেষে একটি <b>concluding sentence</b> দিন।"},
+   ],
+   usefulWords:["global","opportunity","communicate","career","essential","international","fluent","advantage"]},
+  {id:"p4", label:"My Best Friend", level:"A2", words:"60–90", xp:80,
+   prompt:"আপনার সবচেয়ে ভালো বন্ধু সম্পর্কে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"👤", text:"নাম, বয়স ও পরিচয় দিয়ে শুরু করুন।"},
+     {icon:"💬", text:"তার চরিত্র ও স্বভাব নিয়ে ২-৩টি বাক্য লিখুন।"},
+     {icon:"🤝", text:"আপনারা একসাথে কী করেন তা বলুন।"},
+   ],
+   usefulWords:["loyal","supportive","cheerful","trustworthy","childhood","share","companion","bond"]},
+  {id:"p5", label:"A Place I Want to Visit", level:"B1", words:"70–100", xp:100,
+   prompt:"আপনি যে জায়গায় ঘুরতে যেতে চান তা নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"📍", text:"জায়গাটির নাম ও এটি কোথায় তা বলুন।"},
+     {icon:"🏞️", text:"কেন সেখানে যেতে চান তার কারণ লিখুন।"},
+     {icon:"🎯", text:"সেখানে গিয়ে কী করবেন তা উল্লেখ করুন।"},
+   ],
+   usefulWords:["destination","scenery","explore","culture","adventure","breathtaking","journey","experience"]},
+  {id:"p6", label:"Advantages of Reading Books", level:"B1", words:"70–100", xp:100,
+   prompt:"বই পড়ার উপকারিতা নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"📚", text:"বই পড়লে জ্ঞান ও vocabulary কীভাবে বাড়ে তা বলুন।"},
+     {icon:"🧠", text:"Imagination ও concentration-এর উপর প্রভাব উল্লেখ করুন।"},
+     {icon:"🎯", text:"শেষে একটি personal opinion দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["knowledge","vocabulary","imagination","concentration","perspective","habit","valuable","insight"]},
+  {id:"p7", label:"My Hometown", level:"A2", words:"60–90", xp:80,
+   prompt:"আপনার hometown সম্পর্কে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"🏘️", text:"hometown-টি কোথায় এবং কেমন তা বর্ণনা করুন।"},
+     {icon:"🍲", text:"সেখানকার বিশেষ কিছু (খাবার, উৎসব, মানুষ) উল্লেখ করুন।"},
+     {icon:"❤️", text:"কেন hometown-টি আপনার কাছে special তা বলুন।"},
+   ],
+   usefulWords:["located","peaceful","tradition","community","famous for","scenic","heritage","memories"]},
+  {id:"p8", label:"My Favourite Food", level:"A2", words:"50–80", xp:75,
+   prompt:"আপনার প্রিয় খাবার সম্পর্কে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"🍛", text:"খাবারটির নাম এবং এটি কেমন দেখতে/স্বাদের তা বলুন।"},
+     {icon:"👩‍🍳", text:"কখন এবং কার সাথে এটি খেতে ভালো লাগে তা উল্লেখ করুন।"},
+     {icon:"✍️", text:"স্বাদ বর্ণনা করতে <b>adjectives</b> ব্যবহার করুন (যেমন: spicy, delicious, crispy)।"},
+   ],
+   usefulWords:["delicious","spicy","favourite","ingredients","homemade","craving","flavor","mouth-watering"]},
+  {id:"p9", label:"How I Spend My Weekends", level:"A2", words:"60–90", xp:80,
+   prompt:"আপনি সাপ্তাহিক ছুটির দিনগুলো কীভাবে কাটান তা নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💡", text:"<b>Topic sentence:</b> 'I look forward to weekends because...'"},
+     {icon:"⏰", text:"সকাল, দুপুর ও সন্ধ্যার activities আলাদা করে বলুন।"},
+     {icon:"🔗", text:"<b>Connectors</b> ব্যবহার করুন: Usually, Sometimes, In the evening"},
+   ],
+   usefulWords:["relax","household chores","hang out","leisure","refresh","family time","outing","recharge"]},
+  {id:"p10", label:"The Importance of Exercise", level:"B1", words:"70–100", xp:100,
+   prompt:"শারীরিক ব্যায়ামের গুরুত্ব নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💡", text:"ব্যায়াম শরীর ও মনের জন্য কীভাবে উপকারী তা বলুন।"},
+     {icon:"🏃", text:"কিছু সাধারণ exercise-এর উদাহরণ দিন (walking, jogging, yoga)।"},
+     {icon:"🎯", text:"নিয়মিত exercise করার জন্য একটি পরামর্শ দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["fitness","stamina","well-being","routine","reduce stress","muscles","discipline","healthy lifestyle"]},
+  {id:"p11", label:"My Dream Job", level:"A2", words:"50–80", xp:75,
+   prompt:"ভবিষ্যতে আপনি কী হতে চান (dream job) তা নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💡", text:"<b>Topic sentence</b> দিয়ে শুরু করুন। যেমন: 'I have always dreamed of becoming a...'"},
+     {icon:"🎯", text:"কেন এই পেশা পছন্দ করেন তার ১-২টি কারণ দিন।"},
+     {icon:"📚", text:"এই লক্ষ্য পূরণের জন্য আপনি কী করছেন/করবেন তা বলুন।"},
+   ],
+   usefulWords:["dream job","passion","ambition","achieve","dedicated","goal","inspire","future"]},
+  {id:"p12", label:"The Benefits of Learning a New Language", level:"B1", words:"70–100", xp:100,
+   prompt:"নতুন একটি ভাষা শেখার উপকারিতা নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💡", text:"নতুন ভাষা শেখা মস্তিষ্কের জন্য কীভাবে উপকারী তা বলুন।"},
+     {icon:"🌍", text:"Career ও travel-এর ক্ষেত্রে এর সুবিধা উল্লেখ করুন।"},
+     {icon:"🎯", text:"শেষে personal motivation দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["fluency","communication","brain","opportunity","culture","confidence","multilingual","perspective"]},
+  {id:"p13", label:"A Memorable Trip", level:"B1", words:"70–100", xp:100,
+   prompt:"আপনার জীবনের একটি স্মরণীয় ভ্রমণ নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"📍", text:"কোথায় এবং কখন গিয়েছিলেন তা বলুন।"},
+     {icon:"🎒", text:"সেখানে কী কী দেখেছেন এবং করেছেন তা বর্ণনা করুন।"},
+     {icon:"❤️", text:"কেন এই ভ্রমণ স্মরণীয় তা বলুন।"},
+   ],
+   usefulWords:["memorable","scenery","excited","explore","unforgettable","journey","companions","experience"]},
+  {id:"p14", label:"My Favourite Movie or TV Show", level:"A2", words:"50–80", xp:75,
+   prompt:"আপনার প্রিয় movie বা TV show নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"🎬", text:"নাম, genre এবং এটি কী নিয়ে তা বলুন।"},
+     {icon:"⭐", text:"কোন চরিত্র বা scene আপনার সবচেয়ে পছন্দ তা বলুন।"},
+     {icon:"✍️", text:"কেন এটি আপনার প্রিয় তা ব্যাখ্যা করুন।"},
+   ],
+   usefulWords:["genre","character","storyline","entertaining","favourite","plot","exciting","recommend"]},
+  {id:"p15", label:"The Importance of Time Management", level:"B1", words:"70–100", xp:100,
+   prompt:"সময়ের সঠিক ব্যবহারের গুরুত্ব নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"⏰", text:"Time management কী এবং কেন গুরুত্বপূর্ণ তা বলুন।"},
+     {icon:"📋", text:"একটি ভালো routine বা to-do list-এর সুবিধা উল্লেখ করুন।"},
+     {icon:"🎯", text:"Time management না করলে কী সমস্যা হতে পারে তা বলুন।"},
+   ],
+   usefulWords:["productivity","schedule","prioritize","deadline","procrastination","efficient","balance","discipline"]},
+  {id:"p16", label:"How Technology Has Changed Our Lives", level:"B1", words:"70–100", xp:100,
+   prompt:"প্রযুক্তি কীভাবে আমাদের জীবনযাত্রা পরিবর্তন করেছে তা নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💻", text:"Communication, education ও কাজের ক্ষেত্রে পরিবর্তনের কথা বলুন।"},
+     {icon:"📱", text:"একটি specific উদাহরণ দিন (যেমন: smartphone, internet)।"},
+     {icon:"⚖️", text:"এর positive ও negative দিক সংক্ষেপে উল্লেখ করুন।"},
+   ],
+   usefulWords:["innovation","convenience","connected","digital","transform","accessible","dependent","advancement"]},
+  {id:"p17", label:"My Favourite Subject in School", level:"A2", words:"50–80", xp:75,
+   prompt:"School-এ আপনার প্রিয় subject নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"📚", text:"Subject-টির নাম এবং কেন পছন্দ তা বলুন।"},
+     {icon:"👩‍🏫", text:"Teacher বা class-এর কোন বিষয় ভালো লাগে তা বলুন।"},
+     {icon:"🎯", text:"এই subject ভবিষ্যতে কীভাবে কাজে আসবে তা বলুন।"},
+   ],
+   usefulWords:["interesting","curious","understand","practical","enjoyable","skills","knowledge","favourite"]},
+  {id:"p18", label:"The Role of Family in Our Lives", level:"B1", words:"70–100", xp:100,
+   prompt:"আমাদের জীবনে পরিবারের ভূমিকা নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"👨‍👩‍👧‍👦", text:"পরিবার কীভাবে support ও guidance দেয় তা বলুন।"},
+     {icon:"❤️", text:"একটি personal উদাহরণ বা অভিজ্ঞতা শেয়ার করুন।"},
+     {icon:"🎯", text:"পরিবারের প্রতি কৃতজ্ঞতা প্রকাশ করে শেষ করুন।"},
+   ],
+   usefulWords:["support","values","bond","guidance","unconditional","gratitude","upbringing","cherish"]},
+  {id:"p19", label:"A Festival I Enjoy", level:"A2", words:"60–90", xp:80,
+   prompt:"আপনার পছন্দের একটি উৎসব নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"🎉", text:"উৎসবের নাম এবং এটি কখন পালিত হয় তা বলুন।"},
+     {icon:"🍽️", text:"এই সময়ে কী কী করা হয় (খাবার, পোশাক, activities) তা বর্ণনা করুন।"},
+     {icon:"❤️", text:"কেন এই উৎসব আপনার প্রিয় তা বলুন।"},
+   ],
+   usefulWords:["celebration","tradition","festive","gathering","joyful","decoration","custom","occasion"]},
+  {id:"p20", label:"The Importance of Saving Money", level:"B1", words:"70–100", xp:100,
+   prompt:"অর্থ সঞ্চয়ের গুরুত্ব নিয়ে একটি paragraph লিখুন।",
+   hints:[
+     {icon:"💰", text:"কেন টাকা সঞ্চয় করা গুরুত্বপূর্ণ তা বলুন।"},
+     {icon:"📊", text:"Saving-এর কিছু সহজ উপায় উল্লেখ করুন।"},
+     {icon:"🎯", text:"ভবিষ্যতের জন্য সঞ্চয়ের সুবিধা নিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["budget","savings","financial security","expenses","habit","invest","future","responsible"]},
+];
+
+/* ══════════════════════════════════════
+   PAGE INIT
+══════════════════════════════════════ */
+initEditor(TASKS);
+setupEditorToolbar("paragraph");
+setupCommonPage();
+
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  if(el.dataset.action === "go-profile") window.location.href = "profile.html";
+});
+</script>
+</body>
+</html>

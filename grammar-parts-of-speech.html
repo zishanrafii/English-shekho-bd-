@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parts of Speech — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --violet:#a78bfa;--violet2:#c084fc;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(167,139,250,.07),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(192,132,252,.05),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(167,139,250,.2),rgba(192,132,252,.1));border:1px solid rgba(167,139,250,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;background:linear-gradient(135deg,#a78bfa,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;color:var(--sub);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);transition:.2s;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(167,139,250,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));border:2px solid rgba(245,200,66,.2);display:flex;align-items:center;justify-content:center;font-size:.9rem;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.nav-av img{width:100%;height:100%;object-fit:cover;}
+
+.layout{display:flex;height:calc(100vh - 57px);}
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid var(--border);overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(167,139,250,.2);border-radius:3px;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;margin-bottom:2px;}
+.sb-item:hover{background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.1);}
+.sb-item.active{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.25);color:var(--violet);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(167,139,250,.15);border-radius:3px;}
+
+.lesson-header{margin-bottom:2rem;}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#a78bfa,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:.8rem;}
+.lmeta{font-size:12px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,linear-gradient(90deg,var(--violet),var(--violet2)));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* POS HERO */
+.pos-heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:8px;margin-bottom:1.4rem;}
+.pos-hero{border-radius:14px;padding:.9rem .5rem;text-align:center;border:1px solid;transition:.2s;cursor:pointer;}
+.pos-hero:hover{transform:translateY(-2px);}
+.pos-icon{font-size:1.5rem;margin-bottom:.3rem;}
+.pos-name{font-size:11px;font-weight:700;}
+.pos-bn{font-size:9px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;margin-top:1px;}
+
+.formula{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.18);border-radius:14px;padding:1rem 1.4rem;margin-bottom:1rem;}
+.formula-label{font-size:10px;color:var(--violet);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.formula-text{font-size:1rem;color:var(--text);line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.hl{color:var(--gold);font-weight:700;}
+.hl2{color:var(--teal);font-weight:700;}
+.hl3{color:var(--rose);font-weight:700;}
+
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(167,139,250,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-tag{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;border-radius:20px;margin-left:8px;font-weight:700;background:rgba(167,139,250,.1);color:var(--violet);}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{background:rgba(167,139,250,.08);color:var(--violet);font-weight:700;padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(167,139,250,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--text);font-weight:600;}
+.gtable .form{color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:12.5px;}
+.gtable .bn{color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+
+/* WORD CHIPS */
+.word-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;}
+.word-chip{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.18);color:var(--violet);
+  padding:.3rem .85rem;border-radius:20px;font-size:12.5px;font-family:'JetBrains Mono',monospace;font-weight:600;}
+
+.tip{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--violet);}
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+.practice-q{background:rgba(167,139,250,.04);border:1px solid rgba(167,139,250,.15);border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.6rem;}
+.pq-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.pq-opt{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:'JetBrains Mono',monospace;}
+.pq-opt:hover{border-color:rgba(167,139,250,.3);color:var(--violet);}
+.pq-opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);}
+.pq-opt.wrong{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.pq-feedback{font-size:13px;padding:.5rem .8rem;border-radius:8px;display:none;font-family:'Noto Sans Bengali',sans-serif;margin-top:.4rem;}
+.pq-feedback.show{display:block;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:var(--emerald);}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;align-items:center;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.btn-prev:hover,.btn-next:hover{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(167,139,250,.12),rgba(192,132,252,.08));border-color:rgba(167,139,250,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#a78bfa,#c084fc);color:#000;border:none;border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--violet),var(--violet2));transition:width .3s;}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--border);}
+  .main{padding:1.2rem 1rem 3rem;}
+  .pos-heroes{grid-template-columns:repeat(4,1fr);}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">🧩 Parts of Speech</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" id="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section-label">Parts of Speech</div>
+    <div class="sb-item active" data-id="overview" onclick="show('overview',0)">
+      <span class="sb-dot" style="background:#a78bfa"></span><span class="sb-text">Overview — সব ৮টি</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="noun" onclick="show('noun',1)">
+      <span class="sb-dot" style="background:#34d399"></span><span class="sb-text">Noun</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="pronoun" onclick="show('pronoun',2)">
+      <span class="sb-dot" style="background:#2dd4bf"></span><span class="sb-text">Pronoun</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="verb" onclick="show('verb',3)">
+      <span class="sb-dot" style="background:#fb7185"></span><span class="sb-text">Verb</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="adjective" onclick="show('adjective',4)">
+      <span class="sb-dot" style="background:#f5c842"></span><span class="sb-text">Adjective</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="adverb" onclick="show('adverb',5)">
+      <span class="sb-dot" style="background:#fb923c"></span><span class="sb-text">Adverb</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="preposition" onclick="show('preposition',6)">
+      <span class="sb-dot" style="background:#818cf8"></span><span class="sb-text">Preposition</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="conjunction" onclick="show('conjunction',7)">
+      <span class="sb-dot" style="background:#34d399"></span><span class="sb-text">Conjunction</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="interjection" onclick="show('interjection',8)">
+      <span class="sb-dot" style="background:#fb7185"></span><span class="sb-text">Interjection</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="practice" onclick="show('practice',9)">
+      <span class="sb-dot" style="background:#c084fc"></span><span class="sb-text">Practice Quiz</span>
+    </div>
+  </div>
+
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const POS_ICONS={noun:'📦',pronoun:'👤',verb:'⚡',adjective:'🎨',adverb:'🏃',preposition:'📍',conjunction:'🔗',interjection:'❗'};
+const POS_COLORS={noun:'#34d399',pronoun:'#2dd4bf',verb:'#fb7185',adjective:'#f5c842',adverb:'#fb923c',preposition:'#818cf8',conjunction:'#34d399',interjection:'#fb7185'};
+
+const PANELS={
+
+'overview':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Overview</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Parts of Speech — ৮টি গ্রুপ</span></div>
+  <div class="lesson-desc">English এর প্রতিটি শব্দ ৮টি category এর একটিতে পড়ে। এই ৮টি বুঝলে বাক্য গঠন এবং grammar সহজ হয়ে যাবে।</div>
+</div>
+
+<div class="pos-heroes">
+  ${[['noun','📦','Noun','বস্তু/নাম','#34d399'],['pronoun','👤','Pronoun','সর্বনাম','#2dd4bf'],['verb','⚡','Verb','ক্রিয়া','#fb7185'],['adjective','🎨','Adjective','বিশেষণ','#f5c842'],['adverb','🏃','Adverb','ক্রিয়া বিশেষণ','#fb923c'],['preposition','📍','Preposition','অব্যয়','#818cf8'],['conjunction','🔗','Conjunction','সংযোজক','#34d399'],['interjection','❗','Interjection','আবেগ শব্দ','#fb7185']].map(([id,icon,en,bn,c])=>`
+  <div class="pos-hero" style="background:${c}12;border-color:${c}28" onclick="show('${id}',${['noun','pronoun','verb','adjective','adverb','preposition','conjunction','interjection'].indexOf(id)+1})">
+    <div class="pos-icon">${icon}</div>
+    <div class="pos-name" style="color:${c}">${en}</div>
+    <div class="pos-bn">${bn}</div>
+  </div>`).join('')}
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--violet),var(--violet2))">
+  <div class="card-title">📋 সংক্ষিপ্ত পরিচিতি</div>
+  <table class="gtable">
+    <tr><th>Part of Speech</th><th>কাজ</th><th>উদাহরণ</th></tr>
+    <tr><td>📦 Noun</td><td>ব্যক্তি/বস্তু/স্থান/ধারণার নাম</td><td>book, Dhaka, happiness, teacher</td></tr>
+    <tr><td>👤 Pronoun</td><td>Noun এর পরিবর্তে</td><td>he, she, it, they, this</td></tr>
+    <tr><td>⚡ Verb</td><td>কাজ বা অবস্থা বোঝায়</td><td>run, is, think, become</td></tr>
+    <tr><td>🎨 Adjective</td><td>Noun কে describe করে</td><td>beautiful, tall, three, red</td></tr>
+    <tr><td>🏃 Adverb</td><td>Verb/Adjective কে describe করে</td><td>quickly, very, often, well</td></tr>
+    <tr><td>📍 Preposition</td><td>Noun এর সম্পর্ক/স্থান/সময়</td><td>in, on, at, under, by</td></tr>
+    <tr><td>🔗 Conjunction</td><td>দুটো শব্দ/বাক্য যুক্ত করে</td><td>and, but, or, because</td></tr>
+    <tr><td>❗ Interjection</td><td>আবেগ প্রকাশ করে</td><td>Wow!, Oh!, Ouch!, Hurray!</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 একই বাক্য, সব Parts of Speech চিহ্নিত</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en">
+        <span style="color:#fb7185">Wow!</span>
+        <span style="color:#2dd4bf">She</span>
+        <span style="color:#fb923c">quickly</span>
+        <span style="color:#fb7185">finished</span>
+        <span style="color:#34d399">the homework</span>
+        <span style="color:#818cf8">before</span>
+        <span style="color:#f5c842">dinner</span>
+        <span style="color:#34d399">and</span> went out.
+      </div>
+      <div class="ex-bn" style="margin-top:.5rem">
+        <span style="color:#fb7185">❗Interjection</span> ·
+        <span style="color:#2dd4bf">👤Pronoun</span> ·
+        <span style="color:#fb923c">🏃Adverb</span> ·
+        <span style="color:#fb7185">⚡Verb</span> ·
+        <span style="color:#34d399">📦Noun</span> ·
+        <span style="color:#818cf8">📍Preposition</span> ·
+        <span style="color:#f5c842">🎨/📦</span> ·
+        <span style="color:#34d399">🔗Conjunction</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>একটা শব্দ একাধিক Part of Speech হতে পারে!</strong> যেমন "run" — Verb ("I run every day") এবং Noun ("Let's go for a run") দুটোই হতে পারে। Context দেখে বুঝতে হয়।</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="btn-prev" href="grammar-narration.html">← Narration</a>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('noun',1)">Noun →</button>
+</div>`,
+
+'noun':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Noun</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>📦 Noun (বিশেষ্য)</span></div>
+  <div class="lesson-desc">Noun হলো ব্যক্তি, বস্তু, স্থান, প্রাণী বা ধারণার নাম। এটি বাক্যের সবচেয়ে মৌলিক building block।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#34d399,#a78bfa)">
+  <div class="card-title">📋 Noun এর ধরন</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>সংজ্ঞা</th><th>উদাহরণ</th></tr>
+    <tr><td>Proper Noun</td><td>নির্দিষ্ট নাম (বড় হাতের অক্ষর)</td><td>Dhaka, Rafi, Bangladesh, Monday</td></tr>
+    <tr><td>Common Noun</td><td>সাধারণ নাম</td><td>city, boy, country, day</td></tr>
+    <tr><td>Concrete Noun</td><td>স্পর্শ করা যায়</td><td>table, phone, dog</td></tr>
+    <tr><td>Abstract Noun</td><td>স্পর্শ করা যায় না (ধারণা/অনুভূতি)</td><td>love, freedom, honesty, happiness</td></tr>
+    <tr><td>Countable Noun</td><td>গোনা যায়, plural হয়</td><td>book → books, apple → apples</td></tr>
+    <tr><td>Uncountable Noun</td><td>গোনা যায় না, plural হয় না</td><td>water, rice, music, advice</td></tr>
+    <tr><td>Collective Noun</td><td>দলকে বোঝায়</td><td>team, family, audience, herd</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal))">
+  <div class="card-title">📐 Singular → Plural নিয়ম</div>
+  <table class="gtable">
+    <tr><th>নিয়ম</th><th>উদাহরণ</th></tr>
+    <tr><td>সাধারণত +s</td><td>book → books, car → cars</td></tr>
+    <tr><td>-s,-x,-ch,-sh,-o → +es</td><td>box → boxes, watch → watches</td></tr>
+    <tr><td>consonant+y → +ies</td><td>city → cities, baby → babies</td></tr>
+    <tr><td>-f/-fe → +ves</td><td>knife → knives, leaf → leaves</td></tr>
+    <tr><td>Irregular</td><td>man → men, child → children, foot → feet</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>Rafi</b> lives in <b>Dhaka</b>. <span class="ex-tag">Proper Noun</span></div><div class="ex-bn">রাফি ঢাকায় থাকে।</div></div>
+    <div class="ex"><div class="ex-en">I bought a <b>book</b> and some <b>rice</b>. <span class="ex-tag">Countable/Uncountable</span></div><div class="ex-bn">আমি একটা বই এবং কিছু চাল কিনলাম।</div></div>
+    <div class="ex"><div class="ex-en"><b>Honesty</b> is the best policy. <span class="ex-tag">Abstract Noun</span></div><div class="ex-bn">সততা সর্বোত্তম নীতি।</div></div>
+    <div class="ex"><div class="ex-en">The <b>team</b> won the match. <span class="ex-tag">Collective Noun</span></div><div class="ex-bn">দলটি ম্যাচ জিতেছে।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Uncountable Noun এর সাথে "a/an" ব্যবহার করো না।</strong> ❌ "a water" → ✅ "<strong>some water</strong>" বা "<strong>a glass of water</strong>"</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('overview',0)">← Overview</button>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('pronoun',2)">Pronoun →</button>
+</div>`,
+
+'pronoun':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Pronoun</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>👤 Pronoun (সর্বনাম)</span></div>
+  <div class="lesson-desc">Pronoun হলো এমন শব্দ যা Noun এর জায়গায় ব্যবহার হয় — পুনরাবৃত্তি এড়াতে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#2dd4bf,#a78bfa)">
+  <div class="card-title">📋 Pronoun এর ধরন (সংক্ষেপে)</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>উদাহরণ</th></tr>
+    <tr><td>Personal</td><td>I, you, he, she, it, we, they</td></tr>
+    <tr><td>Possessive</td><td>my, your, his, her, mine, yours</td></tr>
+    <tr><td>Reflexive</td><td>myself, yourself, himself, themselves</td></tr>
+    <tr><td>Demonstrative</td><td>this, that, these, those</td></tr>
+    <tr><td>Relative</td><td>who, whom, which, that, whose</td></tr>
+    <tr><td>Indefinite</td><td>someone, anything, nobody, everyone</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples — Noun কে Pronoun দিয়ে replace</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>Rafi</b> went to school. <b>Rafi</b> forgot <b>Rafi's</b> bag. ❌</div><div class="ex-bn">পুনরাবৃত্তি — খারাপ লাগে।</div></div>
+    <div class="ex"><div class="ex-en"><b>He</b> went to school. <b>He</b> forgot <b>his</b> bag. ✅</div><div class="ex-bn">Pronoun দিয়ে replace করা — ভালো।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text">প্রতিটি Pronoun এর ধরন নিয়ে আলাদা ও বিস্তারিত lesson আছে — <a href="grammar-pronouns.html" style="color:var(--violet)">Pronouns পেজ দেখো</a> পূর্ণ formula, examples এবং practice quiz এর জন্য।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('noun',1)">← Noun</button>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('verb',3)">Verb →</button>
+</div>`,
+
+'verb':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Verb</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 18 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>⚡ Verb (ক্রিয়া)</span></div>
+  <div class="lesson-desc">Verb কাজ, ঘটনা বা অবস্থা বোঝায়। প্রতিটি বাক্যে অন্তত একটি verb থাকতেই হবে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb7185,#a78bfa)">
+  <div class="card-title">📋 Verb এর ধরন</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>সংজ্ঞা</th><th>উদাহরণ</th></tr>
+    <tr><td>Action Verb</td><td>শারীরিক/মানসিক কাজ</td><td>run, eat, think, write</td></tr>
+    <tr><td>Linking Verb</td><td>subject ও complement যুক্ত করে</td><td>be, seem, become, look</td></tr>
+    <tr><td>Auxiliary Verb (Helping)</td><td>মূল verb কে সাহায্য করে</td><td>am, is, are, have, do, will</td></tr>
+    <tr><td>Modal Verb</td><td>সক্ষমতা/অনুমতি/সম্ভাবনা</td><td>can, must, should, may</td></tr>
+    <tr><td>Transitive Verb</td><td>Object দরকার</td><td>She <u>eats</u> rice. (rice = object)</td></tr>
+    <tr><td>Intransitive Verb</td><td>Object দরকার নেই</td><td>He <u>sleeps</u>. (object নেই)</td></tr>
+    <tr><td>Phrasal Verb</td><td>Verb + Preposition/Adverb</td><td>give up, look after, turn on</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal))">
+  <div class="card-title">📐 Verb Forms (V1-V5)</div>
+  <table class="gtable">
+    <tr><th>Form</th><th>নাম</th><th>উদাহরণ (regular/irregular)</th></tr>
+    <tr><td>V1</td><td>Base form</td><td>play / go / eat</td></tr>
+    <tr><td>V2</td><td>Past Simple</td><td>played / went / ate</td></tr>
+    <tr><td>V3</td><td>Past Participle</td><td>played / gone / eaten</td></tr>
+    <tr><td>V4 (V-ing)</td><td>Present Participle / Gerund</td><td>playing / going / eating</td></tr>
+    <tr><td>V5 (V-s/es)</td><td>3rd person singular</td><td>plays / goes / eats</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She <b>writes</b> a letter every week. <span class="ex-tag">Action + Transitive</span></div><div class="ex-bn">সে প্রতি সপ্তাহে একটা চিঠি লেখে।</div></div>
+    <div class="ex"><div class="ex-en">He <b>sleeps</b> early. <span class="ex-tag">Intransitive</span></div><div class="ex-bn">সে আগে ঘুমায়।</div></div>
+    <div class="ex"><div class="ex-en">She <b>is</b> a doctor. <span class="ex-tag">Linking Verb</span></div><div class="ex-bn">সে একজন ডাক্তার।</div></div>
+    <div class="ex"><div class="ex-en">I <b>am</b> studying. He <b>has</b> finished. <span class="ex-tag">Auxiliary</span></div><div class="ex-bn">am/has — মূল verb কে সাহায্য করছে।</div></div>
+    <div class="ex"><div class="ex-en">Please <b>turn on</b> the light. <span class="ex-tag">Phrasal Verb</span></div><div class="ex-bn">দয়া করে লাইট জ্বালাও।</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text">Linking verbs (be, seem, look, feel) এর পরে <strong>adjective</strong> আসে, adverb নয়! ✅ "She looks <strong>beautiful</strong>." ❌ "She looks beautifully."</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('pronoun',2)">← Pronoun</button>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('adjective',4)">Adjective →</button>
+</div>`,
+
+'adjective':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Adjective</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>🎨 Adjective (বিশেষণ)</span></div>
+  <div class="lesson-desc">Adjective Noun বা Pronoun কে describe করে — কেমন, কয়টা, কোনটা — এসব বোঝায়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#f5c842,#a78bfa)">
+  <div class="card-title">📋 Adjective এর ধরন</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>উদাহরণ</th></tr>
+    <tr><td>Descriptive (গুণ)</td><td>beautiful, tall, happy, smart</td></tr>
+    <tr><td>Quantity (পরিমাণ)</td><td>some, many, few, several, all</td></tr>
+    <tr><td>Number (সংখ্যা)</td><td>one, two, first, second</td></tr>
+    <tr><td>Demonstrative</td><td>this, that, these, those</td></tr>
+    <tr><td>Possessive</td><td>my, your, his, her, their</td></tr>
+    <tr><td>Comparative</td><td>taller, more beautiful</td></tr>
+    <tr><td>Superlative</td><td>tallest, most beautiful</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal))">
+  <div class="card-title">📐 Comparative & Superlative নিয়ম</div>
+  <table class="gtable">
+    <tr><th>Adjective ধরন</th><th>Comparative</th><th>Superlative</th></tr>
+    <tr><td>সংক্ষিপ্ত (1 syllable)</td><td>tall → tall<b>er</b></td><td>tall → tall<b>est</b></td></tr>
+    <tr><td>e দিয়ে শেষ</td><td>nice → nic<b>er</b></td><td>nice → nic<b>est</b></td></tr>
+    <tr><td>CVC (double consonant)</td><td>big → big<b>ger</b></td><td>big → big<b>gest</b></td></tr>
+    <tr><td>দীর্ঘ (2+ syllables)</td><td><b>more</b> beautiful</td><td><b>most</b> beautiful</td></tr>
+    <tr><td>Irregular</td><td>good → better, bad → worse</td><td>good → best, bad → worst</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She has a <b>beautiful</b> garden. <span class="ex-tag">Descriptive</span></div><div class="ex-bn">তার একটা সুন্দর বাগান আছে।</div></div>
+    <div class="ex"><div class="ex-en">I have <b>three</b> books. <span class="ex-tag">Number</span></div><div class="ex-bn">আমার তিনটা বই আছে।</div></div>
+    <div class="ex"><div class="ex-en">This bag is <b>bigger</b> than that one. <span class="ex-tag">Comparative</span></div><div class="ex-bn">এই ব্যাগটা ওইটার চেয়ে বড়।</div></div>
+    <div class="ex"><div class="ex-en">Dhaka is the <b>most crowded</b> city in Bangladesh. <span class="ex-tag">Superlative</span></div><div class="ex-bn">ঢাকা বাংলাদেশের সবচেয়ে জনাকীর্ণ শহর।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Adjective Order:</strong> একাধিক adjective থাকলে সাধারণ ক্রম: <strong>opinion → size → age → shape → color → origin → material → purpose + noun</strong><br>
+  উদাহরণ: "a <strong>beautiful (opinion) small (size) old (age) red (color) Japanese (origin) car</strong>"</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('verb',3)">← Verb</button>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('adverb',5)">Adverb →</button>
+</div>`,
+
+'adverb':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Adverb</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>🏃 Adverb (ক্রিয়া বিশেষণ)</span></div>
+  <div class="lesson-desc">Adverb verb, adjective বা অন্য adverb কে describe করে — কীভাবে, কখন, কোথায়, কতটা — এসব বোঝায়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb923c,#a78bfa)">
+  <div class="card-title">📋 Adverb এর ধরন</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>প্রশ্ন</th><th>উদাহরণ</th></tr>
+    <tr><td>Manner (কীভাবে)</td><td>How?</td><td>quickly, carefully, well, badly</td></tr>
+    <tr><td>Time (কখন)</td><td>When?</td><td>now, yesterday, soon, already</td></tr>
+    <tr><td>Place (কোথায়)</td><td>Where?</td><td>here, there, everywhere, outside</td></tr>
+    <tr><td>Frequency (কতবার)</td><td>How often?</td><td>always, often, sometimes, never</td></tr>
+    <tr><td>Degree (কতটা)</td><td>How much?</td><td>very, quite, too, extremely</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal))">
+  <div class="card-title">📐 Adjective → Adverb রূপান্তর</div>
+  <table class="gtable">
+    <tr><th>নিয়ম</th><th>উদাহরণ</th></tr>
+    <tr><td>সাধারণত +ly</td><td>quick → quickly, careful → carefully</td></tr>
+    <tr><td>-y → -ily</td><td>happy → happily, easy → easily</td></tr>
+    <tr><td>-le → -ly</td><td>simple → simply, gentle → gently</td></tr>
+    <tr><td>Irregular</td><td>good → well, fast → fast (same)</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She speaks English <b>fluently</b>. <span class="ex-tag">Manner</span></div><div class="ex-bn">সে সাবলীলভাবে English বলে।</div></div>
+    <div class="ex"><div class="ex-en">I will see you <b>tomorrow</b>. <span class="ex-tag">Time</span></div><div class="ex-bn">আমি তোমাকে কাল দেখব।</div></div>
+    <div class="ex"><div class="ex-en">Put the box <b>there</b>. <span class="ex-tag">Place</span></div><div class="ex-bn">বাক্সটা ওখানে রাখো।</div></div>
+    <div class="ex"><div class="ex-en">He <b>always</b> arrives on time. <span class="ex-tag">Frequency</span></div><div class="ex-bn">সে সবসময় সময়মতো আসে।</div></div>
+    <div class="ex"><div class="ex-en">This food is <b>very</b> spicy. <span class="ex-tag">Degree</span></div><div class="ex-bn">এই খাবার খুব মসলাদার।</div></div>
+    <div class="ex"><div class="ex-en">He did <b>well</b> in the exam. <span class="ex-tag">Irregular</span></div><div class="ex-bn">সে পরীক্ষায় ভালো করেছে।</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>Good vs Well:</strong> "good" — adjective ("a good student"), "well" — adverb ("she did well") অথবা "সুস্থ" বোঝায় ("I feel well")। ❌ "She sings good." → ✅ "She sings <strong>well</strong>."</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('adjective',4)">← Adjective</button>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('preposition',6)">Preposition →</button>
+</div>`,
+
+'preposition':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Preposition</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>📍 Preposition (অব্যয়)</span></div>
+  <div class="lesson-desc">Preposition Noun/Pronoun এর সাথে অন্য শব্দের সম্পর্ক দেখায় — স্থান, সময়, দিক ইত্যাদি বোঝায়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#818cf8,#a78bfa)">
+  <div class="card-title">📋 সাধারণ ধরন</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>উদাহরণ</th></tr>
+    <tr><td>Place (স্থান)</td><td>in, on, at, under, behind, between, near</td></tr>
+    <tr><td>Time (সময়)</td><td>in, on, at, before, after, since, during</td></tr>
+    <tr><td>Direction (দিক)</td><td>to, from, into, onto, through, towards</td></tr>
+    <tr><td>Agent/Instrument</td><td>by, with</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal))">
+  <div class="card-title">⏰ In / On / At — Time</div>
+  <table class="gtable">
+    <tr><th>Preposition</th><th>কখন</th><th>উদাহরণ</th></tr>
+    <tr><td>in</td><td>মাস, বছর, সিজন, সকাল/বিকেল/সন্ধ্যা</td><td>in June, in 2024, in the morning</td></tr>
+    <tr><td>on</td><td>দিন, তারিখ</td><td>on Monday, on 5th May</td></tr>
+    <tr><td>at</td><td>নির্দিষ্ট সময়, রাত</td><td>at 6 PM, at noon, at night</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--indigo))">
+  <div class="card-title">📍 In / On / At — Place</div>
+  <table class="gtable">
+    <tr><th>Preposition</th><th>কখন</th><th>উদাহরণ</th></tr>
+    <tr><td>in</td><td>ভিতরে, বড় জায়গা</td><td>in the box, in Dhaka, in a country</td></tr>
+    <tr><td>on</td><td>উপরে, surface</td><td>on the table, on the wall, on a street</td></tr>
+    <tr><td>at</td><td>নির্দিষ্ট পয়েন্ট</td><td>at the door, at school, at the bus stop</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">🔗 Common Preposition Combinations</div>
+  <div class="word-chips">
+    <span class="word-chip">interested in</span>
+    <span class="word-chip">good at</span>
+    <span class="word-chip">afraid of</span>
+    <span class="word-chip">depend on</span>
+    <span class="word-chip">arrive at/in</span>
+    <span class="word-chip">listen to</span>
+    <span class="word-chip">wait for</span>
+    <span class="word-chip">married to</span>
+    <span class="word-chip">proud of</span>
+    <span class="word-chip">famous for</span>
+    <span class="word-chip">responsible for</span>
+    <span class="word-chip">angry with</span>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--rose))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">The cat is <b>under</b> the table.</div><div class="ex-bn">বিড়ালটা টেবিলের নিচে।</div></div>
+    <div class="ex"><div class="ex-en">I was born <b>in</b> 2000, <b>on</b> 5th March, <b>at</b> 6 AM.</div><div class="ex-bn">আমি ২০০০ সালে, ৫ মার্চ, সকাল ৬টায় জন্মগ্রহণ করি।</div></div>
+    <div class="ex"><div class="ex-en">She is interested <b>in</b> music.</div><div class="ex-bn">সে গান-বাজনায় আগ্রহী।</div></div>
+    <div class="ex"><div class="ex-en">He is good <b>at</b> Math.</div><div class="ex-bn">সে গণিতে ভালো।</div></div>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('adverb',5)">← Adverb</button>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('conjunction',7)">Conjunction →</button>
+</div>`,
+
+'conjunction':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Conjunction</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>🔗 Conjunction (সংযোজক)</span></div>
+  <div class="lesson-desc">Conjunction দুটো শব্দ, phrase বা clause কে যুক্ত করে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#34d399,#a78bfa)">
+  <div class="card-title">📋 Conjunction এর ধরন</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>উদাহরণ Words</th><th>কাজ</th></tr>
+    <tr><td>Coordinating (FANBOYS)</td><td>for, and, nor, but, or, yet, so</td><td>সমান গুরুত্বের দুটো অংশ যুক্ত করে</td></tr>
+    <tr><td>Subordinating</td><td>because, although, if, when, since, while</td><td>main clause + dependent clause</td></tr>
+    <tr><td>Correlative</td><td>either...or, neither...nor, both...and</td><td>জোড়ায় ব্যবহার হয়</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal))">
+  <div class="card-title">🅵 FANBOYS — Coordinating Conjunctions</div>
+  <table class="gtable">
+    <tr><th>Word</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td><b>F</b>or</td><td>কারণ</td><td>I stayed home, for it was raining.</td></tr>
+    <tr><td><b>A</b>nd</td><td>এবং</td><td>I like tea and coffee.</td></tr>
+    <tr><td><b>N</b>or</td><td>না-ও</td><td>She doesn't smoke, nor does she drink.</td></tr>
+    <tr><td><b>B</b>ut</td><td>কিন্তু</td><td>He is rich but unhappy.</td></tr>
+    <tr><td><b>O</b>r</td><td>অথবা</td><td>Tea or coffee?</td></tr>
+    <tr><td><b>Y</b>et</td><td>তবুও</td><td>It's expensive, yet worth it.</td></tr>
+    <tr><td><b>S</b>o</td><td>তাই</td><td>I was tired, so I went to bed.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--indigo),var(--rose))">
+  <div class="card-title">📋 Common Subordinating Conjunctions</div>
+  <table class="gtable">
+    <tr><th>Conjunction</th><th>অর্থ/ব্যবহার</th><th>উদাহরণ</th></tr>
+    <tr><td>because</td><td>কারণ</td><td>I'm happy because I passed.</td></tr>
+    <tr><td>although/though</td><td>যদিও</td><td>Although it rained, we went out.</td></tr>
+    <tr><td>if</td><td>যদি</td><td>If it rains, we'll stay home.</td></tr>
+    <tr><td>when</td><td>যখন</td><td>Call me when you arrive.</td></tr>
+    <tr><td>while</td><td>যখন (একই সময়)</td><td>She cooked while I cleaned.</td></tr>
+    <tr><td>since</td><td>যেহেতু/থেকে</td><td>Since you're here, let's start.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">I want to go, <b>but</b> I'm too tired.</div><div class="ex-bn">আমি যেতে চাই, কিন্তু আমি খুব ক্লান্ত।</div></div>
+    <div class="ex"><div class="ex-en"><b>Although</b> he is poor, he is happy.</div><div class="ex-bn">যদিও সে দরিদ্র, সে সুখী।</div></div>
+    <div class="ex"><div class="ex-en">She can <b>either</b> call me <b>or</b> text me.</div><div class="ex-bn">সে আমাকে call করতে পারে বা text করতে পারে।</div></div>
+    <div class="ex"><div class="ex-en">I stayed inside <b>because</b> it was raining.</div><div class="ex-bn">আমি ভিতরে থাকলাম কারণ বৃষ্টি হচ্ছিল।</div></div>
+  </div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('preposition',6)">← Preposition</button>
+  <button class="btn-quiz-big" onclick="show('practice',9)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('interjection',8)">Interjection →</button>
+</div>`,
+
+'interjection':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Interjection</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>❗ Interjection (আবেগ শব্দ)</span></div>
+  <div class="lesson-desc">Interjection হলো এমন শব্দ যা শক্তিশালী আবেগ বা অনুভূতি প্রকাশ করে — সাধারণত exclamation mark (!) এর সাথে ব্যবহার হয়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb7185,#a78bfa)">
+  <div class="card-title">📋 সাধারণ Interjections</div>
+  <table class="gtable">
+    <tr><th>Interjection</th><th>আবেগ</th><th>উদাহরণ</th></tr>
+    <tr><td>Wow! / Wonderful!</td><td>আশ্চর্য/আনন্দ</td><td>Wow! That's amazing!</td></tr>
+    <tr><td>Oh! / Oh no!</td><td>আশ্চর্য/দুঃখ</td><td>Oh no! I forgot my keys.</td></tr>
+    <tr><td>Ouch!</td><td>ব্যথা</td><td>Ouch! That hurts!</td></tr>
+    <tr><td>Hurray! / Yay!</td><td>আনন্দ/উদযাপন</td><td>Hurray! We won!</td></tr>
+    <tr><td>Alas!</td><td>দুঃখ/শোক</td><td>Alas! He failed the exam.</td></tr>
+    <tr><td>Hush! / Shh!</td><td>চুপ থাকার নির্দেশ</td><td>Hush! The baby is sleeping.</td></tr>
+    <tr><td>Bravo!</td><td>প্রশংসা</td><td>Bravo! Excellent performance!</td></tr>
+    <tr><td>Oops!</td><td>ছোট ভুল</td><td>Oops! I dropped my phone.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples in Sentences</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>Wow!</b> You look amazing today!</div><div class="ex-bn">বাহ! তুমি আজ চমৎকার দেখাচ্ছ!</div></div>
+    <div class="ex"><div class="ex-en"><b>Oh no!</b> I missed the bus.</div><div class="ex-bn">আহা! আমি বাস মিস করলাম।</div></div>
+    <div class="ex"><div class="ex-en"><b>Hurray!</b> We got the scholarship!</div><div class="ex-bn">হুররে! আমরা স্কলারশিপ পেয়েছি!</div></div>
+    <div class="ex"><div class="ex-en"><b>Ouch!</b> That really hurt.</div><div class="ex-bn">আহ! এটা সত্যিই লেগেছে।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text">Interjection বাক্যের grammatical structure এর সাথে যুক্ত নয় — এটি স্বাধীনভাবে আবেগ প্রকাশ করে, এবং সাধারণত বাক্যের শুরুতে বসে কমা (,) বা exclamation mark (!) দিয়ে আলাদা থাকে।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('conjunction',7)">← Conjunction</button>
+  <button class="btn-next" onclick="show('practice',9)">Practice Quiz →</button>
+</div>`,
+
+'practice':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Parts of Speech → Practice</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>✍️ Parts of Speech Practice Quiz</span></div>
+  <div class="lesson-desc">নিচের underline করা শব্দটি কোন Part of Speech, সেটা বেছে নাও।</div>
+</div>
+<div id="quiz-wrap"></div>
+<div class="lesson-nav" style="margin-top:1.5rem">
+  <button class="btn-prev" onclick="show('interjection',8)">← Interjection</button>
+  <button class="btn-quiz-big" onclick="resetQuiz()">🔄 আবার চেষ্টা করো</button>
+  <a class="btn-next" href="grammar-prepositions.html">Prepositions →</a>
+</div>`
+};
+
+const QUIZ=[
+  {q:'She speaks English <u>fluently</u>.', opts:['Noun','Verb','Adverb','Adjective'], ans:'Adverb', exp:'"fluently" verb (speaks) কে describe করছে → Adverb'},
+  {q:'<u>Honesty</u> is the best policy.', opts:['Adjective','Abstract Noun','Verb','Pronoun'], ans:'Abstract Noun', exp:'"Honesty" — ধারণা, স্পর্শ করা যায় না → Abstract Noun'},
+  {q:'I have <u>three</u> books.', opts:['Adverb','Noun','Adjective','Pronoun'], ans:'Adjective', exp:'"three" books কে describe করছে (সংখ্যা) → Adjective'},
+  {q:'The cat is <u>under</u> the table.', opts:['Conjunction','Preposition','Adverb','Verb'], ans:'Preposition', exp:'"under" স্থানের সম্পর্ক দেখাচ্ছে → Preposition'},
+  {q:'I want to go, <u>but</u> I am tired.', opts:['Preposition','Adverb','Conjunction','Interjection'], ans:'Conjunction', exp:'"but" দুটো clause যুক্ত করছে → Conjunction'},
+  {q:'<u>Wow!</u> That is amazing.', opts:['Adjective','Interjection','Adverb','Noun'], ans:'Interjection', exp:'"Wow!" আবেগ প্রকাশ করছে → Interjection'},
+  {q:'<u>He</u> went to school.', opts:['Noun','Pronoun','Adjective','Verb'], ans:'Pronoun', exp:'"He" — noun এর পরিবর্তে → Pronoun'},
+  {q:'She <u>runs</u> every morning.', opts:['Noun','Adjective','Verb','Adverb'], ans:'Verb', exp:'"runs" — কাজ বোঝাচ্ছে → Verb'},
+  {q:'This is a <u>beautiful</u> garden.', opts:['Adverb','Adjective','Noun','Verb'], ans:'Adjective', exp:'"beautiful" — garden (noun) কে describe করছে → Adjective'},
+  {q:'I was born <u>in</u> 2000.', opts:['Conjunction','Preposition','Adverb','Verb'], ans:'Preposition', exp:'"in" সময়ের সম্পর্ক দেখাচ্ছে → Preposition'},
+  {q:'He did <u>well</u> in the exam.', opts:['Adjective','Noun','Adverb','Pronoun'], ans:'Adverb', exp:'"well" verb (did) কে describe করছে → Adverb (Irregular)'},
+  {q:'<u>Either</u> tea or coffee.', opts:['Preposition','Conjunction','Adjective','Interjection'], ans:'Conjunction', exp:'"either...or" correlative conjunction'},
+];
+
+let score=0,done=false;
+function renderQuiz(){
+  score=0;done=false;
+  const w=document.getElementById('quiz-wrap');
+  if(!w)return;
+  w.innerHTML=QUIZ.map((q,i)=>`
+    <div class="practice-q" id="pq-${i}">
+      <div class="pq-text">${i+1}. ${q.q}</div>
+      <div class="pq-options">${q.opts.map(o=>`<button class="pq-opt" onclick="checkQ(${i},'${o}')">${o}</button>`).join('')}</div>
+      <div class="pq-feedback" id="pf-${i}"></div>
+    </div>`).join('')+`<div id="score-wrap"></div>`;
+}
+window.checkQ=(i,sel)=>{
+  const q=QUIZ[i];
+  const el=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  el.querySelectorAll('.pq-opt').forEach(b=>{
+    b.onclick=null;
+    if(b.textContent===q.ans)b.classList.add('correct');
+    else if(b.textContent===sel&&sel!==q.ans)b.classList.add('wrong');
+  });
+  fb.className='pq-feedback show '+(sel===q.ans?'correct':'wrong');
+  fb.textContent=(sel===q.ans?'✅ সঠিক! ':'❌ ভুল। ')+q.exp;
+  if(sel===q.ans)score++;
+  if([...document.querySelectorAll('.pq-feedback.show')].length===QUIZ.length&&!done){
+    done=true;
+    const pct=Math.round(score/QUIZ.length*100);
+    document.getElementById('score-wrap').innerHTML=`
+      <div style="background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:18px;padding:1.5rem;text-align:center;margin-top:1rem;">
+        <div style="font-size:2.5rem;font-weight:900;color:var(--violet)">${score}/${QUIZ.length}</div>
+        <div style="font-size:1rem;color:var(--sub);margin:.3rem 0;font-family:'Noto Sans Bengali',sans-serif">${pct>=80?'🎉 অসাধারণ!':pct>=60?'👍 ভালো!':'💪 আরো চেষ্টা করো!'}</div>
+        <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Accuracy: ${pct}% · XP Earned: ${Math.round(pct/2)} XP</div>
+      </div>`;
+  }
+};
+window.resetQuiz=()=>{score=0;done=false;renderQuiz();};
+
+const ORDER=['overview','noun','pronoun','verb','adjective','adverb','preposition','conjunction','interjection','practice'];
+window.show=(id,idx)=>{
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));
+  document.getElementById('prog').style.width=Math.round(idx/(ORDER.length-1)*100)+'%';
+  document.getElementById('main').innerHTML=PANELS[id]();
+  document.getElementById('main').scrollTop=0;
+  if(id==='practice')renderQuiz();
+};
+
+show('overview',0);
+</script>
+</body>
+</html>

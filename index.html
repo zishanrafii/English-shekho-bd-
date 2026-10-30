@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>English Shekho — Login</title>
+
+<!-- PWA Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#101827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="English Shekho">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="বাংলায় ইংরেজি শেখার অ্যাপ — Quiz, Grammar, Chat">
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="assets/icons/icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── Page Background ── */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #0d0a1a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated gradient blobs */
+.auth-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 10% 10%, rgba(124,58,237,.18), transparent 65%),
+    radial-gradient(ellipse 45% 50% at 90% 85%, rgba(220,38,38,.14), transparent 65%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(37,99,235,.10), transparent 60%),
+    radial-gradient(ellipse 30% 30% at 80% 15%, rgba(234,179,8,.08), transparent 55%);
+}
+
+/* floating decorative letters */
+.auth-page::after {
+  content: 'A B C D E F G';
+  position: fixed;
+  top: 8%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: 1.5rem;
+  color: rgba(124,58,237,.06);
+  pointer-events: none;
+  font-family: 'Baloo Da 2', cursive;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ── Auth Card ── */
+.auth-box {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(20,15,40,.88);
+  border: 1px solid rgba(124,58,237,.18);
+  border-radius: 28px;
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(24px);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(124,58,237,.08),
+    0 20px 60px rgba(0,0,0,.5),
+    0 0 80px rgba(124,58,237,.08);
+}
+
+/* top rainbow bar */
+.auth-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #dc2626, #2563eb, #eab308, #7c3aed);
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* corner glow */
+.auth-box::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(220,38,38,.12), transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Logo ── */
+.auth-logo {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.auth-logo .logo-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: .4rem;
+  filter: drop-shadow(0 0 12px rgba(124,58,237,.5));
+}
+
+.auth-logo h1 {
+  font-family: 'Baloo Da 2', cursive;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 .3rem;
+  background: linear-gradient(135deg, #a78bfa, #f87171, #60a5fa, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.auth-logo .tagline {
+  font-size: 12px;
+  color: #9d8ec0;
+  margin: 0;
+  font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+/* ── Tabs ── */
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(124,58,237,.12);
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #9d8ec0;
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s;
+}
+
+.auth-tab.active {
+  background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(124,58,237,.4);
+}
+
+/* ── Forms ── */
+.auth-form {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+}
+.auth-form.active { display: flex; }
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-group label {
+  font-size: 11px;
+  color: #a78bfa;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+.field-group input {
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(124,58,237,.15);
+  background: rgba(255,255,255,.04);
+  color: #ede9fe;
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: all .2s;
+}
+
+.field-group input:focus {
+  border-color: rgba(124,58,237,.5);
+  background: rgba(124,58,237,.06);
+  box-shadow: 0 0 0 3px rgba(124,58,237,.12);
+}
+
+.field-group input::placeholder { color: #4a3f6b; }
+
+/* phone row */
+.phone-row { display: flex; gap: 6px; }
+.phone-code { width: 80px; flex-shrink: 0; text-align: center; }
+.phone-num { flex: 1; }
+
+/* avatar */
+.avatar-wrap { text-align: center; }
+
+.avatar-preview {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 2px dashed rgba(124,58,237,.35);
+  background: rgba(124,58,237,.08);
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .2s;
+}
+.avatar-preview:hover {
+  border-color: rgba(167,139,250,.7);
+  background: rgba(124,58,237,.14);
+}
+.avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+.btn-avatar {
+  background: transparent;
+  border: 1px solid rgba(124,58,237,.25);
+  color: #a78bfa;
+  border-radius: 8px;
+  padding: 5px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Noto Sans Bengali', sans-serif;
+  transition: all .2s;
+}
+.btn-avatar:hover {
+  background: rgba(124,58,237,.12);
+  border-color: rgba(167,139,250,.5);
+}
+
+.avatar-uploading {
+  font-size: 11px;
+  color: #f87171;
+  display: none;
+  margin-top: 4px;
+}
+
+/* ── Buttons ── */
+.btn-auth {
+  background: linear-gradient(135deg, #7c3aed, #dc2626);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: .95rem;
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .25s;
+  margin-top: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(124,58,237,.35);
+}
+.btn-auth::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.1), transparent);
+  opacity: 0;
+  transition: opacity .2s;
+}
+.btn-auth:hover::before { opacity: 1; }
+.btn-auth:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(124,58,237,.45); }
+.btn-auth:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #4a3f6b;
+  font-size: 12px;
+  font-family: 'Noto Sans Bengali', sans-serif;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(124,58,237,.12);
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(124,58,237,.15);
+  border-radius: 14px;
+  padding: .8rem;
+  color: #c4b5fd;
+  font-family: 'Noto Sans Bengali', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-google:hover {
+  background: rgba(124,58,237,.1);
+  border-color: rgba(167,139,250,.35);
+  color: #ede9fe;
+}
+.g-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ── Error ── */
+.auth-error {
+  background: rgba(220,38,38,.1);
+  border: 1px solid rgba(220,38,38,.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #fca5a5;
+  display: none;
+  font-family: 'Noto Sans Bengali', sans-serif;
+}
+.auth-error.show { display: block; }
+
+/* ── Decoration badges ── */
+.badge-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.2rem;
+}
+.badge {
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.badge-a1 { background: rgba(37,99,235,.15); color: #93c5fd; border: 1px solid rgba(37,99,235,.2); }
+.badge-a2 { background: rgba(124,58,237,.15); color: #c4b5fd; border: 1px solid rgba(124,58,237,.2); }
+.badge-b1 { background: rgba(220,38,38,.15); color: #fca5a5; border: 1px solid rgba(220,38,38,.2); }
+.badge-b2 { background: rgba(234,179,8,.12); color: #fde68a; border: 1px solid rgba(234,179,8,.18); }
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+<style>
+.guest-start{margin:0 0 18px;text-align:center}
+.btn-guest{width:100%;padding:14px 18px;border:0;border-radius:14px;cursor:pointer;color:#fff;font:700 16px/1.2 inherit;
+  background:linear-gradient(135deg,#5b5bff,#8b5cf6);box-shadow:0 8px 28px rgba(91,91,255,.35);transition:transform .2s,filter .2s}
+.btn-guest:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn-guest[disabled]{opacity:.6;cursor:wait;transform:none}
+.guest-note{margin:8px 0 0;font-size:13px;color:#94a3b8}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="auth-page">
+  <div class="auth-box">
+
+    <div class="auth-logo">
+      <span class="logo-icon">🇬🇧</span>
+      <h1>English Shekho</h1>
+      <p class="tagline">লগইন করুন অথবা নতুন অ্যাকাউন্ট তৈরি করুন</p>
+    </div>
+
+    <div class="guest-start">
+      <button type="button" class="btn-guest" id="btn-guest">🚀 Account ছাড়াই শেখা শুরু করুন</button>
+      <p class="guest-note">Login লাগবে না। পরে চাইলে account খুলে progress সেভ করতে পারবেন।</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login">লগইন</button>
+      <button class="auth-tab" id="tab-signup">নতুন অ্যাকাউন্ট</button>
+    </div>
+
+    <div id="auth-error" class="auth-error"></div>
+
+    <!-- ── LOGIN ── -->
+    <form id="login-form" class="auth-form active">
+      <div class="field-group">
+        <label>ইমেইল</label>
+        <input type="email" id="login-email" placeholder="আপনার ইমেইল লিখুন">
+      </div>
+      <div class="field-group">
+        <label>পাসওয়ার্ড</label>
+        <input type="password" id="login-password" placeholder="পাসওয়ার্ড লিখুন">
+      </div>
+      <button type="submit" class="btn-auth" id="btn-login">লগইন করুন →</button>
+      <div class="divider">অথবা</div>
+      <button type="button" class="btn-google" id="btn-google-login">
+        <svg class="g-icon" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Google দিয়ে লগইন
+      </button>
+    </form>
+
+    <!-- ── SIGNUP ── -->
+    <form id="signup-form" class="auth-form">
+      <div class="field-group">
+        <label>প্রোফাইল ছবি</label>
+        <div class="avatar-wrap">
+          <div class="avatar-preview" id="avatar-preview">👤</div>
+          <input type="file" id="avatar-input" hidden accept="image/*">
+          <button type="button" class="btn-avatar" id="btn-avatar">ছবি বেছে নিন</button>
+          <div class="avatar-uploading" id="avatar-uploading">⬆️ আপলোড হচ্ছে...</div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>নাম</label>
+        <input type="text" id="signup-name" placeholder="আপনার নাম লিখুন">
+      </div>
+      <div class="field-group">
+        <label>ফোন নম্বর</label>
+        <div class="phone-row">
+          <input type="text" id="signup-phone-code" class="phone-code" value="+880" placeholder="+880">
+          <input type="tel" id="signup-phone" class="phone-num" placeholder="01XXXXXXXXX">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>ইমেইল</label>
+        <input type="email" id="signup-email" placeholder="আপনার ইমেইল লিখুন">
+      </div>
+      <div class="field-group">
+        <label>পাসওয়ার্ড</label>
+        <input type="password" id="signup-password" placeholder="কমপক্ষে ৬ অক্ষর">
+      </div>
+      <button type="submit" class="btn-auth" id="btn-signup">অ্যাকাউন্ট তৈরি করুন →</button>
+      <div class="divider">অথবা</div>
+      <button type="button" class="btn-google" id="btn-google-signup">
+        <svg class="g-icon" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Google দিয়ে সাইন আপ
+      </button>
+    </form>
+
+    <!-- level badges decoration -->
+    <div class="badge-row">
+      <span class="badge badge-a1">A1</span>
+      <span class="badge badge-a2">A2</span>
+      <span class="badge badge-b1">B1</span>
+      <span class="badge badge-b2">B2</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FIREBASE AUTH SCRIPT
+     (firebase-config.js এ imports থাকবে)
+════════════════════════════════════════ -->
+<script type="module">
+import {
+  auth, db, gProvider,
+  createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signInWithPopup, onAuthStateChanged, updateProfile,
+  doc, setDoc, getDoc, serverTimestamp,
+  uploadToCloud, toast
+} from "./js/firebase-config.js";
+import { startGuest } from "./auth/guest.js";
+
+// Already logged in → dashboard
+// ?login=1 lets a guest who already owns an account sign in instead of being bounced.
+const wantsLogin = new URLSearchParams(location.search).get("login") === "1";
+onAuthStateChanged(auth, user => {
+  if (user && !(user.isAnonymous && wantsLogin)) window.location.href = "dashboard.html";
+});
+
+// Start learning without an account (Firebase anonymous auth)
+document.getElementById("btn-guest").onclick = async (ev) => {
+  const btn = ev.currentTarget;
+  btn.disabled = true;
+  try {
+    await startGuest();
+    window.location.href = "dashboard.html";
+  } catch (e) {
+    console.warn("guest start failed", e);
+    btn.disabled = false;
+    toast("শুরু করা যায়নি। Internet পরীক্ষা করে আবার চেষ্টা করুন।", "error");
+  }
+};
+
+// ── Tab switching ──
+document.getElementById("tab-login").onclick  = () => switchTab("login");
+document.getElementById("tab-signup").onclick = () => switchTab("signup");
+
+function switchTab(tab) {
+  document.getElementById("tab-login").classList.toggle("active",  tab === "login");
+  document.getElementById("tab-signup").classList.toggle("active", tab === "signup");
+  document.getElementById("login-form").classList.toggle("active",  tab === "login");
+  document.getElementById("signup-form").classList.toggle("active", tab === "signup");
+  clearErr();
+}
+
+function showErr(msg) {
+  const e = document.getElementById("auth-error");
+  e.textContent = msg;
+  e.classList.add("show");
+}
+function clearErr() {
+  document.getElementById("auth-error").classList.remove("show");
+}
+
+// ── Avatar preview ──
+let avatarFile = null;
+document.getElementById("btn-avatar").onclick     = () => document.getElementById("avatar-input").click();
+document.getElementById("avatar-preview").onclick = () => document.getElementById("avatar-input").click();
+document.getElementById("avatar-input").onchange  = function () {
+  const file = this.files[0];
+  if (!file) return;
+  avatarFile = file;
+  const r = new FileReader();
+  r.onload = e => {
+    document.getElementById("avatar-preview").innerHTML = `<img src="${e.target.result}">`;
+  };
+  r.readAsDataURL(file);
+};
+
+// ── LOGIN ──
+document.getElementById("login-form").onsubmit = async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("login-email").value.trim();
+  const pass  = document.getElementById("login-password").value;
+  if (!email || !pass) return showErr("ইমেইল এবং পাসওয়ার্ড দিন।");
+  const btn = document.getElementById("btn-login");
+  btn.disabled = true; btn.textContent = "লগইন হচ্ছে..."; clearErr();
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch (err) {
+    const m = {
+      "auth/invalid-credential":  "ইমেইল বা পাসওয়ার্ড ভুল।",
+      "auth/user-not-found":      "ইমেইল পাওয়া যায়নি।",
+      "auth/wrong-password":      "পাসওয়ার্ড ভুল।",
+      "auth/invalid-email":       "ইমেইল সঠিক নয়।",
+      "auth/too-many-requests":   "অনেকবার চেষ্টা হয়েছে। একটু অপেক্ষা করুন।"
+    };
+    showErr(m[err.code] || err.message);
+    btn.disabled = false; btn.textContent = "লগইন করুন →";
+  }
+};
+
+// ── SIGNUP ──
+document.getElementById("signup-form").onsubmit = async (e) => {
+  e.preventDefault();
+  const name  = document.getElementById("signup-name").value.trim();
+  const code  = document.getElementById("signup-phone-code").value.trim();
+  const phone = document.getElementById("signup-phone").value.trim();
+  const email = document.getElementById("signup-email").value.trim();
+  const pass  = document.getElementById("signup-password").value;
+  if (!name)          return showErr("নাম দিন।");
+  if (!email)         return showErr("ইমেইল দিন।");
+  if (pass.length < 6) return showErr("পাসওয়ার্ড কমপক্ষে ৬ অক্ষর হতে হবে।");
+  const btn = document.getElementById("btn-signup");
+  btn.disabled = true; btn.textContent = "তৈরি হচ্ছে..."; clearErr();
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    let photoURL = "";
+    if (avatarFile) {
+      document.getElementById("avatar-uploading").style.display = "block";
+      btn.textContent = "ছবি আপলোড হচ্ছে...";
+      photoURL = await uploadToCloud(avatarFile, "image");
+      document.getElementById("avatar-uploading").style.display = "none";
+    }
+    await updateProfile(cred.user, { displayName: name, photoURL });
+    await setDoc(doc(db, "users", cred.user.uid), {
+      displayName:  name,
+      email,
+      phone:        phone ? `${code} ${phone}` : "",
+      photoURL,
+      level:        "Beginner",
+      xp:           0,
+      totalCorrect: 0,
+      sessions:     0,
+      bestScore:    0,
+      streak:       0,
+      createdAt:    serverTimestamp()
+    });
+    setTimeout(() => { window.location.href = "dashboard.html"; }, 800);
+  } catch (err) {
+    const m = {
+      "auth/email-already-in-use": "এই ইমেইল আগে থেকেই ব্যবহৃত।",
+      "auth/invalid-email":        "ইমেইল সঠিক নয়।",
+      "auth/weak-password":        "পাসওয়ার্ড খুব দুর্বল।"
+    };
+    showErr(m[err.code] || err.message);
+    btn.disabled = false; btn.textContent = "অ্যাকাউন্ট তৈরি করুন →";
+  }
+};
+
+// ── GOOGLE AUTH ──
+async function googleAuth() {
+  clearErr();
+  try {
+    const result = await signInWithPopup(auth, gProvider);
+    const u      = result.user;
+    const snap   = await getDoc(doc(db, "users", u.uid));
+    if (!snap.exists()) {
+      await setDoc(doc(db, "users", u.uid), {
+        displayName:  u.displayName || "Google User",
+        email:        u.email,
+        phone:        "",
+        photoURL:     u.photoURL || "",
+        level:        "Beginner",
+        xp:           0,
+        totalCorrect: 0,
+        sessions:     0,
+        bestScore:    0,
+        streak:       0,
+        createdAt:    serverTimestamp()
+      });
+    }
+    window.location.href = "dashboard.html";
+  } catch (err) {
+    if (err.code !== "auth/popup-closed-by-user")
+      showErr("Google লগইন সমস্যা: " + err.message);
+  }
+}
+document.getElementById("btn-google-login").onclick  = googleAuth;
+document.getElementById("btn-google-signup").onclick = googleAuth;
+</script>
+
+<!-- PWA Service Worker -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
+      .then(reg => {
+        console.log('[PWA] SW registered:', reg.scope);
+        // নতুন SW waiting থাকলে সাথে সাথে activate করো
+        reg.addEventListener('updatefound', () => {
+          const newSW = reg.installing;
+          newSW.addEventListener('statechange', () => {
+            if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+              newSW.postMessage('skipWaiting');
+            }
+          });
+        });
+      })
+      .catch(err => console.warn('[PWA] SW failed:', err));
+  });
+}
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const installBtn = document.getElementById('btn-install-app');
+  if (installBtn) {
+    installBtn.style.display = 'block';
+    installBtn.addEventListener('click', () => {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+    });
+  }
+});
+</script>
+</body>
+</html>

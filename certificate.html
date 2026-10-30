@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=IM+Fell+English:ital@0;1&family=Outfit:wght@400;600;700;800&family=Noto+Sans+Bengali:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
+/* ── SCREEN WRAPPER ── */
+body{
+  background:#1a1a2e;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:2rem 1rem;
+  font-family:'Outfit',sans-serif;
+}
+
+.screen-controls{
+  display:flex;gap:12px;margin-bottom:1.6rem;flex-wrap:wrap;justify-content:center;
+}
+.ctrl-btn{
+  padding:.65rem 1.4rem;border-radius:12px;font-weight:700;font-size:13.5px;
+  cursor:pointer;font-family:'Outfit',sans-serif;border:none;transition:.2s;
+}
+.btn-print{background:linear-gradient(135deg,#f5c842,#e0a820);color:#1a1200;}
+.btn-print:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,200,66,.35);}
+.btn-back{background:rgba(255,255,255,.08);color:#f0f4f8;border:1px solid rgba(255,255,255,.12);}
+.btn-back:hover{background:rgba(255,255,255,.14);}
+
+/* ── CERTIFICATE PAPER ── */
+.cert-paper{
+  width:297mm;
+  max-width:100%;
+  aspect-ratio:297/210;
+  background:linear-gradient(160deg,#faf8f2 0%,#f5f0e4 60%,#ede8da 100%);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 20px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.3);
+}
+
+/* ── BORDERS ── */
+.border-outer{
+  position:absolute;inset:8px;
+  border:4px solid #1a1200;
+  pointer-events:none;
+}
+.border-inner{
+  position:absolute;inset:18px;
+  border:1px solid #1a1200;
+  pointer-events:none;
+}
+.border-dash{
+  position:absolute;inset:23px;
+  border:1px dashed rgba(26,18,0,.25);
+  pointer-events:none;
+}
+
+/* ── CORNER ORNAMENTS ── */
+.corner{position:absolute;width:60px;height:60px;}
+.corner svg{width:100%;height:100%;}
+.c-tl{top:10px;left:10px;}
+.c-tr{top:10px;right:10px;transform:scaleX(-1);}
+.c-bl{bottom:10px;left:10px;transform:scaleY(-1);}
+.c-br{bottom:10px;right:10px;transform:scale(-1,-1);}
+
+/* ── TOP DECORATIVE RAIL ── */
+.rail{
+  position:absolute;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:0;
+  white-space:nowrap;
+}
+.rail-top{top:48px;}
+.rail-bottom{top:76px;}
+.rail-line{height:1px;width:120px;background:#1a1200;opacity:.7;}
+.rail-line-bold{height:2.5px;width:100px;background:#1a1200;}
+.rail-dot{width:7px;height:7px;border-radius:50%;background:#1a1200;margin:0 4px;}
+.rail-dot-sm{width:4px;height:4px;border-radius:50%;background:#1a1200;margin:0 3px;}
+.rail-rect{width:22px;height:4.5px;background:#1a1200;border-radius:1px;margin:0 6px;}
+
+/* ── CONTENT AREA ── */
+.cert-content{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:0 60px;
+}
+
+/* PLATFORM NAME */
+.platform-name{
+  margin-top:28px;
+  font-family:'IM Fell English',serif;
+  font-size:clamp(9px,1.8vw,13px);
+  letter-spacing:4px;
+  color:#1a1200;
+  text-transform:uppercase;
+  opacity:.75;
+}
+
+/* RAILS PLACEHOLDER */
+.rail-space{height:42px;}
+
+/* CERT TITLE */
+.cert-title{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(22px,5vw,38px);
+  font-weight:400;
+  letter-spacing:12px;
+  color:#1a1200;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.rail-space2{height:32px;}
+
+/* PRESENTED TO */
+.presented-to{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(8px,1.4vw,11px);
+  letter-spacing:3.5px;
+  color:#3a2e1a;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+/* RECIPIENT NAME */
+.recipient-name{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(28px,6.5vw,52px);
+  font-weight:700;
+  color:#1a1200;
+  line-height:1.1;
+  text-align:center;
+}
+
+/* NAME UNDERLINE */
+.name-underline{
+  width:60%;
+  height:1px;
+  background:#1a1200;
+  opacity:.35;
+  margin:6px auto 14px;
+}
+
+/* DESCRIPTION */
+.cert-desc{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(9px,1.6vw,12.5px);
+  color:#3a2e1a;
+  text-align:center;
+  line-height:1.9;
+  max-width:480px;
+}
+.cert-desc .level{
+  font-weight:700;
+  font-size:clamp(10px,1.8vw,14px);
+  color:#1a1200;
+}
+.cert-desc .bn{
+  font-family:'Noto Sans Bengali',sans-serif;
+  font-size:clamp(8px,1.3vw,11px);
+  color:#5a4e3a;
+}
+
+/* BOTTOM SECTION */
+.cert-bottom{
+  position:absolute;
+  bottom:32px;
+  left:60px;
+  right:60px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+}
+
+/* DATE */
+.bottom-col{text-align:center;}
+.col-value{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(9px,1.5vw,13px);
+  color:#1a1200;
+  margin-bottom:4px;
+}
+.col-label{
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(6px,1vw,9px);
+  letter-spacing:3px;
+  color:#5a4e3a;
+  text-transform:uppercase;
+  border-top:1px solid #1a1200;
+  padding-top:4px;
+  min-width:100px;
+}
+
+/* SEAL */
+.cert-seal{
+  text-align:center;
+  opacity:.7;
+}
+.seal-circle{
+  width:clamp(50px,8vw,70px);
+  height:clamp(50px,8vw,70px);
+  border-radius:50%;
+  border:1.5px solid #1a1200;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  margin:0 auto 6px;
+  background:rgba(26,18,0,.04);
+}
+.seal-text{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(6px,.9vw,8px);
+  color:#1a1200;
+  letter-spacing:1px;
+  text-align:center;
+  line-height:1.5;
+}
+
+/* SIGNATURE */
+.sig-value{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(14px,2.5vw,22px);
+  font-weight:700;
+  color:#1a1200;
+  text-align:center;
+  margin-bottom:4px;
+}
+
+/* WATERMARK */
+.watermark{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-20deg);
+  font-family:'IM Fell English',serif;
+  font-size:clamp(30px,7vw,65px);
+  font-weight:700;
+  color:#1a1200;
+  opacity:.03;
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+  letter-spacing:4px;
+}
+
+/* LEVEL BADGE */
+.level-badge{
+  position:absolute;
+  top:50%;right:42px;
+  transform:translateY(-50%);
+  width:clamp(40px,5vw,52px);
+  height:clamp(40px,5vw,52px);
+  border-radius:50%;
+  background:#1a1200;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.12;
+  font-family:'Outfit',sans-serif;
+  font-size:clamp(12px,1.8vw,16px);
+  font-weight:800;
+  color:#f5f0e4;
+}
+
+/* ── PRINT STYLES ── */
+@media print{
+  body{background:white;padding:0;margin:0;}
+  .screen-controls{display:none;}
+  .cert-paper{
+    width:100vw;
+    height:100vh;
+    max-width:none;
+    box-shadow:none;
+    border-radius:0;
+    aspect-ratio:auto;
+  }
+  @page{
+    size:A4 landscape;
+    margin:0;
+  }
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<!-- SCREEN BUTTONS -->
+<div class="screen-controls">
+  <button class="ctrl-btn btn-back" onclick="history.back()">← Back to Roadmap</button>
+  <button class="ctrl-btn btn-print" onclick="window.print()">🖨️ Download / Print PDF</button>
+</div>
+
+<!-- CERTIFICATE -->
+<div class="cert-paper" id="cert">
+
+  <!-- BORDERS -->
+  <div class="border-outer"></div>
+  <div class="border-inner"></div>
+  <div class="border-dash"></div>
+
+  <!-- CORNER ORNAMENTS -->
+  <div class="corner c-tl">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 56 C4 30 30 4 56 4" stroke="#1a1200" stroke-width="1.2" opacity="0.7"/>
+      <path d="M4 44 C4 24 24 4 44 4" stroke="#1a1200" stroke-width="0.7" opacity="0.5"/>
+      <path d="M4 32 C4 18 18 4 32 4" stroke="#1a1200" stroke-width="0.5" opacity="0.35"/>
+      <circle cx="14" cy="14" r="5" fill="none" stroke="#1a1200" stroke-width="1" opacity="0.6"/>
+      <circle cx="14" cy="14" r="2" fill="#1a1200" opacity="0.4"/>
+      <path d="M4 4 C4 4 10 4 4 10" stroke="#1a1200" stroke-width="1.5" opacity="0.8"/>
+    </svg>
+  </div>
+  <div class="corner c-tr">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 56 C4 30 30 4 56 4" stroke="#1a1200" stroke-width="1.2" opacity="0.7"/>
+      <path d="M4 44 C4 24 24 4 44 4" stroke="#1a1200" stroke-width="0.7" opacity="0.5"/>
+      <path d="M4 32 C4 18 18 4 32 4" stroke="#1a1200" stroke-width="0.5" opacity="0.35"/>
+      <circle cx="14" cy="14" r="5" fill="none" stroke="#1a1200" stroke-width="1" opacity="0.6"/>
+      <circle cx="14" cy="14" r="2" fill="#1a1200" opacity="0.4"/>
+      <path d="M4 4 C4 4 10 4 4 10" stroke="#1a1200" stroke-width="1.5" opacity="0.8"/>
+    </svg>
+  </div>
+  <div class="corner c-bl">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 56 C4 30 30 4 56 4" stroke="#1a1200" stroke-width="1.2" opacity="0.7"/>
+      <path d="M4 44 C4 24 24 4 44 4" stroke="#1a1200" stroke-width="0.7" opacity="0.5"/>
+      <path d="M4 32 C4 18 18 4 32 4" stroke="#1a1200" stroke-width="0.5" opacity="0.35"/>
+      <circle cx="14" cy="14" r="5" fill="none" stroke="#1a1200" stroke-width="1" opacity="0.6"/>
+      <circle cx="14" cy="14" r="2" fill="#1a1200" opacity="0.4"/>
+      <path d="M4 4 C4 4 10 4 4 10" stroke="#1a1200" stroke-width="1.5" opacity="0.8"/>
+    </svg>
+  </div>
+  <div class="corner c-br">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 56 C4 30 30 4 56 4" stroke="#1a1200" stroke-width="1.2" opacity="0.7"/>
+      <path d="M4 44 C4 24 24 4 44 4" stroke="#1a1200" stroke-width="0.7" opacity="0.5"/>
+      <path d="M4 32 C4 18 18 4 32 4" stroke="#1a1200" stroke-width="0.5" opacity="0.35"/>
+      <circle cx="14" cy="14" r="5" fill="none" stroke="#1a1200" stroke-width="1" opacity="0.6"/>
+      <circle cx="14" cy="14" r="2" fill="#1a1200" opacity="0.4"/>
+      <path d="M4 4 C4 4 10 4 4 10" stroke="#1a1200" stroke-width="1.5" opacity="0.8"/>
+    </svg>
+  </div>
+
+  <!-- WATERMARK -->
+  <div class="watermark">ENGLISH SHEKHO</div>
+
+  <!-- CONTENT -->
+  <div class="cert-content">
+    <div class="platform-name">🇬🇧 &nbsp; English Shekho &nbsp; 🇬🇧</div>
+
+    <!-- TOP RAIL -->
+    <div style="display:flex;align-items:center;gap:0;margin-top:6px;">
+      <div style="width:90px;height:1px;background:#1a1200;opacity:.6;"></div>
+      <div style="width:4px;height:4px;border-radius:50%;background:#1a1200;margin:0 4px;opacity:.7;"></div>
+      <div style="width:20px;height:4px;background:#1a1200;border-radius:1px;margin:0 4px;opacity:.8;"></div>
+      <div style="width:7px;height:7px;border-radius:50%;background:#1a1200;margin:0 4px;opacity:.9;"></div>
+      <div style="width:20px;height:4px;background:#1a1200;border-radius:1px;margin:0 4px;opacity:.8;"></div>
+      <div style="width:4px;height:4px;border-radius:50%;background:#1a1200;margin:0 4px;opacity:.7;"></div>
+      <div style="width:90px;height:1px;background:#1a1200;opacity:.6;"></div>
+    </div>
+
+    <div class="cert-title">Certificate</div>
+
+    <!-- BOTTOM RAIL -->
+    <div style="display:flex;align-items:center;gap:0;margin-bottom:10px;">
+      <div style="width:90px;height:1px;background:#1a1200;opacity:.6;"></div>
+      <div style="width:4px;height:4px;border-radius:50%;background:#1a1200;margin:0 4px;opacity:.7;"></div>
+      <div style="width:20px;height:4px;background:#1a1200;border-radius:1px;margin:0 4px;opacity:.8;"></div>
+      <div style="width:7px;height:7px;border-radius:50%;background:#1a1200;margin:0 4px;opacity:.9;"></div>
+      <div style="width:20px;height:4px;background:#1a1200;border-radius:1px;margin:0 4px;opacity:.8;"></div>
+      <div style="width:4px;height:4px;border-radius:50%;background:#1a1200;margin:0 4px;opacity:.7;"></div>
+      <div style="width:90px;height:1px;background:#1a1200;opacity:.6;"></div>
+    </div>
+
+    <div class="presented-to">This Certificate is Presented To</div>
+
+    <div class="recipient-name" id="cert-name">Zishan Rafi</div>
+    <div class="name-underline"></div>
+
+    <div class="cert-desc">
+      for successfully completing the
+      <br>
+      <span class="level" id="cert-level">A2 Elementary</span> Level
+      <br>
+      on the English Shekho A1 → C2 English Learning Roadmap.
+      <br>
+      <span class="bn">সফলভাবে এই স্তর সম্পন্ন করার জন্য এই সনদপত্র প্রদান করা হলো।</span>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW -->
+  <div class="cert-bottom">
+    <div class="bottom-col">
+      <div class="col-value" id="cert-date">15 June 2026</div>
+      <div class="col-label">Date</div>
+    </div>
+
+    <div class="cert-seal">
+      <div class="seal-circle">
+        <div class="seal-text">ENGLISH<br>SHEKHO<br>OFFICIAL</div>
+      </div>
+    </div>
+
+    <div class="bottom-col">
+      <div class="sig-value">Zishan Rafi</div>
+      <div class="col-label">Signature</div>
+    </div>
+  </div>
+
+</div><!-- end cert-paper -->
+
+<script>
+// Read URL params: ?name=Zishan+Rafi&level=A2+Elementary&levelFull=A2+Elementary
+const params = new URLSearchParams(location.search);
+const name  = params.get("name")  || "Learner";
+const level = params.get("level") || "A1 Beginner";
+const date  = new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+
+document.getElementById("cert-name").textContent  = name;
+document.getElementById("cert-level").textContent = level;
+document.getElementById("cert-date").textContent  = date;
+document.title = `Certificate — ${name} — English Shekho`;
+</script>
+</body>
+</html>

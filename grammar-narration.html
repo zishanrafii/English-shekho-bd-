@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Narration — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --accent:#818cf8;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(129,140,248,.07),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(129,140,248,.05),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;
+  background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(129,140,248,.2),rgba(129,140,248,.1));
+  border:1px solid rgba(129,140,248,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;background:linear-gradient(135deg,#818cf8,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;
+  color:var(--sub);text-decoration:none;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);transition:.2s;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(129,140,248,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(129,140,248,.15),rgba(167,139,250,.15));
+  border:2px solid rgba(129,140,248,.2);display:flex;align-items:center;
+  justify-content:center;font-size:.9rem;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.nav-av img{width:100%;height:100%;object-fit:cover;}
+
+.layout{display:flex;height:calc(100vh - 57px);}
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid var(--border);
+  overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(129,140,248,.2);border-radius:3px;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;
+  border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;margin-bottom:2px;}
+.sb-item:hover{background:rgba(129,140,248,.06);border-color:rgba(129,140,248,.1);}
+.sb-item.active{background:rgba(129,140,248,.1);border-color:rgba(129,140,248,.25);color:var(--accent);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+.lvl-b2{background:rgba(251,113,133,.1);color:#fb7185;border:1px solid rgba(251,113,133,.2);}
+
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(129,140,248,.15);border-radius:3px;}
+
+.lesson-header{margin-bottom:2rem;}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#818cf8,#a78bfa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:.8rem;}
+.lmeta{font-size:12px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,linear-gradient(90deg,var(--accent),#a78bfa));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+.narr-heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:1.4rem;}
+.n-hero{border-radius:16px;padding:1rem .8rem;text-align:center;border:1px solid;}
+.n-word{font-size:1.1rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:.25rem;}
+.n-label{font-size:10px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.4;}
+
+.formula{background:rgba(129,140,248,.06);border:1px solid rgba(129,140,248,.18);border-radius:14px;padding:1rem 1.4rem;margin-bottom:1rem;}
+.formula-label{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.formula-text{font-size:.95rem;color:var(--text);line-height:1.9;font-family:'JetBrains Mono',monospace;}
+.hl{color:var(--accent);font-weight:700;}
+.hl2{color:var(--teal);font-weight:700;}
+.hl3{color:var(--rose);font-weight:700;}
+.hl4{color:var(--gold);font-weight:700;}
+
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(129,140,248,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-tag{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;border-radius:20px;margin-left:8px;font-weight:700;background:rgba(129,140,248,.1);color:var(--accent);}
+
+/* Direct ↔ Indirect speech bubble layout */
+.speech-pair{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem;}
+.speech-box{border-radius:14px;padding:.9rem 1.1rem;border:1px solid;}
+.speech-box.direct{background:rgba(129,140,248,.05);border-color:rgba(129,140,248,.2);}
+.speech-box.indirect{background:rgba(45,212,191,.05);border-color:rgba(45,212,191,.2);}
+.speech-label{font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.speech-box.direct .speech-label{color:var(--accent);}
+.speech-box.indirect .speech-label{color:var(--teal);}
+.speech-text{font-size:13px;font-weight:600;line-height:1.5;}
+.speech-bn{font-size:11.5px;color:var(--muted);margin-top:.3rem;font-family:'Noto Sans Bengali',sans-serif;}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{background:rgba(129,140,248,.08);color:var(--accent);font-weight:700;padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(129,140,248,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--text);font-weight:600;}
+.gtable td:nth-child(2){color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:12.5px;}
+.gtable td:nth-child(3){color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:12.5px;}
+.gtable td:nth-child(4){color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+
+.tense-flow{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
+.tense-row{display:flex;align-items:center;gap:8px;font-size:13px;}
+.tense-from{background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.2);color:var(--accent);border-radius:8px;padding:.3rem .7rem;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;min-width:160px;flex-shrink:0;}
+.tense-arrow{color:var(--muted);font-size:1rem;flex-shrink:0;}
+.tense-to{background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.2);color:var(--teal);border-radius:8px;padding:.3rem .7rem;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;min-width:160px;}
+
+.tip{background:rgba(129,140,248,.06);border:1px solid rgba(129,140,248,.2);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--accent);}
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+.practice-q{background:rgba(129,140,248,.04);border:1px solid rgba(129,140,248,.15);border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.6rem;}
+.pq-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.pq-opt{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:'Outfit',sans-serif;}
+.pq-opt:hover{border-color:rgba(129,140,248,.3);color:var(--accent);}
+.pq-opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);}
+.pq-opt.wrong{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.pq-feedback{font-size:13px;padding:.5rem .8rem;border-radius:8px;display:none;font-family:'Noto Sans Bengali',sans-serif;margin-top:.4rem;}
+.pq-feedback.show{display:block;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:var(--emerald);}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;align-items:center;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.btn-prev:hover,.btn-next:hover{background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(129,140,248,.12),rgba(167,139,250,.08));border-color:rgba(129,140,248,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#818cf8,#a78bfa);color:#fff;border:none;border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#818cf8,#a78bfa);transition:width .3s;}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--border);}
+  .main{padding:1.2rem 1rem 3rem;}
+  .speech-pair{grid-template-columns:1fr;}
+  .tense-from{min-width:120px;}
+  .tense-to{min-width:120px;}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">🗣️ Narration</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" id="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section-label">Direct &amp; Indirect Speech</div>
+    <div class="sb-item active" data-id="intro" onclick="show('intro',0)">
+      <span class="sb-dot" style="background:#818cf8"></span><span class="sb-text">Introduction</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="statements" onclick="show('statements',1)">
+      <span class="sb-dot" style="background:#34d399"></span><span class="sb-text">Statements</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="tense" onclick="show('tense',2)">
+      <span class="sb-dot" style="background:#2dd4bf"></span><span class="sb-text">Tense Changes</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="questions" onclick="show('questions',3)">
+      <span class="sb-dot" style="background:#f5c842"></span><span class="sb-text">Questions</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="commands" onclick="show('commands',4)">
+      <span class="sb-dot" style="background:#fb923c"></span><span class="sb-text">Commands &amp; Requests</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="exclamations" onclick="show('exclamations',5)">
+      <span class="sb-dot" style="background:#fb7185"></span><span class="sb-text">Exclamations</span><span class="sb-lvl lvl-b2">B2</span>
+    </div>
+    <div class="sb-item" data-id="reporting" onclick="show('reporting',6)">
+      <span class="sb-dot" style="background:#a78bfa"></span><span class="sb-text">Reporting Verbs</span><span class="sb-lvl lvl-b2">B2</span>
+    </div>
+    <div class="sb-item" data-id="practice" onclick="show('practice',7)">
+      <span class="sb-dot" style="background:#818cf8"></span><span class="sb-text">Practice Quiz</span>
+    </div>
+  </div>
+
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const PANELS={
+
+'intro':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Introduction</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Direct ↔ Indirect Speech</span></div>
+  <div class="lesson-desc">Narration মানে কেউ যা বলেছে তা অন্যকে জানানো। Direct Speech-এ হুবহু উদ্ধৃতি দেওয়া হয়, আর Indirect Speech-এ নিজের ভাষায় বলা হয়।</div>
+</div>
+
+<div class="narr-heroes">
+  <div class="n-hero" style="background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.25)">
+    <div class="n-word" style="color:#818cf8">" "</div>
+    <div class="n-label">Direct Speech<br>হুবহু উদ্ধৃতি</div>
+  </div>
+  <div class="n-hero" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25)">
+    <div class="n-word" style="color:#2dd4bf;font-size:.95rem">that/if</div>
+    <div class="n-label">Indirect Speech<br>নিজের ভাষায়</div>
+  </div>
+  <div class="n-hero" style="background:rgba(245,200,66,.08);border-color:rgba(245,200,66,.25)">
+    <div class="n-word" style="color:#f5c842;font-size:.9rem">said/told</div>
+    <div class="n-label">Reporting Verb<br>যেটা দিয়ে শুরু</div>
+  </div>
+  <div class="n-hero" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)">
+    <div class="n-word" style="color:#34d399;font-size:.85rem">backshift</div>
+    <div class="n-label">Tense পিছিয়ে যায়<br>past reporting এ</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#a78bfa)">
+  <div class="card-title">📋 মূল পার্থক্য</div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct Speech</div>
+      <div class="speech-text">She said, <b>"I am happy."</b></div>
+      <div class="speech-bn">হুবহু তার কথা, quotation marks সহ।</div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect Speech</div>
+      <div class="speech-text">She said <b>that she was happy.</b></div>
+      <div class="speech-bn">নিজের ভাষায়, tense পরিবর্তিত।</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct Speech</div>
+      <div class="speech-text">He said, <b>"I will come."</b></div>
+      <div class="speech-bn">উদ্ধৃতি চিহ্নসহ।</div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect Speech</div>
+      <div class="speech-text">He said <b>that he would come.</b></div>
+      <div class="speech-bn">will → would হয়ে গেছে।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">📌 তিনটি মূল পরিবর্তন</div>
+  <table class="gtable">
+    <tr><th>কী পরিবর্তন হয়</th><th>Direct</th><th>Indirect</th><th>নোট</th></tr>
+    <tr><td>Tense</td><td>am / is</td><td>was / were</td><td>Backshift</td></tr>
+    <tr><td>Pronoun</td><td>I / we / you</td><td>he/she/they</td><td>Context অনুযায়ী</td></tr>
+    <tr><td>Time/Place</td><td>now / here / today</td><td>then / there / that day</td><td>Reference পরিবর্তন</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Reporting Verb Present হলে Tense পরিবর্তন হয় না!</strong><br>
+  "She <strong>says</strong> that she is happy." — এখানে says (present), তাই is থাকে।<br>
+  "She <strong>said</strong> that she <strong>was</strong> happy." — said (past), তাই is → was।</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="btn-prev" href="grammar-modals.html">← Modal Verbs</a>
+  <button class="btn-next" onclick="show('statements',1)">Statements →</button>
+</div>`,
+
+'statements':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Statements</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Statements (বিবৃতি)</span></div>
+  <div class="lesson-desc">Assertive/Declarative sentence — কোনো তথ্য বা অনুভূতি জানানো হয় — এগুলো Indirect Speech এ যেভাবে রূপান্তরিত হয়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">📐 Formula</div>
+  <div class="formula">
+    <div class="formula-label">Direct → Indirect (Positive)</div>
+    <div class="formula-text">Subject + <span class="hl">said/told</span> + <span class="hl2">that</span> + [Subject + past verb + ...]</div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">said vs told পার্থক্য</div>
+    <div class="formula-text">She <span class="hl">said</span> that... &nbsp;(object ছাড়া)<br>She <span class="hl3">told me</span> that... (object সহ — ব্যক্তি উল্লেখ)</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#a78bfa)">
+  <div class="card-title">🔄 Step-by-step রূপান্তর</div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">Rafi said, <b>"I am studying English."</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">Rafi said that <b>he was studying English.</b></div>
+      <div class="speech-bn">am → was, I → he</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">Mim told me, <b>"I have finished my work."</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">Mim told me that <b>she had finished her work.</b></div>
+      <div class="speech-bn">have finished → had finished</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">They said, <b>"We will visit Dhaka tomorrow."</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">They said that <b>they would visit Dhaka the next day.</b></div>
+      <div class="speech-bn">will → would, tomorrow → the next day</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">🕐 Time & Place শব্দ পরিবর্তন</div>
+  <table class="gtable">
+    <tr><th>Direct (এই মুহূর্ত)</th><th>Indirect (past reference)</th></tr>
+    <tr><td>now</td><td>then / at that time</td></tr>
+    <tr><td>today</td><td>that day</td></tr>
+    <tr><td>yesterday</td><td>the day before / the previous day</td></tr>
+    <tr><td>tomorrow</td><td>the next day / the following day</td></tr>
+    <tr><td>here</td><td>there</td></tr>
+    <tr><td>this / these</td><td>that / those</td></tr>
+    <tr><td>last night</td><td>the previous night</td></tr>
+    <tr><td>ago</td><td>before / earlier</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>"told" এর পরে সবসময় Object লাগে।</strong><br>
+  ✅ She <strong>told me</strong> that... &nbsp; ✅ He <strong>told his teacher</strong> that...<br>
+  ❌ She <strong>told</strong> that... (ভুল — told এর পরে ব্যক্তি লাগবে)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('intro',0)">← Introduction</button>
+  <button class="btn-next" onclick="show('tense',2)">Tense Changes →</button>
+</div>`,
+
+'tense':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Tense Changes</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Tense Changes (Backshift)</span></div>
+  <div class="lesson-desc">Indirect Speech এ Reporting Verb past হলে Direct Speech এর tense একধাপ পিছিয়ে যায় — এটাকেই Backshift বলে। এই chart মুখস্থ করলে Narration সহজ হয়ে যাবে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">🔄 Tense Backshift Chart</div>
+  <div class="tense-flow">
+    <div class="tense-row">
+      <div class="tense-from">Present Simple<br><span style="font-size:10px;opacity:.7">I work</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to">Past Simple<br><span style="font-size:10px;opacity:.7">he worked</span></div>
+    </div>
+    <div class="tense-row">
+      <div class="tense-from">Present Continuous<br><span style="font-size:10px;opacity:.7">I am working</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to">Past Continuous<br><span style="font-size:10px;opacity:.7">he was working</span></div>
+    </div>
+    <div class="tense-row">
+      <div class="tense-from">Present Perfect<br><span style="font-size:10px;opacity:.7">I have worked</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to">Past Perfect<br><span style="font-size:10px;opacity:.7">he had worked</span></div>
+    </div>
+    <div class="tense-row">
+      <div class="tense-from">Past Simple<br><span style="font-size:10px;opacity:.7">I worked</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to">Past Perfect<br><span style="font-size:10px;opacity:.7">he had worked</span></div>
+    </div>
+    <div class="tense-row">
+      <div class="tense-from">Past Continuous<br><span style="font-size:10px;opacity:.7">I was working</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to">Past Perfect Cont.<br><span style="font-size:10px;opacity:.7">he had been working</span></div>
+    </div>
+    <div class="tense-row">
+      <div class="tense-from">will / shall<br><span style="font-size:10px;opacity:.7">I will come</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to">would / should<br><span style="font-size:10px;opacity:.7">he would come</span></div>
+    </div>
+    <div class="tense-row">
+      <div class="tense-from">can / may<br><span style="font-size:10px;opacity:.7">I can go</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to">could / might<br><span style="font-size:10px;opacity:.7">he could go</span></div>
+    </div>
+    <div class="tense-row">
+      <div class="tense-from" style="border-color:rgba(251,113,133,.3);background:rgba(251,113,133,.06);color:var(--rose)">must<br><span style="font-size:10px;opacity:.7">I must go</span></div>
+      <div class="tense-arrow">→</div>
+      <div class="tense-to" style="border-color:rgba(251,113,133,.3);background:rgba(251,113,133,.06);color:var(--rose)">had to<br><span style="font-size:10px;opacity:.7">he had to go</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">💬 Examples — Backshift in action</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en">D: "I <b>work</b> at a hospital." → I: She said she <b>worked</b> at a hospital. <span class="ex-tag">Simple→Simple</span></div>
+      <div class="ex-bn">সে একটা হাসপাতালে কাজ করে (বলেছিল করত)।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "She <b>is sleeping</b>." → I: He said she <b>was sleeping</b>. <span class="ex-tag">Cont→Cont</span></div>
+      <div class="ex-bn">সে ঘুমাচ্ছে (বলেছিল ঘুমাচ্ছিল)।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "I <b>have lost</b> my keys." → I: He said he <b>had lost</b> his keys. <span class="ex-tag">Perf→Past Perf</span></div>
+      <div class="ex-bn">সে তার চাবি হারিয়েছে (বলেছিল হারিয়েছিল)।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "I <b>went</b> to market." → I: She said she <b>had gone</b> to market. <span class="ex-tag">Past→Past Perf</span></div>
+      <div class="ex-bn">সে বাজারে গিয়েছিল।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "I <b>will call</b> you." → I: She said she <b>would call</b> me. <span class="ex-tag">will→would</span></div>
+      <div class="ex-bn">সে আমাকে call করবে (বলেছিল করবে)।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--accent))">
+  <div class="card-title">⛔ Tense পরিবর্তন হয় না যখন</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en">Universal truth: He said, "The sun <b>rises</b> in the east." → He said that the sun <b>rises</b> in the east.</div>
+      <div class="ex-bn">সার্বজনীন সত্য কখনো পরিবর্তন হয় না।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">Habitual fact: She said, "I <b>go</b> to the mosque every Friday." → She said she <b>goes</b> every Friday.</div>
+      <div class="ex-bn">নিত্যনৈমিত্তিক সত্য — tense অপরিবর্তিত।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">Past perfect stays: She said, "I <b>had finished</b>." → She said she <b>had finished</b>.</div>
+      <div class="ex-bn">Past Perfect আর পিছিয়ে যায় না।</div>
+    </div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Reporting Verb যদি Present বা Future হয়:</strong><br>
+  "She <strong>says</strong> (that) she is tired." — says (present), তাই is → is (কোনো পরিবর্তন নেই)।<br>
+  Backshift শুধু reporting verb past হলেই লাগে।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('statements',1)">← Statements</button>
+  <button class="btn-next" onclick="show('questions',3)">Questions →</button>
+</div>`,
+
+'questions':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Questions</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Questions (প্রশ্ন)</span></div>
+  <div class="lesson-desc">Interrogative sentences indirect speech এ যাওয়ার সময় question mark বাদ যায়, word order পরিবর্তন হয়, এবং "asked" / "enquired" ব্যবহার হয়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">📐 দুই ধরনের প্রশ্ন</div>
+  <div class="formula">
+    <div class="formula-label">Yes/No Question (সাহায্যকারী verb দিয়ে প্রশ্ন)</div>
+    <div class="formula-text">Subject + <span class="hl">asked</span> + Object + <span class="hl2">if/whether</span> + [Subject + verb + ...]</div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Wh-Question (wh-word দিয়ে প্রশ্ন)</div>
+    <div class="formula-text">Subject + <span class="hl">asked</span> + Object + <span class="hl3">wh-word</span> + [Subject + verb + ...]</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#a78bfa)">
+  <div class="card-title">🔄 Yes/No Questions</div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">He said, <b>"Are you coming?"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">He asked <b>if I was coming.</b></div>
+      <div class="speech-bn">Are → if...was, question mark বাদ</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">She said, <b>"Do you like tea?"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">She asked <b>whether I liked tea.</b></div>
+      <div class="speech-bn">Do...like → whether...liked</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">🔄 Wh-Questions</div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">She asked, <b>"Where do you live?"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">She asked <b>where I lived.</b></div>
+      <div class="speech-bn">do live → lived, question mark বাদ</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">He said, <b>"What are you doing?"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">He asked <b>what I was doing.</b></div>
+      <div class="speech-bn">are doing → was doing</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">Mum said, <b>"Why did you come late?"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">Mum asked <b>why I had come late.</b></div>
+      <div class="speech-bn">did come → had come</div>
+    </div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>Question এ Word Order বদলায়:</strong><br>
+  Direct: "Where <strong>are you</strong> going?" → Indirect: ...where <strong>you were</strong> going. (Subject আগে, verb পরে)<br>
+  ❌ ...where were you going. (ভুল — question word order রাখবে না)</div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>if বনাম whether:</strong> দুটোই Yes/No question এ ব্যবহার করা যায়।<br>
+  তবে "whether" বেশি formal এবং "whether or not" বলতে পারলে আরও নিশ্চিত অর্থ প্রকাশ করে।<br>
+  "She asked <strong>whether or not</strong> I was coming."</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('tense',2)">← Tense Changes</button>
+  <button class="btn-next" onclick="show('commands',4)">Commands →</button>
+</div>`,
+
+'commands':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Commands & Requests</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Commands &amp; Requests (আদেশ ও অনুরোধ)</span></div>
+  <div class="lesson-desc">Imperative sentence indirect speech এ "to + V1" structure এ রূপান্তরিত হয়। Reporting verb হয়: told, ordered, requested, advised, begged।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--orange),var(--accent))">
+  <div class="card-title">📐 Formula</div>
+  <div class="formula">
+    <div class="formula-label">Affirmative Command (আদেশ)</div>
+    <div class="formula-text">Subject + <span class="hl">told/ordered</span> + Object + <span class="hl2">to + V1</span> + ...</div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Negative Command (না করতে বলা)</div>
+    <div class="formula-text">Subject + <span class="hl">told/ordered</span> + Object + <span class="hl3">not to + V1</span> + ...</div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Request (অনুরোধ)</div>
+    <div class="formula-text">Subject + <span class="hl">requested/asked</span> + Object + <span class="hl2">to + V1</span> + ...</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">🔄 Command Examples</div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">The teacher said, <b>"Open your books."</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">The teacher <b>told the students to open their books.</b></div>
+      <div class="speech-bn">Open → to open, আদেশ</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">Mum said, <b>"Don't make noise."</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">Mum <b>told us not to make noise.</b></div>
+      <div class="speech-bn">Don't → not to</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">🙏 Request Examples</div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">She said, <b>"Please help me."</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">She <b>requested me to help her.</b></div>
+      <div class="speech-bn">Please + verb → requested + to</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">He said, <b>"Could you lend me your pen?"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">He <b>requested me to lend him my pen.</b></div>
+      <div class="speech-bn">Polite question → request structure</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--orange))">
+  <div class="card-title">📌 Reporting Verbs for Commands</div>
+  <table class="gtable">
+    <tr><th>Reporting Verb</th><th>ব্যবহার</th><th>উদাহরণ</th></tr>
+    <tr><td>told</td><td>সাধারণ আদেশ</td><td>She told him to sit down.</td></tr>
+    <tr><td>ordered</td><td>কড়া আদেশ</td><td>The officer ordered them to stop.</td></tr>
+    <tr><td>requested</td><td>ভদ্র অনুরোধ</td><td>He requested her to wait.</td></tr>
+    <tr><td>advised</td><td>পরামর্শ</td><td>The doctor advised me to rest.</td></tr>
+    <tr><td>begged</td><td>মিনতি করা</td><td>She begged him not to leave.</td></tr>
+    <tr><td>warned</td><td>সতর্ক করা</td><td>He warned us not to go there.</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Command এ Tense পরিবর্তন হয় না!</strong><br>
+  Imperative → to + V1 (base verb)। Tense backshift এখানে প্রযোজ্য নয়।<br>
+  "Come here" → told to <strong>come</strong> (not "came" বা "had come")।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('questions',3)">← Questions</button>
+  <button class="btn-next" onclick="show('exclamations',5)">Exclamations →</button>
+</div>`,
+
+'exclamations':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Exclamations</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b2" style="padding:4px 12px">B2</span><span class="lmeta">⚡ 125 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Exclamations (বিস্ময়/আবেগ)</span></div>
+  <div class="lesson-desc">Exclamatory sentence indirect speech এ "exclaimed that" বা আবেগ অনুযায়ী নির্দিষ্ট reporting verb ব্যবহার করে রূপান্তরিত হয়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--accent))">
+  <div class="card-title">📐 Formula</div>
+  <div class="formula">
+    <div class="formula-label">সাধারণ Exclamation</div>
+    <div class="formula-text">Subject + <span class="hl">exclaimed</span> + [with joy/sorrow/surprise] + <span class="hl2">that</span> + [statement]</div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">What / How দিয়ে Exclamation</div>
+    <div class="formula-text">"What a beautiful day!" → <span class="hl">exclaimed that</span> it was a very beautiful day.</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--rose))">
+  <div class="card-title">🔄 Exclamation Conversions</div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">She said, <b>"What a beautiful bird!"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">She <b>exclaimed that it was a very beautiful bird.</b></div>
+      <div class="speech-bn">What a → very, ! বাদ যায়</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">He said, <b>"Hurrah! We have won!"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">He <b>exclaimed with joy that they had won.</b></div>
+      <div class="speech-bn">Hurrah → with joy</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">She said, <b>"Alas! My father is dead."</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">She <b>exclaimed with sorrow that her father was dead.</b></div>
+      <div class="speech-bn">Alas → with sorrow</div>
+    </div>
+  </div>
+  <div class="speech-pair">
+    <div class="speech-box direct">
+      <div class="speech-label">✦ Direct</div>
+      <div class="speech-text">He said, <b>"Bravo! You did it!"</b></div>
+    </div>
+    <div class="speech-box indirect">
+      <div class="speech-label">✦ Indirect</div>
+      <div class="speech-text">He <b>applauded him saying that he had done it.</b></div>
+      <div class="speech-bn">Bravo → applauded</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">📌 Interjection → Reporting Phrase</div>
+  <table class="gtable">
+    <tr><th>Direct Interjection</th><th>Indirect Reporting Phrase</th></tr>
+    <tr><td>Hurrah! / Hooray!</td><td>exclaimed with joy that</td></tr>
+    <tr><td>Alas! / Oh no!</td><td>exclaimed with sorrow that</td></tr>
+    <tr><td>Bravo!</td><td>applauded / praised saying that</td></tr>
+    <tr><td>What a...! / How...!</td><td>exclaimed that it was very...</td></tr>
+    <tr><td>Oh! / Ah!</td><td>exclaimed with surprise that</td></tr>
+    <tr><td>Shame! / Fie!</td><td>expressed shame that</td></tr>
+  </table>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>"What" এবং "How" indirect এ "very" হয়ে যায়:</strong><br>
+  "What a <strong>fast</strong> car!" → exclaimed that it was a very <strong>fast</strong> car.<br>
+  "How <strong>beautiful</strong> she is!" → exclaimed that she was very <strong>beautiful</strong>.</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('commands',4)">← Commands</button>
+  <button class="btn-next" onclick="show('reporting',6)">Reporting Verbs →</button>
+</div>`,
+
+'reporting':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Reporting Verbs</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b2" style="padding:4px 12px">B2</span><span class="lmeta">⚡ 150 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Reporting Verbs</span></div>
+  <div class="lesson-desc">শুধু "said" ব্যবহার না করে নির্দিষ্ট reporting verb ব্যবহার করলে লেখা আরও প্রাণবন্ত হয়। প্রতিটির নিজস্ব structure আছে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">📌 Reporting Verbs — Structure Chart</div>
+  <table class="gtable">
+    <tr><th>Verb</th><th>Structure</th><th>বাংলা অর্থ</th></tr>
+    <tr><td>say</td><td>say (that) + clause</td><td>বলা</td></tr>
+    <tr><td>tell</td><td>tell + sb + (that) + clause</td><td>জানানো</td></tr>
+    <tr><td>ask</td><td>ask + sb + to V1 / ask if/wh</td><td>জিজ্ঞেস করা</td></tr>
+    <tr><td>promise</td><td>promise (sb) + to V1 / that</td><td>প্রতিশ্রুতি দেওয়া</td></tr>
+    <tr><td>suggest</td><td>suggest + V-ing / that + should</td><td>পরামর্শ দেওয়া</td></tr>
+    <tr><td>admit</td><td>admit + V-ing / that</td><td>স্বীকার করা</td></tr>
+    <tr><td>deny</td><td>deny + V-ing / that</td><td>অস্বীকার করা</td></tr>
+    <tr><td>refuse</td><td>refuse + to V1</td><td>অস্বীকার করা (কাজ)</td></tr>
+    <tr><td>agree</td><td>agree + to V1 / that</td><td>রাজি হওয়া</td></tr>
+    <tr><td>warn</td><td>warn + sb + not to V1 / that</td><td>সতর্ক করা</td></tr>
+    <tr><td>congratulate</td><td>congratulate sb on + V-ing</td><td>অভিনন্দন দেওয়া</td></tr>
+    <tr><td>apologize</td><td>apologize (to sb) for + V-ing</td><td>ক্ষমা চাওয়া</td></tr>
+    <tr><td>thank</td><td>thank sb for + V-ing</td><td>ধন্যবাদ দেওয়া</td></tr>
+    <tr><td>invite</td><td>invite sb + to V1</td><td>আমন্ত্রণ দেওয়া</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">💬 Examples — Varied Reporting Verbs</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en">D: "I will finish it." → I: He <b>promised to finish</b> it. <span class="ex-tag">promise + to</span></div>
+      <div class="ex-bn">সে শেষ করার প্রতিশ্রুতি দিল।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "Why don't we go to the beach?" → I: She <b>suggested going</b> to the beach. <span class="ex-tag">suggest + V-ing</span></div>
+      <div class="ex-bn">সে সমুদ্র সৈকতে যাওয়ার প্রস্তাব দিল।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "I didn't steal the money." → I: He <b>denied stealing</b> the money. <span class="ex-tag">deny + V-ing</span></div>
+      <div class="ex-bn">সে টাকা চুরির কথা অস্বীকার করল।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "I'm sorry I was late." → I: She <b>apologized for being</b> late. <span class="ex-tag">apologize for + V-ing</span></div>
+      <div class="ex-bn">সে দেরি হওয়ার জন্য ক্ষমা চাইল।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "Congratulations on passing your exam!" → I: He <b>congratulated her on passing</b> her exam. <span class="ex-tag">congratulate on + V-ing</span></div>
+      <div class="ex-bn">সে তাকে পরীক্ষায় পাসের জন্য অভিনন্দন জানাল।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">D: "I won't help you." → I: She <b>refused to help</b> him. <span class="ex-tag">refuse + to</span></div>
+      <div class="ex-bn">সে সাহায্য করতে অস্বীকার করল।</div>
+    </div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>suggest এর পরে NEVER "to" ব্যবহার করবে না!</strong><br>
+  ❌ She suggested <strong>to go</strong> to the cinema.<br>
+  ✅ She suggested <strong>going</strong> to the cinema.<br>
+  ✅ She suggested (that) we <strong>should go</strong> to the cinema.</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('exclamations',5)">← Exclamations</button>
+  <button class="btn-quiz-big" onclick="show('practice',7)">✍️ Practice Quiz</button>
+  <button class="btn-next" onclick="show('practice',7)">Practice →</button>
+</div>`,
+
+'practice':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Narration → Practice</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>✍️ Narration Practice Quiz</span></div>
+  <div class="lesson-desc">Direct থেকে Indirect Speech রূপান্তরের প্রশ্নের সঠিক উত্তর বেছে নাও।</div>
+</div>
+<div id="quiz-wrap"></div>
+<div class="lesson-nav" style="margin-top:1.5rem">
+  <button class="btn-prev" onclick="show('reporting',6)">← Reporting Verbs</button>
+  <button class="btn-quiz-big" onclick="resetQuiz()">🔄 আবার চেষ্টা করো</button>
+  <a class="btn-next" href="grammar-conditionals.html">Conditionals →</a>
+</div>`
+};
+
+const QUIZ=[
+  {q:'She said, "I am tired." → She said that she ___ tired.',
+   opts:['is','was','were','had been'], ans:'was', exp:'Present Simple → Past Simple: am → was'},
+  {q:'He said, "I will come tomorrow." → He said that he ___ come the next day.',
+   opts:['will','would','shall','had'], ans:'would', exp:'will → would (future backshift)'},
+  {q:'The teacher said, "Open your books." → The teacher ___ the students to open their books.',
+   opts:['said','told','asked','ordered'], ans:'told', exp:'Command → told + object + to V1'},
+  {q:'She said, "Where do you live?" → She asked where I ___.',
+   opts:['live','lives','lived','had lived'], ans:'lived', exp:'Wh-question: do live → lived (backshift)'},
+  {q:'He said, "Are you coming?" → He asked ___ I was coming.',
+   opts:['that','what','if','which'], ans:'if', exp:'Yes/No question → if/whether'},
+  {q:'Mum said, "Don\'t make noise." → Mum told us ___ make noise.',
+   opts:['to not','not to','don\'t','not'], ans:'not to', exp:'Negative command → not to + V1'},
+  {q:'She said, "What a beautiful day!" → She exclaimed that it was a ___ beautiful day.',
+   opts:['such','very','so','quite'], ans:'very', exp:'What a → very (exclamation conversion)'},
+  {q:'"I didn\'t steal it," he said. → He ___ stealing it.',
+   opts:['denied','refused','admitted','said'], ans:'denied', exp:'Deny + V-ing (অস্বীকার করা)'},
+  {q:'She said, "I have finished my work." → She said that she ___ her work.',
+   opts:['has finished','finished','had finished','was finishing'], ans:'had finished', exp:'Present Perfect → Past Perfect'},
+  {q:'He said, "The sun rises in the east." → He said that the sun ___ in the east.',
+   opts:['rose','had risen','rises','would rise'], ans:'rises', exp:'Universal truth — tense পরিবর্তন হয় না'},
+  {q:'She said, "Why don\'t we go to the cinema?" → She ___ going to the cinema.',
+   opts:['suggested','told','advised','asked'], ans:'suggested', exp:'Suggestion → suggested + V-ing'},
+  {q:'He said, "I will help you." → He ___ to help me.',
+   opts:['offered','promised','refused','suggested'], ans:'promised', exp:'Future commitment → promised + to V1'},
+];
+
+let score=0,done=false;
+function renderQuiz(){
+  score=0;done=false;
+  const w=document.getElementById('quiz-wrap');
+  if(!w)return;
+  w.innerHTML=QUIZ.map((q,i)=>`
+    <div class="practice-q" id="pq-${i}">
+      <div class="pq-text">${i+1}. ${q.q}</div>
+      <div class="pq-options">${q.opts.map(o=>`<button class="pq-opt" onclick="checkQ(${i},'${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>
+      <div class="pq-feedback" id="pf-${i}"></div>
+    </div>`).join('')+`<div id="score-wrap"></div>`;
+}
+window.checkQ=(i,sel)=>{
+  const q=QUIZ[i];
+  const el=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  el.querySelectorAll('.pq-opt').forEach(b=>{
+    b.onclick=null;
+    if(b.textContent===q.ans)b.classList.add('correct');
+    else if(b.textContent===sel&&sel!==q.ans)b.classList.add('wrong');
+  });
+  fb.className='pq-feedback show '+(sel===q.ans?'correct':'wrong');
+  fb.textContent=(sel===q.ans?'✅ সঠিক! ':'❌ ভুল। ')+q.exp;
+  if(sel===q.ans)score++;
+  if([...document.querySelectorAll('.pq-feedback.show')].length===QUIZ.length&&!done){
+    done=true;
+    const pct=Math.round(score/QUIZ.length*100);
+    document.getElementById('score-wrap').innerHTML=`
+      <div style="background:rgba(129,140,248,.07);border:1px solid rgba(129,140,248,.2);border-radius:18px;padding:1.5rem;text-align:center;margin-top:1rem;">
+        <div style="font-size:2.5rem;font-weight:900;color:var(--accent)">${score}/${QUIZ.length}</div>
+        <div style="font-size:1rem;color:var(--sub);margin:.3rem 0;font-family:'Noto Sans Bengali',sans-serif">${pct>=80?'🎉 অসাধারণ!':pct>=60?'👍 ভালো!':'💪 আরো চেষ্টা করো!'}</div>
+        <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Accuracy: ${pct}% · XP Earned: ${Math.round(pct*1.5)} XP</div>
+      </div>`;
+  }
+};
+window.resetQuiz=()=>{score=0;done=false;renderQuiz();};
+
+const ORDER=['intro','statements','tense','questions','commands','exclamations','reporting','practice'];
+window.show=(id,idx)=>{
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));
+  document.getElementById('prog').style.width=Math.round(idx/(ORDER.length-1)*100)+'%';
+  document.getElementById('main').innerHTML=PANELS[id]();
+  document.getElementById('main').scrollTop=0;
+  if(id==='practice')renderQuiz();
+};
+
+show('intro',0);
+</script>
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prepositions — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --accent:#2dd4bf;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(45,212,191,.07),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.04),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;
+  background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(45,212,191,.2),rgba(45,212,191,.1));
+  border:1px solid rgba(45,212,191,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;background:linear-gradient(135deg,#2dd4bf,#5eead4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;
+  color:var(--sub);text-decoration:none;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);transition:.2s;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(45,212,191,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(45,212,191,.15),rgba(94,234,212,.15));
+  border:2px solid rgba(45,212,191,.2);display:flex;align-items:center;
+  justify-content:center;font-size:.9rem;cursor:pointer;flex-shrink:0;}
+
+.layout{display:flex;height:calc(100vh - 57px);}
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid var(--border);
+  overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(45,212,191,.2);border-radius:3px;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;
+  border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;margin-bottom:2px;}
+.sb-item:hover{background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.1);}
+.sb-item.active{background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.25);color:var(--accent);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+.lvl-b2{background:rgba(251,113,133,.1);color:#fb7185;border:1px solid rgba(251,113,133,.2);}
+
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(45,212,191,.15);border-radius:3px;}
+
+.lesson-header{margin-bottom:2rem;}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#2dd4bf,#5eead4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:.8rem;}
+.lmeta{font-size:12px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,linear-gradient(90deg,var(--accent),#5eead4));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* Preposition hero badges */
+.prep-heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-bottom:1.4rem;}
+.p-hero{border-radius:16px;padding:1rem .7rem;text-align:center;border:1px solid;cursor:pointer;transition:.2s;}
+.p-hero:hover{transform:translateY(-2px);}
+.p-word{font-size:1.6rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:.2rem;}
+.p-cat{font-size:10px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.4;}
+
+/* Three-column rule grid */
+.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1rem;}
+.rule-box{border-radius:14px;padding:1rem;border:1px solid;}
+.rule-box-title{font-size:1.3rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:.3rem;}
+.rule-box-sub{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:.6rem;}
+.rule-list{list-style:none;display:flex;flex-direction:column;gap:.3rem;}
+.rule-list li{font-size:12px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;padding-left:.8rem;position:relative;}
+.rule-list li::before{content:'·';position:absolute;left:0;color:var(--accent);}
+
+.formula{background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.18);border-radius:14px;padding:1rem 1.4rem;margin-bottom:1rem;}
+.formula-label{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.formula-text{font-size:.95rem;color:var(--text);line-height:1.9;font-family:'JetBrains Mono',monospace;}
+.hl{color:var(--accent);font-weight:700;}
+.hl2{color:var(--teal);font-weight:700;}
+.hl3{color:var(--rose);font-weight:700;}
+.hl4{color:var(--gold);font-weight:700;}
+.hl5{color:var(--indigo);font-weight:700;}
+.hl6{color:var(--orange);font-weight:700;}
+.hl7{color:var(--emerald);font-weight:700;}
+
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(45,212,191,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-tag{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;border-radius:20px;margin-left:8px;font-weight:700;background:rgba(45,212,191,.1);color:var(--accent);}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{background:rgba(45,212,191,.08);color:var(--accent);font-weight:700;padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(45,212,191,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;}
+.gtable td:nth-child(2){color:var(--sub);font-size:12.5px;}
+.gtable td:nth-child(3){color:var(--text);font-size:13px;}
+.gtable td:nth-child(4){color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+
+/* Combo pill */
+.combo-grid{display:flex;flex-direction:column;gap:.5rem;}
+.combo-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;}
+.combo-base{font-size:13px;font-weight:700;color:var(--text);min-width:130px;font-family:'JetBrains Mono',monospace;}
+.combo-pill{font-size:12px;padding:.25rem .7rem;border-radius:20px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.combo-bn{font-size:11.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;margin-top:.1rem;}
+
+/* Visual placement diagram */
+.place-diagram{position:relative;width:100%;height:180px;border:2px solid rgba(45,212,191,.2);border-radius:16px;background:rgba(45,212,191,.02);margin-bottom:1rem;overflow:hidden;}
+.place-box{position:absolute;border:2px dashed rgba(45,212,191,.3);border-radius:8px;background:rgba(45,212,191,.04);}
+.place-label{position:absolute;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent);}
+.place-dot{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--rose);}
+
+.tip{background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--accent);}
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+.practice-q{background:rgba(45,212,191,.04);border:1px solid rgba(45,212,191,.15);border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.6rem;}
+.pq-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.pq-opt{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:'Outfit',sans-serif;}
+.pq-opt:hover{border-color:rgba(45,212,191,.3);color:var(--accent);}
+.pq-opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:#34d399;}
+.pq-opt.wrong{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.pq-feedback{font-size:13px;padding:.5rem .8rem;border-radius:8px;display:none;font-family:'Noto Sans Bengali',sans-serif;margin-top:.4rem;}
+.pq-feedback.show{display:block;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#34d399;}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;align-items:center;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.btn-prev:hover,.btn-next:hover{background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(45,212,191,.12),rgba(94,234,212,.08));border-color:rgba(45,212,191,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#2dd4bf,#5eead4);color:#000;border:none;border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#2dd4bf,#5eead4);transition:width .3s;}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--border);}
+  .main{padding:1.2rem 1rem 3rem;}
+  .rule-grid{grid-template-columns:1fr;}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">📍 Prepositions</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section-label">Prepositions</div>
+    <div class="sb-item active" data-id="intro" onclick="show('intro',0)">
+      <span class="sb-dot" style="background:#2dd4bf"></span><span class="sb-text">Introduction</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="inonat" onclick="show('inonat',1)">
+      <span class="sb-dot" style="background:#34d399"></span><span class="sb-text">In / On / At</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="time" onclick="show('time',2)">
+      <span class="sb-dot" style="background:#f5c842"></span><span class="sb-text">Time Prepositions</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="bywithfor" onclick="show('bywithfor',3)">
+      <span class="sb-dot" style="background:#fb923c"></span><span class="sb-text">By / With / For</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="movement" onclick="show('movement',4)">
+      <span class="sb-dot" style="background:#fb7185"></span><span class="sb-text">Movement & Direction</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="verb-prep" onclick="show('verb-prep',5)">
+      <span class="sb-dot" style="background:#818cf8"></span><span class="sb-text">Verb + Preposition</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="adj-prep" onclick="show('adj-prep',6)">
+      <span class="sb-dot" style="background:#2dd4bf"></span><span class="sb-text">Adj + Preposition</span><span class="sb-lvl lvl-b2">B2</span>
+    </div>
+    <div class="sb-item" data-id="practice" onclick="show('practice',7)">
+      <span class="sb-dot" style="background:#5eead4"></span><span class="sb-text">Practice Quiz</span>
+    </div>
+  </div>
+
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const PANELS={
+
+'intro':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → Introduction</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Prepositions — পদান্বয়ী অব্যয়</span></div>
+  <div class="lesson-desc">Preposition হলো এমন শব্দ যা noun বা pronoun এর আগে বসে সেটির সাথে বাক্যের অন্য অংশের সম্পর্ক দেখায় — স্থান, সময়, দিক, কারণ বা পদ্ধতি।</div>
+</div>
+
+<div class="prep-heroes">
+  <div class="p-hero" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25)" onclick="show('inonat',1)">
+    <div class="p-word" style="color:#2dd4bf">in</div><div class="p-cat">ভেতরে / সময়</div>
+  </div>
+  <div class="p-hero" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)" onclick="show('inonat',1)">
+    <div class="p-word" style="color:#34d399">on</div><div class="p-cat">উপরে / দিন</div>
+  </div>
+  <div class="p-hero" style="background:rgba(245,200,66,.08);border-color:rgba(245,200,66,.25)" onclick="show('inonat',1)">
+    <div class="p-word" style="color:#f5c842">at</div><div class="p-cat">নির্দিষ্ট স্থান</div>
+  </div>
+  <div class="p-hero" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25)" onclick="show('bywithfor',3)">
+    <div class="p-word" style="color:#fb923c">by</div><div class="p-cat">দ্বারা / পাশে</div>
+  </div>
+  <div class="p-hero" style="background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.25)" onclick="show('bywithfor',3)">
+    <div class="p-word" style="color:#fb7185">with</div><div class="p-cat">সাথে / দিয়ে</div>
+  </div>
+  <div class="p-hero" style="background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.25)" onclick="show('bywithfor',3)">
+    <div class="p-word" style="color:#818cf8">for</div><div class="p-cat">জন্য / কারণে</div>
+  </div>
+  <div class="p-hero" style="background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.2)" onclick="show('movement',4)">
+    <div class="p-word" style="color:#2dd4bf;font-size:1.2rem">to/from</div><div class="p-cat">গন্তব্য</div>
+  </div>
+  <div class="p-hero" style="background:rgba(94,234,212,.06);border-color:rgba(94,234,212,.2)" onclick="show('movement',4)">
+    <div class="p-word" style="color:#5eead4;font-size:1.1rem">into/out</div><div class="p-cat">আন্দোলন</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#5eead4)">
+  <div class="card-title">📋 Preposition কোথায় কোথায় ব্যবহার হয়</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>Preposition</th><th>উদাহরণ</th><th>অর্থ</th></tr>
+    <tr><td>Place</td><td>in, on, at, under, above</td><td>The book is on the table.</td><td>স্থান</td></tr>
+    <tr><td>Time</td><td>in, on, at, before, after</td><td>I wake up at 6 AM.</td><td>সময়</td></tr>
+    <tr><td>Direction</td><td>to, from, into, out of</td><td>She went to school.</td><td>দিক/গন্তব্য</td></tr>
+    <tr><td>Manner</td><td>by, with, without</td><td>He came by bus.</td><td>পদ্ধতি</td></tr>
+    <tr><td>Reason</td><td>for, because of, due to</td><td>Thanks for your help.</td><td>কারণ/উদ্দেশ্য</td></tr>
+    <tr><td>Agent</td><td>by</td><td>The cake was made by her.</td><td>কর্তা (passive)</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Preposition এর পরে সবসময় Noun/Pronoun/Gerund আসে।</strong><br>
+  ✅ She is good <strong>at singing</strong>. (gerund)<br>
+  ✅ He looked <strong>at me</strong>. (pronoun)<br>
+  ❌ She is good <strong>at sing</strong>. (bare verb — ভুল)</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="btn-prev" href="grammar-parts-of-speech.html">← Parts of Speech</a>
+  <button class="btn-next" onclick="show('inonat',1)">In / On / At →</button>
+</div>`,
+
+'inonat':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → In / On / At</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>In / On / At — স্থান</span></div>
+  <div class="lesson-desc">স্থান বোঝাতে In, On, At — তিনটির ব্যবহার আলাদা। সাধারণ নিয়ম: In = ভেতরে (enclosed space), On = উপরিতলে (surface), At = নির্দিষ্ট বিন্দু (exact point)।</div>
+</div>
+
+<div class="rule-grid">
+  <div class="rule-box" style="background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.2)">
+    <div class="rule-box-title" style="color:#2dd4bf">IN</div>
+    <div class="rule-box-sub" style="color:#2dd4bf">ভেতরে / enclosed</div>
+    <ul class="rule-list">
+      <li>বদ্ধ স্থানের ভেতরে<br><span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px">in the room</span></li>
+      <li>শহর / দেশ<br><span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px">in Dhaka / in Bangladesh</span></li>
+      <li>পানিতে<br><span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px">in the sea / in the pool</span></li>
+      <li>গাড়ির ভেতরে (ছোট)<br><span style="color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px">in the car / in a taxi</span></li>
+    </ul>
+  </div>
+  <div class="rule-box" style="background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.2)">
+    <div class="rule-box-title" style="color:#34d399">ON</div>
+    <div class="rule-box-sub" style="color:#34d399">উপরিতল / surface</div>
+    <ul class="rule-list">
+      <li>সমতল উপরিতলে<br><span style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">on the table / on the floor</span></li>
+      <li>দেয়াল / ছাদে<br><span style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">on the wall / on the ceiling</span></li>
+      <li>যানবাহন (বড়)<br><span style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">on the bus / on the train</span></li>
+      <li>রাস্তায়<br><span style="color:#34d399;font-family:'JetBrains Mono',monospace;font-size:11px">on the street / on the road</span></li>
+    </ul>
+  </div>
+  <div class="rule-box" style="background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2)">
+    <div class="rule-box-title" style="color:#f5c842">AT</div>
+    <div class="rule-box-sub" style="color:#f5c842">নির্দিষ্ট বিন্দু / point</div>
+    <ul class="rule-list">
+      <li>নির্দিষ্ট স্থান<br><span style="color:#f5c842;font-family:'JetBrains Mono',monospace;font-size:11px">at the door / at the corner</span></li>
+      <li>প্রতিষ্ঠান (কার্যক্রম)<br><span style="color:#f5c842;font-family:'JetBrains Mono',monospace;font-size:11px">at school / at work</span></li>
+      <li>ঠিকানা<br><span style="color:#f5c842;font-family:'JetBrains Mono',monospace;font-size:11px">at 24 Green Road</span></li>
+      <li>ইভেন্ট / অনুষ্ঠান<br><span style="color:#f5c842;font-family:'JetBrains Mono',monospace;font-size:11px">at the concert / at a party</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--emerald))">
+  <div class="card-title">💬 Place Examples তুলনা</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">The milk is <span class="hl">in</span> the fridge. <span class="ex-tag">enclosed space</span></div><div class="ex-bn">দুধ ফ্রিজের ভেতরে আছে।</div></div>
+    <div class="ex"><div class="ex-en">The cup is <span class="hl7">on</span> the table. <span class="ex-tag">surface</span></div><div class="ex-bn">কাপটা টেবিলের উপরে।</div></div>
+    <div class="ex"><div class="ex-en">She is waiting <span class="hl4">at</span> the bus stop. <span class="ex-tag">specific point</span></div><div class="ex-bn">সে বাস স্টপে অপেক্ষা করছে।</div></div>
+    <div class="ex"><div class="ex-en">He lives <span class="hl">in</span> London but works <span class="hl4">at</span> a school <span class="hl7">on</span> Oxford Street. <span class="ex-tag">তিনটি একসাথে</span></div><div class="ex-bn">সে লন্ডনে থাকে, অক্সফোর্ড স্ট্রিটের একটি স্কুলে কাজ করে।</div></div>
+    <div class="ex"><div class="ex-en">We sat <span class="hl7">on</span> the grass <span class="hl">in</span> the park. <span class="ex-tag">surface + enclosed area</span></div><div class="ex-bn">পার্কের ভেতরে ঘাসের উপর বসলাম।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--accent))">
+  <div class="card-title">⚡ Tricky Cases — সাবধান!</div>
+  <table class="gtable">
+    <tr><th>বলবো</th><th>Preposition</th><th>কেন</th></tr>
+    <tr><td>in the car / in a taxi</td><td style="color:#2dd4bf">in</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">ছোট ব্যক্তিগত যান — ভেতরে ঢোকো</td></tr>
+    <tr><td>on the bus / on the train</td><td style="color:#34d399">on</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">বড় পাবলিক যান — উঠে পড়ো</td></tr>
+    <tr><td>at the top / at the bottom</td><td style="color:#f5c842">at</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">নির্দিষ্ট অবস্থান বিন্দু</td></tr>
+    <tr><td>in the corner (room)</td><td style="color:#2dd4bf">in</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">ঘরের কোণ — enclosed</td></tr>
+    <tr><td>at the corner (street)</td><td style="color:#f5c842">at</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">রাস্তার কোণ — specific point</td></tr>
+    <tr><td>on the left / on the right</td><td style="color:#34d399">on</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">দিকনির্দেশনা</td></tr>
+    <tr><td>at the end (of street)</td><td style="color:#f5c842">at</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">শেষ বিন্দু</td></tr>
+    <tr><td>in the end (finally)</td><td style="color:#2dd4bf">in</td><td style="color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">পরিশেষে (idiom)</td></tr>
+  </table>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>arrive in বনাম arrive at:</strong><br>
+  "We arrived <strong>in</strong> London." — বড় জায়গা (শহর/দেশ)<br>
+  "We arrived <strong>at</strong> the station." — নির্দিষ্ট স্থান (building/point)<br>
+  "arrive <strong>home</strong>" — কোনো preposition লাগে না!</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('intro',0)">← Introduction</button>
+  <button class="btn-next" onclick="show('time',2)">Time Prepositions →</button>
+</div>`,
+
+'time':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → Time Prepositions</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 18 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Time Prepositions — সময়</span></div>
+  <div class="lesson-desc">In, On, At — সময়ের ক্ষেত্রেও এই তিনটির আলাদা নিয়ম আছে। এছাড়াও Before, After, During, Since, For, Until, By — এগুলো সময় বোঝাতে ব্যবহৃত হয়।</div>
+</div>
+
+<div class="rule-grid">
+  <div class="rule-box" style="background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.2)">
+    <div class="rule-box-title" style="color:#2dd4bf">IN</div>
+    <div class="rule-box-sub" style="color:#2dd4bf">দীর্ঘ সময়কাল</div>
+    <ul class="rule-list">
+      <li>মাস: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace">in January</span></li>
+      <li>বছর: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace">in 2024</span></li>
+      <li>ঋতু: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace">in summer</span></li>
+      <li>দিনের ভাগ: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace">in the morning</span></li>
+      <li>শতাব্দী: <span style="color:var(--accent);font-family:'JetBrains Mono',monospace">in the 21st century</span></li>
+    </ul>
+  </div>
+  <div class="rule-box" style="background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.2)">
+    <div class="rule-box-title" style="color:#34d399">ON</div>
+    <div class="rule-box-sub" style="color:#34d399">নির্দিষ্ট দিন</div>
+    <ul class="rule-list">
+      <li>বারের নাম: <span style="color:#34d399;font-family:'JetBrains Mono',monospace">on Monday</span></li>
+      <li>তারিখ: <span style="color:#34d399;font-family:'JetBrains Mono',monospace">on 15th March</span></li>
+      <li>বিশেষ দিন: <span style="color:#34d399;font-family:'JetBrains Mono',monospace">on Eid / on Christmas</span></li>
+      <li>দিন + ভাগ: <span style="color:#34d399;font-family:'JetBrains Mono',monospace">on Monday morning</span></li>
+    </ul>
+  </div>
+  <div class="rule-box" style="background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2)">
+    <div class="rule-box-title" style="color:#f5c842">AT</div>
+    <div class="rule-box-sub" style="color:#f5c842">নির্দিষ্ট সময়</div>
+    <ul class="rule-list">
+      <li>ঘণ্টা: <span style="color:#f5c842;font-family:'JetBrains Mono',monospace">at 6 o'clock</span></li>
+      <li>বিশেষ সময়: <span style="color:#f5c842;font-family:'JetBrains Mono',monospace">at noon / at midnight</span></li>
+      <li>উৎসব: <span style="color:#f5c842;font-family:'JetBrains Mono',monospace">at Christmas time</span></li>
+      <li>at night: <span style="color:#f5c842;font-family:'JetBrains Mono',monospace">at night (ব্যতিক্রম!)</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">📌 অন্যান্য গুরুত্বপূর্ণ Time Prepositions</div>
+  <table class="gtable">
+    <tr><th>Preposition</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td>since</td><td>থেকে (past→now)</td><td>I've lived here since 2010.</td></tr>
+    <tr><td>for</td><td>ধরে (duration)</td><td>She studied for 3 hours.</td></tr>
+    <tr><td>during</td><td>সময়কালে</td><td>It rained during the match.</td></tr>
+    <tr><td>until / till</td><td>পর্যন্ত</td><td>Wait until 5 PM.</td></tr>
+    <tr><td>by</td><td>এর মধ্যে (deadline)</td><td>Submit by Friday.</td></tr>
+    <tr><td>before</td><td>আগে</td><td>Come before 8 AM.</td></tr>
+    <tr><td>after</td><td>পরে</td><td>We'll meet after class.</td></tr>
+    <tr><td>within</td><td>ভেতরে (timeframe)</td><td>Reply within 24 hours.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">💬 since বনাম for — সবচেয়ে বেশি ভুল</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">I have lived in Dhaka <span class="hl4">for</span> five years. <span class="ex-tag">duration — কতদিন</span></div><div class="ex-bn">আমি পাঁচ বছর ধরে ঢাকায় থাকি।</div></div>
+    <div class="ex"><div class="ex-en">I have lived in Dhaka <span class="hl">since</span> 2019. <span class="ex-tag">start point — কবে থেকে</span></div><div class="ex-bn">আমি ২০১৯ সাল থেকে ঢাকায় থাকি।</div></div>
+    <div class="ex"><div class="ex-en">Finish your work <span class="hl7">by</span> 5 PM. <span class="ex-tag">deadline</span></div><div class="ex-bn">বিকেল ৫টার মধ্যে কাজ শেষ করো।</div></div>
+    <div class="ex"><div class="ex-en">Wait <span class="hl2">until</span> 5 PM. <span class="ex-tag">continuous till that point</span></div><div class="ex-bn">বিকেল ৫টা পর্যন্ত অপেক্ষা করো।</div></div>
+    <div class="ex"><div class="ex-en">She slept <span class="hl3">during</span> the lecture. <span class="ex-tag">within a period</span></div><div class="ex-bn">সে লেকচারের সময় ঘুমিয়ে পড়েছিল।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>সহজ নিয়ম মনে রাখো: In &gt; On &gt; At (ছোট হতে ছোট)</strong><br>
+  <strong>IN</strong> = বড় সময়কাল (বছর, মাস, ঋতু)<br>
+  <strong>ON</strong> = মাঝারি (দিন, তারিখ)<br>
+  <strong>AT</strong> = সবচেয়ে ছোট (নির্দিষ্ট সময়, ঘণ্টা)<br>
+  "in 2024, on Monday, at 9 AM" — বছর → দিন → সময়</div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>এই ক্ষেত্রে preposition লাগে না:</strong><br>
+  ❌ "See you <strong>on</strong> tomorrow." → ✅ "See you <strong>tomorrow</strong>."<br>
+  ❌ "I arrived <strong>at</strong> last night." → ✅ "I arrived <strong>last night</strong>."<br>
+  this, next, last, every দিয়ে শুরু হলে preposition বাদ দাও।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('inonat',1)">← In / On / At (Place)</button>
+  <button class="btn-next" onclick="show('bywithfor',3)">By / With / For →</button>
+</div>`,
+
+'bywithfor':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → By / With / For</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>By / With / For</span></div>
+  <div class="lesson-desc">এই তিনটি preposition এর ব্যবহার অনেক বেশি এবং বহু অর্থে। প্রতিটির মূল ধারণা বুঝলে সহজ হয়ে যাবে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb923c,var(--accent))">
+  <div class="card-title">📌 BY — পদ্ধতি / কর্তা / সময়সীমা</div>
+  <div class="formula">
+    <div class="formula-label">BY এর মূল অর্থসমূহ</div>
+    <div class="formula-text">
+      <span class="hl6">By</span> = দ্বারা (agent/method) &nbsp;|&nbsp; পাশে (beside) &nbsp;|&nbsp; এর মধ্যে (deadline)
+    </div>
+  </div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">The book was written <span class="hl6">by</span> Humayun Ahmed. <span class="ex-tag">Passive agent</span></div><div class="ex-bn">বইটি হুমায়ূন আহমেদ কর্তৃক রচিত।</div></div>
+    <div class="ex"><div class="ex-en">She goes to school <span class="hl6">by</span> bus. <span class="ex-tag">Method of transport</span></div><div class="ex-bn">সে বাসে স্কুলে যায়।</div></div>
+    <div class="ex"><div class="ex-en">He was standing <span class="hl6">by</span> the window. <span class="ex-tag">Beside / near</span></div><div class="ex-bn">সে জানালার পাশে দাঁড়িয়ে ছিল।</div></div>
+    <div class="ex"><div class="ex-en">Submit the report <span class="hl6">by</span> Friday. <span class="ex-tag">Deadline</span></div><div class="ex-bn">শুক্রবারের মধ্যে রিপোর্ট জমা দাও।</div></div>
+    <div class="ex"><div class="ex-en">You can pay <span class="hl6">by</span> card or cash. <span class="ex-tag">Method</span></div><div class="ex-bn">কার্ড বা নগদে পেমেন্ট করতে পারো।</div></div>
+    <div class="ex"><div class="ex-en">She held my hand <span class="hl6">by</span> mistake. <span class="ex-tag">by + noun phrase (idiom)</span></div><div class="ex-bn">সে ভুলবশত আমার হাত ধরেছিল।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb7185,var(--accent))">
+  <div class="card-title">📌 WITH — সাথে / দিয়ে / যুক্ত</div>
+  <div class="formula">
+    <div class="formula-label">WITH এর মূল অর্থসমূহ</div>
+    <div class="formula-text"><span class="hl3">With</span> = সাথে (accompaniment) &nbsp;|&nbsp; দিয়ে (instrument) &nbsp;|&nbsp; যুক্ত (having)</div>
+  </div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She came <span class="hl3">with</span> her friend. <span class="ex-tag">Accompaniment — সাথে</span></div><div class="ex-bn">সে তার বন্ধুর সাথে এসেছিল।</div></div>
+    <div class="ex"><div class="ex-en">He cut the bread <span class="hl3">with</span> a knife. <span class="ex-tag">Instrument — দিয়ে</span></div><div class="ex-bn">সে ছুরি দিয়ে রুটি কেটেছিল।</div></div>
+    <div class="ex"><div class="ex-en">The man <span class="hl3">with</span> the blue hat is my uncle. <span class="ex-tag">Having — যার আছে</span></div><div class="ex-bn">নীল টুপি পরা লোকটা আমার চাচা।</div></div>
+    <div class="ex"><div class="ex-en">I'm angry <span class="hl3">with</span> him. <span class="ex-tag">Emotion toward person</span></div><div class="ex-bn">আমি তার উপর রাগান্বিত।</div></div>
+    <div class="ex"><div class="ex-en">Mix the flour <span class="hl3">with</span> water. <span class="ex-tag">Combination</span></div><div class="ex-bn">আটার সাথে পানি মেশাও।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#818cf8,var(--accent))">
+  <div class="card-title">📌 FOR — জন্য / সময়কাল / কারণে</div>
+  <div class="formula">
+    <div class="formula-label">FOR এর মূল অর্থসমূহ</div>
+    <div class="formula-text"><span class="hl5">For</span> = জন্য (purpose/benefit) &nbsp;|&nbsp; ধরে (duration) &nbsp;|&nbsp; পক্ষে (support)</div>
+  </div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">This gift is <span class="hl5">for</span> you. <span class="ex-tag">Benefit / purpose</span></div><div class="ex-bn">এই উপহারটা তোমার জন্য।</div></div>
+    <div class="ex"><div class="ex-en">I've been waiting <span class="hl5">for</span> two hours. <span class="ex-tag">Duration of time</span></div><div class="ex-bn">আমি দুই ঘণ্টা ধরে অপেক্ষা করছি।</div></div>
+    <div class="ex"><div class="ex-en">She works <span class="hl5">for</span> a hospital. <span class="ex-tag">Employment</span></div><div class="ex-bn">সে একটা হাসপাতালে কাজ করে।</div></div>
+    <div class="ex"><div class="ex-en">Thank you <span class="hl5">for</span> your help. <span class="ex-tag">Reason / cause</span></div><div class="ex-bn">তোমার সাহায্যের জন্য ধন্যবাদ।</div></div>
+    <div class="ex"><div class="ex-en">Are you <span class="hl5">for</span> or against the idea? <span class="ex-tag">Support / opposition</span></div><div class="ex-bn">তুমি কি এই আইডিয়ার পক্ষে নাকি বিপক্ষে?</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">⚡ BY vs WITH vs FOR — তুলনা</div>
+  <table class="gtable">
+    <tr><th>প্রসঙ্গ</th><th>BY</th><th>WITH</th><th>FOR</th></tr>
+    <tr><td>পদ্ধতি</td><td>by bus / by email</td><td>with a spoon</td><td>—</td></tr>
+    <tr><td>কর্তা</td><td>written by her</td><td>—</td><td>—</td></tr>
+    <tr><td>সাথী</td><td>—</td><td>with friends</td><td>—</td></tr>
+    <tr><td>উদ্দেশ্য</td><td>—</td><td>—</td><td>for fun</td></tr>
+    <tr><td>সময়</td><td>by Friday (deadline)</td><td>—</td><td>for 3 hours (duration)</td></tr>
+    <tr><td>কারণ</td><td>—</td><td>—</td><td>thanks for helping</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>BY vs WITH — পার্থক্য মনে রাখো:</strong><br>
+  "He was killed <strong>by</strong> a knife." ← Passive agent (ছুরি হলো কর্তা)<br>
+  "He was killed <strong>with</strong> a knife." ← Instrument (ছুরি হলো হাতিয়ার)<br>
+  দুটোই সঠিক, কিন্তু অর্থ সামান্য আলাদা!</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('time',2)">← Time Prepositions</button>
+  <button class="btn-next" onclick="show('movement',4)">Movement →</button>
+</div>`,
+
+'movement':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → Movement & Direction</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Movement &amp; Direction — গতি ও দিক</span></div>
+  <div class="lesson-desc">To, From, Into, Out of, Through, Along, Across, Over, Under, Past — এগুলো গতি এবং দিক বোঝাতে ব্যবহৃত হয়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb7185,var(--accent))">
+  <div class="card-title">📌 মূল Movement Prepositions</div>
+  <table class="gtable">
+    <tr><th>Preposition</th><th>অর্থ</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>to</td><td>গন্তব্যের দিকে</td><td>Go to school.</td><td>স্কুলে যাও।</td></tr>
+    <tr><td>from</td><td>উৎস থেকে</td><td>Come from Dhaka.</td><td>ঢাকা থেকে আসো।</td></tr>
+    <tr><td>into</td><td>ভেতরে প্রবেশ</td><td>Walk into the room.</td><td>ঘরে ঢোকো।</td></tr>
+    <tr><td>out of</td><td>বাইরে বেরোনো</td><td>Jump out of the car.</td><td>গাড়ি থেকে লাফাও।</td></tr>
+    <tr><td>through</td><td>ভেদ করে</td><td>Run through the forest.</td><td>জঙ্গলের মধ্য দিয়ে দৌড়াও।</td></tr>
+    <tr><td>across</td><td>পার হয়ে</td><td>Swim across the river.</td><td>নদী পার হয়ে সাঁতার দাও।</td></tr>
+    <tr><td>along</td><td>বরাবর</td><td>Walk along the road.</td><td>রাস্তা ধরে হাঁটো।</td></tr>
+    <tr><td>over</td><td>উপর দিয়ে</td><td>Jump over the fence.</td><td>বেড়া ডিঙিয়ে লাফাও।</td></tr>
+    <tr><td>under</td><td>নিচ দিয়ে</td><td>Go under the bridge.</td><td>ব্রিজের নিচ দিয়ে যাও।</td></tr>
+    <tr><td>past</td><td>পাশ দিয়ে অতিক্রম</td><td>Drive past the school.</td><td>স্কুলের পাশ দিয়ে গাড়ি চালাও।</td></tr>
+    <tr><td>towards</td><td>দিকে (লক্ষ্য)</td><td>Walk towards the light.</td><td>আলোর দিকে হাঁটো।</td></tr>
+    <tr><td>away from</td><td>দূরে</td><td>Run away from danger.</td><td>বিপদ থেকে দূরে পালাও।</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">💬 Movement Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She walked <span class="hl">into</span> the room and sat down. <span class="ex-tag">into = entering</span></div><div class="ex-bn">সে ঘরে ঢুকে বসে পড়ল।</div></div>
+    <div class="ex"><div class="ex-en">The cat jumped <span class="hl7">over</span> the wall. <span class="ex-tag">over = above and across</span></div><div class="ex-bn">বিড়ালটা দেয়াল ডিঙিয়ে লাফ দিল।</div></div>
+    <div class="ex"><div class="ex-en">We drove <span class="hl2">through</span> the tunnel. <span class="ex-tag">through = from one side to other</span></div><div class="ex-bn">আমরা টানেলের মধ্য দিয়ে গেলাম।</div></div>
+    <div class="ex"><div class="ex-en">They walked <span class="hl6">along</span> the beach at sunset. <span class="ex-tag">along = following a line</span></div><div class="ex-bn">তারা সূর্যাস্তের সময় সমুদ্র সৈকত বরাবর হাঁটল।</div></div>
+    <div class="ex"><div class="ex-en">He ran <span class="hl4">across</span> the street. <span class="ex-tag">across = from one side to other (flat)</span></div><div class="ex-bn">সে রাস্তা পার হয়ে দৌড়াল।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>in বনাম into — static vs movement:</strong><br>
+  "She is <strong>in</strong> the room." → Static (সে ঘরে আছে — নড়াচড়া নেই)<br>
+  "She walked <strong>into</strong> the room." → Movement (সে ঘরে ঢুকল — গতি আছে)<br>
+  গতি থাকলে → into; অবস্থান হলে → in।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('bywithfor',3)">← By / With / For</button>
+  <button class="btn-next" onclick="show('verb-prep',5)">Verb + Preposition →</button>
+</div>`,
+
+'verb-prep':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → Verb + Preposition</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 125 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Verb + Preposition Combinations</span></div>
+  <div class="lesson-desc">কিছু verb সবসময় নির্দিষ্ট preposition নেয় — এগুলো fixed combination, যুক্তি দিয়ে বোঝা যায় না, মুখস্থ করতে হয়।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#818cf8,var(--accent))">
+  <div class="card-title">🔗 Verb + AT</div>
+  <div class="combo-grid">
+    <div class="combo-row"><div class="combo-base">look at</div><div class="combo-pill" style="background:rgba(45,212,191,.1);color:var(--accent)">তাকানো</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Look at the board.</div></div>
+    <div class="combo-row"><div class="combo-base">laugh at</div><div class="combo-pill" style="background:rgba(45,212,191,.1);color:var(--accent)">হাসা</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Don't laugh at him.</div></div>
+    <div class="combo-row"><div class="combo-base">shout at</div><div class="combo-pill" style="background:rgba(45,212,191,.1);color:var(--accent)">চিৎকার করা</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Stop shouting at me.</div></div>
+    <div class="combo-row"><div class="combo-base">stare at</div><div class="combo-pill" style="background:rgba(45,212,191,.1);color:var(--accent)">একদৃষ্টিতে দেখা</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">She stared at the sky.</div></div>
+    <div class="combo-row"><div class="combo-base">aim at</div><div class="combo-pill" style="background:rgba(45,212,191,.1);color:var(--accent)">লক্ষ্য করা</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Aim at the target.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#fb923c)">
+  <div class="card-title">🔗 Verb + FOR</div>
+  <div class="combo-grid">
+    <div class="combo-row"><div class="combo-base">wait for</div><div class="combo-pill" style="background:rgba(251,146,60,.1);color:#fb923c">অপেক্ষা করা</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Wait for me!</div></div>
+    <div class="combo-row"><div class="combo-base">look for</div><div class="combo-pill" style="background:rgba(251,146,60,.1);color:#fb923c">খোঁজা</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">I'm looking for my keys.</div></div>
+    <div class="combo-row"><div class="combo-base">apply for</div><div class="combo-pill" style="background:rgba(251,146,60,.1);color:#fb923c">আবেদন করা</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Apply for the job.</div></div>
+    <div class="combo-row"><div class="combo-base">care for</div><div class="combo-pill" style="background:rgba(251,146,60,.1);color:#fb923c">যত্ন নেওয়া</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">She cares for her parents.</div></div>
+    <div class="combo-row"><div class="combo-base">ask for</div><div class="combo-pill" style="background:rgba(251,146,60,.1);color:#fb923c">চাওয়া</div><div style="font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">He asked for help.</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--accent))">
+  <div class="card-title">🔗 Verb + ON / ABOUT / FROM / OF</div>
+  <table class="gtable">
+    <tr><th>Verb + Prep</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td>depend on</td><td>নির্ভর করা</td><td>It depends on the weather.</td></tr>
+    <tr><td>insist on</td><td>জোর দেওয়া</td><td>She insisted on paying.</td></tr>
+    <tr><td>concentrate on</td><td>মনোযোগ দেওয়া</td><td>Focus on your studies.</td></tr>
+    <tr><td>talk about</td><td>কথা বলা</td><td>Let's talk about it later.</td></tr>
+    <tr><td>think about</td><td>ভাবা</td><td>I'm thinking about you.</td></tr>
+    <tr><td>worry about</td><td>চিন্তা করা</td><td>Don't worry about me.</td></tr>
+    <tr><td>suffer from</td><td>ভুগছে</td><td>He suffers from fever.</td></tr>
+    <tr><td>consist of</td><td>গঠিত</td><td>Water consists of H and O.</td></tr>
+    <tr><td>dream of</td><td>স্বপ্ন দেখা</td><td>She dreams of flying.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--emerald))">
+  <div class="card-title">🔗 Verb + TO / WITH / IN</div>
+  <table class="gtable">
+    <tr><th>Verb + Prep</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td>listen to</td><td>মনোযোগ দিয়ে শোনা</td><td>Listen to the teacher.</td></tr>
+    <tr><td>belong to</td><td>মালিকানা</td><td>This bag belongs to me.</td></tr>
+    <tr><td>apologize to</td><td>ক্ষমা চাওয়া</td><td>Apologize to her.</td></tr>
+    <tr><td>agree with</td><td>একমত হওয়া</td><td>I agree with you.</td></tr>
+    <tr><td>deal with</td><td>সামলানো</td><td>I can't deal with this.</td></tr>
+    <tr><td>succeed in</td><td>সফল হওয়া</td><td>She succeeded in her plan.</td></tr>
+    <tr><td>believe in</td><td>বিশ্বাস করা</td><td>I believe in hard work.</td></tr>
+    <tr><td>result in</td><td>পরিণতি হওয়া</td><td>Hard work results in success.</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>look at / look for / look after — তিনটি আলাদা অর্থ!</strong><br>
+  <strong>look at</strong> = তাকানো (I'm looking at you.)<br>
+  <strong>look for</strong> = খোঁজা (I'm looking for my phone.)<br>
+  <strong>look after</strong> = দেখাশোনা করা (Please look after the baby.)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('movement',4)">← Movement</button>
+  <button class="btn-next" onclick="show('adj-prep',6)">Adj + Preposition →</button>
+</div>`,
+
+'adj-prep':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → Adjective + Preposition</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b2" style="padding:4px 12px">B2</span><span class="lmeta">⚡ 125 XP</span><span class="lmeta">⏱️ 18 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Adjective + Preposition Combinations</span></div>
+  <div class="lesson-desc">Adjective এর পরেও নির্দিষ্ট preposition আসে। এগুলো fixed collocations — context দেখে মুখস্থ করা সহজ।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#818cf8,var(--accent))">
+  <div class="card-title">🔗 Adjective + OF</div>
+  <table class="gtable">
+    <tr><th>Adjective + of</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td>afraid of</td><td>ভয় পাওয়া</td><td>She is afraid of dogs.</td></tr>
+    <tr><td>proud of</td><td>গর্বিত</td><td>I'm proud of you.</td></tr>
+    <tr><td>ashamed of</td><td>লজ্জিত</td><td>He was ashamed of his mistake.</td></tr>
+    <tr><td>aware of</td><td>সচেতন</td><td>Be aware of the risks.</td></tr>
+    <tr><td>capable of</td><td>সক্ষম</td><td>She is capable of doing it.</td></tr>
+    <tr><td>fond of</td><td>পছন্দ করা</td><td>He is fond of music.</td></tr>
+    <tr><td>full of</td><td>পরিপূর্ণ</td><td>The glass is full of water.</td></tr>
+    <tr><td>tired of</td><td>বিরক্ত</td><td>I'm tired of waiting.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">🔗 Adjective + AT / FOR / WITH / TO</div>
+  <table class="gtable">
+    <tr><th>Adjective + Prep</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td>good at</td><td>দক্ষ</td><td>She is good at English.</td></tr>
+    <tr><td>bad at</td><td>দুর্বল</td><td>I'm bad at maths.</td></tr>
+    <tr><td>surprised at</td><td>অবাক</td><td>I was surprised at the news.</td></tr>
+    <tr><td>angry at/with</td><td>রাগান্বিত</td><td>He is angry with her.</td></tr>
+    <tr><td>famous for</td><td>বিখ্যাত</td><td>Bangladesh is famous for rice.</td></tr>
+    <tr><td>responsible for</td><td>দায়ী</td><td>Who is responsible for this?</td></tr>
+    <tr><td>ready for</td><td>প্রস্তুত</td><td>Are you ready for the exam?</td></tr>
+    <tr><td>grateful to</td><td>কৃতজ্ঞ</td><td>I'm grateful to you.</td></tr>
+    <tr><td>similar to</td><td>একই রকম</td><td>This is similar to mine.</td></tr>
+    <tr><td>different from</td><td>আলাদা</td><td>She is different from her sister.</td></tr>
+    <tr><td>interested in</td><td>আগ্রহী</td><td>He's interested in football.</td></tr>
+    <tr><td>involved in</td><td>জড়িত</td><td>She was involved in the project.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">💬 Adj + Prep — Sentences in context</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She is <span class="hl">interested in</span> learning new languages. <span class="ex-tag">in + gerund</span></div><div class="ex-bn">সে নতুন ভাষা শেখায় আগ্রহী।</div></div>
+    <div class="ex"><div class="ex-en">He is very <span class="hl4">good at</span> cooking. <span class="ex-tag">at + gerund</span></div><div class="ex-bn">সে রান্নায় খুব দক্ষ।</div></div>
+    <div class="ex"><div class="ex-en">I'm <span class="hl7">grateful to</span> my teacher <span class="hl5">for</span> helping me. <span class="ex-tag">two prepositions</span></div><div class="ex-bn">আমার শিক্ষকের সাহায্যের জন্য আমি কৃতজ্ঞ।</div></div>
+    <div class="ex"><div class="ex-en">This problem is <span class="hl2">similar to</span> yesterday's. <span class="ex-tag">similar to</span></div><div class="ex-bn">এই সমস্যাটা গতকালেরটার মতো।</div></div>
+    <div class="ex"><div class="ex-en">English is quite <span class="hl3">different from</span> Bengali. <span class="ex-tag">different from</span></div><div class="ex-bn">ইংরেজি বাংলা থেকে বেশ আলাদা।</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>different from / to / than:</strong><br>
+  British English: <strong>different from</strong> ✅ (সবচেয়ে সাধারণ)<br>
+  American English: <strong>different than</strong> ✅ (acceptable)<br>
+  Informal: <strong>different to</strong> ✅ (British informal)<br>
+  Exam এ "different <strong>from</strong>" ব্যবহার করো।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('verb-prep',5)">← Verb + Preposition</button>
+  <button class="btn-quiz-big" onclick="show('practice',7)">✍️ Practice Quiz</button>
+  <button class="btn-next" onclick="show('practice',7)">Practice →</button>
+</div>`,
+
+'practice':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Prepositions → Practice</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>✍️ Prepositions Practice Quiz</span></div>
+  <div class="lesson-desc">সঠিক preposition বেছে নাও — place, time, verb+prep, adj+prep সব মিলিয়ে প্রশ্ন আছে।</div>
+</div>
+<div id="quiz-wrap"></div>
+<div class="lesson-nav" style="margin-top:1.5rem">
+  <button class="btn-prev" onclick="show('adj-prep',6)">← Adj + Preposition</button>
+  <button class="btn-quiz-big" onclick="resetQuiz()">🔄 আবার চেষ্টা করো</button>
+  <a class="btn-next" href="grammar-sentence.html">Sentence Structure →</a>
+</div>`
+};
+
+const QUIZ=[
+  {q:'She lives ___ a small village ___ the north of Bangladesh.',
+   opts:['in / in','at / in','in / at','on / in'], ans:'in / in', exp:'village = enclosed area → in; north = general area → in'},
+  {q:'The meeting is ___ Monday ___ 10 AM.',
+   opts:['on / at','in / at','at / on','on / in'], ans:'on / at', exp:'Days → on; Specific time → at'},
+  {q:'I have been waiting ___ you ___ two hours.',
+   opts:['for / for','for / since','on / for','at / since'], ans:'for / for', exp:'wait for = fixed verb+prep; two hours = duration → for'},
+  {q:'He has lived in Dhaka ___ 2015.',
+   opts:['for','since','at','during'], ans:'since', exp:'since = নির্দিষ্ট সময় থেকে এখন পর্যন্ত (start point)'},
+  {q:'The cat jumped ___ the wall and ran ___ the garden.',
+   opts:['over / through','on / in','across / to','over / across'], ans:'over / through', exp:'over = উপর দিয়ে; through = ভেতর দিয়ে'},
+  {q:'She is very good ___ playing the guitar.',
+   opts:['in','at','for','on'], ans:'at', exp:'good at = fixed adjective + preposition combination'},
+  {q:'The book was written ___ Rabindranath Tagore.',
+   opts:['with','for','by','from'], ans:'by', exp:'Passive voice এ কর্তা বোঝাতে by ব্যবহার হয়'},
+  {q:'I\'m looking ___ my glasses. Have you seen them?',
+   opts:['at','after','for','into'], ans:'for', exp:'look for = খোঁজা (fixed verb + preposition)'},
+  {q:'Bangladesh is famous ___ its rivers and greenery.',
+   opts:['of','for','by','with'], ans:'for', exp:'famous for = fixed adjective + preposition'},
+  {q:'Don\'t worry ___ small problems.',
+   opts:['on','with','at','about'], ans:'about', exp:'worry about = fixed verb + preposition combination'},
+  {q:'She walked ___ the room and sat ___ the chair.',
+   opts:['into / on','in / on','into / in','in / at'], ans:'into / on', exp:'into = movement into enclosed space; on = sitting on a surface'},
+  {q:'Submit your assignment ___ Friday — not after!',
+   opts:['until','since','by','during'], ans:'by', exp:'by = deadline — এর মধ্যে (not after that point)'},
+];
+
+let score=0,done=false;
+function renderQuiz(){
+  score=0;done=false;
+  const w=document.getElementById('quiz-wrap');
+  if(!w)return;
+  w.innerHTML=QUIZ.map((q,i)=>`
+    <div class="practice-q" id="pq-${i}">
+      <div class="pq-text">${i+1}. ${q.q}</div>
+      <div class="pq-options">${q.opts.map(o=>`<button class="pq-opt" onclick="checkQ(${i},'${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>
+      <div class="pq-feedback" id="pf-${i}"></div>
+    </div>`).join('')+`<div id="score-wrap"></div>`;
+}
+window.checkQ=(i,sel)=>{
+  const q=QUIZ[i];
+  const el=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  el.querySelectorAll('.pq-opt').forEach(b=>{
+    b.onclick=null;
+    if(b.textContent===q.ans)b.classList.add('correct');
+    else if(b.textContent===sel&&sel!==q.ans)b.classList.add('wrong');
+  });
+  fb.className='pq-feedback show '+(sel===q.ans?'correct':'wrong');
+  fb.textContent=(sel===q.ans?'✅ সঠিক! ':'❌ ভুল। ')+q.exp;
+  if(sel===q.ans)score++;
+  if([...document.querySelectorAll('.pq-feedback.show')].length===QUIZ.length&&!done){
+    done=true;
+    const pct=Math.round(score/QUIZ.length*100);
+    document.getElementById('score-wrap').innerHTML=`
+      <div style="background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.2);border-radius:18px;padding:1.5rem;text-align:center;margin-top:1rem;">
+        <div style="font-size:2.5rem;font-weight:900;color:var(--accent)">${score}/${QUIZ.length}</div>
+        <div style="font-size:1rem;color:var(--sub);margin:.3rem 0;font-family:'Noto Sans Bengali',sans-serif">${pct>=80?'🎉 অসাধারণ!':pct>=60?'👍 ভালো!':'💪 আরো চেষ্টা করো!'}</div>
+        <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Accuracy: ${pct}% · XP Earned: ${Math.round(pct*1.5)} XP</div>
+      </div>`;
+  }
+};
+window.resetQuiz=()=>{score=0;done=false;renderQuiz();};
+
+const ORDER=['intro','inonat','time','bywithfor','movement','verb-prep','adj-prep','practice'];
+window.show=(id,idx)=>{
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));
+  document.getElementById('prog').style.width=Math.round(idx/(ORDER.length-1)*100)+'%';
+  document.getElementById('main').innerHTML=PANELS[id]();
+  document.getElementById('main').scrollTop=0;
+  if(id==='practice')renderQuiz();
+};
+
+show('intro',0);
+</script>
+</body>
+</html>

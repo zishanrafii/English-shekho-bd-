@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — English Shekho</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  main{max-width:960px;margin:auto;padding:var(--es-s5) var(--es-s4) var(--es-s7)}
+  h1{font-size:var(--es-fs-3xl);margin:.2em 0}
+  h2{font-size:var(--es-fs-xl);margin:var(--es-s6) 0 var(--es-s3);color:var(--es-indigo-300)}
+  .row{display:flex;flex-wrap:wrap;gap:var(--es-s3);align-items:center}
+  .sw{width:112px;border-radius:var(--es-r-md);overflow:hidden;border:1px solid var(--es-border)}
+  .sw i{display:block;height:56px}
+  .sw span{display:block;padding:.35rem .5rem;font:var(--es-fs-xs) var(--es-font-mono);color:var(--es-sub)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--es-s4)}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<nav class="es-nav" aria-label="Main"><a href="dashboard.html">← Dashboard</a><a href="design-system.html" aria-current="page">Design System</a></nav>
+<main>
+  <h1 class="es-gradient-text">English Shekho Design System</h1>
+  <p class="es-sub">Calm · Clear · Premium · Friendly. নেভি সারফেস, সফট ইন্ডিগো, টিল অ্যাকসেন্ট ও উষ্ণ অ্যাম্বার—দীর্ঘক্ষণ শেখার জন্য কম ঝলমলে রঙ। নতুন কোডে সবসময় <code>--es-*</code> token ও <code>.es-*</code> class ব্যবহার করুন।</p>
+
+  <h2>Colors</h2>
+  <div class="row">
+    <div class="sw"><i style="background:var(--es-indigo-500)"></i><span>indigo-500</span></div>
+    <div class="sw"><i style="background:var(--es-indigo-400)"></i><span>indigo-400</span></div>
+    <div class="sw"><i style="background:var(--es-violet-500)"></i><span>violet-500</span></div>
+    <div class="sw"><i style="background:var(--es-cyan-400)"></i><span>cyan-400</span></div>
+    <div class="sw"><i style="background:var(--es-warm-400)"></i><span>warm-400</span></div>
+    <div class="sw"><i style="background:var(--es-success)"></i><span>success</span></div>
+    <div class="sw"><i style="background:var(--es-danger)"></i><span>danger</span></div>
+    <div class="sw"><i style="background:var(--es-surface-2)"></i><span>surface-2</span></div>
+  </div>
+
+  <h2>Buttons</h2>
+  <div class="row">
+    <button class="es-btn">Primary</button>
+    <button class="es-btn es-btn--secondary">Secondary</button>
+    <button class="es-btn es-btn--ghost">Ghost</button>
+    <button class="es-btn es-btn--reward">Reward</button>
+    <button class="es-btn" disabled>Disabled</button>
+    <button class="es-btn es-btn--sm">Small</button>
+  </div>
+
+  <h2>Cards, badges, progress</h2>
+  <div class="grid">
+    <a class="es-card" href="#"><h3 style="margin:0 0 .3rem">Lesson card</h3><p class="es-sub" style="margin:0 0 .8rem">Hover করে দেখুন।</p><span class="es-badge">A1</span> <span class="es-badge es-badge--info">Grammar</span> <span class="es-badge es-badge--reward">+20 XP</span></a>
+    <div class="es-card"><strong>Daily goal</strong><div class="es-progress" style="--value:64%;margin:.8rem 0"><span></span></div><span class="es-muted">64% complete</span></div>
+  </div>
+
+  <h2>Inputs &amp; chips</h2>
+  <div class="grid">
+    <label>Your name<input class="es-input" placeholder="নাম লিখুন"></label>
+    <label>Level<select class="es-select"><option>A1</option><option>A2</option><option>B1</option></select></label>
+  </div>
+  <p class="row"><span class="es-chip is-active">Speaking</span><span class="es-chip">Grammar</span><span class="es-chip">Vocabulary</span></p>
+</main>
+</body>
+</html>

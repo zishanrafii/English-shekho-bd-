@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pronouns — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(45,212,191,.06),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(129,140,248,.05),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;
+  background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(45,212,191,.2),rgba(129,140,248,.1));
+  border:1px solid rgba(45,212,191,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;background:linear-gradient(135deg,#2dd4bf,#818cf8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;
+  color:var(--sub);text-decoration:none;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);transition:.2s;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(45,212,191,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  border:2px solid rgba(245,200,66,.2);display:flex;align-items:center;
+  justify-content:center;font-size:.9rem;overflow:hidden;cursor:pointer;flex-shrink:0;}
+.nav-av img{width:100%;height:100%;object-fit:cover;}
+
+.layout{display:flex;height:calc(100vh - 57px);}
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid var(--border);
+  overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(45,212,191,.2);border-radius:3px;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;
+  border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;margin-bottom:2px;}
+.sb-item:hover{background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.1);}
+.sb-item.active{background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.25);color:var(--teal);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(45,212,191,.15);border-radius:3px;}
+
+.lesson-header{margin-bottom:2rem;}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#2dd4bf,#818cf8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:.8rem;}
+.lmeta{font-size:12px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,linear-gradient(90deg,var(--teal),var(--indigo)));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* PRONOUN TABLE */
+.pro-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:.5rem;}
+.pro-table th{padding:.6rem .8rem;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;border-bottom:2px solid rgba(45,212,191,.2);}
+.pro-table td{padding:.55rem .8rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.pro-table tr:last-child td{border-bottom:none;}
+.pro-table tr:hover td{background:rgba(255,255,255,.02);}
+.pro-table .person{color:var(--muted);font-size:11px;font-family:'JetBrains Mono',monospace;}
+.pro-table .form{font-weight:700;color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:14px;}
+.pro-table .bn{color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+.pro-table .ex{color:var(--sub);font-size:12px;font-style:italic;}
+.th-person{color:var(--muted)!important;}
+.th-form{color:var(--teal)!important;}
+.th-bn{color:var(--indigo)!important;}
+.th-ex{color:var(--gold)!important;}
+
+/* HERO GRID */
+.pronoun-heroes{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:1.4rem;}
+.pro-hero{border-radius:16px;padding:1.2rem .8rem;text-align:center;border:1px solid;cursor:pointer;transition:.3s;}
+.pro-hero:hover{transform:translateY(-3px);}
+.pro-word{font-size:1.8rem;font-weight:900;margin-bottom:.3rem;font-family:'JetBrains Mono',monospace;}
+.pro-label{font-size:10px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.4;}
+
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(45,212,191,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-tag{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;border-radius:20px;margin-left:8px;font-weight:700;background:rgba(45,212,191,.1);color:var(--teal);}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{background:rgba(45,212,191,.08);color:var(--teal);font-weight:700;padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(45,212,191,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--text);font-weight:600;}
+.gtable td:nth-child(2){color:var(--teal);font-family:'JetBrains Mono',monospace;}
+.gtable td:nth-child(3){color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+.correct{color:var(--emerald)!important;font-weight:700;}
+.wrong{color:var(--rose)!important;}
+
+.tip{background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--teal);}
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+/* PRACTICE */
+.practice-q{background:rgba(45,212,191,.04);border:1px solid rgba(45,212,191,.15);border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.6rem;}
+.pq-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.pq-opt{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:'JetBrains Mono',monospace;}
+.pq-opt:hover{border-color:rgba(45,212,191,.3);color:var(--teal);}
+.pq-opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);}
+.pq-opt.wrong{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.pq-feedback{font-size:13px;padding:.5rem .8rem;border-radius:8px;display:none;font-family:'Noto Sans Bengali',sans-serif;margin-top:.4rem;}
+.pq-feedback.show{display:block;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:var(--emerald);}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;align-items:center;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.btn-prev:hover,.btn-next:hover{background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(45,212,191,.12),rgba(129,140,248,.08));border-color:rgba(45,212,191,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#2dd4bf,#818cf8);color:#000;border:none;border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--indigo));transition:width .3s;}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--border);}
+  .main{padding:1.2rem 1rem 3rem;}
+  .pronoun-heroes{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">👤 Pronouns</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" id="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section-label">Pronouns</div>
+    <div class="sb-item active" data-id="personal" onclick="show('personal',0)">
+      <span class="sb-dot" style="background:#2dd4bf"></span>
+      <span class="sb-text">Personal Pronouns</span>
+      <span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="possessive" onclick="show('possessive',1)">
+      <span class="sb-dot" style="background:#f5c842"></span>
+      <span class="sb-text">Possessive Pronouns</span>
+      <span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="reflexive" onclick="show('reflexive',2)">
+      <span class="sb-dot" style="background:#fb923c"></span>
+      <span class="sb-text">Reflexive Pronouns</span>
+      <span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="demonstrative" onclick="show('demonstrative',3)">
+      <span class="sb-dot" style="background:#818cf8"></span>
+      <span class="sb-text">Demonstrative Pronouns</span>
+      <span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="relative" onclick="show('relative',4)">
+      <span class="sb-dot" style="background:#fb7185"></span>
+      <span class="sb-text">Relative Pronouns</span>
+      <span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="indefinite" onclick="show('indefinite',5)">
+      <span class="sb-dot" style="background:#34d399"></span>
+      <span class="sb-text">Indefinite Pronouns</span>
+      <span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="practice" onclick="show('practice',6)">
+      <span class="sb-dot" style="background:#2dd4bf"></span>
+      <span class="sb-text">Practice Quiz</span>
+    </div>
+  </div>
+
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const PANELS={
+
+'personal':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Pronouns → Personal</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Personal Pronouns</span></div>
+  <div class="lesson-desc">Personal Pronouns ব্যক্তি বা বস্তুর নামের পরিবর্তে ব্যবহার হয়। এগুলো Subject এবং Object — দুটো রূপে আসে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--indigo))">
+  <div class="card-title">📋 Subject vs Object Pronouns</div>
+  <div style="overflow-x:auto">
+  <table class="pro-table">
+    <tr><th class="th-person">Person</th><th class="th-form">Subject (কর্তা)</th><th class="th-form">Object (কর্ম)</th><th class="th-bn">বাংলা</th><th class="th-ex">Example</th></tr>
+    <tr><td class="person">1st Singular</td><td class="form">I</td><td class="form">me</td><td class="bn">আমি / আমাকে</td><td class="ex">I see him. He sees me.</td></tr>
+    <tr><td class="person">2nd</td><td class="form">you</td><td class="form">you</td><td class="bn">তুমি / তোমাকে</td><td class="ex">You help me. I help you.</td></tr>
+    <tr><td class="person">3rd Masc.</td><td class="form">he</td><td class="form">him</td><td class="bn">সে / তাকে</td><td class="ex">He called me. I called him.</td></tr>
+    <tr><td class="person">3rd Fem.</td><td class="form">she</td><td class="form">her</td><td class="bn">সে / তাকে</td><td class="ex">She told me. I told her.</td></tr>
+    <tr><td class="person">3rd Neuter</td><td class="form">it</td><td class="form">it</td><td class="bn">এটা / এটাকে</td><td class="ex">It is a cat. I see it.</td></tr>
+    <tr><td class="person">1st Plural</td><td class="form">we</td><td class="form">us</td><td class="bn">আমরা / আমাদের</td><td class="ex">We called them. They called us.</td></tr>
+    <tr><td class="person">3rd Plural</td><td class="form">they</td><td class="form">them</td><td class="bn">তারা / তাদের</td><td class="ex">They know us. We know them.</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--orange))">
+  <div class="card-title">📌 Subject vs Object — কীভাবে বুঝবো</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>কোথায় বসে</th><th>উদাহরণ</th></tr>
+    <tr><td>Subject Pronoun</td><td>Verb এর আগে (কাজ করে)</td><td><span style="color:var(--teal)">She</span> loves English.</td></tr>
+    <tr><td>Object Pronoun</td><td>Verb এর পরে (কাজ পায়)</td><td>I love <span style="color:var(--teal)">her</span>.</td></tr>
+    <tr><td>Object Pronoun</td><td>Preposition এর পরে</td><td>She talked to <span style="color:var(--teal)">him</span>.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>She</b> is my sister. I love <b>her</b>.</div><div class="ex-bn">সে আমার বোন। আমি তাকে ভালোবাসি।</div></div>
+    <div class="ex"><div class="ex-en"><b>We</b> invited <b>them</b> to our party.</div><div class="ex-bn">আমরা তাদের আমাদের পার্টিতে আমন্ত্রণ জানালাম।</div></div>
+    <div class="ex"><div class="ex-en"><b>He</b> gave the book to <b>me</b>.</div><div class="ex-bn">সে আমাকে বইটা দিল।</div></div>
+    <div class="ex"><div class="ex-en">Can you help <b>us</b>? <b>We</b> are lost.</div><div class="ex-bn">তুমি কি আমাদের সাহায্য করতে পারবে? আমরা হারিয়ে গেছি।</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>সাধারণ ভুল:</strong><br>
+  ❌ "Me and John went to school." → ✅ "<strong>John and I</strong> went to school."<br>
+  ❌ "Between you and I" → ✅ "Between <strong>you and me</strong>" (preposition এর পরে object)</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="btn-prev" href="grammar-articles.html">← Articles</a>
+  <button class="btn-quiz-big" onclick="show('practice',6)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('possessive',1)">Possessive →</button>
+</div>`,
+
+'possessive':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Pronouns → Possessive</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Possessive Pronouns & Adjectives</span></div>
+  <div class="lesson-desc">Possessive শব্দ দিয়ে মালিকানা বোঝানো হয়। দুটো রূপ আছে — Possessive Adjective (noun এর আগে) এবং Possessive Pronoun (noun ছাড়া একা)।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--teal))">
+  <div class="card-title">📋 Possessive Adjective vs Pronoun</div>
+  <div style="overflow-x:auto">
+  <table class="pro-table">
+    <tr><th class="th-person">Person</th><th class="th-form">Possessive Adj.</th><th class="th-form">Possessive Pro.</th><th class="th-bn">বাংলা</th><th class="th-ex">Example</th></tr>
+    <tr><td class="person">I</td><td class="form">my</td><td class="form">mine</td><td class="bn">আমার</td><td class="ex">my book / the book is mine</td></tr>
+    <tr><td class="person">you</td><td class="form">your</td><td class="form">yours</td><td class="bn">তোমার</td><td class="ex">your pen / the pen is yours</td></tr>
+    <tr><td class="person">he</td><td class="form">his</td><td class="form">his</td><td class="bn">তার (পুরুষ)</td><td class="ex">his car / the car is his</td></tr>
+    <tr><td class="person">she</td><td class="form">her</td><td class="form">hers</td><td class="bn">তার (মহিলা)</td><td class="ex">her bag / the bag is hers</td></tr>
+    <tr><td class="person">it</td><td class="form">its</td><td class="form">—</td><td class="bn">এটার</td><td class="ex">its color (pronoun form rare)</td></tr>
+    <tr><td class="person">we</td><td class="form">our</td><td class="form">ours</td><td class="bn">আমাদের</td><td class="ex">our house / the house is ours</td></tr>
+    <tr><td class="person">they</td><td class="form">their</td><td class="form">theirs</td><td class="bn">তাদের</td><td class="ex">their school / the school is theirs</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--indigo),var(--rose))">
+  <div class="card-title">📌 Adjective vs Pronoun পার্থক্য</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>ব্যবহার</th><th>উদাহরণ</th></tr>
+    <tr><td>Possessive Adjective</td><td>Noun এর আগে বসে</td><td>This is <span style="color:var(--gold)">my</span> book.</td></tr>
+    <tr><td>Possessive Pronoun</td><td>Noun ছাড়া একা বসে</td><td>This book is <span style="color:var(--gold)">mine</span>.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">This is <b>my</b> phone. That one is <b>yours</b>.</div><div class="ex-bn">এটা আমার ফোন। ওটা তোমার।</div></div>
+    <div class="ex"><div class="ex-en"><b>Her</b> dress is beautiful. <b>Mine</b> is old.</div><div class="ex-bn">তার পোশাক সুন্দর। আমারটা পুরনো।</div></div>
+    <div class="ex"><div class="ex-en">The cat licked <b>its</b> paw.</div><div class="ex-bn">বিড়ালটা তার থাবা চাটল।</div></div>
+    <div class="ex"><div class="ex-en">Is this seat <b>yours</b> or <b>hers</b>?</div><div class="ex-bn">এই আসনটা কি তোমার নাকি তার?</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>It's vs Its:</strong><br>
+  <strong>It's</strong> = It is (সংক্ষিপ্ত) → "It's a sunny day."<br>
+  <strong>Its</strong> = Possessive → "The dog wagged its tail." — কোনো apostrophe নেই!</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('personal',0)">← Personal</button>
+  <button class="btn-quiz-big" onclick="show('practice',6)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('reflexive',2)">Reflexive →</button>
+</div>`,
+
+'reflexive':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Pronouns → Reflexive</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Reflexive Pronouns</span></div>
+  <div class="lesson-desc">Reflexive Pronouns ব্যবহার হয় যখন subject এবং object একই ব্যক্তি — অথবা কোনো কাজ নিজে নিজে করা বোঝাতে।</div>
+</div>
+
+<div class="pronoun-heroes">
+  ${[['myself','আমি নিজে','#2dd4bf'],['yourself','তুমি নিজে','#f5c842'],['himself','সে নিজে (পুরুষ)','#fb923c'],['herself','সে নিজে (মহিলা)','#fb7185'],['itself','এটা নিজে','#818cf8'],['ourselves','আমরা নিজেরা','#34d399'],['yourselves','তোমরা নিজেরা','#2dd4bf'],['themselves','তারা নিজেরা','#f5c842']].map(([w,bn,c])=>`
+  <div class="pro-hero" style="background:${c}15;border-color:${c}30">
+    <div class="pro-word" style="color:${c};font-size:1.1rem">${w}</div>
+    <div class="pro-label">${bn}</div>
+  </div>`).join('')}
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--orange),var(--rose))">
+  <div class="card-title">📌 কখন Reflexive Pronoun ব্যবহার করবেন</div>
+  <table class="gtable">
+    <tr><th>ব্যবহার</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>Subject = Object</td><td>She hurt <span style="color:var(--teal)">herself</span>.</td><td>সে নিজেকে আঘাত করল।</td></tr>
+    <tr><td>জোর দেওয়া (Emphatic)</td><td>I did it <span style="color:var(--teal)">myself</span>.</td><td>আমি নিজেই এটা করেছি।</td></tr>
+    <tr><td>By + reflexive = একা</td><td>She lives by <span style="color:var(--teal)">herself</span>.</td><td>সে একা থাকে।</td></tr>
+    <tr><td>Enjoy/behave + reflexive</td><td>Enjoy <span style="color:var(--teal)">yourself</span>!</td><td>মজা করো!</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">He made the cake <b>himself</b>. <span class="ex-tag">emphatic</span></div><div class="ex-bn">সে নিজেই কেকটা বানিয়েছে।</div></div>
+    <div class="ex"><div class="ex-en">She looked at <b>herself</b> in the mirror.</div><div class="ex-bn">সে আয়নায় নিজেকে দেখল।</div></div>
+    <div class="ex"><div class="ex-en">The children enjoyed <b>themselves</b> at the party.</div><div class="ex-bn">বাচ্চারা পার্টিতে খুব মজা করল।</div></div>
+    <div class="ex"><div class="ex-en">Please help <b>yourself</b> to the food.</div><div class="ex-bn">অনুগ্রহ করে খাবার নিন।</div></div>
+    <div class="ex"><div class="ex-en">We did the project by <b>ourselves</b>.</div><div class="ex-bn">আমরা নিজেরাই প্রজেক্টটা করলাম।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Singular vs Plural মনে রাখো:</strong><br>
+  yourself (একজন) → yourselves (একাধিক)<br>
+  "Behave <strong>yourself</strong>!" (একজনকে) vs "Behave <strong>yourselves</strong>!" (সবাইকে)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('possessive',1)">← Possessive</button>
+  <button class="btn-quiz-big" onclick="show('practice',6)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('demonstrative',3)">Demonstrative →</button>
+</div>`,
+
+'demonstrative':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Pronouns → Demonstrative</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Demonstrative Pronouns</span></div>
+  <div class="lesson-desc">Demonstrative Pronouns ব্যবহার হয় কাছের বা দূরের কিছু নির্দেশ করতে।</div>
+</div>
+
+<div class="pronoun-heroes" style="grid-template-columns:repeat(4,1fr)">
+  <div class="pro-hero" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)"><div class="pro-word" style="color:#34d399">this</div><div class="pro-label">কাছের একটি</div></div>
+  <div class="pro-hero" style="background:rgba(245,200,66,.08);border-color:rgba(245,200,66,.25)"><div class="pro-word" style="color:#f5c842">that</div><div class="pro-label">দূরের একটি</div></div>
+  <div class="pro-hero" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25)"><div class="pro-word" style="color:#2dd4bf">these</div><div class="pro-label">কাছের একাধিক</div></div>
+  <div class="pro-hero" style="background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.25)"><div class="pro-word" style="color:#818cf8">those</div><div class="pro-label">দূরের একাধিক</div></div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--emerald),var(--teal))">
+  <div class="card-title">📋 This / That / These / Those</div>
+  <table class="gtable">
+    <tr><th></th><th>কাছে (Near)</th><th>দূরে (Far)</th></tr>
+    <tr><td>Singular (একটি)</td><td><span style="color:var(--emerald)">this</span> — এটা, এই</td><td><span style="color:var(--gold)">that</span> — ওটা, সেটা</td></tr>
+    <tr><td>Plural (একাধিক)</td><td><span style="color:var(--teal)">these</span> — এগুলো</td><td><span style="color:var(--indigo)">those</span> — ওগুলো, সেগুলো</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>This</b> is my phone. <b>That</b> is yours.</div><div class="ex-bn">এটা আমার ফোন। ওটা তোমার।</div></div>
+    <div class="ex"><div class="ex-en"><b>These</b> shoes are new. <b>Those</b> are old.</div><div class="ex-bn">এই জুতাগুলো নতুন। ওগুলো পুরনো।</div></div>
+    <div class="ex"><div class="ex-en"><b>This</b> is my friend, Rafi.</div><div class="ex-bn">এ হলো আমার বন্ধু, রাফি। (পরিচয় করানো)</div></div>
+    <div class="ex"><div class="ex-en"><b>That</b> was a great movie!</div><div class="ex-bn">ওটা একটা দারুণ সিনেমা ছিল!</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>ফোনে পরিচয়:</strong> ফোনে নিজেকে পরিচয় দেওয়ার সময় — <strong>"This is Rafi speaking."</strong> (This ব্যবহার হয়, That নয়।)<br>
+  <strong>Past এর কথা বলতে:</strong> "That was amazing!" (অতীত ঘটনা → that)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('reflexive',2)">← Reflexive</button>
+  <button class="btn-quiz-big" onclick="show('practice',6)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('relative',4)">Relative →</button>
+</div>`,
+
+'relative':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Pronouns → Relative</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Relative Pronouns</span></div>
+  <div class="lesson-desc">Relative Pronouns দুটো clause কে যুক্ত করে এবং একটি noun সম্পর্কে অতিরিক্ত তথ্য দেয়।</div>
+</div>
+
+<div class="pronoun-heroes" style="grid-template-columns:repeat(5,1fr)">
+  ${[['who','ব্যক্তি (subject)','#2dd4bf'],['whom','ব্যক্তি (object)','#f5c842'],['which','বস্তু/প্রাণী','#818cf8'],['that','ব্যক্তি/বস্তু','#34d399'],['whose','মালিকানা','#fb7185']].map(([w,bn,c])=>`
+  <div class="pro-hero" style="background:${c}12;border-color:${c}28">
+    <div class="pro-word" style="color:${c};font-size:1.2rem">${w}</div>
+    <div class="pro-label">${bn}</div>
+  </div>`).join('')}
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--indigo))">
+  <div class="card-title">📋 কোনটা কখন ব্যবহার করবেন</div>
+  <table class="gtable">
+    <tr><th>Pronoun</th><th>কখন</th><th>উদাহরণ</th></tr>
+    <tr><td><span style="color:var(--teal)">who</span></td><td>ব্যক্তির জন্য (Subject)</td><td>The man <b>who</b> called you is here.</td></tr>
+    <tr><td><span style="color:var(--gold)">whom</span></td><td>ব্যক্তির জন্য (Object/formal)</td><td>The person <b>whom</b> I met was kind.</td></tr>
+    <tr><td><span style="color:var(--indigo)">which</span></td><td>বস্তু/প্রাণীর জন্য</td><td>The book <b>which</b> I read was great.</td></tr>
+    <tr><td><span style="color:var(--emerald)">that</span></td><td>ব্যক্তি বা বস্তু (defining)</td><td>The car <b>that</b> I bought is red.</td></tr>
+    <tr><td><span style="color:var(--rose)">whose</span></td><td>মালিকানা (ব্যক্তি/বস্তু)</td><td>The girl <b>whose</b> bag is red is my friend.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--orange))">
+  <div class="card-title">🔄 Defining vs Non-Defining Clause</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en"><b>Defining:</b> The student <b>who</b> studies hard will succeed. <span class="ex-tag">comma নেই</span></div>
+      <div class="ex-bn">যে ছাত্র কঠোর পড়াশোনা করে সে সফল হবে। (কোন ছাত্র — specify করছে)</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en"><b>Non-Defining:</b> Rafi, <b>who</b> is my friend, lives in Dhaka. <span class="ex-tag">comma আছে</span></div>
+      <div class="ex-bn">রাফি, যে আমার বন্ধু, ঢাকায় থাকে। (extra info, comma দিয়ে আলাদা)</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">The woman <b>who</b> teaches us is very kind.</div><div class="ex-bn">যে মহিলা আমাদের পড়ান তিনি খুব সদয়।</div></div>
+    <div class="ex"><div class="ex-en">I found the wallet <b>that</b> I lost yesterday.</div><div class="ex-bn">আমি গতকাল হারানো মানিব্যাগটা পেলাম।</div></div>
+    <div class="ex"><div class="ex-en">The boy <b>whose</b> father is a doctor is my classmate.</div><div class="ex-bn">যে ছেলের বাবা ডাক্তার সে আমার সহপাঠী।</div></div>
+    <div class="ex"><div class="ex-en">The movie <b>which</b> we watched last night was boring.</div><div class="ex-bn">গত রাতে আমরা যে সিনেমা দেখেছিলাম সেটা বিরক্তিকর ছিল।</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Who vs That:</strong> Non-defining clause এ (comma সহ) সবসময় <strong>who/which</strong> ব্যবহার করো, <strong>that</strong> নয়।<br>
+  ✅ "My mother, <strong>who</strong> is a nurse, works hard."<br>
+  ❌ "My mother, <strong>that</strong> is a nurse, works hard."</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('demonstrative',3)">← Demonstrative</button>
+  <button class="btn-quiz-big" onclick="show('practice',6)">✍️ Practice</button>
+  <button class="btn-next" onclick="show('indefinite',5)">Indefinite →</button>
+</div>`,
+
+'indefinite':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Pronouns → Indefinite</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Indefinite Pronouns</span></div>
+  <div class="lesson-desc">Indefinite Pronouns অনির্দিষ্ট ব্যক্তি বা বস্তু বোঝায়। এগুলো তিনটি গ্রুপে ভাগ করা যায়: some-, any-, no-।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--emerald),var(--teal))">
+  <div class="card-title">📋 Some / Any / No + body/one/thing/where</div>
+  <div style="overflow-x:auto">
+  <table class="pro-table">
+    <tr><th class="th-person">Prefix</th><th class="th-form">+body</th><th class="th-form">+one</th><th class="th-form">+thing</th><th class="th-form">+where</th><th class="th-bn">কখন</th></tr>
+    <tr><td class="person" style="color:var(--emerald)">some-</td><td class="form">somebody</td><td class="form">someone</td><td class="form">something</td><td class="form">somewhere</td><td class="bn">positive / offer</td></tr>
+    <tr><td class="person" style="color:var(--gold)">any-</td><td class="form">anybody</td><td class="form">anyone</td><td class="form">anything</td><td class="form">anywhere</td><td class="bn">negative / question</td></tr>
+    <tr><td class="person" style="color:var(--rose)">no-</td><td class="form">nobody</td><td class="form">no one</td><td class="form">nothing</td><td class="form">nowhere</td><td class="bn">negative meaning</td></tr>
+    <tr><td class="person" style="color:var(--indigo)">every-</td><td class="form">everybody</td><td class="form">everyone</td><td class="form">everything</td><td class="form">everywhere</td><td class="bn">সবাই/সব</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--orange))">
+  <div class="card-title">📌 Some vs Any নিয়ম</div>
+  <table class="gtable">
+    <tr><th>পরিস্থিতি</th><th>Some-</th><th>Any-</th></tr>
+    <tr><td>Positive sentence</td><td class="correct">✅ Someone called you.</td><td>❌ (সাধারণত নয়)</td></tr>
+    <tr><td>Negative sentence</td><td>❌</td><td class="correct">✅ Nobody/Nothing was there.</td></tr>
+    <tr><td>Question (সাধারণ)</td><td>❌</td><td class="correct">✅ Did anyone call?</td></tr>
+    <tr><td>Offer / Request</td><td class="correct">✅ Would you like something?</td><td>❌</td></tr>
+    <tr><td>Negative + any = কোনো নেই</td><td>❌</td><td class="correct">✅ I don't know anything.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">💬 Examples</div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>Someone</b> knocked on the door.</div><div class="ex-bn">কেউ একজন দরজায় টোকা দিল।</div></div>
+    <div class="ex"><div class="ex-en">I don't know <b>anything</b> about it.</div><div class="ex-bn">আমি এ বিষয়ে কিছুই জানি না।</div></div>
+    <div class="ex"><div class="ex-en"><b>Nobody</b> came to the party.</div><div class="ex-bn">পার্টিতে কেউ আসেনি।</div></div>
+    <div class="ex"><div class="ex-en"><b>Everyone</b> loves a good story.</div><div class="ex-bn">সবাই ভালো গল্প পছন্দ করে।</div></div>
+    <div class="ex"><div class="ex-en">Would you like <b>something</b> to eat?</div><div class="ex-bn">তুমি কি কিছু খেতে চাও? (offer)</div></div>
+    <div class="ex"><div class="ex-en">Is there <b>anyone</b> here who speaks English?</div><div class="ex-bn">এখানে কি কেউ আছে যে English বলতে পারে?</div></div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>Double Negative এড়িয়ে চলো!</strong><br>
+  ❌ "I don't know nobody." (double negative — ভুল)<br>
+  ✅ "I don't know <strong>anybody</strong>." অথবা ✅ "<strong>Nobody</strong> knows."</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('relative',4)">← Relative</button>
+  <button class="btn-next" onclick="show('practice',6)">Practice Quiz →</button>
+</div>`,
+
+'practice':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Pronouns → Practice</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>✍️ Pronouns Practice Quiz</span></div>
+  <div class="lesson-desc">সঠিক pronoun বেছে নাও।</div>
+</div>
+<div id="quiz-wrap"></div>
+<div class="lesson-nav" style="margin-top:1.5rem">
+  <button class="btn-prev" onclick="show('indefinite',5)">← Indefinite</button>
+  <button class="btn-quiz-big" onclick="resetQuiz()">🔄 আবার চেষ্টা করো</button>
+  <a class="btn-next" href="grammar-modals.html">Modals →</a>
+</div>`
+};
+
+const QUIZ=[
+  {q:'___ is my best friend. (সে — পুরুষ, subject)',       opts:['Him','He','His','Himself'],  ans:'He',       exp:'Subject position → He'},
+  {q:'She gave the book to ___. (আমাকে)',                   opts:['I','my','me','myself'],       ans:'me',       exp:'Object (preposition এর পরে) → me'},
+  {q:'This bag is ___. (আমার — pronoun, noun ছাড়া)',        opts:['my','me','mine','myself'],    ans:'mine',     exp:'Noun ছাড়া একা → Possessive Pronoun: mine'},
+  {q:'The cat hurt ___. (নিজেকে)',                          opts:['it','its','itself','him'],    ans:'itself',   exp:'Cat = it → Reflexive: itself'},
+  {q:'___ books are on the table. (এগুলো — কাছে)',          opts:['This','That','These','Those'],ans:'These',    exp:'কাছের plural → These'},
+  {q:'The teacher ___ taught us retired. (যিনি)',           opts:['which','that','who','whom'],  ans:'who',      exp:'ব্যক্তি + subject → who'},
+  {q:'The car ___ I bought is red.',                        opts:['who','whom','which','whose'], ans:'which',    exp:'বস্তু → which / that উভয়ই চলে'},
+  {q:'___ called me? I don\'t know. (কেউ কি?)',             opts:['Someone','Anybody','Nobody','Everyone'],ans:'Anybody',exp:'প্রশ্নে → any- group: Anybody'},
+  {q:'I did the homework ___. (নিজেই)',                      opts:['me','by me','myself','mine'], ans:'myself',   exp:'নিজে করা বোঝাতে → myself'},
+  {q:'___ is your name? (তোমার — adjective)',               opts:['You','Yours','Your','Yourself'],ans:'Your',  exp:'Noun (name) এর আগে → Possessive Adjective: Your'},
+  {q:'Nobody told ___ about the party. (আমাকে)',            opts:['I','me','my','mine'],         ans:'me',       exp:'Object position → me'},
+  {q:'The girl ___ bag is red is my friend.',               opts:['who','whom','which','whose'], ans:'whose',    exp:'মালিকানা → whose'},
+];
+
+let score=0,done=false;
+function renderQuiz(){
+  score=0;done=false;
+  const w=document.getElementById('quiz-wrap');
+  if(!w)return;
+  w.innerHTML=QUIZ.map((q,i)=>`
+    <div class="practice-q" id="pq-${i}">
+      <div class="pq-text">${i+1}. ${q.q}</div>
+      <div class="pq-options">${q.opts.map(o=>`<button class="pq-opt" onclick="checkQ(${i},'${o}')">${o}</button>`).join('')}</div>
+      <div class="pq-feedback" id="pf-${i}"></div>
+    </div>`).join('')+`<div id="score-wrap"></div>`;
+}
+window.checkQ=(i,sel)=>{
+  const q=QUIZ[i];
+  const el=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  el.querySelectorAll('.pq-opt').forEach(b=>{
+    b.onclick=null;
+    if(b.textContent===q.ans)b.classList.add('correct');
+    else if(b.textContent===sel&&sel!==q.ans)b.classList.add('wrong');
+  });
+  fb.className='pq-feedback show '+(sel===q.ans?'correct':'wrong');
+  fb.textContent=(sel===q.ans?'✅ সঠিক! ':'❌ ভুল। ')+q.exp;
+  if(sel===q.ans)score++;
+  if([...document.querySelectorAll('.pq-feedback.show')].length===QUIZ.length&&!done){
+    done=true;
+    const pct=Math.round(score/QUIZ.length*100);
+    document.getElementById('score-wrap').innerHTML=`
+      <div style="background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.2);border-radius:18px;padding:1.5rem;text-align:center;margin-top:1rem;">
+        <div style="font-size:2.5rem;font-weight:900;color:var(--teal)">${score}/${QUIZ.length}</div>
+        <div style="font-size:1rem;color:var(--sub);margin:.3rem 0;font-family:'Noto Sans Bengali',sans-serif">${pct>=80?'🎉 অসাধারণ!':pct>=60?'👍 ভালো!':'💪 আরো চেষ্টা করো!'}</div>
+        <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Accuracy: ${pct}% · XP Earned: ${Math.round(pct/2)} XP</div>
+      </div>`;
+  }
+};
+window.resetQuiz=()=>{score=0;done=false;renderQuiz();};
+
+const ORDER=['personal','possessive','reflexive','demonstrative','relative','indefinite','practice'];
+window.show=(id,idx)=>{
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));
+  document.getElementById('prog').style.width=Math.round(idx/(ORDER.length-1)*100)+'%';
+  document.getElementById('main').innerHTML=PANELS[id]();
+  document.getElementById('main').scrollTop=0;
+  if(id==='practice')renderQuiz();
+};
+
+show('personal',0);
+</script>
+</body>
+</html>

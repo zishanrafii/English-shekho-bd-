@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>লেখার ভুল থেকে শেখা — English Shekho</title>
+<meta name="robots" content="noindex">
+<meta name="es-guest" content="allowed">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  body{min-height:100vh;padding:var(--es-s4);display:grid;place-items:start center}
+  .wrap{width:min(600px,100%);margin-top:clamp(0rem,3vh,1.5rem)}
+  .top{display:flex;justify-content:space-between;margin-bottom:var(--es-s4)} .top a{color:var(--es-sub);text-decoration:none;font-size:var(--es-fs-sm)}
+  h1{font-size:var(--es-fs-2xl);margin:0 0 var(--es-s2)} .lead{color:var(--es-sub);margin:0 0 var(--es-s4)}
+  .sum{display:flex;gap:var(--es-s2);flex-wrap:wrap;margin:var(--es-s3) 0 var(--es-s4)}
+  .ctx{font-size:var(--es-fs-lg);line-height:1.7;margin:var(--es-s3) 0;padding:.8rem 1rem;border-radius:var(--es-r-md);background:var(--es-surface-1)}
+  .ctx mark{background:rgba(251,113,133,.25);color:inherit;border-radius:4px;padding:0 4px}
+  .row{display:flex;gap:var(--es-s2);flex-wrap:wrap;margin-top:var(--es-s3)}
+  .fb{margin-top:var(--es-s3);padding:.8rem 1rem;border-radius:var(--es-r-md)}
+  .fb.ok{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.35)} .fb.no{background:rgba(255,200,87,.08);border:1px solid rgba(255,200,87,.35)}
+  .err{min-height:1.3em;color:var(--es-danger);font-size:var(--es-fs-sm);margin-top:var(--es-s2);text-align:center} .center{text-align:center}
+  .stats{display:flex;gap:var(--es-s2);justify-content:center;flex-wrap:wrap;margin:var(--es-s4) 0}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><a href="writing-lab.html">← Writing Lab</a><a href="dashboard.html">Dashboard</a></div>
+  <div class="es-card" id="view"><p class="lead">লোড হচ্ছে…</p></div>
+  <p class="err" id="err" role="alert"></p>
+</main>
+<script type="module">
+import { requireAuth, db, doc, setDoc, getDocs, collection, query, where, limit, increment } from "./js/firebase-config.js";
+import { summarize, checkAnswer } from "./writing/mistakes.js";
+import { CATEGORIES } from "./writing/analyzer.js";
+import { isoDay } from "./learning/srs.js";
+
+const $ = (id) => document.getElementById(id);
+const bn = (n) => String(n).replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const btn = (t, fn, cls = "es-btn es-btn--secondary") => { const b = el("button", cls, t); b.type = "button"; b.onclick = fn; return b; };
+const view = (...n) => { const v = $("view"); v.textContent = ""; v.append(...n); $("err").textContent = ""; };
+const shuffle = (a) => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const SESSION = 8;
+let uid = null, all = [], items = [], pos = 0, fixed = 0, tried = 0;
+const refOf = (id) => doc(db, "users", uid, "writingMistakes", id);
+
+async function start() {
+  const snap = await getDocs(query(collection(db, "users", uid, "writingMistakes"), where("fixed", "==", false), limit(100)));
+  all = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  items = shuffle(all).slice(0, SESSION); pos = 0; fixed = 0; tried = 0;
+  if (!items.length) {
+    const box = el("div", "center");
+    box.append(el("h1", "es-gradient-text", "কোনো ভুল জমে নেই 🎉"), el("p", "lead", "Writing Lab-এ লেখা check করলে যেসব ভুল ধরা পড়ে সেগুলো এখানে অনুশীলনের জন্য জমা হয়।"));
+    const a = el("a", "es-btn", "Writing Lab-এ যান →"); a.href = "writing-lab.html"; box.appendChild(a); return view(box);
+  }
+  show(true);
+}
+
+function show(first) {
+  if (pos >= items.length) return summary();
+  const m = items[pos]; const box = el("div");
+  if (first && pos === 0) {
+    box.appendChild(el("h1", "es-gradient-text", "ভুল থেকে শেখা"));
+    box.appendChild(el("p", "lead", "আপনার লেখার ভুল অংশটি ঠিক করে লিখুন।"));
+    const sum = el("div", "sum"); summarize(all).forEach((x) => sum.appendChild(el("span", "es-badge", `${x.label} · ${bn(x.count)}`))); box.appendChild(sum);
+  }
+  box.append(el("span", "es-badge es-badge--info", `${bn(pos + 1)} / ${bn(items.length)} · ${(CATEGORIES[m.category] || CATEGORIES.other).bn}`));
+  const ctx = el("div", "ctx"); ctx.lang = "en";
+  const at = m.context ? m.context.indexOf(m.original) : -1;
+  if (at >= 0) { ctx.append(document.createTextNode(m.context.slice(0, at))); ctx.appendChild(el("mark", null, m.original)); ctx.append(document.createTextNode(m.context.slice(at + m.original.length))); }
+  else { ctx.appendChild(el("mark", null, m.original)); }
+  box.appendChild(ctx);
+  const lab = el("label", "lead", "ঠিক রূপটি লিখুন:"); lab.htmlFor = "ans"; lab.style.display = "block"; lab.style.margin = "0 0 .4rem";
+  const inp = el("input", "es-input"); inp.id = "ans"; inp.autocomplete = "off"; inp.spellcheck = false; inp.lang = "en"; inp.placeholder = "…";
+  const out = el("div"); const row = el("div", "row");
+  const submit = btn("✔ যাচাই করুন", async () => {
+    const r = checkAnswer(inp.value, m); if (r === "empty") { inp.focus(); return; }
+    submit.disabled = true; skip.disabled = true; inp.disabled = true; tried++;
+    const right = r === "correct";
+    out.className = "fb " + (right ? "ok" : "no");
+    out.textContent = right ? "✅ ঠিক!" : (r === "same" ? "এটি আগের ভুল রূপটিই। ঠিক রূপ: " : "ঠিক রূপ: ");
+    if (!right) out.appendChild(Object.assign(el("b", null, m.corrected), { lang: "en" }));
+    if (m.why) out.appendChild(el("div", "lead", m.why)).style.cssText = "margin:.4rem 0 0;font-size:.9rem";
+    try {
+      if (right) { await setDoc(refOf(m.id), { fixed: true, last: isoDay() }, { merge: true }); fixed++; }
+      else await setDoc(refOf(m.id), { count: increment(1), last: isoDay() }, { merge: true });
+    } catch (e) { console.warn(e); $("err").textContent = "সেভ করা যায়নি, তবে চালিয়ে যেতে পারেন।"; }
+    const nx = btn(pos + 1 < items.length ? "পরের প্রশ্ন →" : "শেষ করি", () => { pos++; show(false); }, "es-btn es-btn--sm"); nx.style.marginTop = ".6rem"; out.appendChild(document.createElement("br")); out.appendChild(nx); nx.focus();
+  }, "es-btn");
+  const skip = btn("উত্তর দেখান", () => { inp.value = ""; out.className = "fb no"; out.textContent = "ঠিক রূপ: "; out.appendChild(Object.assign(el("b", null, m.corrected), { lang: "en" })); if (m.why) out.appendChild(el("div", "lead", m.why)).style.cssText = "margin:.4rem 0 0;font-size:.9rem"; submit.disabled = true; skip.disabled = true; inp.disabled = true; tried++; const nx = btn(pos + 1 < items.length ? "পরের প্রশ্ন →" : "শেষ করি", () => { pos++; show(false); }, "es-btn es-btn--sm"); nx.style.marginTop = ".6rem"; out.appendChild(document.createElement("br")); out.appendChild(nx); nx.focus(); });
+  inp.onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); submit.click(); } };   // preventDefault: otherwise the same Enter press also "clicks" the Next button that gets focus right after
+  row.append(submit, skip); box.append(lab, inp, row, out); view(box); inp.focus();
+}
+
+function summary() {
+  const box = el("div", "center");
+  box.append(el("h1", "es-gradient-text", fixed === tried ? "চমৎকার! 🎉" : "ভালো চেষ্টা 👏"), el("p", "lead", `${bn(tried)}টির মধ্যে ${bn(fixed)}টি এবার ঠিক হয়েছে। বাকিগুলো পরে আবার আসবে, কোনো তাড়া নেই।`));
+  const st = el("div", "stats"); st.append(el("span", "es-badge es-badge--success", `✅ ${bn(fixed)} ঠিক`), el("span", "es-badge", `🔁 ${bn(Math.max(0, all.length - fixed))}টি বাকি`));
+  const row = el("div", "row"); row.style.justifyContent = "center";
+  if (all.length - fixed > 0) row.appendChild(btn("আরও কিছু করি", () => start(), "es-btn"));
+  const back = el("a", "es-btn es-btn--secondary", "Writing Lab"); back.href = "writing-lab.html"; row.appendChild(back);
+  box.append(st, row); view(box);
+}
+
+requireAuth((u) => { uid = u.uid; start().catch((e) => { console.warn(e); view(el("p", "lead", "লোড করা যায়নি। Internet পরীক্ষা করে রিফ্রেশ করুন।")); }); });
+</script>
+</body>
+</html>

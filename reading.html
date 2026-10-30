@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading Center — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/reading.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>ENGLISH LEARNING PLATFORM · A1 TO C2</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="listening.html" class="nav-link">Listening</a>
+        <a href="reading.html" class="nav-link active">Reading</a>
+        <a href="writing-lab.html" class="nav-link">Writing</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" data-action="go-profile">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" data-action="logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       LIST SCREEN
+  ════════════════════════════════ -->
+  <div class="list-screen">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-stripe"></div>
+      <div class="hero-orb1"></div>
+      <div class="hero-orb2"></div>
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-eyebrow">📖 Reading Center</div>
+          <h2>Build Your <span>Reading Skill</span> 📚</h2>
+          <p class="hero-sub">Short story, article ও real-life passage পড়ে comprehension skill বাড়ান। প্রতিটি passage-এ গুরুত্বপূর্ণ word-এর বাংলা অর্থ এবং একটি ছোট comprehension quiz আছে।</p>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat">
+            <div class="hstat-v" id="h-total">0</div>
+            <div class="hstat-l">Passages</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-v" id="h-completed">0</div>
+            <div class="hstat-l">Completed</div>
+          </div>
+          <div class="hstat">
+            <div class="hstat-v" id="h-xp">0</div>
+            <div class="hstat-l">Total XP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- READING SPEED INFO CARD -->
+    <div class="speed-test-card">
+      <div class="st-icon">⏱️</div>
+      <div class="st-text">
+        <h4>Reading Speed Tracker</h4>
+        <p>প্রতিটি passage পড়ার সময় আমরা automatically তোমার Words-Per-Minute (WPM) measure করি।</p>
+      </div>
+      <div>
+        <div class="st-wpm" id="st-wpm">—</div>
+        <div class="st-wpm-label">Last WPM</div>
+      </div>
+    </div>
+
+    <!-- SEARCH + FILTER -->
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Passage খুঁজুন... e.g. Bees, Habit, Climate">
+      </div>
+      <div class="cat-tabs" id="cat-tabs"></div>
+      <div class="bookmark-filter-btn" id="bookmark-filter-btn" title="শুধু Bookmarked passage দেখুন">🔖 Bookmarked</div>
+    </div>
+    <div class="level-tabs" id="level-tabs"></div>
+
+    <!-- PASSAGE GRID -->
+    <div class="section-title">📂 All Passages <span id="rt-count"></span></div>
+    <div class="passage-grid" id="passage-grid"></div>
+
+  </div><!-- /.list-screen -->
+
+  <!-- ════════════════════════════════
+       READER SCREEN
+  ════════════════════════════════ -->
+  <div class="reader-screen" id="reader-screen">
+
+    <div class="reader-top">
+      <button class="btn-back" data-action="back-to-list">← সব Passage</button>
+      <div class="reader-controls">
+        <div class="icon-btn" id="reader-bookmark-btn" title="Bookmark করুন">🏷️</div>
+        <div class="icon-btn" title="Font size +" data-action="noop">🔠</div>
+      </div>
+    </div>
+
+    <div class="reading-progress-bar">
+      <div class="reading-progress-fill" id="reading-progress-fill"></div>
+    </div>
+
+    <div class="reader-card" id="reader-card-inner">
+      <div class="reader-head">
+        <div class="reader-icon" id="reader-icon">📖</div>
+        <div>
+          <div class="reader-title" id="reader-title">Title</div>
+          <div class="reader-meta" id="reader-meta"></div>
+        </div>
+      </div>
+
+      <!-- AUDIO NARRATION BAR -->
+      <div class="audio-bar" id="audio-bar">
+        <button class="audio-play-btn" id="tts-play-btn" data-action="tts-toggle" title="Play/Pause narration">▶</button>
+        <div class="audio-bar-mid">
+          <div class="audio-bar-track" id="audio-bar-track">
+            <div class="audio-bar-fill" id="audio-bar-fill"></div>
+          </div>
+          <div class="audio-bar-time">
+            <span id="tts-current-sentence">0</span>/<span id="tts-total-sentence">0</span> sentences
+          </div>
+        </div>
+        <div class="audio-speed-group">
+          <button class="speed-btn" data-speed="0.75">0.75x</button>
+          <button class="speed-btn active" data-speed="1">1x</button>
+          <button class="speed-btn" data-speed="1.25">1.25x</button>
+        </div>
+        <div class="icon-btn" id="tts-stop-btn" data-action="tts-stop" title="Stop">⏹</div>
+      </div>
+
+      <div class="passage-text" id="passage-text"></div>
+
+      <div class="reader-actions">
+        <button class="btn-primary" id="btn-finish-reading" data-action="finish-reading">✅ Reading শেষ করুন</button>
+        <a class="btn-secondary" id="read-aloud-link" href="speaking-practice.html?mode=read" style="display:inline-block;text-decoration:none;margin-left:8px">🎤 জোরে পড়ুন (Read Aloud)</a>
+      </div>
+    </div>
+
+    <!-- QUIZ PANEL -->
+    <div class="quiz-panel" id="quiz-panel">
+      <div class="quiz-head">
+        <h3>📝 Comprehension Quiz</h3>
+        <div class="quiz-progress-dots" id="quiz-progress-dots"></div>
+      </div>
+
+      <div class="quiz-body">
+        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:.6rem;" id="quiz-q-num"></div>
+        <div class="quiz-q" id="quiz-q"></div>
+        <div class="quiz-opts" id="quiz-opts"></div>
+        <div class="quiz-exp" id="quiz-exp"></div>
+        <div class="reader-actions">
+          <button class="btn-primary" id="btn-next-q" data-action="next-q" style="display:none;">পরের প্রশ্ন →</button>
+        </div>
+      </div>
+
+      <div class="quiz-result" id="quiz-result">
+        <div class="qr-emoji" id="qr-emoji">🎉</div>
+        <div class="qr-score" id="qr-score">0/0</div>
+        <div class="qr-sub" id="qr-sub"></div>
+        <div class="qr-sub" id="qr-wpm" style="margin-top:4px"></div>
+        <button class="btn-primary" data-action="back-to-list">📂 আরও Passage পড়ুন</button>
+      </div>
+    </div>
+
+  </div><!-- /.reader-screen -->
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম। A1 থেকে C2 পর্যন্ত vocabulary, grammar, speaking এবং live chat সুবিধা।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span><br><span>Unauthorized reproduction</span><br><span>is strictly prohibited.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/reading.js"></script>
+</body>
+</html>

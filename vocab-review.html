@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>স্মার্ট রিভিউ — English Shekho</title>
+<meta name="robots" content="noindex">
+<meta name="es-guest" content="allowed">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  body{min-height:100vh;padding:var(--es-s4);display:grid;place-items:start center}
+  .wrap{width:min(600px,100%);margin-top:clamp(0rem,3vh,1.5rem)}
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--es-s4)}
+  .top a{color:var(--es-sub);text-decoration:none;font-size:var(--es-fs-sm)}
+  h1{font-size:var(--es-fs-2xl);margin:0 0 var(--es-s2)}
+  .lead{color:var(--es-sub);margin:0 0 var(--es-s4)}
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--es-s3);margin-bottom:var(--es-s4)}
+  .stat{background:var(--es-surface-1);border:1px solid var(--es-border);border-radius:var(--es-r-md);padding:var(--es-s3) var(--es-s4)}
+  .stat b{display:block;font-size:var(--es-fs-2xl);line-height:1.1}
+  .stat span{color:var(--es-muted);font-size:var(--es-fs-xs)}
+  .actions{display:grid;gap:var(--es-s3)}
+  .w100{width:100%}
+  .tabs{display:flex;gap:var(--es-s2);flex-wrap:wrap;margin:var(--es-s5) 0 var(--es-s3)}
+  .list{display:grid;gap:var(--es-s2)}
+  .row{display:flex;justify-content:space-between;gap:var(--es-s3);align-items:center;padding:.65rem .9rem;border-radius:var(--es-r-md);background:var(--es-surface-1);border:1px solid var(--es-border)}
+  .row .en{font-weight:700}.row .bn{color:var(--es-sub);font-size:var(--es-fs-sm)}
+  .meter{width:64px;height:6px;border-radius:99px;background:var(--es-surface-3);overflow:hidden;flex:none}
+  .meter i{display:block;height:100%;background:var(--es-grad-energy)}
+  /* flashcard */
+  .card{min-height:300px;display:flex;flex-direction:column;justify-content:center;text-align:center;gap:var(--es-s3)}
+  .tagrow{display:flex;gap:var(--es-s2);justify-content:center;flex-wrap:wrap}
+  .word{font-size:clamp(2rem,9vw,2.8rem);font-weight:800;line-height:1.15;word-break:break-word}
+  .ph{color:var(--es-muted);font-family:var(--es-font-mono)}
+  .meaning{font-size:var(--es-fs-xl);color:var(--es-warm-400);font-weight:700}
+  .ex{color:var(--es-sub);line-height:1.6}
+  .ex mark{background:rgba(124,131,255,.25);color:#fff;border-radius:4px;padding:0 .15em}
+  .iconbtn{background:var(--es-surface-2);border:1px solid var(--es-border-strong);color:var(--es-text);border-radius:99px;padding:.45rem .9rem;cursor:pointer;font:inherit}
+  .iconbtn[aria-pressed="true"]{border-color:var(--es-warm-400);color:var(--es-warm-400)}
+  .grades{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--es-s3);margin-top:var(--es-s4)}
+  .g{display:flex;flex-direction:column;align-items:center;gap:2px;padding:.7rem .4rem;border-radius:var(--es-r-md);cursor:pointer;color:var(--es-text);font:700 var(--es-fs-md)/1.2 var(--es-font);background:var(--es-surface-2);border:1px solid var(--es-border-strong)}
+  .g small{font-weight:500;color:var(--es-muted);font-size:var(--es-fs-xs)}
+  .g:hover{border-color:var(--es-indigo-400)}
+  .g0{border-color:rgba(251,113,133,.5)}.g3{border-color:rgba(52,211,153,.5)}
+  .err{min-height:1.3em;color:var(--es-danger);font-size:var(--es-fs-sm);margin-top:var(--es-s2);text-align:center}
+  .note{font-size:var(--es-fs-xs);color:var(--es-muted);margin-top:var(--es-s4);text-align:center}
+  .quiet{background:none;border:0;color:var(--es-muted);cursor:pointer;font:inherit;text-decoration:underline;padding:.4rem}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><a href="dashboard.html">← Dashboard</a><a href="vocab-dashboard.html">সব শব্দ দেখুন</a></div>
+  <div id="view"><div class="es-card"><p class="lead">লোড হচ্ছে…</p></div></div>
+  <p class="err" id="err" role="alert"></p>
+</main>
+
+<script type="module">
+import { requireAuth, db, doc, getDoc, setDoc, updateDoc, getDocs, collection, query, where, limit, orderBy, increment, toast } from "./js/firebase-config.js";
+import { GRADE, newCard, review, markKnown, previewIntervals, statusOf, masteryScore, sessionLimits, buildSession, dailyShuffle, isoDay, intervalLabel } from "./learning/srs.js";
+
+const $ = (id) => document.getElementById(id);
+const bn = (n) => String(n).replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const btn = (cls, text, fn) => { const b = el("button", cls, text); b.type = "button"; b.onclick = fn; return b; };
+const view = (...nodes) => { const v = $("view"); v.textContent = ""; v.append(...nodes); $("err").textContent = ""; window.scrollTo({ top: 0 }); };
+
+/* ── vocabulary datasets (loaded on demand, one file per level) ── */
+const FILES = { A1: ["./js/vocab-a1.js", "VOCAB_A1"], A2: ["./js/vocab-a2.js", "VOCAB_A2"], B1: ["./js/vocab-b1.js", "VOCAB_B1"], B2: ["./js/vocab-b2.js", "VOCAB_B2"] };
+const ENTRY = {}; const loaded = {};
+const keyOfLevel = (l) => (FILES[l] ? l : "B2");                    // C1/C2 learners use the B2 set (no higher dataset yet)
+const keyOfId = (id) => ({ a1: "A1", a2: "A2", b1: "B1", b2: "B2" }[String(id).slice(0, 2)]);
+async function loadSet(k) {
+  if (!k || loaded[k]) return loaded[k] || [];
+  const m = await import(FILES[k][0]);
+  loaded[k] = m[FILES[k][1]];
+  loaded[k].forEach((w) => { ENTRY[w.id] = w; });
+  return loaded[k];
+}
+
+
+/* a card either points at a dataset word (ENTRY) or carries its own meaning (saved from reading/listening) */
+function entryFor(id, card) {
+  const e = ENTRY[id] || loaded[keyOfId(id)]?.find((w) => w.id === id);
+  if (e) return e;
+  if (card && card.meaning) return { id, word: card.word, meaning: card.meaning, example: card.example || "", level: card.level || "A1", category: card.src === "listening" ? "শুনে পাওয়া" : card.src === "speaking" ? "বলে অনুশীলন" : "পড়ে পাওয়া", phonetic: "" };
+  return null;
+}
+
+/* ── state ── */
+let uid = null, user = null, profile = null, meta = {}, today = isoDay(), flags = { avoid: [] };
+let dueCards = [], limits = sessionLimits(20), queue = [], pos = 0, redo = {};
+const run = { reviewed: 0, learned: 0, correct: 0, addedWords: 0, masteredDelta: 0, newCount: 0, earliestDue: null, dirty: false };
+const cardRef = (id) => doc(db, "users", uid, "vocabSrs", id);
+const docToCard = (d) => ({ id: d.id, ...d.data() });
+const stripId = ({ id, ...c }) => c;
+const newLeftToday = () => Math.max(0, limits.newWords - (meta.newDate === today ? (meta.newCount || 0) : 0) - run.newCount);
+
+/* ── Firestore helpers ── */
+async function syncQuizMistakes() {
+  if (meta.syncDate === today) return;
+  try {
+    const snap = await getDocs(query(collection(db, "users", uid, "wrongWords"), orderBy("lastSeen", "desc"), limit(20)));
+    for (const d of snap.docs) {
+      const w = d.data(); const k = FILES[w.level] ? w.level : null; if (!k || !w.word) continue;
+      const set = await loadSet(k);
+      const hit = set.find((x) => x.word.toLowerCase() === String(w.word).toLowerCase());
+      if (!hit) continue;
+      const exists = await getDoc(cardRef(hit.id));
+      if (exists.exists()) continue;
+      await setDoc(cardRef(hit.id), { ...newCard(hit.word, hit.level, today, { src: "quiz" }), ease: 2.1, lapses: 1 });
+      run.addedWords++; run.dirty = true;
+    }
+    await updateDoc(doc(db, "users", uid), { "srsMeta.syncDate": today });
+    meta.syncDate = today;
+  } catch (e) { console.warn("quiz sync skipped", e); }
+}
+async function loadDue() {
+  const snap = await getDocs(query(collection(db, "users", uid, "vocabSrs"), where("due", "<=", today), limit(60)));
+  dueCards = snap.docs.map(docToCard).filter((c) => !c.known);
+  for (const k of new Set(dueCards.map((c) => keyOfId(c.id)).filter(Boolean))) await loadSet(k);
+  dueCards = dueCards.filter((c) => ENTRY[c.id] || c.meaning);                 // dataset words, or words the learner saved from reading/listening
+}
+async function newCandidates() {
+  const lvl = keyOfLevel(profile && profile.level || "A1");
+  const set = await loadSet(lvl);
+  const mine = await getDocs(query(collection(db, "users", uid, "vocabSrs"), where("level", "==", lvl), limit(1500)));
+  const have = new Set(mine.docs.map((d) => d.id)); const avoid = new Set(flags.avoid);
+  const pool = set.filter((w) => !have.has(w.id) && !avoid.has(w.id) && w.meaning && w.example);
+  return dailyShuffle(pool, today);
+}
+async function flushMeta() {
+  if (!run.dirty && !run.reviewed) return;
+  const upd = { "planHistory.vocabulary": today };
+  const sameDay = meta.newDate === today;
+  if (run.newCount) { upd["srsMeta.newDate"] = today; upd["srsMeta.newCount"] = (sameDay ? (meta.newCount || 0) : 0) + run.newCount; }
+  if (run.addedWords) upd["srsMeta.words"] = increment(run.addedWords);
+  const m = (meta.mastered || 0) + run.masteredDelta;
+  if (run.masteredDelta && m >= 0) upd["srsMeta.mastered"] = increment(run.masteredDelta);
+  try {
+    await updateDoc(doc(db, "users", uid), upd);
+    if (run.newCount) { meta.newDate = today; meta.newCount = upd["srsMeta.newCount"]; }
+    meta.words = (meta.words || 0) + run.addedWords; meta.mastered = Math.max(0, m);
+    run.newCount = 0; run.addedWords = 0; run.masteredDelta = 0; run.dirty = false;
+  } catch (e) { console.warn("meta save failed", e); }
+}
+window.addEventListener("pagehide", () => { flushMeta(); });
+
+/* ── speech (local text-to-speech: works offline, uses no data) ── */
+const canSpeak = "speechSynthesis" in window;
+function speak(text) {
+  if (!canSpeak) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = "en-US"; u.rate = 0.9;
+    const v = speechSynthesis.getVoices().find((x) => /^en[-_]/i.test(x.lang)); if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch (_) {}
+}
+
+/* ── HOME ── */
+function home() {
+  const learnLeft = newLeftToday(), dueN = dueCards.length;
+  const box = el("div", "es-card");
+  box.append(el("h1", "es-gradient-text", "স্মার্ট রিভিউ"), el("p", "lead", "যে শব্দ ভুলে যাওয়ার মুখে, সেটাই ঠিক সময়ে সামনে আসে। দিনে অল্প অল্প করে মনে রাখুন।"));
+  const st = el("div", "stats");
+  [[dueN >= 60 ? "৬০+" : bn(dueN), "আজ রিভিউয়ের জন্য"], [bn(learnLeft), "আজকের নতুন শব্দ (বাকি)"], [bn(meta.words || 0), "মোট শেখা শব্দ"], [bn(meta.mastered || 0), "আয়ত্ত করা শব্দ"]]
+    .forEach(([n, l]) => { const s = el("div", "stat"); s.append(el("b", null, n), el("span", null, l)); st.appendChild(s); });
+  box.appendChild(st);
+  const act = el("div", "actions");
+  const total = Math.min(dueN, limits.review) + learnLeft;
+  const start = btn("es-btn es-btn--lg w100", total ? `শুরু করি · ${bn(total)}টি শব্দ` : "আজকের জন্য সব শেষ 🎉", () => startSession(true, true));
+  if (!total) start.disabled = true;
+  act.appendChild(start);
+  if (!total) act.appendChild(btn("es-btn es-btn--secondary w100", "আরও ৫টি নতুন শব্দ শিখতে চাই", () => { limits = { ...limits, newWords: limits.newWords + 5 }; startSession(false, true); }));
+  box.appendChild(act);
+  if (dueN > limits.review) box.appendChild(el("p", "note", `আজ ${bn(limits.review)}টি রিভিউ করলেই হবে। বাকিগুলো পরে আসবে, কোনো চাপ নেই।`));
+  box.appendChild(el("div", "tabs")).append(...["weak:দুর্বল শব্দ", "saved:⭐ সংরক্ষিত", "mastered:আয়ত্ত", "learning:শিখছি"].map((t) => { const [k, l] = t.split(":"); return btn("es-chip", l, () => myWords(k)); }));
+  const holder = el("div", "list"); holder.id = "mywords"; box.appendChild(holder);
+  view(box);
+}
+
+async function myWords(kind) {
+  const holder = $("mywords"); holder.textContent = "লোড হচ্ছে…";
+  try {
+    let cards;
+    if (kind === "saved") cards = (await getDocs(query(collection(db, "users", uid, "vocabSrs"), where("saved", "==", true), limit(100)))).docs.map(docToCard);
+    else cards = (await getDocs(query(collection(db, "users", uid, "vocabSrs"), orderBy("last", "desc"), limit(200)))).docs.map(docToCard);
+    for (const k of new Set(cards.map((c) => keyOfId(c.id)).filter(Boolean))) await loadSet(k);
+    if (kind !== "saved") cards = cards.filter((c) => statusOf(c, today) === kind);
+    holder.textContent = "";
+    if (!cards.length) { holder.appendChild(el("p", "note", "এখানে এখনো কোনো শব্দ নেই।")); return; }
+    cards.slice(0, 60).forEach((c) => {
+      const e = entryFor(c.id, c); if (!e) return;
+      const row = el("div", "row"); const l = el("div"); l.append(el("div", "en", e.word), el("div", "bn", e.meaning));
+      const m = el("div", "meter"); const i = el("i"); i.style.width = masteryScore(c) + "%"; m.appendChild(i);
+      m.setAttribute("title", "দক্ষতা " + masteryScore(c) + "%"); row.append(l, m); holder.appendChild(row);
+    });
+  } catch (e) { holder.textContent = ""; $("err").textContent = "তালিকা লোড করা যায়নি।"; }
+}
+
+/* ── SESSION ── */
+async function startSession(withReviews, withNew) {
+  $("err").textContent = "";
+  try {
+    let fresh = [];
+    if (withNew && newLeftToday() > 0) fresh = await newCandidates();
+    const s = buildSession(withReviews ? dueCards : [], fresh, { review: limits.review, newWords: limits.newWords, newLeftToday: newLeftToday(), today });
+    queue = [
+      ...s.reviews.map((c) => ({ kind: "review", id: c.id, card: stripId(c) })),
+      ...s.newWords.map((w) => ({ kind: "new", id: w.id, card: null })),
+    ];
+    pos = 0; redo = {};
+    Object.assign(run, { reviewed: 0, learned: 0, correct: 0 });
+    if (!queue.length) { toast("আজকের জন্য কোনো শব্দ বাকি নেই।"); return home(); }
+    show();
+  } catch (e) { console.warn(e); $("err").textContent = "শুরু করা যায়নি। Internet পরীক্ষা করে আবার চেষ্টা করুন।"; }
+}
+
+function highlight(sentence, word) {
+  const p = el("p", "ex"); const i = sentence.toLowerCase().indexOf(word.toLowerCase().split(" ")[0].replace(/[^a-z]/g, ""));
+  if (i < 0 || word.length < 2) { p.textContent = sentence; return p; }
+  const stem = word.toLowerCase().split(" ")[0].replace(/[^a-z]/g, ""); let end = i + stem.length;
+  while (end < sentence.length && /[a-z]/i.test(sentence[end])) end++;                 // include endings like -ed, -ing
+  p.append(document.createTextNode(sentence.slice(0, i)), Object.assign(el("mark"), { textContent: sentence.slice(i, end) }), document.createTextNode(sentence.slice(end)));
+  return p;
+}
+
+function show() {
+  if (pos >= queue.length) return finish();
+  const item = queue[pos];
+  const e = entryFor(item.id, item.card);
+  if (!e) { pos++; return show(); }
+  const card = item.card || newCard(e.word, e.level, today, { src: "new" });
+  let revealed = false;
+  const bar = el("div", "es-progress"); bar.style.cssText = "margin-bottom:12px"; const sp = el("span"); bar.appendChild(sp); bar.style.setProperty("--value", (pos / queue.length * 100) + "%");
+  const head = el("div", "top"); head.append(el("span", "es-sub", `${bn(pos + 1)} / ${bn(queue.length)}`), btn("quiet", "আজকের মতো শেষ করি", () => finish()));
+  const box = el("div", "es-card card"); box.setAttribute("aria-live", "polite");
+  const tags = el("div", "tagrow"); tags.append(el("span", "es-badge" + (item.kind === "new" ? " es-badge--reward" : ""), item.kind === "new" ? "🌱 নতুন শব্দ" : "🔁 রিভিউ"), el("span", "es-badge es-badge--info", e.level + (e.category ? " · " + e.category : "")));
+  const w = el("div", "word", e.word); w.lang = "en";
+  const ph = el("div", "ph", e.phonetic || "");
+  const tools = el("div", "tagrow");
+  const say = btn("iconbtn", "🔊 উচ্চারণ", () => speak(e.word)); if (!canSpeak) say.hidden = true;
+  const star = btn("iconbtn", card.saved ? "⭐ সংরক্ষিত" : "☆ সংরক্ষণ", async () => {
+    const on = !card.saved; card.saved = on; star.textContent = on ? "⭐ সংরক্ষিত" : "☆ সংরক্ষণ"; star.setAttribute("aria-pressed", String(on));
+    try { await setDoc(cardRef(item.id), { ...card, saved: on }, { merge: true }); if (!item.card) { item.card = { ...card, saved: on }; run.addedWords++; run.dirty = true; } } catch { toast("সেভ করা যায়নি।", "error"); }
+  }); star.setAttribute("aria-pressed", String(!!card.saved));
+  tools.append(say, star);
+  const answer = el("div"); answer.hidden = true; answer.style.cssText = "display:none;gap:8px;flex-direction:column";
+  answer.append(el("div", "meaning", e.meaning), e.example ? highlight(e.example, e.word) : el("p"));
+  const reveal = btn("es-btn es-btn--lg w100", "উত্তর দেখুন", () => doReveal()); reveal.style.marginTop = "12px";
+  box.append(tags, w, ph, tools, answer);
+
+  const grades = el("div", "grades"); grades.hidden = true;
+  const prev = previewIntervals(card, today);
+  const mk = (g, label) => { const b = btn("g g" + g, label, () => grade(g)); b.append(el("small", null, intervalLabel(prev[g]))); return b; };
+  grades.append(mk(0, "আবার"), mk(1, "কঠিন"), mk(2, "ঠিক আছে"), mk(3, "সহজ"));
+  const known = item.kind === "new" ? btn("quiet", "এই শব্দ আগে থেকেই জানি", () => grade("known")) : null;
+  if (known) known.hidden = false;
+
+  function doReveal() { revealed = true; answer.style.display = "flex"; answer.hidden = false; reveal.hidden = true; grades.hidden = false; grades.querySelector(".g2").focus(); }
+  async function grade(g) {
+    if (!revealed && g !== "known") return;
+    grades.querySelectorAll("button").forEach((b) => (b.disabled = true)); reveal.disabled = true; if (known) known.disabled = true;
+    const before = statusOf(item.card, today);
+    const next = g === "known" ? markKnown(e.word, e.level, today) : review(card, g, today);
+    if (card.saved) next.saved = true; if (card.src && !next.src) next.src = card.src;
+    try { await setDoc(cardRef(item.id), next); }
+    catch (err) { console.warn(err); $("err").textContent = "সেভ করা যায়নি। আবার চেষ্টা করুন।"; grades.querySelectorAll("button").forEach((b) => (b.disabled = false)); reveal.disabled = false; return; }
+    run.reviewed++; run.dirty = true;
+    if (g === "known" || g >= 2) run.correct++;
+    if (item.kind === "new") { run.learned++; run.newCount++; run.addedWords += item.card ? 0 : 1; }
+    const was = before === "mastered", is = statusOf(next, today) === "mastered";
+    run.masteredDelta += (is ? 1 : 0) - (was ? 1 : 0);
+    if (!run.earliestDue || next.due < run.earliestDue) run.earliestDue = next.due;
+    item.card = next;
+    if (g === GRADE.AGAIN && (redo[item.id] = (redo[item.id] || 0) + 1) <= 2) queue.push({ kind: "review", id: item.id, card: next });   // see it again at the end of this session
+    pos++; show();
+  }
+
+  const page = el("div"); page.append(head, bar, box, reveal, grades); if (known) { known.style.cssText = "display:block;margin:10px auto 0"; page.appendChild(known); }
+  page.appendChild(el("p", "note", "কীবোর্ড: Space = উত্তর, ১–৪ = ফলাফল"));
+  view(page); reveal.focus();
+  window.onkeydown = (ev) => {
+    if (ev.target && /input|textarea/i.test(ev.target.tagName)) return;
+    if (!revealed && (ev.key === " " || ev.key === "Enter")) { ev.preventDefault(); doReveal(); }
+    else if (revealed && "1234".includes(ev.key) && ev.key) grade(Number(ev.key) - 1);
+  };
+}
+
+async function finish() {
+  window.onkeydown = null;
+  await flushMeta();
+  const box = el("div", "es-card"); box.style.textAlign = "center";
+  const n = run.reviewed, acc = n ? Math.round(run.correct / n * 100) : 0;
+  box.append(el("h1", "es-gradient-text", n ? "চমৎকার! 🎉" : "ঠিক আছে 👍"));
+  if (n) {
+    const st = el("div", "stats");
+    [[bn(n), "শব্দ অনুশীলন"], [bn(run.learned), "নতুন শব্দ"], [bn(acc) + "%", "মনে ছিল"], [run.earliestDue ? (run.earliestDue <= today ? "আজই আবার" : intervalLabel(Math.round((new Date(run.earliestDue) - new Date(today)) / 86400000))) : "—", "পরের রিভিউ"]]
+      .forEach(([v, l]) => { const s = el("div", "stat"); s.append(el("b", null, v), el("span", null, l)); st.appendChild(s); });
+    box.append(el("p", "lead", "আজকের শব্দ ঠিক সময়ে আবার সামনে আসবে। এখন বিশ্রাম নিতে পারেন।"), st);
+  } else box.append(el("p", "lead", "কোনো সমস্যা নেই। যখন ইচ্ছা হয়, আবার আসবেন।"));
+  const act = el("div", "actions");
+  act.append(btn("es-btn es-btn--lg w100", "Dashboard-এ ফিরি", () => { location.href = "dashboard.html"; }));
+  act.append(btn("es-btn es-btn--secondary w100", "আরও কিছু করি", async () => { await loadDue(); home(); }));
+  box.appendChild(act); view(box);
+}
+
+requireAuth(async (u, d = {}) => {
+  uid = u.uid; user = u; profile = d.learningProfile || null; meta = d.srsMeta || {};
+  limits = sessionLimits(profile && profile.dailyMinutes);
+  try {
+    try { const r = await fetch("data/vocab-flags.json", { cache: "force-cache" }); if (r.ok) flags = await r.json(); } catch (_) {}
+    await syncQuizMistakes();
+    await loadDue();
+    home();
+  } catch (e) { console.warn(e); view(el("div", "es-card", "লোড করা যায়নি। Internet পরীক্ষা করে পেজটি রিফ্রেশ করুন।")); }
+});
+</script>
+</body>
+</html>

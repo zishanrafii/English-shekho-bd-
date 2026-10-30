@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Journey — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#04080f;
+  --surface:#080e1a;
+  --surface2:#0c1322;
+  --surface3:#101828;
+  --border:rgba(255,255,255,.055);
+  --gold:#f5c842;
+  --gold2:#e0a820;
+  --teal:#2dd4bf;
+  --rose:#fb7185;
+  --indigo:#818cf8;
+  --emerald:#34d399;
+  --orange:#fb923c;
+  --muted:#64748b;
+  --sub:#94a3b8;
+  --text:#f0f4f8;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(129,140,248,.025),transparent 60%);
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+
+.wrap{max-width:1160px;margin:auto;padding:1.6rem 1.4rem 0;position:relative;z-index:1;}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+  background:rgba(8,14,26,.8);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:.9rem 1.4rem;
+  backdrop-filter:blur(24px);
+  box-shadow:0 4px 32px rgba(0,0,0,.4);
+  position:sticky;top:16px;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));
+  border:1px solid rgba(245,200,66,.3);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  box-shadow:0 0 18px rgba(245,200,66,.12);
+  flex-shrink:0;
+}
+.logo-text h1{
+  font-size:1.55rem;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-.5px;
+}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{
+  padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;
+  color:var(--sub);text-decoration:none;transition:.2s;border:1px solid transparent;
+}
+.nav-link:hover{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  overflow:hidden;border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;
+  transition:.2s;box-shadow:0 0 14px rgba(245,200,66,.1);
+}
+.user-avatar:hover{border-color:var(--gold);box-shadow:0 0 22px rgba(245,200,66,.25);}
+.user-avatar img{width:100%;height:100%;object-fit:cover;}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{
+  border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);
+  color:var(--rose);padding:.4rem .9rem;border-radius:10px;
+  cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;
+}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* ─── PAGE HERO ─── */
+.hero{
+  border-radius:24px;padding:2.2rem 2.4rem;margin-bottom:1.8rem;
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#080e18,#0a1220);
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:0 8px 48px rgba(0,0,0,.45);
+}
+.hero-stripe{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);
+}
+.hero-orb1{
+  position:absolute;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,200,66,.1),transparent 70%);
+  top:-100px;left:-80px;pointer-events:none;
+}
+.hero-orb2{
+  position:absolute;width:240px;height:240px;border-radius:50%;
+  background:radial-gradient(circle,rgba(45,212,191,.09),transparent 70%);
+  bottom:-80px;right:-60px;pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:.7rem;opacity:.8;
+}
+.hero h2{
+  font-size:2.1rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;line-height:1.15;
+}
+.hero h2 span{
+  background:linear-gradient(135deg,#f5c842,#fbbf24);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{color:var(--sub);font-size:13.5px;line-height:1.7;max-width:500px;font-family:'Noto Sans Bengali',sans-serif;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.hstat{
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:.75rem 1.2rem;text-align:center;min-width:78px;
+  transition:.2s;cursor:default;position:relative;overflow:hidden;
+}
+.hstat::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5;
+}
+.hstat:hover{border-color:rgba(245,200,66,.25);transform:translateY(-2px);}
+.hstat-v{
+  font-size:1.5rem;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+/* ─── SECTION TITLE ─── */
+.section-title{
+  font-size:11px;font-weight:700;color:var(--muted);margin-bottom:1rem;
+  display:flex;align-items:center;gap:10px;
+  letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;
+}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ─── OVERALL PROGRESS BAR ─── */
+.overall-progress{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:18px;padding:1.4rem 1.6rem;margin-bottom:1.8rem;
+}
+.op-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem;}
+.op-title{font-weight:700;font-size:15px;}
+.op-badge{
+  background:linear-gradient(135deg,#f5c842,#e0a820);
+  color:#000;font-size:9.5px;font-weight:800;
+  padding:3px 10px;border-radius:20px;
+  letter-spacing:.8px;text-transform:uppercase;
+}
+.progress-track{
+  height:8px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-bottom:.6rem;
+}
+.progress-fill{
+  height:100%;border-radius:20px;
+  background:linear-gradient(90deg,#f5c842,#2dd4bf);
+  transition:width .8s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 12px rgba(245,200,66,.3);
+}
+.progress-meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;}
+
+/* ─── MOTIVATION BANNER ─── */
+.motivation-banner{
+  background:linear-gradient(135deg,rgba(245,200,66,.08),rgba(45,212,191,.06));
+  border:1px solid rgba(245,200,66,.18);
+  border-radius:18px;padding:1.2rem 1.6rem;margin-bottom:1.8rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  position:relative;overflow:hidden;
+}
+.motivation-banner::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,200,66,.5),transparent);
+}
+.mot-left{display:flex;align-items:center;gap:14px;}
+.mot-icon{
+  width:44px;height:44px;border-radius:12px;font-size:1.4rem;
+  background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.mot-title{font-weight:700;font-size:14.5px;margin-bottom:2px;}
+.mot-desc{font-size:12px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;}
+.btn-mot{
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(245,200,66,.08));
+  border:1px solid rgba(245,200,66,.3);
+  color:var(--gold);padding:.55rem 1.3rem;border-radius:12px;
+  cursor:pointer;font-weight:700;font-family:'Outfit',sans-serif;font-size:13px;
+  transition:.2s;text-decoration:none;white-space:nowrap;
+}
+.btn-mot:hover{background:rgba(245,200,66,.2);border-color:var(--gold);}
+
+/* ─── ROADMAP TIMELINE ─── */
+.roadmap{
+  position:relative;
+  padding-bottom:2rem;
+  margin-bottom:1.8rem;
+}
+
+/* Vertical spine */
+.roadmap::before{
+  content:'';
+  position:absolute;
+  left:32px;
+  top:0;bottom:0;
+  width:2px;
+  background:linear-gradient(180deg,
+    rgba(245,200,66,.5) 0%,
+    rgba(45,212,191,.4) 40%,
+    rgba(129,140,248,.35) 70%,
+    rgba(251,113,133,.2) 100%);
+  z-index:0;
+}
+
+/* ─── LEVEL SECTION ─── */
+.level-section{
+  position:relative;
+  margin-bottom:2.2rem;
+}
+
+/* Dot on the spine */
+.level-dot{
+  position:absolute;
+  left:20px;top:22px;
+  width:26px;height:26px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:800;
+  font-family:'JetBrains Mono',monospace;
+  z-index:2;
+  transition:.3s;
+  flex-shrink:0;
+}
+
+/* ─── LEVEL HEADER CARD ─── */
+.level-header{
+  margin-left:68px;
+  border-radius:20px;
+  padding:1.4rem 1.6rem;
+  border:1px solid var(--border);
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  transition:.3s;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.level-header:hover{transform:translateX(4px);}
+.level-header-top{position:absolute;top:0;left:0;right:0;height:2px;}
+.lh-left{display:flex;align-items:center;gap:16px;}
+.lh-badge{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;font-weight:900;
+  font-family:'JetBrains Mono',monospace;
+  flex-shrink:0;
+  letter-spacing:-1px;
+}
+.lh-info h3{font-size:1.1rem;font-weight:800;margin-bottom:2px;letter-spacing:-.3px;}
+.lh-info p{font-size:12px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;line-height:1.5;max-width:400px;}
+.lh-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.lh-xp-tag{
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+  padding:4px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;
+  white-space:nowrap;
+}
+.cert-btn{
+  font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+  padding:6px 14px;border-radius:20px;white-space:nowrap;cursor:pointer;
+  border:1px solid rgba(245,200,66,.35);
+  background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));
+  color:var(--gold);transition:.2s;display:flex;align-items:center;gap:6px;
+}
+.cert-btn:hover{background:linear-gradient(135deg,rgba(245,200,66,.28),rgba(45,212,191,.18));transform:translateY(-1px);}
+.lh-pct{
+  font-size:1.3rem;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  white-space:nowrap;
+}
+.lh-mini-bar{
+  width:90px;height:5px;background:rgba(255,255,255,.06);border-radius:20px;overflow:hidden;
+}
+.lh-mini-fill{height:100%;border-radius:20px;transition:width .8s cubic-bezier(.4,0,.2,1);}
+.lh-chevron{
+  font-size:.8rem;color:var(--muted);transition:.3s;
+}
+.level-header.open .lh-chevron{transform:rotate(90deg);}
+
+/* locked state */
+.level-header.locked{opacity:.5;cursor:default;}
+.level-header.locked:hover{transform:none;}
+.lock-tag{
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:600;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* ─── TOPICS GRID (collapsible) ─── */
+.topics-wrap{
+  margin-left:68px;
+  margin-top:8px;
+  display:none;
+  animation:fadeDown .25s ease;
+}
+.topics-wrap.open{display:block;}
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-8px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.topics-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:10px;
+  padding:.5rem 0;
+}
+
+/* ─── TOPIC CARD ─── */
+.topic-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:16px;padding:1.1rem 1.2rem;
+  position:relative;overflow:hidden;
+  transition:.25s;cursor:pointer;
+  text-decoration:none;color:var(--text);
+}
+.topic-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  opacity:.6;
+}
+.topic-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.09);box-shadow:0 8px 28px rgba(0,0,0,.3);}
+.topic-card.done{background:rgba(45,212,191,.04);border-color:rgba(45,212,191,.15);}
+.topic-card.done::after{background:linear-gradient(90deg,transparent,#2dd4bf,transparent);}
+.topic-card.active-topic{background:rgba(245,200,66,.04);border-color:rgba(245,200,66,.2);}
+.topic-card.active-topic::after{background:linear-gradient(90deg,transparent,#f5c842,transparent);}
+.topic-card.locked-topic{opacity:.4;cursor:not-allowed;}
+.topic-card.locked-topic:hover{transform:none;box-shadow:none;}
+.topic-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.55rem;}
+.topic-icon{font-size:1.3rem;}
+.topic-status{
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.7rem;
+  border:1.5px solid var(--border);
+}
+.topic-status.done-s{background:rgba(45,212,191,.15);border-color:rgba(45,212,191,.3);color:#2dd4bf;}
+.topic-status.active-s{background:rgba(245,200,66,.12);border-color:rgba(245,200,66,.3);color:#f5c842;}
+.topic-status.locked-s{background:rgba(100,116,139,.08);border-color:rgba(100,116,139,.2);color:var(--muted);}
+.topic-name{font-size:13px;font-weight:700;margin-bottom:3px;}
+.topic-desc{font-size:11px;color:var(--muted);line-height:1.5;font-family:'Noto Sans Bengali',sans-serif;}
+.topic-xp{
+  margin-top:.55rem;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--gold);font-weight:600;
+}
+
+/* ─── ACHIEVEMENTS STRIP ─── */
+.achievements-strip{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:18px;padding:1.4rem 1.6rem;margin-bottom:1.8rem;
+}
+.ach-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:1rem;
+}
+.ach-card{
+  background:rgba(255,255,255,.025);border:1px solid var(--border);
+  border-radius:14px;padding:1rem .9rem;text-align:center;
+  transition:.2s;position:relative;overflow:hidden;
+}
+.ach-card.earned{border-color:rgba(245,200,66,.2);background:rgba(245,200,66,.04);}
+.ach-card.earned::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#f5c842,transparent);
+}
+.ach-card:not(.earned){opacity:.35;filter:grayscale(1);}
+.ach-emoji{font-size:1.8rem;margin-bottom:.4rem;}
+.ach-name{font-size:11px;font-weight:700;margin-bottom:2px;}
+.ach-desc{font-size:10px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.4;}
+
+/* ─── DAILY GOALS ─── */
+.daily-goals{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:18px;padding:1.4rem 1.6rem;margin-bottom:1.8rem;
+}
+.goal-list{display:flex;flex-direction:column;gap:10px;margin-top:1rem;}
+.goal-item{
+  display:flex;align-items:center;gap:14px;
+  padding:.9rem 1.1rem;border-radius:14px;
+  background:rgba(255,255,255,.025);border:1px solid var(--border);
+  transition:.2s;
+}
+.goal-item.done-g{background:rgba(45,212,191,.04);border-color:rgba(45,212,191,.15);}
+.goal-item:hover{border-color:rgba(255,255,255,.09);}
+.goal-checkbox{
+  width:22px;height:22px;border-radius:7px;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:.2s;font-size:.75rem;
+}
+.goal-item.done-g .goal-checkbox{background:rgba(45,212,191,.15);border-color:#2dd4bf;color:#2dd4bf;}
+.goal-text{flex:1;}
+.goal-title{font-size:13px;font-weight:700;margin-bottom:1px;}
+.goal-sub{font-size:11px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.goal-xp{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+  color:var(--gold);white-space:nowrap;
+}
+
+
+
+/* ─── FOOTER ─── */
+footer{
+  margin-top:3rem;
+  border-top:1px solid rgba(255,255,255,.05);
+  position:relative;overflow:hidden;
+}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),rgba(45,212,191,.35),transparent);
+}
+.footer-inner{
+  max-width:1160px;margin:auto;padding:2.2rem 1.4rem;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;
+}
+.footer-brand .brand-name{
+  font-size:1.35rem;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.3rem;
+}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.9rem;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:11px;color:#2a3545;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.copyright-text span{color:#374151;}
+.footer-col h4{
+  font-size:.9rem;font-weight:700;color:var(--sub);
+  margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);
+}
+.dev-card{
+  background:linear-gradient(135deg,rgba(245,200,66,.04),rgba(45,212,191,.04));
+  border:1px solid rgba(245,200,66,.12);border-radius:14px;padding:1.1rem;
+}
+.dev-name{font-size:1.05rem;font-weight:800;color:#f0f4f8;margin-bottom:.1rem;}
+.dev-title{font-size:10px;color:var(--gold);letter-spacing:.8px;margin-bottom:.8rem;font-family:'JetBrains Mono',monospace;}
+.dev-contact{display:flex;flex-direction:column;gap:.45rem;}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);}
+.contact-row a{color:var(--sub);text-decoration:none;transition:.15s;}
+.contact-row a:hover{color:var(--gold);}
+.contact-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:rgba(255,255,255,.05);}
+.social-links{display:flex;flex-direction:column;gap:.55rem;}
+.social-link{
+  display:flex;align-items:center;gap:10px;padding:.55rem .85rem;border-radius:11px;
+  background:rgba(255,255,255,.025);border:1px solid var(--border);
+  text-decoration:none;color:var(--sub);font-size:12px;transition:.2s;
+}
+.social-link:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);color:#f0f4f8;transform:translateX(3px);}
+.sl-icon{font-size:.9rem;width:20px;text-align:center;}
+.sl-label{font-weight:600;}
+.sl-handle{color:var(--muted);font-size:10.5px;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{
+  max-width:1160px;margin:auto;
+  padding:.8rem 1.4rem 1.3rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;
+  border-top:1px solid rgba(255,255,255,.04);
+  font-size:11px;color:#2d3748;font-family:'JetBrains Mono',monospace;
+}
+.footer-bottom a{color:#374151;text-decoration:none;}
+.footer-bottom a:hover{color:var(--muted);}
+.footer-heart{color:var(--rose);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:800px){
+  .footer-inner{grid-template-columns:1fr;gap:1.6rem;}
+  .nav-links{display:none;}
+  .roadmap::before{left:18px;}
+  .level-dot{left:6px;}
+  .level-header,.topics-wrap{margin-left:48px;}
+}
+@media(max-width:600px){
+  .topbar{flex-direction:column;align-items:flex-start;}
+  .hero h2{font-size:1.6rem;}
+  .topics-grid{grid-template-columns:1fr 1fr;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;}
+  .wrap{padding:1rem .9rem 0;}
+  .lh-mini-bar,.lh-pct{display:none;}
+}
+@media(max-width:420px){
+  .topics-grid{grid-template-columns:1fr;}
+  .ach-grid{grid-template-columns:repeat(3,1fr);}
+}
+
+/* ─── TOAST ─── */
+.toast{
+  position:fixed;top:20px;right:20px;
+  background:#0c1322;color:#f0f4f8;
+  padding:.9rem 1.2rem;border-radius:14px;
+  border-left:3px solid #f5c842;
+  z-index:9999;opacity:0;transform:translateY(-16px);
+  transition:.3s;font-size:13.5px;
+  box-shadow:0 8px 32px rgba(0,0,0,.5);
+}
+.toast.show{opacity:1;transform:translateY(0);}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>ENGLISH LEARNING PLATFORM · A1 TO C2</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" onclick="location.href='profile.html'">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">🗺️ Your Learning Journey</div>
+        <h2>A1 থেকে <span>C2</span> পর্যন্ত! 🚀</h2>
+        <p class="hero-sub">ধাপে ধাপে English শিখুন। প্রতিটি level-এ নতুন topics unlock হবে — XP অর্জন করুন এবং এগিয়ে যান।</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-v" id="h-level">A1</div>
+          <div class="hstat-l">Current</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-xp">0</div>
+          <div class="hstat-l">Total XP</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-done">0</div>
+          <div class="hstat-l">Topics Done</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OVERALL PROGRESS -->
+  <div class="overall-progress">
+    <div class="op-header">
+      <div class="op-title">📈 Overall Journey Progress</div>
+      <div class="op-badge" id="journey-badge">A1 Beginner</div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="journey-bar" style="width:0%"></div>
+    </div>
+    <div class="progress-meta">
+      <span id="journey-xp-label">0 XP earned</span>
+      <span id="journey-next-label">Next unlock: A2 at 500 XP</span>
+    </div>
+  </div>
+
+  <!-- MOTIVATION BANNER -->
+  <div class="motivation-banner">
+    <div class="mot-left">
+      <div class="mot-icon">🎯</div>
+      <div>
+        <div class="mot-title">আজকের লক্ষ্য <span style="background:linear-gradient(135deg,#f5c842,#e0a820);color:#000;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;letter-spacing:.8px;text-transform:uppercase;margin-left:6px;">Daily</span></div>
+        <div class="mot-desc" id="daily-goal-text">৩০ মিনিট practice করুন এবং ২টি নতুন topic শেষ করুন।</div>
+      </div>
+    </div>
+    <a href="quiz-beginner.html" class="btn-mot">Start Learning →</a>
+  </div>
+
+  <!-- ROADMAP TIMELINE -->
+  <div class="section-title">🗺️ Full Roadmap · A1 → C2</div>
+  <div class="roadmap" id="roadmap-container">
+    <!-- Injected by JS -->
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="section-title">🏅 Achievements</div>
+  <div class="achievements-strip">
+    <div class="ach-grid" id="ach-grid">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+  <!-- DAILY GOALS -->
+  <div class="section-title">✅ Daily Goals</div>
+  <div class="daily-goals">
+    <div class="goal-list" id="goal-list">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম। A1 থেকে C2 পর্যন্ত vocabulary, grammar, speaking এবং live chat সুবিধা।</div>
+      <div class="copyright-text">
+        © <span id="footer-year"></span> English Shekho<br>
+        <span>All rights reserved.</span><br>
+        <span>Unauthorized reproduction</span><br>
+        <span>is strictly prohibited.</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+
+
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { safeUrl,
+  auth, db, signOut, requireAuth,
+  doc, getDoc, toast
+} from "./js/firebase-config.js";
+
+/* ── TOPIC LESSON PAGES ──
+   Maps a topic.id to its standalone lesson page under /topics/<level>/
+   Levels not yet built will fall back to a "coming soon" toast. */
+const TOPIC_PAGES = {
+  "a1-t1": "topics/a1/alphabet-phonics.html",
+  "a1-t2": "topics/a1/greetings-intro.html",
+  "a1-t3": "topics/a1/numbers-colors.html",
+  "a1-t4": "topics/a1/common-nouns.html",
+  "a1-t5": "topics/a1/present-simple.html",
+  "a1-t6": "topics/a1/basic-questions.html",
+  "a1-t7": "topics/a1/everyday-phrases.html",
+  "a1-t8": "topics/a1/final-test.html",
+  "a2-t1": "topics/a2/past-simple.html",
+  "a2-t2": "topics/a2/future-tense.html",
+  "a2-t3": "topics/a2/adjectives-adverbs.html",
+  "a2-t4": "topics/a2/conjunctions.html",
+  "a2-t5": "topics/a2/shopping-travel.html",
+  "a2-t6": "topics/a2/short-conversations.html",
+  "a2-t7": "topics/a2/paragraph-writing.html",
+  "a2-t8": "topics/a2/final-test.html",
+  "b1-t1": "topics/b1/present-perfect.html",
+  "b1-t2": "topics/b1/passive-voice.html",
+  "b1-t3": "topics/b1/modal-verbs.html",
+  "b1-t4": "topics/b1/reading-comprehension.html",
+  "b1-t5": "topics/b1/opinion-discussion.html",
+  "b1-t6": "topics/b1/email-writing.html",
+  "b1-t7": "topics/b1/listening-practice.html",
+  "b1-t8": "topics/b1/final-test.html",
+  "b2-t1": "topics/b2/advanced-vocabulary.html",
+  "b2-t2": "topics/b2/conditional-sentences.html",
+  "b2-t3": "topics/b2/reported-speech.html",
+  "b2-t4": "topics/b2/essay-writing.html",
+  "b2-t5": "topics/b2/public-speaking.html",
+  "b2-t6": "topics/b2/idioms-phrases.html",
+  "b2-t7": "topics/b2/data-graph.html",
+  "b2-t8": "topics/b2/final-test.html",
+  "c1-t1": "topics/c1/academic-english.html",
+  "c1-t2": "topics/c1/formal-register.html",
+  "c1-t3": "topics/c1/current-affairs.html",
+  "c1-t4": "topics/c1/figurative-language.html",
+  "c1-t5": "topics/c1/literary-analysis.html",
+  "c1-t6": "topics/c1/negotiation-skills.html",
+  "c1-t7": "topics/c1/critical-thinking.html",
+  "c1-t8": "topics/c1/final-test.html",
+  "c2-t1": "topics/c2/classical-literature.html",
+  "c2-t2": "topics/c2/philosophical-debate.html",
+  "c2-t3": "topics/c2/creative-writing.html",
+  "c2-t4": "topics/c2/research-methodology.html",
+  "c2-t5": "topics/c2/media-journalism.html",
+  "c2-t6": "topics/c2/cross-cultural.html",
+  "c2-t7": "topics/c2/keynote-oratory.html",
+  "c2-t8": "topics/c2/mastery-exam.html",
+};
+
+/* XP thresholds */
+const XP_LEVELS = {
+  A1:{min:0,   max:500,  color:"#2dd4bf", bg:"rgba(45,212,191,.12)",  border:"rgba(45,212,191,.25)", barColor:"#2dd4bf"},
+  A2:{min:500, max:2000, color:"#f5c842", bg:"rgba(245,200,66,.12)",  border:"rgba(245,200,66,.25)", barColor:"#f5c842"},
+  B1:{min:2000,max:5000, color:"#818cf8", bg:"rgba(129,140,248,.12)", border:"rgba(129,140,248,.25)",barColor:"#818cf8"},
+  B2:{min:5000,max:10000,color:"#fb7185", bg:"rgba(251,113,133,.12)", border:"rgba(251,113,133,.25)",barColor:"#fb7185"},
+  C1:{min:10000,max:18000,color:"#fb923c",bg:"rgba(251,146,60,.12)",  border:"rgba(251,146,60,.25)", barColor:"#fb923c"},
+  C2:{min:18000,max:30000,color:"#a78bfa",bg:"rgba(167,139,250,.12)", border:"rgba(167,139,250,.25)",barColor:"#a78bfa"},
+};
+
+/* Full roadmap data */
+let currentUserName = "Learner";
+const ROADMAP = [
+  {
+    id:"A1", label:"A1", emoji:"🌱", name:"Beginner",
+    desc:"English-এর একদম শুরু। Alphabet, greetings, numbers এবং basic sentences।",
+    xpRequired:0,
+    topics:[
+      {id:"a1-t1", icon:"🔤", name:"Alphabet & Phonics",    desc:"26টি letter এবং উচ্চারণ শিখুন",      xp:50},
+      {id:"a1-t2", icon:"👋", name:"Greetings & Intro",     desc:"Hello, Thank you, My name is...",     xp:50},
+      {id:"a1-t3", icon:"🔢", name:"Numbers & Colors",      desc:"1–100 এবং রঙের নাম ইংরেজিতে",       xp:50},
+      {id:"a1-t4", icon:"🏠", name:"Common Nouns",          desc:"Home, family, food-এর শব্দ",         xp:75},
+      {id:"a1-t5", icon:"🕐", name:"Present Simple Intro",  desc:"I am, You are, He is...",             xp:75},
+      {id:"a1-t6", icon:"❓", name:"Basic Questions",        desc:"What, Who, Where দিয়ে প্রশ্ন",      xp:75},
+      {id:"a1-t7", icon:"🗣️", name:"Everyday Phrases",      desc:"Daily life-এ ব্যবহৃত ১০০+ phrase", xp:75},
+      {id:"a1-t8", icon:"📖", name:"A1 Final Test",         desc:"সব topic মিলিয়ে final quiz",         xp:100},
+    ]
+  },
+  {
+    id:"A2", label:"A2", emoji:"🌿", name:"Elementary",
+    desc:"Vocabulary বাড়ান, tense শিখুন এবং ছোট paragraph লিখতে পারবেন।",
+    xpRequired:500,
+    topics:[
+      {id:"a2-t1", icon:"⏰", name:"Past Simple Tense",     desc:"Yesterday, last week দিয়ে বলুন",     xp:100},
+      {id:"a2-t2", icon:"🔮", name:"Future Tense",          desc:"Will এবং Going to শিখুন",             xp:100},
+      {id:"a2-t3", icon:"📝", name:"Adjectives & Adverbs",  desc:"বাক্যকে আরও প্রাণবন্ত করুন",       xp:100},
+      {id:"a2-t4", icon:"🔗", name:"Conjunctions",          desc:"And, But, Because, So...",            xp:100},
+      {id:"a2-t5", icon:"🛒", name:"Shopping & Travel",     desc:"Real-life vocabulary practice",       xp:100},
+      {id:"a2-t6", icon:"💬", name:"Short Conversations",   desc:"2–3 turn dialogue practice",          xp:125},
+      {id:"a2-t7", icon:"✍️", name:"Paragraph Writing",     desc:"৫–৬ বাক্যের paragraph লিখুন",       xp:125},
+      {id:"a2-t8", icon:"📖", name:"A2 Final Test",         desc:"সব topic মিলিয়ে final quiz",         xp:150},
+    ]
+  },
+  {
+    id:"B1", label:"B1", emoji:"🌲", name:"Intermediate",
+    desc:"Complex sentence, opinions দেওয়া এবং দৈনন্দিন বিষয়ে কথা বলতে পারবেন।",
+    xpRequired:2000,
+    topics:[
+      {id:"b1-t1", icon:"🔄", name:"Present Perfect",       desc:"Have/Has + V3 ব্যবহার",               xp:150},
+      {id:"b1-t2", icon:"📌", name:"Passive Voice",         desc:"Active থেকে Passive বানানো",          xp:150},
+      {id:"b1-t3", icon:"🎭", name:"Modal Verbs",           desc:"Can, Could, Must, Should...",         xp:150},
+      {id:"b1-t4", icon:"📰", name:"Reading Comprehension", desc:"Article পড়া এবং বোঝা",              xp:175},
+      {id:"b1-t5", icon:"🎙️", name:"Opinion & Discussion",  desc:"I think, In my opinion...",          xp:175},
+      {id:"b1-t6", icon:"📧", name:"Email Writing",         desc:"Formal ও informal email লেখা",       xp:175},
+      {id:"b1-t7", icon:"👂", name:"Listening Practice",    desc:"Native speaker audio বোঝা",          xp:200},
+      {id:"b1-t8", icon:"📖", name:"B1 Final Test",         desc:"সব topic মিলিয়ে final quiz",         xp:225},
+    ]
+  },
+  {
+    id:"B2", label:"B2", emoji:"🌳", name:"Upper-Intermediate",
+    desc:"Fluent conversation, academic writing এবং complex grammar শিখুন।",
+    xpRequired:5000,
+    topics:[
+      {id:"b2-t1", icon:"📚", name:"Advanced Vocabulary",   desc:"Academic ও professional শব্দ",       xp:250},
+      {id:"b2-t2", icon:"🔀", name:"Conditional Sentences", desc:"If clause type 1, 2, 3",              xp:250},
+      {id:"b2-t3", icon:"🗣️", name:"Reported Speech",       desc:"Direct to indirect speech",          xp:250},
+      {id:"b2-t4", icon:"📄", name:"Essay Writing",         desc:"Argumentative essay structure",       xp:275},
+      {id:"b2-t5", icon:"🎤", name:"Public Speaking",       desc:"Presentation এবং debate skills",     xp:275},
+      {id:"b2-t6", icon:"🧩", name:"Idioms & Phrases",      desc:"Common idioms ও তাদের অর্থ",        xp:275},
+      {id:"b2-t7", icon:"📊", name:"Data & Graph Desc.",    desc:"Charts ও statistics বর্ণনা করুন",  xp:300},
+      {id:"b2-t8", icon:"📖", name:"B2 Final Test",         desc:"সব topic মিলিয়ে final quiz",         xp:350},
+    ]
+  },
+  {
+    id:"C1", label:"C1", emoji:"🏔️", name:"Advanced",
+    desc:"Professional-grade English। Academic articles, debates এবং nuanced writing।",
+    xpRequired:10000,
+    topics:[
+      {id:"c1-t1", icon:"🔬", name:"Academic English",      desc:"Research paper style writing",        xp:400},
+      {id:"c1-t2", icon:"⚖️", name:"Formal Register",       desc:"Legal ও business language",          xp:400},
+      {id:"c1-t3", icon:"🌐", name:"Current Affairs",       desc:"News ও world events নিয়ে discuss",  xp:400},
+      {id:"c1-t4", icon:"🎨", name:"Figurative Language",   desc:"Metaphor, irony, sarcasm",            xp:425},
+      {id:"c1-t5", icon:"📜", name:"Literary Analysis",     desc:"Poem ও prose বিশ্লেষণ",             xp:425},
+      {id:"c1-t6", icon:"🤝", name:"Negotiation Skills",    desc:"Business negotiation phrases",        xp:450},
+      {id:"c1-t7", icon:"🧠", name:"Critical Thinking",     desc:"Evaluate arguments in English",       xp:450},
+      {id:"c1-t8", icon:"📖", name:"C1 Final Test",         desc:"সব topic মিলিয়ে final quiz",         xp:500},
+    ]
+  },
+  {
+    id:"C2", label:"C2", emoji:"👑", name:"Mastery",
+    desc:"Native-level English। Literature, research এবং advanced discourse।",
+    xpRequired:18000,
+    topics:[
+      {id:"c2-t1", icon:"🏛️", name:"Classical Literature",  desc:"Shakespeare, Dickens ও আরও",        xp:600},
+      {id:"c2-t2", icon:"🔭", name:"Philosophical Debate",   desc:"Abstract concepts নিয়ে argue",      xp:600},
+      {id:"c2-t3", icon:"🖊️", name:"Creative Writing",      desc:"Short story ও poetry writing",       xp:600},
+      {id:"c2-t4", icon:"🎓", name:"Research Methodology",  desc:"Academic research writing style",     xp:650},
+      {id:"c2-t5", icon:"📡", name:"Media & Journalism",    desc:"Broadcast ও print media language",   xp:650},
+      {id:"c2-t6", icon:"🌏", name:"Cross-cultural Comm.",  desc:"Global English varieties",            xp:650},
+      {id:"c2-t7", icon:"🎙️", name:"Keynote & Oratory",    desc:"Inspirational speech techniques",    xp:700},
+      {id:"c2-t8", icon:"🏆", name:"C2 Mastery Exam",       desc:"The ultimate English challenge",      xp:800},
+    ]
+  },
+];
+
+const ACHIEVEMENTS = [
+  {emoji:"🌱", name:"First Step",       desc:"প্রথম topic শেষ করুন",    id:"ach-first"},
+  {emoji:"🔥", name:"On Fire",          desc:"৭ দিন streak ধরুন",       id:"ach-streak"},
+  {emoji:"⭐", name:"500 XP Club",      desc:"500 XP অর্জন করুন",       id:"ach-500xp"},
+  {emoji:"📚", name:"Word Nerd",        desc:"১০০ word শিখুন",          id:"ach-vocab"},
+  {emoji:"🎯", name:"Quiz Master",      desc:"৫টি quiz-এ ১০০% পান",     id:"ach-quiz"},
+  {emoji:"💬", name:"Chatterbox",       desc:"Community-তে post করুন", id:"ach-chat"},
+  {emoji:"🏆", name:"A2 Unlocked",      desc:"A2 level unlock করুন",    id:"ach-a2"},
+  {emoji:"🌟", name:"B1 Scholar",       desc:"B1 level reach করুন",     id:"ach-b1"},
+];
+
+const DAILY_GOALS = [
+  {title:"Vocabulary Practice",    sub:"১০টি নতুন শব্দ শিখুন",         xp:"+20 XP", done:true},
+  {title:"Grammar Lesson",         sub:"১টি grammar topic পড়ুন",      xp:"+30 XP", done:true},
+  {title:"Quiz Attempt",           sub:"যেকোনো ১টি quiz দিন",          xp:"+50 XP", done:false},
+  {title:"Speaking Practice",      sub:"৫টি sentence জোরে বলুন",      xp:"+25 XP", done:false},
+  {title:"Community Interaction",  sub:"Chat-এ ১টি message করুন",     xp:"+15 XP", done:false},
+];
+
+/* ─── LEVEL COLOR HELPERS ─── */
+function lvColor(id){ return XP_LEVELS[id]?.color || "#f5c842"; }
+function lvBg(id)   { return XP_LEVELS[id]?.bg    || "rgba(245,200,66,.12)"; }
+function lvBorder(id){ return XP_LEVELS[id]?.border|| "rgba(245,200,66,.25)"; }
+function lvBar(id)  { return XP_LEVELS[id]?.barColor||"#f5c842"; }
+
+/* ─── COMPUTE CURRENT LEVEL ─── */
+function getCurrentLevel(xp){
+  const keys = Object.keys(XP_LEVELS);
+  for(let i=keys.length-1;i>=0;i--){
+    if(xp >= XP_LEVELS[keys[i]].min) return keys[i];
+  }
+  return "A1";
+}
+
+/* ─── BUILD ROADMAP ─── */
+function buildRoadmap(xp, doneTopic){
+  const container = document.getElementById("roadmap-container");
+  const currentLvl = getCurrentLevel(xp);
+  container.innerHTML = "";
+
+  ROADMAP.forEach((level, li) => {
+    const isUnlocked = xp >= level.xpRequired;
+    const isActive   = level.id === currentLvl;
+    const lConf      = XP_LEVELS[level.id];
+
+    // Count done topics in this level
+    const topicsDoneHere = level.topics.filter(t => doneTopic.includes(t.id)).length;
+    const pct = Math.round((topicsDoneHere / level.topics.length) * 100);
+
+    /* ── dot ── */
+    const dot = document.createElement("div");
+    dot.className = "level-dot";
+    dot.textContent = level.label;
+    dot.style.cssText = `
+      background:${isUnlocked ? lConf.bg : "rgba(255,255,255,.03)"};
+      border:2px solid ${isUnlocked ? lConf.border : "rgba(255,255,255,.08)"};
+      color:${isUnlocked ? lConf.color : "var(--muted)"};
+      ${isActive ? `box-shadow:0 0 14px ${lConf.color}44;` : ""}
+    `;
+
+    /* ── header ── */
+    const header = document.createElement("div");
+    header.className = "level-header" + (!isUnlocked ? " locked" : "");
+    header.style.cssText = `
+      background:${isUnlocked
+        ? `linear-gradient(135deg,${lConf.bg},rgba(8,14,26,.8))`
+        : "var(--surface2)"};
+      border-color:${isUnlocked ? lConf.border : "var(--border)"};
+      ${isActive ? `box-shadow:0 0 28px ${lConf.color}22;` : ""}
+    `;
+
+    const topStripColor = isUnlocked
+      ? `linear-gradient(90deg,transparent,${lConf.color},transparent)`
+      : "none";
+
+    const xpTag = isUnlocked
+      ? `<span class="lh-xp-tag" style="background:${lConf.bg};border:1px solid ${lConf.border};color:${lConf.color};">${pct}% done</span>`
+      : `<span class="lock-tag">🔒 Unlock at ${level.xpRequired} XP</span>`;
+
+    const certBtn = (isUnlocked && pct === 100)
+      ? `<button class="cert-btn" data-cert="${level.id}">🎓 Certificate</button>`
+      : "";
+
+    const progressBarHtml = isUnlocked ? `
+      <div class="lh-mini-bar">
+        <div class="lh-mini-fill" style="width:${pct}%;background:${lConf.barColor};"></div>
+      </div>
+      <span class="lh-pct">${pct}%</span>
+    ` : "";
+
+    header.innerHTML = `
+      <div class="level-header-top" style="background:${topStripColor};"></div>
+      <div class="lh-left">
+        <div class="lh-badge" style="background:${lConf.bg};border:1px solid ${lConf.border};color:${lConf.color};">${level.emoji}</div>
+        <div class="lh-info">
+          <h3>${level.label} <span style="color:${lConf.color};font-size:.85rem;">${level.name}</span></h3>
+          <p>${level.desc}</p>
+        </div>
+      </div>
+      <div class="lh-right">
+        ${xpTag}
+        ${certBtn}
+        ${progressBarHtml}
+        <span class="lh-chevron">${isUnlocked ? "▶" : ""}</span>
+      </div>
+    `;
+
+    const certButtonEl = header.querySelector("[data-cert]");
+    if(certButtonEl){
+      certButtonEl.addEventListener("click", (e)=>{
+        e.stopPropagation();
+        generateCertificate(level);
+      });
+    }
+
+    /* ── topics grid ── */
+    const topicsWrap = document.createElement("div");
+    topicsWrap.className = "topics-wrap";
+
+    if(isUnlocked){
+      const grid = document.createElement("div");
+      grid.className = "topics-grid";
+
+      level.topics.forEach((topic, ti) => {
+        const isDone   = doneTopic.includes(topic.id);
+        const isNextUp = !isDone && (ti === topicsDoneHere);
+        const isLocked = !isDone && !isNextUp;
+
+        let cls = "topic-card";
+        let statusCls = "locked-s";
+        let statusIcon = "🔒";
+        if(isDone)    { cls += " done";         statusCls = "done-s";   statusIcon = "✓"; }
+        if(isNextUp)  { cls += " active-topic"; statusCls = "active-s"; statusIcon = "→"; }
+        if(isLocked && !isDone && !isNextUp) cls += " locked-topic";
+
+        const card = document.createElement("a");
+        const pageUrl = TOPIC_PAGES[topic.id];
+        const canOpen = (isDone || isNextUp) && pageUrl;
+        card.href  = canOpen ? pageUrl : "#";
+        if(!canOpen){
+          card.addEventListener("click", (e)=>{
+            e.preventDefault();
+            if(isLocked && !isDone && !isNextUp){
+              toast("🔒 আগের topic গুলো শেষ করুন আগে।", "info");
+            } else {
+              toast("🚧 এই lesson page এখনো তৈরি হচ্ছে — শীঘ্রই আসছে!", "info");
+            }
+          });
+        }
+        card.className = cls;
+        card.style.cssText = isDone
+          ? `--ta:${lConf.color};`
+          : isNextUp ? `--ta:${lConf.color};` : "";
+
+        // bottom bar color for done/active
+        if(isDone)   card.style.setProperty("--tab-color", lConf.barColor);
+        if(isNextUp) card.style.setProperty("--tab-color", lConf.barColor);
+
+        card.innerHTML = `
+          <div class="topic-top">
+            <span class="topic-icon">${topic.icon}</span>
+            <div class="topic-status ${statusCls}">${statusIcon}</div>
+          </div>
+          <div class="topic-name">${topic.name}</div>
+          <div class="topic-desc">${topic.desc}</div>
+          <div class="topic-xp">+${topic.xp} XP</div>
+        `;
+
+        // Dynamic bottom accent for done/active via inline style
+        if(isDone || isNextUp){
+          card.style.cssText += ``;
+          const bar = document.createElement("style");
+          // handled via class already
+        }
+
+        grid.appendChild(card);
+      });
+
+      topicsWrap.appendChild(grid);
+
+      /* toggle */
+      if(isUnlocked){
+        // auto-open current level
+        if(isActive){
+          header.classList.add("open");
+          topicsWrap.classList.add("open");
+        }
+        header.addEventListener("click", ()=>{
+          const isOpen = topicsWrap.classList.contains("open");
+          topicsWrap.classList.toggle("open", !isOpen);
+          header.classList.toggle("open", !isOpen);
+        });
+      }
+    }
+
+    /* ── section ── */
+    const section = document.createElement("div");
+    section.className = "level-section";
+    section.appendChild(dot);
+    section.appendChild(header);
+    section.appendChild(topicsWrap);
+    container.appendChild(section);
+  });
+}
+
+/* ─── CERTIFICATE GENERATOR ─── */
+function generateCertificate(level){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation:"landscape", unit:"mm", format:"a4" });
+  const W = 297, H = 210;
+  const lConf = XP_LEVELS[level.id];
+
+  // background
+  doc.setFillColor(4,8,15);
+  doc.rect(0,0,W,H,"F");
+
+  // outer border
+  const accent = hexToRgb(lConf.color);
+  doc.setDrawColor(accent.r, accent.g, accent.b);
+  doc.setLineWidth(1.2);
+  doc.rect(8,8,W-16,H-16);
+  doc.setLineWidth(0.3);
+  doc.rect(13,13,W-26,H-26);
+
+  // header
+  doc.setTextColor(245,200,66);
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(13);
+  doc.text("ENGLISH SHEKHO", W/2, 30, { align:"center" });
+
+  doc.setTextColor(150,160,175);
+  doc.setFont("helvetica","normal");
+  doc.setFontSize(9);
+  doc.text("ENGLISH LEARNING PLATFORM · A1 TO C2", W/2, 37, { align:"center" });
+
+  // title
+  doc.setTextColor(240,244,248);
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(28);
+  doc.text("Certificate of Completion", W/2, 60, { align:"center" });
+
+  doc.setFont("helvetica","normal");
+  doc.setFontSize(12);
+  doc.setTextColor(150,160,175);
+  doc.text("This certificate is proudly presented to", W/2, 78, { align:"center" });
+
+  // name
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(26);
+  doc.setTextColor(accent.r, accent.g, accent.b);
+  doc.text(currentUserName || "Learner", W/2, 95, { align:"center" });
+
+  // underline
+  doc.setDrawColor(accent.r, accent.g, accent.b);
+  doc.setLineWidth(0.5);
+  doc.line(W/2-50, 99, W/2+50, 99);
+
+  // description
+  doc.setFont("helvetica","normal");
+  doc.setFontSize(12);
+  doc.setTextColor(200,210,220);
+  doc.text(
+    `for successfully completing the ${level.label} (${level.name}) level`,
+    W/2, 112, { align:"center" }
+  );
+  doc.setFontSize(10);
+  doc.setTextColor(150,160,175);
+  doc.text(`on the English Shekho A1 \u2192 C2 learning roadmap.`, W/2, 119, { align:"center" });
+
+  // level badge
+  doc.setFillColor(accent.r, accent.g, accent.b);
+  doc.circle(W/2, 140, 12, "F");
+  doc.setTextColor(10,12,18);
+  doc.setFont("helvetica","bold");
+  doc.setFontSize(16);
+  doc.text(level.label, W/2, 143, { align:"center" });
+
+  // date + footer
+  const dateStr = new Date().toLocaleDateString("en-GB", { day:"2-digit", month:"long", year:"numeric" });
+  doc.setFont("helvetica","normal");
+  doc.setFontSize(10);
+  doc.setTextColor(150,160,175);
+  doc.text(`Issued on: ${dateStr}`, 25, H-22);
+
+  doc.setFont("helvetica","italic");
+  doc.setTextColor(245,200,66);
+  doc.text("English Shekho", W-25, H-22, { align:"right" });
+  doc.setFont("helvetica","normal");
+  doc.setTextColor(120,130,145);
+  doc.setFontSize(8);
+  doc.text("Developed by Zishan Rafi", W-25, H-17, { align:"right" });
+
+  doc.save(`English_Shekho_${level.label}_Certificate.pdf`);
+  toast(`🎓 ${level.label} সার্টিফিকেট ডাউনলোড হয়েছে!`);
+}
+
+function hexToRgb(hex){
+  hex = hex.replace("#","");
+  return {
+    r: parseInt(hex.substring(0,2),16),
+    g: parseInt(hex.substring(2,4),16),
+    b: parseInt(hex.substring(4,6),16)
+  };
+}
+
+/* ─── BUILD ACHIEVEMENTS ─── */
+function buildAchievements(xp, doneTopic){
+  const earned = new Set();
+  if(doneTopic.length >= 1)  earned.add("ach-first");
+  if(xp >= 500)              earned.add("ach-500xp");
+  if(xp >= 2000)             earned.add("ach-b1");
+  if(xp >= 500)              earned.add("ach-a2");
+
+  const grid = document.getElementById("ach-grid");
+  grid.innerHTML = ACHIEVEMENTS.map(a => `
+    <div class="ach-card ${earned.has(a.id) ? "earned" : ""}">
+      <div class="ach-emoji">${a.emoji}</div>
+      <div class="ach-name">${a.name}</div>
+      <div class="ach-desc">${a.desc}</div>
+    </div>
+  `).join("");
+}
+
+/* ─── BUILD DAILY GOALS ─── */
+function buildGoals(){
+  const list = document.getElementById("goal-list");
+  list.innerHTML = DAILY_GOALS.map(g => `
+    <div class="goal-item ${g.done ? "done-g" : ""}">
+      <div class="goal-checkbox">${g.done ? "✓" : ""}</div>
+      <div class="goal-text">
+        <div class="goal-title">${g.title}</div>
+        <div class="goal-sub">${g.sub}</div>
+      </div>
+      <div class="goal-xp">${g.xp}</div>
+    </div>
+  `).join("");
+}
+
+/* ─── UPDATE XP UI ─── */
+function updateXPUI(xp, doneTopic){
+  const lvls = Object.keys(XP_LEVELS);
+  let currentKey = "A1";
+  for(let i=lvls.length-1;i>=0;i--){
+    if(xp >= XP_LEVELS[lvls[i]].min){ currentKey = lvls[i]; break; }
+  }
+  const conf = XP_LEVELS[currentKey];
+  const idx  = lvls.indexOf(currentKey);
+  const pct  = Math.min(100, Math.round((xp - conf.min)/(conf.max - conf.min)*100));
+
+  document.getElementById("h-level").textContent  = currentKey;
+  document.getElementById("h-xp").textContent     = xp;
+  document.getElementById("h-done").textContent   = doneTopic.length;
+  document.getElementById("journey-badge").textContent = `${currentKey} ${ROADMAP.find(r=>r.id===currentKey)?.name}`;
+  document.getElementById("journey-bar").style.width = pct + "%";
+  document.getElementById("journey-xp-label").textContent = xp + " XP earned";
+
+  const nextKey = lvls[idx+1];
+  if(nextKey){
+    document.getElementById("journey-next-label").textContent =
+      `Next unlock: ${nextKey} at ${XP_LEVELS[nextKey].min} XP`;
+  } else {
+    document.getElementById("journey-next-label").textContent = "🏆 Maximum level reached!";
+  }
+}
+
+/* ─── MAIN INIT ─── */
+function init(u){
+  currentUserName = u.displayName;
+  document.getElementById("nav-name").textContent = u.displayName;
+  const photo = u.photoURL || "";
+  const av = document.getElementById("nav-avatar");
+  if(photo) av.innerHTML = `<img src="${safeUrl(photo)}" style="width:100%;height:100%;object-fit:cover;">`;
+  else av.textContent = u.displayName[0]?.toUpperCase() || "?";
+
+  document.getElementById("footer-year").textContent  = new Date().getFullYear();
+  document.getElementById("footer-year2").textContent = new Date().getFullYear();
+
+  updateXPUI(u.xp, u.topicsDone);
+  buildRoadmap(u.xp, u.topicsDone);
+  buildAchievements(u.xp, u.topicsDone);
+  buildGoals();
+
+  document.getElementById("btn-logout").onclick = async () => {
+    await signOut(auth);
+    window.location.href = "index.html";
+  };
+
+  /* Daily motivation */
+  const motivations = [
+    "৩০ মিনিট practice করুন এবং ২টি নতুন topic শেষ করুন।",
+    "আজ ১০টি নতুন vocabulary word মুখস্থ করুন।",
+    "Grammar-এর ১টি tense ভালো করে অনুশীলন করুন।",
+    "Speaking practice-এ ৫টি sentence জোরে বলুন।",
+    "Community chat-এ ৩টি English বাক্য লিখুন।",
+    "Quiz দিন এবং নিজের score beat করুন।",
+    "১টি পুরো level শেষ করুন — আজই!",
+  ];
+  document.getElementById("daily-goal-text").textContent =
+    motivations[new Date().getDay()];
+}
+
+requireAuth(async user => {
+  const snap = await getDoc(doc(db,"users",user.uid));
+  const d = snap.exists() ? snap.data() : {};
+  const gp = d.grammarProgress || {};
+
+  init({
+    displayName: d.displayName || user.displayName || "Learner",
+    photoURL: d.photoURL || user.photoURL || "",
+    xp: d.xp || 0,
+    topicsDone: gp.done || []
+  });
+});
+</script>
+</body>
+</html>

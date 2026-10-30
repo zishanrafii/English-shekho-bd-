@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account খুলুন — English Shekho</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  body{min-height:100vh;display:grid;place-items:center;padding:var(--es-s4)}
+  .box{width:min(440px,100%)}
+  h1{font-size:var(--es-fs-2xl);margin:0 0 var(--es-s2)}
+  .lead{color:var(--es-sub);margin:0 0 var(--es-s5)}
+  .notice{padding:.7rem 1rem;border-radius:var(--es-r-md);background:rgba(255,200,87,.1);border:1px solid rgba(255,200,87,.3);color:var(--es-warm-400);margin-bottom:var(--es-s4);font-size:var(--es-fs-sm)}
+  .err{min-height:1.4em;margin:var(--es-s3) 0 0;color:var(--es-danger);font-size:var(--es-fs-sm)}
+  form{display:grid;gap:var(--es-s3)}
+  .or{text-align:center;color:var(--es-muted);margin:var(--es-s4) 0;font-size:var(--es-fs-sm)}
+  .links{display:grid;gap:var(--es-s2);margin-top:var(--es-s5);font-size:var(--es-fs-sm);text-align:center}
+  .links a{color:var(--es-indigo-300)}
+  .perks{margin:0 0 var(--es-s5);padding-left:1.2rem;color:var(--es-sub);font-size:var(--es-fs-sm)}
+  .w100{width:100%}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<main class="box es-card">
+  <h1 class="es-gradient-text">Progress সেভ করুন</h1>
+  <p class="lead">বিনামূল্যে account খুলুন। আপনার এখনকার সব progress সাথে থাকবে।</p>
+  <div class="notice" id="locked" hidden>এই feature ব্যবহার করতে account দরকার (chat, friends, leaderboard ইত্যাদি)।</div>
+  <ul class="perks">
+    <li>যেকোনো device থেকে শেখা চালিয়ে যান</li>
+    <li>বন্ধু, study group ও community chat</li>
+    <li>Leaderboard ও certificate</li>
+  </ul>
+
+  <button type="button" class="es-btn es-btn--secondary w100" id="btn-google">Google দিয়ে চালিয়ে যান</button>
+  <div class="or">অথবা email দিয়ে</div>
+
+  <form id="form" novalidate>
+    <label class="es-sr-only" for="name">নাম</label>
+    <input class="es-input" id="name" autocomplete="name" placeholder="আপনার নাম" maxlength="60">
+    <label class="es-sr-only" for="email">Email</label>
+    <input class="es-input" id="email" type="email" autocomplete="email" placeholder="Email" required>
+    <label class="es-sr-only" for="pass">Password</label>
+    <input class="es-input" id="pass" type="password" autocomplete="new-password" placeholder="Password (কমপক্ষে ৬ অক্ষর)" minlength="6" required>
+    <button class="es-btn w100" id="btn-submit" type="submit">Account খুলুন</button>
+  </form>
+  <p class="err" id="err" role="alert"></p>
+
+  <div class="links">
+    <a href="index.html?login=1">আগে থেকেই account আছে? Login করুন (Guest progress যুক্ত হবে না)</a>
+    <a id="keep" href="dashboard.html">এখন না, Guest হিসেবেই শিখতে থাকি</a>
+  </div>
+</main>
+
+<script type="module">
+import { auth, onAuthStateChanged } from "./js/firebase-config.js";
+import { safeNext, upgradeWithEmail, upgradeWithGoogle, friendlyError } from "./auth/guest.js";
+
+const q = new URLSearchParams(location.search);
+const next = safeNext(q.get("next"));
+const $ = (id) => document.getElementById(id);
+if (q.get("reason") === "locked") $("locked").hidden = false;
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) { location.replace("index.html"); return; }
+  if (!user.isAnonymous) { location.replace(next); }
+});
+
+const busy = (b) => { $("btn-google").disabled = b; $("btn-submit").disabled = b; };
+const fail = (e) => { $("err").textContent = friendlyError(e); busy(false); };
+const done = () => { location.replace(next); };
+
+$("btn-google").onclick = async () => {
+  $("err").textContent = ""; busy(true);
+  try { await upgradeWithGoogle(); done(); } catch (e) { fail(e); }
+};
+
+$("form").onsubmit = async (ev) => {
+  ev.preventDefault();
+  $("err").textContent = "";
+  const name = $("name").value.trim();
+  const email = $("email").value.trim();
+  const pass = $("pass").value;
+  if (!email || pass.length < 6) { $("err").textContent = "Email ও ৬+ অক্ষরের password দিন।"; return; }
+  busy(true);
+  try { await upgradeWithEmail(name, email, pass); done(); } catch (e) { fail(e); }
+};
+</script>
+</body>
+</html>

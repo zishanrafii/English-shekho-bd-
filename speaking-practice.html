@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speaking অনুশীলন — English Shekho</title>
+<meta name="robots" content="noindex">
+<meta name="es-guest" content="allowed">
+<link rel="stylesheet" href="styles/tokens.css">
+<style>
+  body{min-height:100vh;padding:var(--es-s3) var(--es-s3) 6rem;display:grid;place-items:start center}
+  .wrap{width:min(560px,100%)}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:var(--es-s3);margin-bottom:var(--es-s3)}
+  .top a{color:var(--es-sub);text-decoration:none;font-size:var(--es-fs-sm)}
+  .es-btn--sm,.top select{min-height:40px}   /* comfortable touch targets on phones */
+  .top select{background:var(--es-surface-2);color:var(--es-text);border:1px solid var(--es-border-strong);border-radius:var(--es-r-sm);padding:.35rem .6rem;font:inherit}
+  h1{font-size:var(--es-fs-xl);margin:0}
+  .sp-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--es-s2);margin:var(--es-s3) 0}
+  .sp-tab{padding:.7rem .5rem;border-radius:var(--es-r-md);cursor:pointer;color:var(--es-sub);font:600 var(--es-fs-sm)/1.2 var(--es-font);background:var(--es-surface-1);border:1px solid var(--es-border-strong);min-height:44px}
+  .sp-tab[aria-selected="true"]{color:#fff;background:var(--es-grad-brand);border-color:transparent}
+  #permnote{padding:.7rem .9rem;border-radius:var(--es-r-md);background:rgba(34,211,238,.09);border:1px solid rgba(34,211,238,.3);color:var(--es-cyan-300);font-size:var(--es-fs-sm);margin-bottom:var(--es-s3)}
+  .sp-card{padding:var(--es-s4);margin-bottom:var(--es-s3)}
+  .sp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--es-s2)}
+  .sp-count,.sp-sub{color:var(--es-muted);font-size:var(--es-fs-sm)}
+  .sp-tag{margin:0 0 var(--es-s3);color:var(--es-sub);font-size:var(--es-fs-sm)}
+  .sp-h{margin:0 0 var(--es-s2);font-size:var(--es-fs-lg)}
+  .sp-target{font-size:clamp(1.35rem,6vw,1.9rem);line-height:1.45;font-weight:700;margin:var(--es-s3) 0;word-break:break-word}
+  h2.sp-target{margin:var(--es-s2) 0}
+  .sp-prompts{margin:var(--es-s2) 0;padding-left:1.2rem;color:var(--es-sub);line-height:1.8}
+  .sp-row{display:flex;gap:var(--es-s2);flex-wrap:wrap;align-items:center;margin:var(--es-s2) 0}
+  .es-btn[aria-pressed="true"]{border-color:var(--es-indigo-400);color:#fff;background:rgba(91,91,255,.25)}
+  .sp-pick{display:block;width:100%;text-align:left;margin:var(--es-s2) 0;padding:.8rem 1rem;border-radius:var(--es-r-md);background:var(--es-surface-1);border:1px solid var(--es-border-strong);color:var(--es-text);font:inherit;cursor:pointer;min-height:44px}
+  .sp-passage{line-height:1.8;margin:var(--es-s3) 0;padding:var(--es-s3);border-radius:var(--es-r-md);background:var(--es-surface-1)}
+  .sp-cur{background:rgba(255,200,87,.2);border-radius:4px;box-shadow:0 0 0 2px rgba(255,200,87,.35)} .sp-done{color:var(--es-success)} .sp-todo{color:var(--es-muted)}
+  /* microphone */
+  .sp-mic{display:flex;flex-direction:column;align-items:center;gap:var(--es-s2);margin:var(--es-s4) 0 var(--es-s2)}
+  .sp-micbtn{width:88px;height:88px;border-radius:50%;border:0;cursor:pointer;font-size:2rem;color:#fff;background:var(--es-grad-brand);box-shadow:var(--es-glow);display:grid;place-items:center}
+  .sp-micbtn:focus-visible{outline:3px solid var(--es-cyan-400);outline-offset:4px}
+  .sp-micbtn.sp-m-recording{background:linear-gradient(135deg,#fb7185,#e11d48);animation:sp-pulse 1.4s ease-in-out infinite}
+  .sp-micbtn.sp-m-processing{background:var(--es-surface-3);cursor:default}
+  .sp-micbtn.sp-m-error{background:var(--es-surface-3);border:2px solid var(--es-danger)}
+  @keyframes sp-pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.5)}50%{box-shadow:0 0 0 14px rgba(251,113,133,0)}}
+  .sp-miclabel{color:var(--es-sub);font-size:var(--es-fs-sm);min-height:1.4em}
+  .sp-timer{font-family:var(--es-font-mono);color:var(--es-warm-400);min-height:1.2em}
+  .sp-live{color:var(--es-muted);font-size:var(--es-fs-sm);text-align:center;min-height:1.2em;max-width:100%;word-break:break-word}
+  .sp-error{padding:.8rem 1rem;border-radius:var(--es-r-md);background:rgba(251,113,133,.09);border:1px solid rgba(251,113,133,.35);margin-bottom:var(--es-s3)}
+  .sp-error p{margin:.4rem 0;color:var(--es-sub)}
+  /* result */
+  .sp-headline{font-size:var(--es-fs-xl);margin:0 0 var(--es-s3);line-height:1.35}
+  .sp-headline:focus{outline:none}
+  .sp-positive{color:var(--es-success)} .sp-gentle{color:var(--es-warm-400)}
+  .sp-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--es-s2);margin:var(--es-s3) 0}
+  .sp-tile{padding:.7rem;border-radius:var(--es-r-md);background:var(--es-surface-1);border:1px solid var(--es-border);text-align:center}
+  .sp-tile-v{font-size:var(--es-fs-2xl);font-weight:800;line-height:1.1}
+  .sp-tile-l{color:var(--es-sub);font-size:var(--es-fs-xs)} .sp-tile-s{color:var(--es-muted);font-size:var(--es-fs-xs)}
+  .sp-chips{display:flex;flex-wrap:wrap;gap:var(--es-s2);margin:var(--es-s3) 0}
+  .sp-chip{padding:.45rem .75rem;border-radius:var(--es-r-pill);cursor:pointer;font:600 var(--es-fs-md)/1 var(--es-font);color:var(--es-text);background:var(--es-surface-1);border:1px solid var(--es-border-strong);min-height:40px}
+  .sp-ok{border-color:rgba(52,211,153,.55)} .sp-close,.sp-wrong{border-color:rgba(255,200,87,.7);background:rgba(255,200,87,.08)} .sp-missed{border-color:rgba(251,113,133,.7);background:rgba(251,113,133,.08);text-decoration:underline dotted}
+  .sp-sym{font-weight:800}
+  .sp-fine{color:var(--es-muted);font-size:var(--es-fs-xs);line-height:1.6;margin:var(--es-s2) 0}
+  .sp-note,.sp-fb{margin:var(--es-s2) 0;color:var(--es-sub)} .sp-fb{color:var(--es-text)}
+  .sp-next{list-style:none;margin:var(--es-s2) 0;padding:0;color:var(--es-indigo-300)}
+  .sp-transcript{padding:.7rem .9rem;border-radius:var(--es-r-md);background:var(--es-surface-1);margin:var(--es-s2) 0;line-height:1.7}
+  .sp-diff{margin:var(--es-s3) 0;padding:.7rem .9rem;border-radius:var(--es-r-md);background:rgba(255,200,87,.07);border:1px solid rgba(255,200,87,.3)}
+  .sp-diffrow{display:flex;gap:var(--es-s2);align-items:center;flex-wrap:wrap;margin-top:var(--es-s2)} .sp-diffw{font-weight:800}
+  .sp-actions{display:flex;gap:var(--es-s2);flex-wrap:wrap;margin-top:var(--es-s3)}
+  .sp-actions .es-btn{flex:1 1 140px}
+  .sp-save{margin:var(--es-s3) 0 0;color:var(--es-success);font-size:var(--es-fs-sm)}
+  .sp-audio{width:100%;margin:var(--es-s2) 0}
+  .sp-h3{font-size:var(--es-fs-md);margin:var(--es-s3) 0 var(--es-s2);color:var(--es-indigo-300)} .sp-list{margin:0;padding-left:1.2rem;color:var(--es-sub);line-height:1.7}
+  #wordpop{position:sticky;bottom:var(--es-s3);z-index:50;padding:var(--es-s3);border-radius:var(--es-r-lg);background:rgba(19,23,49,.98);border:1px solid rgba(124,131,255,.45);box-shadow:var(--es-shadow-2)}
+  #wordpop[hidden]{display:none}
+  .sp-poptop{display:flex;gap:var(--es-s2);align-items:center;flex-wrap:wrap} .sp-popw{font-size:var(--es-fs-xl)} .sp-ph{color:var(--es-muted);font-family:var(--es-font-mono)} .sp-popm{color:var(--es-warm-400);margin:var(--es-s2) 0}
+  .sp-poptop .es-btn:last-child{margin-left:auto}
+  @media (min-width:520px){.sp-tabs{grid-template-columns:repeat(4,1fr)}}
+</style>
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="top">
+    <a href="dashboard.html">← Dashboard</a>
+    <h1>🎤 Speaking</h1>
+    <label class="sp-sub">স্তর <select id="lvl" aria-label="অনুশীলনের স্তর"></select></label>
+  </div>
+  <div class="sp-tabs" id="tabs" role="tablist" aria-label="অনুশীলনের ধরন"></div>
+  <div id="permnote" hidden></div>
+  <div id="stage" aria-live="off"></div>
+  <div id="err"></div>
+  <div id="result"></div>
+  <div id="wordpop" hidden role="dialog" aria-label="শব্দের তথ্য"></div>
+  <p class="sp-sub" style="text-align:center;margin-top:1.5rem"><a href="simulator.html" style="color:var(--es-indigo-300)">🎭 Real-life English: বাস্তব পরিস্থিতির কথোপকথন</a></p>
+  <p class="sp-sub" style="text-align:center;margin-top:1.5rem">পুরোনো Speaking পেজ: <a href="speaking.html" style="color:var(--es-indigo-300)">টেপ ও টাস্ক-ভিত্তিক অনুশীলন</a></p>
+  <div id="sr" class="es-sr-only" role="status" aria-live="polite"></div>
+</main>
+<script type="module" src="speaking/ui.js"></script>
+</body>
+</html>

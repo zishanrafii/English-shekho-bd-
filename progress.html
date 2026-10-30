@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progress Report — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#04080f;
+  --surface:#080e1a;
+  --surface2:#0c1322;
+  --surface3:#101828;
+  --border:rgba(255,255,255,.055);
+  --gold:#f5c842;
+  --gold2:#e0a820;
+  --teal:#2dd4bf;
+  --rose:#fb7185;
+  --indigo:#818cf8;
+  --emerald:#34d399;
+  --orange:#fb923c;
+  --muted:#64748b;
+  --sub:#94a3b8;
+  --text:#f0f4f8;
+}
+
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(129,140,248,.025),transparent 60%);
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+
+.wrap{max-width:1160px;margin:auto;padding:1.6rem 1.4rem 0;position:relative;z-index:1;}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+  background:rgba(8,14,26,.8);border:1px solid var(--border);
+  border-radius:18px;padding:.9rem 1.4rem;
+  backdrop-filter:blur(24px);box-shadow:0 4px 32px rgba(0,0,0,.4);
+  position:sticky;top:16px;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));
+  border:1px solid rgba(245,200,66,.3);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  box-shadow:0 0 18px rgba(245,200,66,.12);flex-shrink:0;
+}
+.logo-text h1{
+  font-size:1.55rem;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-.5px;
+}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{
+  padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;
+  color:var(--sub);text-decoration:none;transition:.2s;border:1px solid transparent;
+}
+.nav-link:hover{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.nav-link.active{background:rgba(129,140,248,.08);color:var(--indigo);border-color:rgba(129,140,248,.2);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  overflow:hidden;border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;
+  transition:.2s;box-shadow:0 0 14px rgba(245,200,66,.1);
+}
+.user-avatar img{width:100%;height:100%;object-fit:cover;}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{
+  border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);
+  color:var(--rose);padding:.4rem .9rem;border-radius:10px;
+  cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;
+}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* ─── HERO ─── */
+.page-hero{
+  border-radius:24px;padding:2rem 2.4rem;margin-bottom:1.8rem;
+  background:linear-gradient(135deg,#080e18,#0a1220);
+  border:1px solid rgba(255,255,255,.07);
+  position:relative;overflow:hidden;
+  box-shadow:0 8px 48px rgba(0,0,0,.45);
+}
+.page-hero::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#818cf8 30%,#2dd4bf 70%,transparent);
+}
+.hero-orb1{position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(129,140,248,.08),transparent 70%);top:-80px;left:-60px;pointer-events:none;}
+.hero-orb2{position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.07),transparent 70%);bottom:-60px;right:-40px;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--indigo);letter-spacing:2px;text-transform:uppercase;margin-bottom:.6rem;opacity:.8;}
+.page-hero h2{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;}
+.page-hero h2 span{background:linear-gradient(135deg,#818cf8,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--sub);font-size:13px;font-family:'Noto Sans Bengali',sans-serif;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.hstat{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.7rem 1.1rem;text-align:center;min-width:80px;}
+.hstat-v{font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,#818cf8,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+/* ─── SECTION TITLE ─── */
+.section-title{
+  font-size:11px;font-weight:700;color:var(--muted);margin-bottom:1rem;
+  display:flex;align-items:center;gap:10px;
+  letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;
+}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ─── STAT CARDS ROW ─── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1.8rem;}
+.stat-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:16px;padding:1.2rem 1.1rem;
+  display:flex;align-items:center;gap:12px;
+  transition:.2s;position:relative;overflow:hidden;
+}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:.6;}
+.stat-card:nth-child(1)::after{background:linear-gradient(90deg,transparent,#818cf8,transparent);}
+.stat-card:nth-child(2)::after{background:linear-gradient(90deg,transparent,#f5c842,transparent);}
+.stat-card:nth-child(3)::after{background:linear-gradient(90deg,transparent,#2dd4bf,transparent);}
+.stat-card:nth-child(4)::after{background:linear-gradient(90deg,transparent,#fb7185,transparent);}
+.stat-card:nth-child(5)::after{background:linear-gradient(90deg,transparent,#34d399,transparent);}
+.stat-card:nth-child(6)::after{background:linear-gradient(90deg,transparent,#fb923c,transparent);}
+.stat-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.09);box-shadow:0 8px 28px rgba(0,0,0,.3);}
+.stat-icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.stat-card:nth-child(1) .stat-icon{background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.18);}
+.stat-card:nth-child(2) .stat-icon{background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.18);}
+.stat-card:nth-child(3) .stat-icon{background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.18);}
+.stat-card:nth-child(4) .stat-icon{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.18);}
+.stat-card:nth-child(5) .stat-icon{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.18);}
+.stat-card:nth-child(6) .stat-icon{background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.18);}
+.stat-v{font-size:1.35rem;font-weight:800;}
+.stat-l{font-size:10.5px;color:var(--muted);margin-top:1px;font-family:'Noto Sans Bengali',sans-serif;}
+.sv-1{color:#818cf8;}.sv-2{color:#f5c842;}.sv-3{color:#2dd4bf;}.sv-4{color:#fb7185;}.sv-5{color:#34d399;}.sv-6{color:#fb923c;}
+
+/* ─── XP LEVEL PROGRESS ─── */
+.level-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:18px;padding:1.5rem 1.6rem;margin-bottom:1.8rem;
+}
+.level-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.8rem;}
+.level-left{}
+.level-title{font-size:16px;font-weight:700;margin-bottom:4px;}
+.level-sub{font-size:12px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;}
+.level-badges{display:flex;gap:8px;flex-wrap:wrap;}
+.level-badge{padding:.3rem .9rem;border-radius:20px;font-size:11.5px;font-weight:700;font-family:'JetBrains Mono',monospace;letter-spacing:.3px;}
+.lb-a1{background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.25);color:#2dd4bf;}
+.lb-a2{background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.25);color:#f5c842;}
+.lb-b1{background:rgba(129,140,248,.12);border:1px solid rgba(129,140,248,.25);color:#818cf8;}
+.lb-b2{background:rgba(251,113,133,.12);border:1px solid rgba(251,113,133,.25);color:#fb7185;}
+.lb-active{box-shadow:0 0 12px currentColor;}
+.lb-inactive{opacity:.3;}
+.xp-track{height:10px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-bottom:.6rem;}
+.xp-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#818cf8,#2dd4bf);transition:width 1s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px rgba(129,140,248,.4);}
+.xp-meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+
+/* ─── TWO COL LAYOUT ─── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.8rem;}
+@media(max-width:760px){.two-col{grid-template-columns:1fr;}}
+
+/* ─── PANEL ─── */
+.panel{background:var(--surface2);border:1px solid var(--border);border-radius:18px;overflow:hidden;}
+.panel-head{
+  padding:.9rem 1.2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.018);
+}
+.panel-title{font-size:13.5px;font-weight:700;}
+.panel-sub{font-size:11px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.panel-body{padding:1.2rem;}
+
+/* ─── SCORE CHART (SVG bar chart) ─── */
+.chart-wrap{width:100%;overflow-x:auto;}
+.chart-wrap svg{display:block;}
+.no-data{
+  padding:2rem;text-align:center;
+  color:var(--muted);font-size:13px;font-family:'Noto Sans Bengali',sans-serif;
+}
+
+/* ─── STREAK CALENDAR ─── */
+.cal-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;}
+.cal-month{font-size:13.5px;font-weight:700;}
+.cal-nav{display:flex;gap:6px;}
+.cal-btn{
+  width:28px;height:28px;border-radius:8px;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);color:var(--sub);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;
+  cursor:pointer;transition:.2s;
+}
+.cal-btn:hover{background:rgba(255,255,255,.07);color:var(--text);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-day-label{font-size:9px;text-align:center;color:var(--muted);font-family:'JetBrains Mono',monospace;padding-bottom:4px;font-weight:700;}
+.cal-day{
+  aspect-ratio:1;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10.5px;font-family:'JetBrains Mono',monospace;
+  cursor:default;transition:.2s;
+  background:rgba(255,255,255,.03);color:var(--muted);
+}
+.cal-day.empty{background:transparent;color:transparent;}
+.cal-day.today{border:1px solid rgba(129,140,248,.4);color:var(--indigo);font-weight:700;}
+.cal-day.has-activity{background:linear-gradient(135deg,rgba(129,140,248,.25),rgba(45,212,191,.2));color:var(--text);font-weight:700;border:1px solid rgba(129,140,248,.25);}
+.cal-day.streak-day{background:linear-gradient(135deg,rgba(251,146,60,.25),rgba(245,200,66,.2));color:var(--gold);font-weight:700;border:1px solid rgba(245,200,66,.25);}
+.cal-legend{display:flex;gap:12px;margin-top:.8rem;flex-wrap:wrap;}
+.cal-legend-item{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--muted);}
+.cal-legend-dot{width:10px;height:10px;border-radius:3px;}
+
+/* ─── SCORE HISTORY TABLE ─── */
+.score-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem .8rem;border-radius:12px;transition:.15s;
+  border:1px solid transparent;
+}
+.score-item:hover{background:rgba(255,255,255,.025);border-color:var(--border);}
+.score-left{display:flex;align-items:center;gap:10px;}
+.score-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.score-name{font-size:13px;font-weight:600;}
+.score-meta{font-size:11px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;}
+.score-right{text-align:right;}
+.score-pct{font-size:1.1rem;font-weight:800;font-family:'JetBrains Mono',monospace;}
+.score-fraction{font-size:10.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.pct-high{color:var(--emerald);}
+.pct-mid{color:var(--gold);}
+.pct-low{color:var(--rose);}
+
+/* ─── ACHIEVEMENTS ─── */
+.achievements-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+.ach-item{
+  background:var(--surface3);border:1px solid var(--border);
+  border-radius:14px;padding:1rem;text-align:center;
+  transition:.2s;position:relative;overflow:hidden;
+}
+.ach-item.unlocked{
+  background:linear-gradient(135deg,rgba(245,200,66,.07),rgba(45,212,191,.05));
+  border-color:rgba(245,200,66,.2);
+}
+.ach-item.locked{opacity:.4;filter:grayscale(.6);}
+.ach-icon{font-size:2rem;margin-bottom:.5rem;display:block;}
+.ach-name{font-size:11.5px;font-weight:700;margin-bottom:3px;}
+.ach-desc{font-size:10px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.4;}
+.ach-badge{
+  position:absolute;top:8px;right:8px;
+  font-size:8px;font-weight:800;padding:2px 6px;border-radius:10px;
+  background:linear-gradient(135deg,#f5c842,#e0a820);color:#000;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* mobile */
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .hero-stats{display:none;}
+  .page-hero{padding:1.2rem;}
+  .page-hero h2{font-size:1.4rem;}
+}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:2.5rem 1.4rem 1.5rem;margin-top:3rem;position:relative;z-index:1;
+}
+.footer-inner{max-width:1160px;margin:auto;display:grid;grid-template-columns:1fr auto auto;gap:3rem;}
+.footer-brand .brand-name{font-size:1.2rem;font-weight:800;margin-bottom:.5rem;}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.7;max-width:280px;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:10.5px;color:#4a5568;margin-top:.9rem;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.footer-col h4{font-size:12px;font-weight:700;margin-bottom:1rem;color:var(--sub);text-transform:uppercase;letter-spacing:.8px;}
+.dev-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:.9rem 1rem;}
+.dev-name{font-size:14px;font-weight:700;margin-bottom:2px;}
+.dev-title{font-size:9.5px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:.7rem;}
+.contact-row{display:flex;align-items:center;gap:7px;margin-bottom:5px;font-size:12px;}
+.contact-icon{font-size:.9rem;}
+.contact-row a{color:var(--sub);text-decoration:none;transition:.15s;}
+.contact-row a:hover{color:var(--text);}
+.social-links{display:flex;flex-direction:column;gap:6px;}
+.social-link{display:flex;align-items:center;gap:9px;padding:.45rem .7rem;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--border);text-decoration:none;transition:.2s;}
+.social-link:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.09);}
+.sl-icon{font-size:.95rem;flex-shrink:0;}
+.sl-label{font-size:12px;font-weight:600;color:var(--sub);}
+.sl-handle{font-size:10.5px;color:var(--muted);margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{max-width:1160px;margin:1.8rem auto 0;padding-top:1.2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:11.5px;color:var(--muted);}
+.footer-bottom a{color:var(--sub);text-decoration:none;}
+.footer-bottom a:hover{color:var(--text);}
+.footer-heart{color:var(--rose);}
+@media(max-width:768px){.footer-inner{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;}}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ─── TOPBAR ─── -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>PROGRESS REPORT</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">🏠 Dashboard</a>
+        <a href="grammar.html" class="nav-link">📖 Grammar</a>
+        <a href="chat.html" class="nav-link">💬 Chat</a>
+        <a href="leaderboard.html" class="nav-link">🏆 Leaderboard</a>
+        <a href="progress.html" class="nav-link active">📊 Progress</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar"></div>
+        <span class="user-name" id="nav-name">...</span>
+        <button class="btn-logout" id="btn-logout">লগআউট</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PAGE HERO ─── -->
+  <div class="page-hero">
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">📊 YOUR JOURNEY</div>
+        <h2>Progress <span>Report</span></h2>
+        <div class="hero-sub">আপনার শেখার যাত্রা এক নজরে দেখুন।</div>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-v" id="h-xp">0</div>
+          <div class="hstat-l">Total XP</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-streak">0🔥</div>
+          <div class="hstat-l">Streak</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-sessions">0</div>
+          <div class="hstat-l">Sessions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── STAT CARDS ─── -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div><div class="stat-v sv-1" id="s-xp">0</div><div class="stat-l">মোট XP</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🔥</div>
+      <div><div class="stat-v sv-2" id="s-streak">0</div><div class="stat-l">Day Streak</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div><div class="stat-v sv-3" id="s-correct">0</div><div class="stat-l">সঠিক উত্তর</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📚</div>
+      <div><div class="stat-v sv-4" id="s-sessions">0</div><div class="stat-l">Sessions</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🏆</div>
+      <div><div class="stat-v sv-5" id="s-best">0%</div><div class="stat-l">Best Score</div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🎯</div>
+      <div><div class="stat-v sv-6" id="s-avg">0%</div><div class="stat-l">Average Score</div></div>
+    </div>
+  </div>
+
+  <!-- ─── XP LEVEL PROGRESS ─── -->
+  <div class="section-title">⚡ Level Progress</div>
+  <div class="level-card">
+    <div class="level-top">
+      <div class="level-left">
+        <div class="level-title" id="level-title">A1 Beginner</div>
+        <div class="level-sub" id="level-sub">পরের level-এর জন্য আরো XP দরকার</div>
+      </div>
+      <div class="level-badges">
+        <span class="level-badge lb-a1 lb-inactive" id="badge-a1">A1</span>
+        <span class="level-badge lb-a2 lb-inactive" id="badge-a2">A2</span>
+        <span class="level-badge lb-b1 lb-inactive" id="badge-b1">B1</span>
+        <span class="level-badge lb-b2 lb-inactive" id="badge-b2">B2</span>
+        <span class="level-badge lb-c1 lb-inactive" id="badge-c1">C1</span>
+        <span class="level-badge lb-c2 lb-inactive" id="badge-c2">C2</span>
+
+
+      </div>
+    </div>
+    <div class="xp-track">
+      <div class="xp-fill" id="xp-fill" style="width:0%"></div>
+    </div>
+    <div class="xp-meta">
+      <span id="xp-current">0 XP</span>
+      <span id="xp-next">Next: 5000 XP</span>
+    </div>
+  </div>
+
+  <!-- ─── SCORE CHART + CALENDAR ─── -->
+  <div class="two-col">
+
+    <!-- Score Bar Chart -->
+    <div>
+      <div class="section-title">📈 Score History</div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Last 10 Quiz Scores</div>
+          <div class="panel-sub" id="chart-range">—</div>
+        </div>
+        <div class="panel-body">
+          <div class="chart-wrap" id="chart-wrap">
+            <div class="no-data">এখনো কোনো quiz দেওয়া হয়নি।</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Streak Calendar -->
+    <div>
+      <div class="section-title">🗓️ Activity Calendar</div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Monthly Activity</div>
+          <div class="cal-nav">
+            <div class="cal-btn" id="cal-prev">‹</div>
+            <div class="cal-btn" id="cal-next">›</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="cal-controls">
+            <div class="cal-month" id="cal-month-label">—</div>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-legend">
+            <div class="cal-legend-item">
+              <div class="cal-legend-dot" style="background:rgba(129,140,248,.3);border:1px solid rgba(129,140,248,.3);"></div>
+              Quiz দিয়েছেন
+            </div>
+            <div class="cal-legend-item">
+              <div class="cal-legend-dot" style="background:rgba(251,146,60,.3);border:1px solid rgba(245,200,66,.3);"></div>
+              Streak day
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─── RECENT SCORES + ACHIEVEMENTS ─── -->
+  <div class="two-col">
+
+    <!-- Recent Scores List -->
+    <div>
+      <div class="section-title">🎯 Recent Scores</div>
+      <div class="panel">
+        <div class="panel-body" style="display:flex;flex-direction:column;gap:4px;" id="score-list">
+          <div class="no-data">লোড হচ্ছে...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievements -->
+    <div>
+      <div class="section-title">🏅 Achievements</div>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="achievements-grid" id="achievements-grid">
+            <!-- injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">বাংলায় ইংরেজি শেখার অ্যাপ — Quiz, Grammar, Chat সহ সম্পূর্ণ শিক্ষার পরিবেশ।</div>
+      <div class="copyright-text">
+        © <span id="footer-year"></span> English Shekho<br>
+        All rights reserved.<br>
+        Unauthorized reproduction<br>
+        is strictly prohibited.
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+
+<script type="module">
+import { safeUrl,
+  auth, db, signOut, requireAuth,
+  doc, getDoc,
+  collection, query, orderBy, limit, getDocs, where, esc
+} from "./js/firebase-config.js";
+
+/* ── year ── */
+const yr = new Date().getFullYear();
+document.getElementById("footer-year").textContent  = yr;
+document.getElementById("footer-year2").textContent = yr;
+
+/* ── ACHIEVEMENTS DEFINITION ── */
+const ACHIEVEMENTS = [
+  { id:"first_quiz",  icon:"🎓", name:"First Step",      desc:"প্রথম quiz দিয়েছেন",         cond: (u,s) => s.length >= 1 },
+  { id:"xp_1000",      icon:"⚡", name:"XP Hunter",       desc:"1000 XP অর্জন করেছেন",        cond: (u)   => (u.xp||0) >= 1000 },
+  { id:"xp_5000",      icon:"🔋", name:"Energy Surge",    desc:"5000 XP অর্জন করেছেন",        cond: (u)   => (u.xp||0) >= 5000 },
+  { id:"xp_10000",     icon:"🌟", name:"Rising Star",     desc:"10000 XP — C1 Level!",         cond: (u)   => (u.xp||0) >=10000 },
+  { id:"xp_20000",     icon:"🏆", name:"Champion",        desc:"20000 XP — C2 Mastery!",       cond: (u)   => (u.xp||0) >= 20000 },
+  { id:"xp_300000",     icon:"🧑‍🎓️", name:"Pro",        desc:"30000 XP — Mastery!",          cond: (u)   => (u.xp||0) >= 30000 },
+  { id:"streak_3",    icon:"🔥", name:"On Fire",         desc:"৩ দিন streak ধরে রেখেছেন",   cond: (u)   => (u.streak||0) >= 3 },
+  { id:"streak_7",    icon:"💥", name:"Week Warrior",    desc:"৭ দিন streak!",               cond: (u)   => (u.streak||0) >= 7 },
+  { id:"streak_30",   icon:"🌙", name:"Unstoppable",     desc:"৩০ দিন streak!",              cond: (u)   => (u.streak||0) >= 30 },
+  { id:"perfect",     icon:"💯", name:"Perfectionist",   desc:"100% score পেয়েছেন",          cond: (u,s) => s.some(x => (x.pct||0) >= 100) },
+  { id:"sessions_10", icon:"📚", name:"Bookworm",        desc:"১০টি session শেষ করেছেন",    cond: (u)   => (u.sessions||0) >= 10 },
+  { id:"sessions_50", icon:"🎯", name:"Dedicated",       desc:"৫০টি session শেষ করেছেন",    cond: (u)   => (u.sessions||0) >= 50 },
+  { id:"correct_100", icon:"✅", name:"Answer Machine",  desc:"১০০টি সঠিক উত্তর দিয়েছেন",  cond: (u)   => (u.totalCorrect||0) >= 100 },
+];
+
+/* ── LEVEL HELPERS ── */
+function levelFromXP(xp) {
+  const value = Math.max(0, Number(xp) || 0);
+  if (value >= 18000) return "C2";
+  if (value >= 10000) return "C1";
+  if (value >= 5000) return "B2";
+  if (value >= 2000) return "B1";
+  if (value >= 500) return "A2";
+  return "A1";
+}
+function updateXPBar(xp) {
+  xp = Math.max(0, Number(xp) || 0);
+  const levels = [
+    { label:"A1", min:0, max:500 },
+    { label:"A2", min:500, max:2000 },
+    { label:"B1", min:2000, max:5000 },
+    { label:"B2", min:5000, max:10000 },
+    { label:"C1", min:10000, max:18000 },
+    { label:"C2", min:18000, max:30000 },
+  ];
+  const cur = [...levels].reverse().find((lv) => xp >= lv.min) || levels[0];
+  const pct = xp >= 30000 ? 100 : Math.max(0, Math.min(100, Math.round((xp - cur.min) / (cur.max - cur.min) * 100)));
+  document.getElementById("xp-fill").style.width = pct + "%";
+  document.getElementById("xp-current").textContent = xp.toLocaleString() + " XP";
+  document.getElementById("xp-next").textContent = xp >= 30000 ? "Mastery reached 🎉" : `Next: ${cur.max.toLocaleString()} XP`;
+  document.getElementById("level-title").textContent =
+    { A1:"A1 Beginner", A2:"A2 Elementary", B1:"B1 Intermediate", B2:"B2 Upper-Intermediate", C1:"C1 Advanced", C2:"C2 Mastery" }[cur.label];
+  const nextLevel = { A1:"A2", A2:"B1", B1:"B2", B2:"C1", C1:"C2", C2:"Mastery" }[cur.label];
+  document.getElementById("level-sub").textContent =
+    xp >= 30000 ? "সর্বোচ্চ স্তরে পৌঁছে গেছেন! 🎉" :
+    `${(cur.max - xp).toLocaleString()} XP বাকি — পরের level: ${nextLevel}`;
+
+  const thresholds = { a1:0, a2:500, b1:2000, b2:5000, c1:10000, c2:18000 };
+  Object.entries(thresholds).forEach(([id, threshold]) => {
+    const el = document.getElementById("badge-" + id);
+    if (!el) return;
+    el.classList.toggle("lb-active", xp >= threshold);
+    el.classList.toggle("lb-inactive", xp < threshold);
+  });
+}
+
+/* ── SCORE BAR CHART ── */
+function renderChart(scores) {
+  const wrap = document.getElementById("chart-wrap");
+  if (!scores.length) { wrap.innerHTML = '<div class="no-data">এখনো কোনো quiz দেওয়া হয়নি।</div>'; return; }
+
+  const W = 420, H = 160, PAD = 28, BAR_GAP = 6;
+  const n = scores.length;
+  const barW = Math.max(18, Math.floor((W - PAD * 2 - BAR_GAP * (n - 1)) / n));
+  const totalW = PAD * 2 + barW * n + BAR_GAP * (n - 1);
+
+  let svg = `<svg viewBox="0 0 ${totalW} ${H + 30}" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:260px;">
+    <defs>
+      <linearGradient id="bar-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#818cf8"/>
+        <stop offset="100%" stop-color="#2dd4bf" stop-opacity=".7"/>
+      </linearGradient>
+      <linearGradient id="bar-hi" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f5c842"/>
+        <stop offset="100%" stop-color="#fb923c" stop-opacity=".8"/>
+      </linearGradient>
+    </defs>`;
+
+  /* grid lines */
+  [0,25,50,75,100].forEach(v => {
+    const y = PAD + (100 - v) / 100 * H;
+    svg += `<line x1="${PAD}" y1="${y}" x2="${totalW - PAD}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
+    svg += `<text x="${PAD - 4}" y="${y + 4}" text-anchor="end" font-size="8" fill="#64748b" font-family="JetBrains Mono,monospace">${v}</text>`;
+  });
+
+  scores.forEach((s, i) => {
+    const pct  = Math.min(100, s.pct || 0);
+    const bH   = Math.max(4, (pct / 100) * H);
+    const x    = PAD + i * (barW + BAR_GAP);
+    const y    = PAD + H - bH;
+    const grad = pct >= 80 ? "bar-hi" : "bar-grad";
+    const dt   = s.createdAt?.toDate ? s.createdAt.toDate() : new Date();
+    const label = `${dt.getDate()}/${dt.getMonth() + 1}`;
+
+    svg += `<rect x="${x}" y="${y}" width="${barW}" height="${bH}" rx="4"
+      fill="url(#${grad})" opacity=".85"/>`;
+    svg += `<text x="${x + barW/2}" y="${y - 4}" text-anchor="middle"
+      font-size="8.5" fill="#94a3b8" font-family="JetBrains Mono,monospace">${pct}%</text>`;
+    svg += `<text x="${x + barW/2}" y="${PAD + H + 16}" text-anchor="middle"
+      font-size="8" fill="#64748b" font-family="JetBrains Mono,monospace">${label}</text>`;
+  });
+
+  svg += `</svg>`;
+  wrap.innerHTML = svg;
+
+  /* date range label */
+  if (scores.length) {
+    const first = scores[0].createdAt?.toDate ? scores[0].createdAt.toDate() : new Date();
+    const last  = scores[scores.length-1].createdAt?.toDate ? scores[scores.length-1].createdAt.toDate() : new Date();
+    document.getElementById("chart-range").textContent =
+      first.toLocaleDateString("bn-BD") + " – " + last.toLocaleDateString("bn-BD");
+  }
+}
+
+/* ── SCORE LIST ── */
+function renderScoreList(scores) {
+  const list = document.getElementById("score-list");
+  if (!scores.length) { list.innerHTML = '<div class="no-data">এখনো কোনো quiz দেওয়া হয়নি।</div>'; return; }
+  list.innerHTML = "";
+  [...scores].reverse().slice(0, 12).forEach(s => {
+    const pct    = s.pct || 0;
+    const cls    = pct >= 80 ? "pct-high" : pct >= 50 ? "pct-mid" : "pct-low";
+    const dotClr = pct >= 80 ? "#34d399" : pct >= 50 ? "#f5c842" : "#fb7185";
+    const dt     = s.createdAt?.toDate ? s.createdAt.toDate().toLocaleDateString("bn-BD") : "—";
+    const lvlMap = { beginner:"A1-A2", intermediate:"B1-B2", advanced:"C1-C2" };
+    const lvlLabel = lvlMap[s.level] || (s.level?.toUpperCase() || "—");
+    const el = document.createElement("div");
+    el.className = "score-item";
+    el.innerHTML = `
+      <div class="score-left">
+        <div class="score-dot" style="background:${dotClr};box-shadow:0 0 6px ${dotClr}44;"></div>
+        <div>
+          <div class="score-name">${s.correct||0}/${s.total||0} সঠিক</div>
+          <div class="score-meta">${lvlLabel} · ${dt}</div>
+        </div>
+      </div>
+      <div class="score-right">
+        <div class="score-pct ${cls}">${pct}%</div>
+        <div class="score-fraction">${s.correct||0} correct</div>
+      </div>`;
+    list.appendChild(el);
+  });
+}
+
+/* ── ACHIEVEMENTS ── */
+function renderAchievements(userData, scores) {
+  const grid = document.getElementById("achievements-grid");
+  grid.innerHTML = "";
+  ACHIEVEMENTS.forEach(a => {
+    const unlocked = a.cond(userData, scores);
+    const el = document.createElement("div");
+    el.className = "ach-item " + (unlocked ? "unlocked" : "locked");
+    el.innerHTML = `
+      ${unlocked ? '<div class="ach-badge">✓</div>' : ''}
+      <span class="ach-icon">${a.icon}</span>
+      <div class="ach-name">${a.name}</div>
+      <div class="ach-desc">${a.desc}</div>`;
+    grid.appendChild(el);
+  });
+}
+
+/* ── CALENDAR ── */
+let calYear  = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+let activityDates = new Set(); // "YYYY-MM-DD"
+
+function renderCalendar() {
+  const days   = ["S","M","T","W","T","F","S"];
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const bn_months = ["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
+
+  document.getElementById("cal-month-label").textContent = `${bn_months[calMonth]} ${calYear}`;
+
+  const grid      = document.getElementById("cal-grid");
+  const firstDay  = new Date(calYear, calMonth, 1).getDay();
+  const daysInMon = new Date(calYear, calMonth + 1, 0).getDate();
+  const today     = new Date();
+
+  grid.innerHTML = days.map(d => `<div class="cal-day-label">${d}</div>`).join("");
+
+  for (let i = 0; i < firstDay; i++) {
+    grid.innerHTML += `<div class="cal-day empty"></div>`;
+  }
+
+  for (let d = 1; d <= daysInMon; d++) {
+    const dateStr  = `${calYear}-${String(calMonth+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const isToday  = today.getFullYear()===calYear && today.getMonth()===calMonth && today.getDate()===d;
+    const hasAct   = activityDates.has(dateStr);
+    let cls = "cal-day";
+    if (isToday)  cls += " today";
+    if (hasAct)   cls += " has-activity";
+    grid.innerHTML += `<div class="${cls}">${d}</div>`;
+  }
+}
+
+document.getElementById("cal-prev").onclick = () => {
+  calMonth--;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  renderCalendar();
+};
+document.getElementById("cal-next").onclick = () => {
+  calMonth++;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+};
+
+/* ── AVERAGE ── */
+function calcAvg(scores) {
+  if (!scores.length) return 0;
+  return Math.round(scores.reduce((a, s) => a + (s.pct || 0), 0) / scores.length);
+}
+
+/* ── MAIN ── */
+requireAuth(async user => {
+  /* topbar */
+  const snap  = await getDoc(doc(db, "users", user.uid));
+  const uData = snap.exists() ? snap.data() : {};
+  const name  = uData.displayName || user.displayName || "Learner";
+  const photo = uData.photoURL    || user.photoURL    || "";
+  const xp      = uData.xp           || 0;
+  const streak  = uData.streak       || 0;
+  const correct = uData.totalCorrect || 0;
+  const sessions= uData.sessions     || 0;
+  const best    = uData.bestScore    || 0;
+
+  document.getElementById("nav-name").textContent = name;
+  const av = document.getElementById("nav-avatar");
+  if (photo) av.innerHTML = `<img src="${safeUrl(photo)}">`;
+  else av.textContent = name[0]?.toUpperCase() || "?";
+
+  /* hero */
+  document.getElementById("h-xp").textContent      = xp.toLocaleString();
+  document.getElementById("h-streak").textContent  = streak + "🔥";
+  document.getElementById("h-sessions").textContent = sessions;
+
+  /* stat cards */
+  document.getElementById("s-xp").textContent      = xp.toLocaleString();
+  document.getElementById("s-streak").textContent  = streak;
+  document.getElementById("s-correct").textContent = correct.toLocaleString();
+  document.getElementById("s-sessions").textContent= sessions;
+  document.getElementById("s-best").textContent    = best + "%";
+
+  /* xp bar */
+  updateXPBar(xp);
+
+  /* scores from Firestore */
+  let scores = [];
+  try {
+    const sq = query(
+      collection(db, "users", user.uid, "scores"),
+      orderBy("createdAt", "asc"),
+      limit(50)
+    );
+    const ssnap = await getDocs(sq);
+    ssnap.forEach(d => scores.push(d.data()));
+
+    /* average */
+    document.getElementById("s-avg").textContent = calcAvg(scores) + "%";
+
+    /* activity dates for calendar */
+    scores.forEach(s => {
+      if (s.createdAt?.toDate) {
+        const d = s.createdAt.toDate();
+        const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+        activityDates.add(key);
+      }
+    });
+
+    /* chart: last 10 */
+    renderChart(scores.slice(-10));
+    renderScoreList(scores);
+    renderAchievements(uData, scores);
+    renderCalendar();
+
+  } catch(e) {
+    console.error(e);
+    document.getElementById("s-avg").textContent = "—";
+    renderCalendar();
+    renderAchievements(uData, []);
+  }
+
+  /* logout */
+  document.getElementById("btn-logout").onclick = async () => {
+    await signOut(auth);
+    window.location.href = "index.html";
+  };
+});
+</script>
+
+</body>
+</html>

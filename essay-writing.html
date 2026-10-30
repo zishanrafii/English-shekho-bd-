@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Essay Writing — Writing Lab — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/writing-lab.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text"><h1>English Shekho</h1><p>ENGLISH LEARNING PLATFORM · A1 TO C2</p></div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" data-action="go-profile">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div class="breadcrumb">
+    <a href="writing-lab.html">✍️ Writing Lab</a>
+    <span class="bc-sep">›</span><span>Essay Writing</span>
+  </div>
+  <div class="task-tabs" id="task-tabs"></div>
+  <div id="prompt"></div>
+  <div class="editor-layout">
+    <div class="hints-panel">
+      <div class="hints-head">📐 Essay Structure</div>
+      <div class="hints-body" id="hints"></div>
+    </div>
+    <div class="editor-panel">
+      <div class="editor-toolbar">
+          <button class="etool-btn" data-action="bold"><b>B</b></button>
+          <button class="etool-btn" data-action="italic"><i>I</i></button>
+          <button class="etool-btn" data-action="quote">❝❞</button>
+          <div class="etool-sep"></div>
+          <button class="etool-btn" data-action="clear">🗑 Clear</button>
+        <div class="word-counter">Words: <span id="word-count">0</span></div>
+      </div>
+      <textarea class="editor-textarea" id="main-editor" placeholder="এখানে essay লিখুন..." style="min-height:340px;"></textarea>
+      <div class="editor-footer">
+        <div class="ef-left">লক্ষ্য: ১৫০–৩০০ শব্দ
+          <label class="ef-public"><input type="checkbox" id="public-checkbox"> 🌍 Community-তে public করো</label>
+        </div>
+        <div class="ef-actions">
+          <button class="btn-save" data-action="save">💾 Save Draft</button>
+          <button class="btn-check" data-action="check">🤖 Writing Check</button>
+          <button class="btn-submit" data-action="submit">Submit ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="feedback-panel" id="feedback-panel"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { setupCommonPage, initEditor, setupEditorToolbar } from "./js/writing-common.js";
+
+/* ══════════════════════════════════════
+   DATA — Essay Writing Tasks
+══════════════════════════════════════ */
+const TASKS = [
+  {id:"e1", label:"Social Media", level:"B1", words:"150–250", xp:150,
+   prompt:"Social media-র সুবিধা ও অসুবিধা নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> Social media কী এবং এর প্রভাব সম্পর্কে সাধারণ ধারণা দিন।"},
+     {icon:"✅", text:"<b>Body (Advantages):</b> Communication, information sharing, business।"},
+     {icon:"❌", text:"<b>Body (Disadvantages):</b> Addiction, privacy, misinformation।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> Balanced ব্যবহারের পরামর্শ দিন।"},
+   ],
+   usefulWords:["platform","connectivity","addiction","misinformation","privacy","interact","influence","balance"]},
+  {id:"e2", label:"Climate Change", level:"B2", words:"200–300", xp:200,
+   prompt:"Climate change এবং এর সমাধান নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"🌍", text:"<b>Introduction:</b> Climate change-এর সংজ্ঞা ও বর্তমান পরিস্থিতি।"},
+     {icon:"⚡", text:"<b>Causes:</b> Fossil fuels, deforestation, industrialization।"},
+     {icon:"💡", text:"<b>Solutions:</b> Renewable energy, conservation, policy change।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> সম্মিলিত প্রচেষ্টার গুরুত্ব।"},
+   ],
+   usefulWords:["greenhouse","emissions","renewable","sustainable","deforestation","catastrophic","mitigation","conservation"]},
+  {id:"e3", label:"Advantages and Disadvantages of Online Education", level:"B1", words:"180–250", xp:175,
+   prompt:"Online education-এর সুবিধা ও অসুবিধা নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> Online education কী এবং কেন জনপ্রিয় হয়ে উঠছে।"},
+     {icon:"✅", text:"<b>Advantages:</b> Flexibility, accessibility, cost-effectiveness।"},
+     {icon:"❌", text:"<b>Disadvantages:</b> Lack of interaction, technical issues, self-discipline।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> Traditional ও online education-এর balance নিয়ে মতামত দিন।"},
+   ],
+   usefulWords:["flexibility","accessibility","interaction","discipline","technology","platform","engagement","drawback"]},
+  {id:"e4", label:"The Role of Youth in Nation Building", level:"B2", words:"200–300", xp:200,
+   prompt:"দেশ গঠনে যুবসমাজের ভূমিকা নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> যুবসমাজ কেন একটি দেশের ভবিষ্যৎ তা তুলে ধরুন।"},
+     {icon:"💪", text:"<b>Body:</b> Education, employment, leadership, social work-এ ভূমিকা।"},
+     {icon:"⚠️", text:"<b>Challenges:</b> Unemployment, lack of opportunities, distractions।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> যুবসমাজকে সঠিক পথে guide করার গুরুত্ব।"},
+   ],
+   usefulWords:["potential","responsibility","leadership","innovation","employment","contribute","empower","progress"]},
+  {id:"e5", label:"Should Mobile Phones Be Allowed in Schools?", level:"B1", words:"180–250", xp:175,
+   prompt:"School-এ mobile phone ব্যবহার অনুমোদিত হওয়া উচিত কিনা তার পক্ষে-বিপক্ষে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> বিষয়টি সংক্ষেপে তুলে ধরুন এবং আপনার মূল মতামত উল্লেখ করুন।"},
+     {icon:"✅", text:"<b>For:</b> Emergency contact, learning apps, quick research।"},
+     {icon:"❌", text:"<b>Against:</b> Distraction, cheating, social isolation।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> একটি balanced policy-র পরামর্শ দিন (যেমন: শুধু break time-এ ব্যবহার)।"},
+   ],
+   usefulWords:["distraction","emergency","policy","restriction","beneficial","concentration","supervision","appropriate"]},
+  {id:"e6", label:"The Impact of Technology on Education", level:"B2", words:"200–300", xp:200,
+   prompt:"শিক্ষা ক্ষেত্রে প্রযুক্তির প্রভাব নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> Education-এ technology-র ব্যবহার কীভাবে বেড়েছে তা উল্লেখ করুন।"},
+     {icon:"✅", text:"<b>Positive impact:</b> Interactive learning, access to resources, personalized pace।"},
+     {icon:"❌", text:"<b>Negative impact:</b> Screen time, digital divide, reduced face-to-face interaction।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> Technology-কে কীভাবে কার্যকরভাবে ব্যবহার করা যায় তার পরামর্শ দিন।"},
+   ],
+   usefulWords:["interactive","resources","digital divide","personalized","engagement","access","screen time","efficient"]},
+  {id:"e7", label:"Should Students Do Part-Time Jobs?", level:"B1", words:"180–250", xp:175,
+   prompt:"ছাত্রছাত্রীদের পার্ট-টাইম job করা উচিত কিনা তার পক্ষে-বিপক্ষে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> বিষয়টি সংক্ষেপে তুলে ধরুন।"},
+     {icon:"✅", text:"<b>For:</b> Financial independence, work experience, time management skills।"},
+     {icon:"❌", text:"<b>Against:</b> Studies-এ negative effect, কম বিশ্রাম, stress।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> Balance বজায় রাখার উপায় নিয়ে মতামত দিন।"},
+   ],
+   usefulWords:["independence","responsibility","balance","workload","experience","prioritize","financial","manage time"]},
+  {id:"e8", label:"Environmental Pollution and Its Solutions", level:"B2", words:"200–300", xp:200,
+   prompt:"পরিবেশ দূষণ এবং এর প্রতিকার নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> পরিবেশ দূষণ কী এবং এর প্রধান ধরনগুলো (air, water, plastic) উল্লেখ করুন।"},
+     {icon:"⚡", text:"<b>Causes:</b> Industrial waste, vehicle emissions, plastic use, deforestation।"},
+     {icon:"💡", text:"<b>Solutions:</b> Recycling, public awareness, government regulations, green energy।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> ব্যক্তিগত ও সামাজিক দায়িত্বের উপর জোর দিন।"},
+   ],
+   usefulWords:["pollutant","ecosystem","recycling","awareness","regulation","contamination","hazardous","preserve"]},
+  {id:"e9", label:"The Importance of Education for Women", level:"B2", words:"200–300", xp:200,
+   prompt:"নারী শিক্ষার গুরুত্ব নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> নারী শিক্ষার বর্তমান অবস্থা ও গুরুত্ব সংক্ষেপে তুলে ধরুন।"},
+     {icon:"💪", text:"<b>Body:</b> পরিবার, সমাজ ও অর্থনীতিতে শিক্ষিত নারীর প্রভাব।"},
+     {icon:"⚠️", text:"<b>Challenges:</b> বাল্যবিবাহ, সামাজিক বাধা, দারিদ্র্য।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> নারী শিক্ষা নিশ্চিত করতে করণীয় নিয়ে মতামত দিন।"},
+   ],
+   usefulWords:["empowerment","literacy","equality","opportunity","barrier","awareness","development","contribute"]},
+  {id:"e10", label:"Advantages and Disadvantages of Living in a City", level:"B1", words:"180–250", xp:175,
+   prompt:"শহরে বসবাসের সুবিধা ও অসুবিধা নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> শহরে বসবাসের প্রবণতা সংক্ষেপে উল্লেখ করুন।"},
+     {icon:"✅", text:"<b>Advantages:</b> চাকরি, শিক্ষা, স্বাস্থ্যসেবা, entertainment-এর সুযোগ।"},
+     {icon:"❌", text:"<b>Disadvantages:</b> যানজট, দূষণ, উচ্চ ব্যয়, ব্যস্ত জীবন।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> শহর ও গ্রামের balance নিয়ে মতামত দিন।"},
+   ],
+   usefulWords:["urbanization","congestion","facilities","cost of living","pollution","opportunity","lifestyle","convenience"]},
+  {id:"e11", label:"Should Homework Be Banned?", level:"B1", words:"180–250", xp:175,
+   prompt:"School-এ homework বন্ধ করা উচিত কিনা তার পক্ষে-বিপক্ষে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> বিষয়টি সংক্ষেপে তুলে ধরুন ও আপনার মতামত উল্লেখ করুন।"},
+     {icon:"✅", text:"<b>For (ban):</b> মানসিক চাপ কমে, free time বাড়ে, family time বাড়ে।"},
+     {icon:"❌", text:"<b>Against (ban):</b> Practice ও revision-এর জন্য জরুরি, discipline তৈরি করে।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> একটি balanced homework policy-র পরামর্শ দিন।"},
+   ],
+   usefulWords:["workload","stress","revision","balance","productive","pressure","leisure","reinforce"]},
+  {id:"e12", label:"The Impact of Tourism on Bangladesh's Economy", level:"B2", words:"200–300", xp:200,
+   prompt:"বাংলাদেশের অর্থনীতিতে পর্যটনের প্রভাব নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> বাংলাদেশের পর্যটন সম্ভাবনা (Cox's Bazar, Sundarbans) সংক্ষেপে উল্লেখ করুন।"},
+     {icon:"✅", text:"<b>Positive impact:</b> কর্মসংস্থান, বৈদেশিক মুদ্রা, infrastructure উন্নয়ন।"},
+     {icon:"⚠️", text:"<b>Challenges:</b> Infrastructure-এর অভাব, পরিবেশ দূষণ, প্রচারের অভাব।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> পর্যটন শিল্প উন্নয়নের জন্য সুপারিশ দিন।"},
+   ],
+   usefulWords:["potential","revenue","infrastructure","employment","heritage","promote","sustainable","attraction"]},
+  {id:"e13", label:"The Effects of Junk Food on Health", level:"B1", words:"180–250", xp:175,
+   prompt:"Junk food স্বাস্থ্যের উপর কী প্রভাব ফেলে তা নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> Junk food কী এবং এর জনপ্রিয়তা সম্পর্কে বলুন।"},
+     {icon:"⚠️", text:"<b>Health effects:</b> Obesity, heart disease, low energy।"},
+     {icon:"💡", text:"<b>Causes:</b> ব্যস্ত জীবনযাত্রা, advertising, স্বাদ।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> Healthy খাদ্যাভ্যাসের পরামর্শ দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["obesity","nutrition","unhealthy","cravings","balanced diet","processed","calories","awareness"]},
+  {id:"e14", label:"Globalization: Boon or Bane?", level:"B2", words:"200–300", xp:200,
+   prompt:"Globalization আমাদের জন্য আশীর্বাদ নাকি অভিশাপ তা নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> Globalization-এর সংজ্ঞা ও বিস্তার সম্পর্কে বলুন।"},
+     {icon:"✅", text:"<b>Boon:</b> Trade, technology exchange, cultural exchange।"},
+     {icon:"❌", text:"<b>Bane:</b> স্থানীয় culture ও industry-র উপর negative প্রভাব, inequality।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> একটি balanced মতামত দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["interconnected","trade","culture","inequality","exchange","competition","economy","influence"]},
+  {id:"e15", label:"The Importance of Time Management for Students", level:"B1", words:"180–250", xp:175,
+   prompt:"ছাত্রছাত্রীদের জন্য সময় ব্যবস্থাপনার গুরুত্ব নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> Time management কী এবং students-এর জন্য কেন গুরুত্বপূর্ণ।"},
+     {icon:"📋", text:"<b>Benefits:</b> পড়া, খেলাধুলা ও বিশ্রামের balance।"},
+     {icon:"⚠️", text:"<b>Without it:</b> Stress, low grades, procrastination।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> কিছু practical tips দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["schedule","prioritize","procrastination","balance","productivity","discipline","goals","efficient"]},
+  {id:"e16", label:"Child Labor: Causes and Solutions", level:"B2", words:"200–300", xp:200,
+   prompt:"শিশুশ্রমের কারণ ও সমাধান নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> শিশুশ্রম কী এবং এর বর্তমান অবস্থা সংক্ষেপে বলুন।"},
+     {icon:"⚡", text:"<b>Causes:</b> দারিদ্র্য, শিক্ষার অভাব, পারিবারিক সমস্যা।"},
+     {icon:"💡", text:"<b>Solutions:</b> Free education, awareness, law enforcement।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> সম্মিলিত প্রচেষ্টার গুরুত্ব নিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["poverty","exploitation","awareness","enforcement","education","rights","vulnerable","eradicate"]},
+  {id:"e17", label:"The Advantages and Disadvantages of Working from Home", level:"B1", words:"180–250", xp:175,
+   prompt:"ঘরে বসে কাজ করার (work from home) সুবিধা ও অসুবিধা নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> Work from home ধারণাটি সংক্ষেপে তুলে ধরুন।"},
+     {icon:"✅", text:"<b>Advantages:</b> Flexibility, কম যাতায়াত খরচ, family time।"},
+     {icon:"❌", text:"<b>Disadvantages:</b> Distraction, isolation, work-life balance-এর সমস্যা।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> Hybrid model নিয়ে মতামত দিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["flexibility","productivity","isolation","distraction","commute","work-life balance","remote","discipline"]},
+  {id:"e18", label:"The Importance of Protecting Wildlife", level:"B1", words:"180–250", xp:175,
+   prompt:"বন্যপ্রাণী রক্ষার গুরুত্ব নিয়ে একটি essay লিখুন।",
+   hints:[
+     {icon:"📌", text:"<b>Introduction:</b> জীববৈচিত্র্য ও বন্যপ্রাণীর গুরুত্ব সংক্ষেপে বলুন।"},
+     {icon:"⚠️", text:"<b>Threats:</b> Deforestation, poaching, climate change।"},
+     {icon:"💡", text:"<b>Solutions:</b> Protected areas, law enforcement, awareness campaigns।"},
+     {icon:"🎯", text:"<b>Conclusion:</b> প্রতিটি মানুষের দায়িত্ব নিয়ে শেষ করুন।"},
+   ],
+   usefulWords:["biodiversity","endangered","habitat","poaching","conservation","ecosystem","extinction","preserve"]},
+];
+
+/* ══════════════════════════════════════
+   PAGE INIT
+══════════════════════════════════════ */
+initEditor(TASKS);
+setupEditorToolbar("essay");
+setupCommonPage();
+
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  if(el.dataset.action === "go-profile") window.location.href = "profile.html";
+});
+</script>
+</body>
+</html>

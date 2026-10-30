@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing Lab — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/writing-lab.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text"><h1>English Shekho</h1><p>ENGLISH LEARNING PLATFORM · A1 TO C2</p></div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="speaking.html" class="nav-link">Speaking</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="chat.html" class="nav-link">Chat</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" data-action="go-profile">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div><div class="hero-orb1"></div><div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">✍️ Writing Lab</div>
+        <h2>লিখতে শিখুন <span>Fluently</span> ✍️</h2>
+        <p class="hero-sub">Sentence builder থেকে essay writing পর্যন্ত — ধাপে ধাপে English লেখা শিখুন। AI feedback দিয়ে নিজেকে আরও উন্নত করুন।</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-v" id="h-written">0</div><div class="hstat-l">Written</div></div>
+        <div class="hstat"><div class="hstat-v" id="h-words">0</div><div class="hstat-l">Words</div></div>
+        <div class="hstat"><div class="hstat-v" id="h-xp">0</div><div class="hstat-l">XP Earned</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mm-card"></div>
+
+  <!-- MODULE CARDS -->
+  <div class="section-title">✍️ Writing Modules</div>
+  <div class="module-grid">
+    <a class="module-card" href="sentence-builder.html">
+      <div class="mc-accent ca-teal"></div>
+      <div class="mc-icon">🔤</div>
+      <div class="mc-title">Sentence Builder</div>
+      <div class="mc-desc">Words সাজিয়ে সঠিক sentence তৈরি করুন। Grammar rules practice করুন।</div>
+      <div class="mc-progress"><div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-sentence" style="width:0%;background:linear-gradient(90deg,#2dd4bf,#06b6d4);"></div></div><div class="mc-prog-label" id="prog-sentence-label">0 submissions</div></div>
+    </a>
+    <a class="module-card" href="paragraph-writing.html">
+      <div class="mc-accent ca-gold"></div>
+      <div class="mc-icon">📝</div>
+      <div class="mc-title">Paragraph Writing</div>
+      <div class="mc-desc">Topic দেওয়া হবে, ৫–৮ বাক্যের একটি paragraph লিখুন।</div>
+      <span class="mc-badge">Popular</span>
+      <div class="mc-progress"><div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-paragraph" style="width:0%;background:linear-gradient(90deg,#f5c842,#fbbf24);"></div></div><div class="mc-prog-label" id="prog-paragraph-label">0 submissions</div></div>
+    </a>
+    <a class="module-card" href="essay-writing.html">
+      <div class="mc-accent ca-indigo"></div>
+      <div class="mc-icon">📄</div>
+      <div class="mc-title">Essay Writing</div>
+      <div class="mc-desc">Introduction, body এবং conclusion সহ পূর্ণ essay লিখুন।</div>
+      <div class="mc-progress"><div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-essay" style="width:0%;background:linear-gradient(90deg,#818cf8,#6366f1);"></div></div><div class="mc-prog-label" id="prog-essay-label">0 submissions</div></div>
+    </a>
+    <a class="module-card" href="email-writing.html">
+      <div class="mc-accent ca-rose"></div>
+      <div class="mc-icon">📧</div>
+      <div class="mc-title">Email Writing</div>
+      <div class="mc-desc">Formal ও informal email লিখুন। Professional tone শিখুন।</div>
+      <span class="mc-badge">New</span>
+      <div class="mc-progress"><div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-email" style="width:0%;background:linear-gradient(90deg,#fb7185,#f43f5e);"></div></div><div class="mc-prog-label" id="prog-email-label">0 submissions</div></div>
+    </a>
+    <a class="module-card" href="story-writing.html">
+      <div class="mc-accent ca-emerald"></div>
+      <div class="mc-icon">📖</div>
+      <div class="mc-title">Story Writing</div>
+      <div class="mc-desc">Creative story লিখুন। Imagination এবং vocabulary ব্যবহার করুন।</div>
+      <div class="mc-progress"><div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-story" style="width:0%;background:linear-gradient(90deg,#34d399,#10b981);"></div></div><div class="mc-prog-label" id="prog-story-label">0 submissions</div></div>
+    </a>
+  </div>
+
+  <!-- WRITING CHALLENGES -->
+  <div class="section-title">⚡ Writing Challenges</div>
+  <div class="challenge-grid" id="challenge-grid"></div>
+
+  <!-- WRITING HISTORY -->
+  <div class="section-title">🕐 Writing History
+    <a href="community-writings.html" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:700;text-transform:none;letter-spacing:normal;font-family:'Outfit',sans-serif;white-space:nowrap;">🌍 Community Writings →</a>
+  </div>
+  <div class="history-list" id="history-list"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { setupCommonPage, toast } from "./js/writing-common.js";
+import {
+  db, doc, getDoc,
+  collection, getDocs, query, orderBy, limit, where
+} from "./js/firebase-config.js";
+import { summarize } from "./writing/mistakes.js";
+
+/* ══════════════════════════════════════
+   DATA — challenges + recent history style map
+══════════════════════════════════════ */
+const CHALLENGES = [
+  {icon:"⚡", title:"Daily Writing Sprint", desc:"১০ মিনিটে যত পারো লিখো। Topic: My Dream Job", xp:"+50 XP", diff:"easy", deadline:"Today", color:"#f5c842", border:"rgba(245,200,66,.25)"},
+  {icon:"🏆", title:"Weekly Essay Challenge", desc:"Climate change নিয়ে ২০০ শব্দের essay জমা দাও।", xp:"+150 XP", diff:"hard", deadline:"3 days", color:"#818cf8", border:"rgba(129,140,248,.25)"},
+  {icon:"📧", title:"Email Pro", desc:"৫টি different type-এর email সফলভাবে লিখুন।", xp:"+200 XP", diff:"medium", deadline:"7 days", color:"#2dd4bf", border:"rgba(45,212,191,.25)"},
+  {icon:"📖", title:"Storyteller Badge", desc:"একটি complete short story লিখুন ১৫০+ শব্দে।", xp:"+125 XP", diff:"medium", deadline:"5 days", color:"#34d399", border:"rgba(52,211,153,.25)"},
+];
+
+const TYPE_STYLE = {
+  paragraph:{icon:"📝",color:"rgba(245,200,66,.1)",border:"rgba(245,200,66,.25)",text:"#f5c842"},
+  essay:    {icon:"📄",color:"rgba(129,140,248,.1)",border:"rgba(129,140,248,.25)",text:"#818cf8"},
+  email:    {icon:"📧",color:"rgba(45,212,191,.1)",border:"rgba(45,212,191,.25)",text:"#2dd4bf"},
+  story:    {icon:"📖",color:"rgba(52,211,153,.1)",border:"rgba(52,211,153,.25)",text:"#34d399"},
+  sentence: {icon:"🔤",color:"rgba(251,146,60,.1)",border:"rgba(251,146,60,.25)",text:"#fb923c"},
+};
+
+let totalWritten = 0, totalWords = 0, totalXP = 0;
+
+function updateStats(){
+  document.getElementById("h-written").textContent = totalWritten;
+  document.getElementById("h-words").textContent   = totalWords;
+  document.getElementById("h-xp").textContent      = totalXP;
+}
+
+function buildChallenges(){
+  document.getElementById("challenge-grid").innerHTML = CHALLENGES.map(c=>`
+    <div class="challenge-card" style="border-color:${c.border};" data-action="start-challenge">
+      <div class="cc-top">
+        <span class="cc-icon">${c.icon}</span>
+        <span class="cc-xp">${c.xp}</span>
+      </div>
+      <div class="cc-title">${c.title}</div>
+      <div class="cc-desc">${c.desc}</div>
+      <div class="cc-footer">
+        <span class="cc-diff ${c.diff==='easy'?'diff-easy':c.diff==='medium'?'diff-medium':'diff-hard'}">${c.diff}</span>
+        <span class="cc-deadline">⏰ ${c.deadline}</span>
+      </div>
+    </div>`).join("");
+}
+
+function fmtAgo(ts){
+  if(!ts) return "";
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  const diff = Math.floor((Date.now()-d)/1000);
+  if(diff<60) return "এইমাত্র";
+  if(diff<3600) return Math.floor(diff/60)+" মিনিট আগে";
+  if(diff<86400) return Math.floor(diff/3600)+" ঘণ্টা আগে";
+  return Math.floor(diff/86400)+" দিন আগে";
+}
+
+async function loadHistory(){
+  if(!window._currentUser) return;
+  const el = document.getElementById("history-list");
+  el.innerHTML = `<div style="color:var(--muted);font-size:13px;text-align:center;padding:1rem;font-family:'Noto Sans Bengali',sans-serif;">Loading...</div>`;
+  try {
+    const snap = await getDocs(query(
+      collection(db,"writings"),
+      where("uid","==",window._currentUser.uid),
+      orderBy("submittedAt","desc"),
+      limit(10)
+    ));
+    if(snap.empty){ el.innerHTML=`<div style="color:var(--muted);font-size:13px;text-align:center;padding:1.5rem;font-family:'Noto Sans Bengali',sans-serif;">এখনো কোনো writing submit হয়নি।</div>`; return; }
+    el.innerHTML = snap.docs.map(d=>{
+      const h = d.data();
+      const s = TYPE_STYLE[h.type]||TYPE_STYLE.paragraph;
+      return `<div class="history-item">
+        <div class="hi-icon" style="background:${s.color};border:1px solid ${s.border};">${s.icon}</div>
+        <div class="hi-info">
+          <div class="hi-title">${h.taskLabel||h.type}</div>
+          <div class="hi-meta">${fmtAgo(h.submittedAt)} · ${h.wordCount||0} words · <span class="hi-type" style="background:${s.color};border:1px solid ${s.border};color:${s.text};">${h.type}</span></div>
+        </div>
+        <div class="hi-score" style="color:var(--gold);">+${h.xpEarned||0} XP</div>
+      </div>`;
+    }).join("");
+  } catch(e){ el.innerHTML=`<div style="color:var(--muted);font-size:13px;padding:1rem;">Could not load history.</div>`; }
+}
+
+async function loadModuleProgress(){
+  if(!window._currentUser) return;
+  const types = ["sentence","paragraph","essay","email","story"];
+  const maxMap = {sentence:25, paragraph:20, essay:18, email:19, story:18};
+  try {
+    const snap = await getDocs(query(
+      collection(db,"writings"),
+      where("uid","==",window._currentUser.uid)
+    ));
+    const counts = {sentence:0,paragraph:0,essay:0,email:0,story:0};
+    snap.forEach(d=>{ const t=d.data().type; if(counts[t]!==undefined) counts[t]++; });
+    types.forEach(type=>{
+      const count = counts[type];
+      const max   = maxMap[type];
+      const pct   = Math.min(100, Math.round(count/max*100));
+      const barEl = document.getElementById("prog-"+type);
+      const lblEl = document.getElementById("prog-"+type+"-label");
+      if(barEl) barEl.style.width = pct+"%";
+      if(lblEl) lblEl.textContent = `${count} submission${count!==1?'s':''}`;
+    });
+  } catch(e){ console.warn("Module progress load failed:",e); }
+}
+
+/* ── INIT ── */
+buildChallenges();
+updateStats();
+
+setupCommonPage(async (user) => {
+  // Load user stats
+  try {
+    const snap = await getDoc(doc(db,"users",user.uid));
+    if(snap.exists()){
+      const d = snap.data();
+      totalWritten = d.writingCount || 0;
+      totalWords   = d.totalWords   || 0;
+      totalXP      = d.xp           || 0;
+      updateStats();
+    }
+  } catch(e){ console.warn("Stats load failed",e); }
+
+  /* Personal Mistake Memory summary: "Articles 7 · Prepositions 5 · Tenses 3" (DOM only) */
+  try {
+    const ms = await getDocs(query(collection(db,"users",user.uid,"writingMistakes"), where("fixed","==",false), limit(100)));
+    const sum = summarize(ms.docs.map(d => d.data()));
+    const host = document.getElementById("mm-card");
+    if (host && sum.length) {
+      const bn = n => String(n).replace(/\d/g, x => "০১২৩৪৫৬৭৮৯"[x]);
+      const box = document.createElement("div"); box.className = "es-card"; box.style.cssText = "margin:0 0 18px;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap";
+      const info = document.createElement("div");
+      const t = document.createElement("div"); t.style.cssText = "font-weight:800;margin-bottom:6px"; t.textContent = "🧠 আপনার ভুলের স্মৃতি";
+      const chips = document.createElement("div"); chips.style.cssText = "display:flex;gap:6px;flex-wrap:wrap";
+      sum.slice(0,5).forEach(x => { const c = document.createElement("span"); c.className = "es-badge"; c.textContent = `${x.label} · ${bn(x.count)}`; chips.appendChild(c); });
+      info.append(t, chips);
+      const a = document.createElement("a"); a.className = "es-btn es-btn--sm"; a.href = "writing-review.html"; a.textContent = "এখন অনুশীলন করুন →";
+      box.append(info, a); host.textContent = ""; host.appendChild(box);
+    }
+  } catch(e){ console.warn("mistake summary failed", e); }
+
+  await loadHistory();
+  await loadModuleProgress();
+});
+
+/* go-profile click */
+document.addEventListener("click", function(e){
+  const el = e.target.closest("[data-action]");
+  if(!el) return;
+  if(el.dataset.action === "go-profile") window.location.href = "profile.html";
+  if(el.dataset.action === "start-challenge") toast("Challenge started! 🚀");
+});
+</script>
+</body>
+</html>

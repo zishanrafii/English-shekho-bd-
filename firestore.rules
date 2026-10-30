@@ -1,0 +1,583 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ───── ADMIN CHECK ─────
+    // Hardcoded admin email list. Admin hole sob jaygay extra permission pabe.
+    function isAdmin() {
+      return request.auth != null &&
+        (request.auth.token.admin == true ||
+         request.auth.token.email in [
+           "zishanrafii@gmail.com"
+         ]);
+    }
+
+    // Anonymous (guest) Firebase accounts are signed in but NOT registered users.
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isRegistered() {
+      return request.auth != null &&
+        request.auth.token.firebase.sign_in_provider != 'anonymous';
+    }
+    function isSelf(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+    // Fields a user must never write on their own profile document.
+    function safePhoto() {
+      return !('photoURL' in request.resource.data) ||
+        request.resource.data.photoURL == '' ||
+        (request.resource.data.photoURL is string &&
+         request.resource.data.photoURL.matches('^https://[^"\'<>\\\\\\s]{1,500}$'));
+    }
+    // email on a profile must match the signed-in account's own verified email
+    function emailOk() {
+      return !('email' in request.resource.data) ||
+        request.resource.data.email == request.auth.token.get('email', '');
+    }
+    function emailUnchangedOrOwn() {
+      return !request.resource.data.diff(resource.data).affectedKeys().hasAny(['email']) ||
+        request.resource.data.email == request.auth.token.get('email', '');
+    }
+    // Learning DNA (onboarding) — strict shape so the profile cannot be abused as free storage
+    function profileOk() {
+      return !('learningProfile' in request.resource.data) ||
+        (request.resource.data.learningProfile is map &&
+         request.resource.data.learningProfile.keys().hasOnly(
+           ['version','ageGroup','level','levelPending','reasons','examTarget','skills',
+            'dailyMinutes','studyTime','style','completedAt','levelSource']) &&
+         request.resource.data.learningProfile.get('dailyMinutes', 10) is int &&
+         request.resource.data.learningProfile.get('dailyMinutes', 10) >= 5 &&
+         request.resource.data.learningProfile.get('dailyMinutes', 10) <= 180 &&
+         request.resource.data.learningProfile.get('reasons', []).size() <= 8 &&
+         request.resource.data.learningProfile.get('skills', []).size() <= 8);
+    }
+    // Placement result written by the "Find My Level" page
+    function placementOk() {
+      return !('placement' in request.resource.data) ||
+        (request.resource.data.placement is map &&
+         request.resource.data.placement.keys().hasOnly(
+           ['version','recommended','chosen','answered','correct','confidence','takenAt']) &&
+         request.resource.data.placement.get('recommended', 'A1') in ['A1','A2','B1','B2','C1','C2'] &&
+         request.resource.data.placement.get('chosen', 'A1') in ['A1','A2','B1','B2','C1','C2']);
+    }
+    // Daily plan bookkeeping written from the dashboard
+    function planOk() {
+      return (!('planProgress' in request.resource.data) ||
+        (request.resource.data.planProgress is map &&
+         request.resource.data.planProgress.keys().hasOnly(['date','done','skills']) &&
+         request.resource.data.planProgress.get('date', '') is string &&
+         request.resource.data.planProgress.get('date', '').size() <= 10 &&
+         request.resource.data.planProgress.get('done', []).size() <= 12 &&
+         request.resource.data.planProgress.get('skills', []).size() <= 12)) &&
+        (!('planHistory' in request.resource.data) ||
+        (request.resource.data.planHistory is map &&
+         request.resource.data.planHistory.keys().hasOnly(
+           ['vocabulary','listening','grammar','reading','quiz','speaking','writing'])));
+    }
+    // Smart-review counters kept on the profile (updated by the vocab review page)
+    function srsMetaOk() {
+      return !('srsMeta' in request.resource.data) ||
+        (request.resource.data.srsMeta is map &&
+         request.resource.data.srsMeta.keys().hasOnly(['newDate','newCount','words','mastered','syncDate']) &&
+         request.resource.data.srsMeta.get('newCount', 0) is int &&
+         request.resource.data.srsMeta.get('newCount', 0) >= 0 &&
+         request.resource.data.srsMeta.get('newCount', 0) <= 100 &&
+         request.resource.data.srsMeta.get('words', 0) is int &&
+         request.resource.data.srsMeta.get('words', 0) >= 0 &&
+         request.resource.data.srsMeta.get('words', 0) <= 5000 &&
+         request.resource.data.srsMeta.get('mastered', 0) is int &&
+         request.resource.data.srsMeta.get('mastered', 0) >= 0 &&
+         request.resource.data.srsMeta.get('mastered', 0) <= 5000);
+    }
+    // Grammar progress on the profile: done[] (existing), mastery{topic → result}, openMistakes counter
+    function grammarOk() {
+      return !('grammarProgress' in request.resource.data) ||
+        (request.resource.data.grammarProgress is map &&
+         request.resource.data.grammarProgress.keys().hasOnly(['done','mastery','openMistakes']) &&
+         request.resource.data.grammarProgress.get('done', []).size() <= 100 &&
+         request.resource.data.grammarProgress.get('mastery', {}).size() <= 60 &&
+         request.resource.data.grammarProgress.get('openMistakes', 0) is int &&
+         request.resource.data.grammarProgress.get('openMistakes', 0) >= 0 &&
+         request.resource.data.grammarProgress.get('openMistakes', 0) <= 1000);
+    }
+    // Aggregate speaking counters kept on the profile (written by the speaking practice page)
+    function speakingStatsOk() {
+      return !('speakingStats' in request.resource.data) ||
+        (request.resource.data.speakingStats is map &&
+         request.resource.data.speakingStats.keys().hasOnly(['sessions','seconds','accSum','accN','modes','day','dayCount','last','difficult']) &&
+         request.resource.data.speakingStats.get('sessions', 0) is int && request.resource.data.speakingStats.get('sessions', 0) >= 0 && request.resource.data.speakingStats.get('sessions', 0) <= 100000 &&
+         request.resource.data.speakingStats.get('seconds', 0) is int && request.resource.data.speakingStats.get('seconds', 0) >= 0 && request.resource.data.speakingStats.get('seconds', 0) <= 10000000 &&
+         request.resource.data.speakingStats.get('accSum', 0) is int && request.resource.data.speakingStats.get('accSum', 0) >= 0 &&
+         request.resource.data.speakingStats.get('accN', 0) is int && request.resource.data.speakingStats.get('accN', 0) >= 0 &&
+         request.resource.data.speakingStats.get('dayCount', 0) is int && request.resource.data.speakingStats.get('dayCount', 0) >= 0 && request.resource.data.speakingStats.get('dayCount', 0) <= 1000 &&
+         request.resource.data.speakingStats.get('modes', {}) is map &&
+         request.resource.data.speakingStats.get('modes', {}).keys().hasOnly(['repeat','shadow','read','free','sim']) &&
+         request.resource.data.speakingStats.get('difficult', {}) is map &&
+         request.resource.data.speakingStats.get('difficult', {}).size() <= 80);
+    }
+    // Writing bookkeeping on the profile: which tasks already gave XP today
+    function writingStatsOk() {
+      return !('writingStats' in request.resource.data) ||
+        (request.resource.data.writingStats is map &&
+         request.resource.data.writingStats.keys().hasOnly(['xpDate','xpTasks']) &&
+         request.resource.data.writingStats.get('xpDate', '') is string && request.resource.data.writingStats.get('xpDate', '').size() <= 10 &&
+         request.resource.data.writingStats.get('xpTasks', []).size() <= 12);
+    }
+    function noProtectedProfileFields() {
+      return !request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['role','isAdmin','banned','plan','planExpiry']);
+    }
+
+    // ───── USERS ─────
+    // Sobai login thakle nijer o onner profile dekhte parbe (leaderboard, friends list e dorkar)
+    // Kintu nijer document chara onno karo data write/delete korte parbe na
+    // Admin hole onno user-er document o update korte parbe (ban, role change, etc.)
+    match /users/{userId} {
+      allow read: if isSelf(userId) || isRegistered();
+      allow create: if isSelf(userId) &&
+        !request.resource.data.keys().hasAny(['role','isAdmin','banned','plan','planExpiry']) && safePhoto() && emailOk() && profileOk() && placementOk() && planOk() && srsMetaOk() && grammarOk() && speakingStatsOk() && writingStatsOk();
+      allow update: if isAdmin() ||
+        (isSelf(userId) && noProtectedProfileFields() && safePhoto() && emailUnchangedOrOwn() && profileOk() && placementOk() && planOk() && srsMetaOk() && grammarOk() && speakingStatsOk() && writingStatsOk());
+      allow delete: if isAdmin();
+    }
+
+    // ───── CONVERSATIONS / DM CHAT ─────
+    // dmId = [uid1, uid2].sort().join("_")  => documentId-e duijon-er uid thake
+    // Tai shudhu oi duijon e nijeder conversation porte/likhte parbe
+    match /conversations/{convId} {
+      allow read, write: if isRegistered() &&
+        (convId.split('_')[0] == request.auth.uid ||
+         convId.split('_')[1] == request.auth.uid);
+
+      match /messages/{messageId} {
+        allow read: if isRegistered() &&
+          (convId.split('_')[0] == request.auth.uid ||
+           convId.split('_')[1] == request.auth.uid);
+
+        allow create: if isRegistered() &&
+          (convId.split('_')[0] == request.auth.uid ||
+           convId.split('_')[1] == request.auth.uid) &&
+          request.resource.data.senderId == request.auth.uid;
+
+        allow update, delete: if request.auth != null &&
+          resource.data.senderId == request.auth.uid;
+      }
+
+      // WebRTC call signaling
+      match /calls/{callId} {
+        allow read, write: if isRegistered() &&
+          (convId.split('_')[0] == request.auth.uid ||
+           convId.split('_')[1] == request.auth.uid);
+
+        match /callerCandidates/{candId} {
+          allow read, write: if isRegistered() &&
+            (convId.split('_')[0] == request.auth.uid ||
+             convId.split('_')[1] == request.auth.uid);
+        }
+        match /calleeCandidates/{candId} {
+          allow read, write: if isRegistered() &&
+            (convId.split('_')[0] == request.auth.uid ||
+             convId.split('_')[1] == request.auth.uid);
+        }
+      }
+    }
+
+    // ───── COMMUNITY CHAT (public room) ─────
+    // Login thakle sobai porte o nijer naam diye message likhte parbe
+    // Admin hole onner message o delete (moderate) korte parbe
+    match /community_chat/{messageId} {
+      allow read: if isRegistered();
+      allow create: if isRegistered() &&
+        request.resource.data.senderId == request.auth.uid;
+      allow update: if request.auth != null && resource.data.senderId == request.auth.uid;
+      allow delete: if request.auth != null &&
+        (resource.data.senderId == request.auth.uid || isAdmin());
+    }
+
+    // ───── LISTENING SESSIONS ─────
+    // Login thakle nijer session save korte parbe, onner ta porbe na
+    match /listening_sessions/{sessionId} {
+      allow read: if request.auth != null && (resource.data.uid == request.auth.uid || isAdmin());
+      allow create: if request.auth != null &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.lessonId is string;
+      allow update, delete: if false;
+    }
+
+    // ───── READING SESSIONS ─────
+    // Login thakle nijer reading session (passage completion log) save korte parbe, onner ta porbe na
+    match /reading_sessions/{sessionId} {
+      allow read: if request.auth != null && (resource.data.uid == request.auth.uid || isAdmin());
+      allow create: if request.auth != null &&
+        request.resource.data.uid == request.auth.uid &&
+        request.resource.data.passageId is string;
+      allow update, delete: if false;
+    }
+
+    // ───── ADMIN-MANAGED CONTENT ─────
+    // passages, grammar_lessons: Sobai porte parbe, shudhu admin add/edit/delete korte parbe.
+    // (Reading Center ar Grammar Hub-er static JS data file-er paribarte
+    //  bhobishyote Firestore-driven content-e migrate korar jonno taiyar kora.)
+    match /passages/{passageId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+    match /grammar_lessons/{lessonId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+        // ───── CHAT ROOMS (used by chat.html) ─────
+    match /chat_rooms/{roomId} {
+      allow read: if isRegistered();
+      allow write: if false;
+
+      match /messages/{messageId} {
+        allow read: if isRegistered();
+        allow create: if isRegistered() &&
+          request.resource.data.uid == request.auth.uid;
+        allow update, delete: if request.auth != null &&
+          resource.data.uid == request.auth.uid;
+      }
+    }
+
+    // ───── QUIZ SCORES (root collection — used by progress.html history/chart) ─────
+    // Nijer score read korte parbe, create korte parbe, kintu change/delete kora jabe na
+    match /scores/{scoreId} {
+      allow read: if request.auth != null && (resource.data.uid == request.auth.uid || isAdmin());
+      allow create: if request.auth != null &&
+        request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // ───── WRITING LAB ─────
+    // writings: submitted writing pieces (sentence/paragraph/essay/email/story)
+    // User nijer submission create korte parbe, nijer ta porte/dekhte parbe
+    // One submitted piece of writing. uid must be the signed-in user; counters start at zero; sizes are bounded.
+    function writingOk() {
+      let d = request.resource.data;
+      return d.uid == request.auth.uid &&
+        d.keys().hasAll(['uid','type','content']) &&
+        d.keys().hasOnly(['uid','displayName','photoURL','type','taskId','taskLabel','content','wordCount','xpEarned','score','isPublic',
+                          'reviewCount','submittedAt','issueCount','sentences','level','version']) &&
+        d.type in ['paragraph','essay','email','story'] &&
+        d.content is string && d.content.size() <= 6000 &&
+        d.get('displayName', '') is string && d.get('displayName', '').size() <= 80 &&
+        d.get('photoURL', '') is string && d.get('photoURL', '').size() <= 500 &&
+        (d.get('photoURL', '') == '' || d.photoURL.matches('^https://[^"\'<>\\\\\\s]{1,500}$')) &&
+        d.get('taskId', '') is string && d.get('taskId', '').size() <= 40 &&
+        d.get('taskLabel', '') is string && d.get('taskLabel', '').size() <= 200 &&
+        d.get('wordCount', 0) is int && d.get('wordCount', 0) >= 0 && d.get('wordCount', 0) <= 1500 &&
+        d.get('xpEarned', 0) is int && d.get('xpEarned', 0) >= 0 && d.get('xpEarned', 0) <= 150 &&
+        (!('score' in d) || d.score == null || d.score is number) &&
+        d.get('isPublic', false) is bool &&
+        (d.get('isPublic', false) == false || request.auth.token.firebase.sign_in_provider != 'anonymous') &&
+        d.get('reviewCount', 0) == 0 &&
+        d.get('submittedAt', request.time) == request.time &&
+        d.get('issueCount', 0) is int && d.get('issueCount', 0) >= 0 && d.get('issueCount', 0) <= 500 &&
+        d.get('sentences', 0) is int && d.get('sentences', 0) >= 0 && d.get('sentences', 0) <= 500 &&
+        d.get('level', 'A1') in ['A1','A2','B1','B2','C1','C2'] &&
+        d.get('version', 1) is int;
+    }
+
+    // Admin hole kono inappropriate writing delete (moderate) korte parbe
+    match /writings/{writingId} {
+      // Nijer lekha othoba public-e share kora lekha — keu porte parbe
+      allow read: if request.auth != null &&
+        (resource.data.uid == request.auth.uid || resource.data.isPublic == true || isAdmin());
+      allow create: if request.auth != null && writingOk();
+      // Shudhu reviewCount/avgRating aggregate update korte parbe (community review-er por)
+      allow update: if request.auth != null &&
+        resource.data.isPublic == true &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reviewCount','avgRating']);
+      allow delete: if isAdmin();
+
+      // Community review-gulo
+      match /reviews/{reviewId} {
+        allow read: if request.auth != null;
+        allow create: if request.auth != null &&
+          request.resource.data.reviewerUid == request.auth.uid &&
+          request.resource.data.rating is number &&
+          request.resource.data.text is string &&
+          get(/databases/$(database)/documents/writings/$(writingId)).data.uid != request.auth.uid;
+        allow update, delete: if false;
+      }
+    }
+
+    // writing_drafts: auto-saved drafts, doc id = {uid}_{type}_{taskId}
+    // Nijer draft read/write/update korte parbe
+    match /writing_drafts/{draftId} {
+      allow read, delete: if request.auth != null &&
+        draftId.matches(request.auth.uid + '_.*');
+      allow create, update: if request.auth != null &&
+        draftId.matches(request.auth.uid + '_.*') &&
+        request.resource.data.get('content', '') is string && request.resource.data.get('content', '').size() <= 6000 &&
+        request.resource.data.get('uid', request.auth.uid) == request.auth.uid;
+    }
+
+    // ───── LEADERBOARD ─────
+    // Shudhu read-only. Score update hobe users/{uid} document e (xp, totalCorrect etc.)
+    // tai alada leaderboard collection lagle eta shudhu read kora hobe.
+    match /leaderboard/{entryId} {
+      allow read: if isRegistered();
+      allow write: if false; // server-side only
+    }
+
+    // ───── CHALLENGES / DAILY TASKS ─────
+    // Shob users porte parbe, kintu kichu modify korte parbe na (admin/Cloud Function thik korbe)
+    match /challenges/{challengeId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    // User-specific challenge progress
+    // Spaced-repetition cards: one document per word the learner has met
+    function srsCardOk() {
+      let d = request.resource.data;
+      return d.keys().hasAll(['word','level','ease','interval','reps','lapses','due','last']) &&
+        d.keys().hasOnly(['word','level','ease','interval','reps','lapses','due','last','saved','known','src','meaning','example']) &&
+        d.get('meaning', '') is string && d.get('meaning', '').size() <= 80 &&
+        d.get('example', '') is string && d.get('example', '').size() <= 200 &&
+        d.word is string && d.word.size() > 0 && d.word.size() <= 40 &&
+        d.level in ['A1','A2','B1','B2','C1','C2'] &&
+        d.ease is number && d.ease >= 1.3 && d.ease <= 3.0 &&
+        d.interval is int && d.interval >= 0 && d.interval <= 365 &&
+        d.reps is int && d.reps >= 0 && d.reps <= 1000 &&
+        d.lapses is int && d.lapses >= 0 && d.lapses <= 1000 &&
+        d.due is string && d.due.size() == 10 &&
+        d.last is string && d.last.size() == 10;
+    }
+
+    match /users/{userId}/vocabSrs/{wordId} {
+      allow read, delete: if isSelf(userId);
+      allow create, update: if isSelf(userId) && srsCardOk();
+    }
+
+    // A grammar question the learner got wrong (kept so it can be practised again)
+    function grammarMistakeOk() {
+      let d = request.resource.data;
+      return d.keys().hasAll(['topic','q','opts','picked','correct','last','fixed']) &&
+        d.keys().hasOnly(['topic','q','opts','picked','correct','why','last','fixed','count']) &&
+        d.topic is string && d.topic.size() > 0 && d.topic.size() <= 12 &&
+        d.q is string && d.q.size() > 0 && d.q.size() <= 220 &&
+        d.opts is list && d.opts.size() >= 2 && d.opts.size() <= 4 &&
+        d.picked is string && d.picked.size() <= 90 &&
+        d.correct is string && d.correct.size() > 0 && d.correct.size() <= 90 &&
+        d.get('why', '') is string && d.get('why', '').size() <= 220 &&
+        d.last is string && d.last.size() == 10 &&
+        d.fixed is bool &&
+        d.get('count', 0) is int && d.get('count', 0) >= 0 && d.get('count', 0) <= 1000;
+    }
+
+    match /users/{userId}/grammarMistakes/{mistakeId} {
+      allow read, delete: if isSelf(userId);
+      allow create, update: if isSelf(userId) && grammarMistakeOk();
+    }
+
+    // A phrase the learner wrote wrongly + its correction (Personal Mistake Memory, practised in writing-review.html)
+    function writingMistakeOk() {
+      let d = request.resource.data;
+      return d.keys().hasAll(['category','original','corrected','last','fixed']) &&
+        d.keys().hasOnly(['category','original','corrected','why','context','last','fixed','count']) &&
+        d.category in ['article','preposition','tense','agreement','word-choice','word-form','word-order','spelling','other'] &&
+        d.original is string && d.original.size() > 0 && d.original.size() <= 160 &&
+        d.corrected is string && d.corrected.size() > 0 && d.corrected.size() <= 160 &&
+        d.get('why', '') is string && d.get('why', '').size() <= 220 &&
+        d.get('context', '') is string && d.get('context', '').size() <= 240 &&
+        d.last is string && d.last.size() == 10 && d.fixed is bool &&
+        d.get('count', 0) is int && d.get('count', 0) >= 0 && d.get('count', 0) <= 1000;
+    }
+
+    match /users/{userId}/writingMistakes/{mistakeId} {
+      allow read, delete: if isSelf(userId);
+      allow create, update: if isSelf(userId) && writingMistakeOk();
+    }
+
+    match /users/{userId}/challengeProgress/{progressId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // User-specific quiz scores (quiz-beginner, quiz-intermediate, quiz-advanced)
+    // Shudhu nijer score likhte/porte parbe
+    match /users/{userId}/scores/{scoreId} {
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update, delete: if false; // score immutable — ekbar save hoile change hobe na
+    }
+
+    // User-specific quiz analytics — overall/level stats, category progress, wrong words/questions
+    match /users/{userId}/quizStats/{statId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    match /users/{userId}/categoryProgress/{catId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    match /users/{userId}/wrongWords/{wordId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    match /users/{userId}/wrongQuestions/{qId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // ───── LIVE CLASS ROOMS ─────
+    // Jei kono logged-in user room dekhte o join korte parbe
+    // Room create korte parbe, kintu delete korbe shudhu host (uid match)
+    match /liveRooms/{roomId} {
+      allow read: if isRegistered();
+      allow create: if isRegistered() &&
+        request.resource.data.hostUid == request.auth.uid;
+      // Host may edit the room. Other members may adjust counters by at most one
+      // per write; counters are display hints, not authoritative attendance records.
+      allow update: if isRegistered() &&
+        (resource.data.hostUid == request.auth.uid ||
+         (request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['participantCount','waitingCount']) &&
+          request.resource.data.get('participantCount', 0) is int &&
+          request.resource.data.get('waitingCount', 0) is int &&
+          request.resource.data.get('participantCount', 0) >= 0 &&
+          request.resource.data.get('participantCount', 0) <= 1000 &&
+          request.resource.data.get('waitingCount', 0) >= 0 &&
+          request.resource.data.get('waitingCount', 0) <= 1000 &&
+          request.resource.data.get('participantCount', 0) >= resource.data.get('participantCount', 0) - 1 &&
+          request.resource.data.get('participantCount', 0) <= resource.data.get('participantCount', 0) + 1 &&
+          request.resource.data.get('waitingCount', 0) >= resource.data.get('waitingCount', 0) - 1 &&
+          request.resource.data.get('waitingCount', 0) <= resource.data.get('waitingCount', 0) + 1));
+      allow delete: if isRegistered() &&
+        resource.data.hostUid == request.auth.uid;
+
+      // Participants — jara room-e ache
+      match /participants/{uid} {
+        allow read: if isRegistered();
+        allow write: if isRegistered() && request.auth.uid == uid;
+      }
+
+      // Waiting room — join request queue
+      match /waiting/{uid} {
+        allow read: if isRegistered();
+        allow create, update: if isRegistered() && request.auth.uid == uid;
+        // the person waiting, or the room host, may remove the entry
+        allow delete: if isRegistered() &&
+          (request.auth.uid == uid ||
+           get(/databases/$(database)/documents/liveRooms/$(roomId)).data.hostUid == request.auth.uid);
+      }
+
+      // WebRTC signaling — peer-to-peer offer/answer/ICE
+      match /signals/{signalId} {
+        allow read: if isRegistered();
+        allow create: if isRegistered() &&
+          request.resource.data.from == request.auth.uid;
+        allow delete: if isRegistered() &&
+          resource.data.from == request.auth.uid;
+        allow update: if false;
+      }
+    }
+
+    // ───── FRIEND REQUESTS ─────
+    // Jei kono logged-in user nijer request dekhte, pathate, update/delete korte parbe
+    match /friendRequests/{reqId} {
+      allow read: if request.auth != null &&
+        (resource.data.from == request.auth.uid || resource.data.to == request.auth.uid);
+      allow create: if isRegistered() &&
+        request.resource.data.keys().hasOnly(['from','to','status','createdAt']) &&
+        request.resource.data.from == request.auth.uid &&
+        request.resource.data.to is string &&
+        request.resource.data.to != request.auth.uid &&
+        request.resource.data.status == "pending";
+      allow update: if isRegistered() &&
+        resource.data.to == request.auth.uid &&
+        resource.data.status == "pending" &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']) &&
+        request.resource.data.status == "accepted";
+      allow delete: if request.auth != null &&
+        (resource.data.from == request.auth.uid || resource.data.to == request.auth.uid);
+    }
+
+    // ───── STUDY GROUPS (used by groups.html) ─────
+    match /studyGroups/{groupId} {
+      allow read: if isRegistered();
+      allow create: if isRegistered() &&
+        request.resource.data.createdBy == request.auth.uid &&
+        request.resource.data.members is list &&
+        request.resource.data.members.hasOnly([request.auth.uid]) &&
+        request.resource.data.members.size() == 1 &&
+        (!('memberCount' in request.resource.data) || request.resource.data.memberCount == 1);
+      // Creator may edit. Other users may only add/remove their own UID, and
+      // may not alter group metadata or spoof the displayed member count.
+      allow update: if isRegistered() &&
+        (resource.data.createdBy == request.auth.uid ||
+         (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['members','memberCount']) &&
+          resource.data.members is list && request.resource.data.members is list &&
+          request.resource.data.members.size() <= 100 &&
+          request.resource.data.members.toSet().difference(resource.data.members.toSet()).hasOnly([request.auth.uid]) &&
+          resource.data.members.toSet().difference(request.resource.data.members.toSet()).hasOnly([request.auth.uid]) &&
+          (!('memberCount' in request.resource.data) || request.resource.data.memberCount == request.resource.data.members.size())));
+      // shudhu group-er creator delete korte parbe
+      allow delete: if request.auth != null && resource.data.createdBy == request.auth.uid;
+
+      match /messages/{messageId} {
+        allow read: if request.auth != null &&
+          request.auth.uid in get(/databases/$(database)/documents/studyGroups/$(groupId)).data.members;
+        allow create: if request.auth != null &&
+          request.resource.data.uid == request.auth.uid &&
+          request.auth.uid in get(/databases/$(database)/documents/studyGroups/$(groupId)).data.members;
+        allow update, delete: if false;
+      }
+    }
+
+    // ───── SPEAKING SESSIONS ─────
+    // User nijer speaking session save korte o porte parbe
+    // Onner session porte parbe na, update/delete kora jabe na
+    match /speaking_sessions/{sessionId} {
+      allow read: if request.auth != null &&
+        resource.data.uid == request.auth.uid;
+      allow create: if request.auth != null && speakingSessionOk();
+      allow update, delete: if false;
+    }
+
+    // One practised item. uid MUST equal the signed-in user, so nobody can write into another learner's history.
+    function speakingSessionOk() {
+      let d = request.resource.data;
+      return d.uid == request.auth.uid &&
+        d.keys().hasAll(['uid','prompt','dateStr','recordedAt']) &&
+        d.keys().hasOnly(['uid','displayName','prompt','transcript','wordCount','scores','xpEarned','dateStr','recordedAt',
+                          'mode','level','activityId','durationSec','attempts','wordAccuracy','completion','fluency','wpm',
+                          'difficultWords','version','provider','scenarioId','objectivesDone','objectivesTotal','turns']) &&
+        d.prompt is string && d.prompt.size() <= 300 &&
+        d.dateStr is string && d.dateStr.size() == 10 &&
+        d.recordedAt == request.time &&
+        d.get('transcript', '') is string && d.get('transcript', '').size() <= 3000 &&
+        d.get('displayName', '') is string && d.get('displayName', '').size() <= 80 &&
+        d.get('wordCount', 0) is int && d.get('wordCount', 0) >= 0 && d.get('wordCount', 0) <= 5000 &&
+        d.get('durationSec', 0) is number && d.get('durationSec', 0) >= 0 && d.get('durationSec', 0) <= 1800 &&
+        d.get('attempts', 1) is int && d.get('attempts', 1) >= 1 && d.get('attempts', 1) <= 100 &&
+        d.get('xpEarned', 0) is int && d.get('xpEarned', 0) >= 0 && d.get('xpEarned', 0) <= 50 &&
+        d.get('mode', 'free') in ['repeat','shadow','read','free','sim'] &&
+        d.get('scenarioId', '') is string && d.get('scenarioId', '').size() <= 20 &&
+        d.get('objectivesDone', 0) is int && d.get('objectivesDone', 0) >= 0 && d.get('objectivesDone', 0) <= 10 &&
+        d.get('objectivesTotal', 0) is int && d.get('objectivesTotal', 0) >= 0 && d.get('objectivesTotal', 0) <= 10 &&
+        d.get('turns', 0) is int && d.get('turns', 0) >= 0 && d.get('turns', 0) <= 30 &&
+        d.get('level', 'A1') in ['A1','A2','B1','B2','C1','C2'] &&
+        d.get('activityId', '') is string && d.get('activityId', '').size() <= 40 &&
+        d.get('wordAccuracy', 0) is int && d.get('wordAccuracy', 0) >= 0 && d.get('wordAccuracy', 0) <= 100 &&
+        d.get('completion', 0) is int && d.get('completion', 0) >= 0 && d.get('completion', 0) <= 100 &&
+        d.get('fluency', 0) is int && d.get('fluency', 0) >= 0 && d.get('fluency', 0) <= 100 &&
+        d.get('wpm', 0) is int && d.get('wpm', 0) >= 0 && d.get('wpm', 0) <= 400 &&
+        d.get('difficultWords', []) is list && d.get('difficultWords', []).size() <= 8 &&
+        (!('scores' in d) || (d.scores is map && d.scores.keys().hasOnly(['overall','fluency','pronunciation','confidence']))) &&
+        d.get('version', 1) is int && d.get('provider', 'browser-speech') is string;
+    }
+
+    // ───── DAILY TASKS (speaking page) ─────
+    // User nijer ajoker task complete/uncomplete korte parbe
+    // Document id = YYYY-MM-DD (date string)
+    match /users/{userId}/dailyTasks/{dateId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // ───── DEFAULT: sob kichu deny ─────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

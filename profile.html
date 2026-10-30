@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;--surface3:#101828;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--gold2:#e0a820;
+  --teal:#2dd4bf;--rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;
+  --orange:#fb923c;--muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(129,140,248,.025),transparent 60%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:52px 52px;}
+.wrap{max-width:1000px;margin:auto;padding:1.6rem 1.4rem 4rem;position:relative;z-index:1;}
+
+/* ─── TOPBAR ─── */
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+  background:rgba(8,14,26,.8);border:1px solid var(--border);border-radius:18px;padding:.9rem 1.4rem;
+  backdrop-filter:blur(24px);box-shadow:0 4px 32px rgba(0,0,0,.4);position:sticky;top:16px;z-index:100;}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));
+  border:1px solid rgba(245,200,66,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  box-shadow:0 0 18px rgba(245,200,66,.12);flex-shrink:0;}
+.logo-text h1{font-size:1.55rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--sub);text-decoration:none;transition:.2s;border:1px solid transparent;}
+.nav-link:hover,.nav-link.active{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));
+  display:flex;align-items:center;justify-content:center;font-size:1rem;overflow:hidden;
+  border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;transition:.2s;box-shadow:0 0 14px rgba(245,200,66,.1);}
+.user-avatar:hover{border-color:var(--gold);}
+.user-avatar img{width:100%;height:100%;object-fit:cover;}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);color:var(--rose);
+  padding:.4rem .9rem;border-radius:10px;cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* ─── COVER ─── */
+.cover-wrap{position:relative;margin-bottom:0;}
+.cover{height:200px;border-radius:22px 22px 0 0;
+  background:linear-gradient(135deg,rgba(245,200,66,.2),rgba(45,212,191,.15),rgba(129,140,248,.15)),
+    url('https://images.unsplash.com/photo-1546521343-4eb2c01aa44b?q=80&w=1200');
+  background-size:cover;background-position:center;position:relative;overflow:hidden;
+  border:1px solid var(--border);border-bottom:none;}
+.cover::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(4,8,15,.9));}
+.cover-stripe{position:absolute;top:0;left:0;right:0;height:3px;z-index:2;
+  background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);}
+.btn-cover{position:absolute;right:14px;top:14px;z-index:5;
+  background:rgba(4,8,15,.75);border:1px solid rgba(255,255,255,.1);color:#fff;
+  padding:.5rem .9rem;border-radius:10px;cursor:pointer;font-size:12px;
+  font-family:'Outfit',sans-serif;backdrop-filter:blur(10px);transition:.2s;display:none;}
+.btn-cover:hover{background:rgba(4,8,15,.95);border-color:rgba(245,200,66,.3);}
+#cover-input{display:none;}
+
+/* ─── PROFILE CARD ─── */
+.profile-card{background:var(--surface2);border:1px solid var(--border);
+  border-radius:0 0 22px 22px;padding:0 2rem 2rem;position:relative;z-index:5;border-top:none;}
+.profile-top{display:flex;align-items:flex-end;gap:1.4rem;padding-top:0;margin-bottom:1.2rem;flex-wrap:wrap;}
+
+/* big avatar */
+.avatar-wrap-big{position:relative;margin-top:-52px;flex-shrink:0;}
+.profile-avatar-big{width:100px;height:100px;border-radius:50%;
+  border:4px solid var(--surface2);
+  background:linear-gradient(135deg,rgba(245,200,66,.2),rgba(45,212,191,.2));
+  overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2.6rem;cursor:pointer;
+  box-shadow:0 0 0 2px rgba(245,200,66,.3),0 8px 30px rgba(0,0,0,.5);transition:.3s;}
+.profile-avatar-big img{width:100%;height:100%;object-fit:cover;}
+.avatar-edit-fab{position:absolute;bottom:4px;right:4px;width:28px;height:28px;
+  background:linear-gradient(135deg,#f5c842,#e0a820);border:none;border-radius:50%;
+  cursor:pointer;display:none;align-items:center;justify-content:center;font-size:.8rem;
+  box-shadow:0 2px 8px rgba(245,200,66,.4);}
+#avatar-input{display:none;}
+
+/* profile meta */
+.profile-meta{flex:1;padding-top:14px;}
+.p-name-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:.3rem;}
+.p-name{font-size:1.6rem;font-weight:800;letter-spacing:-.5px;}
+.p-level-tag{padding:3px 12px;border-radius:20px;font-size:11px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;
+  background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.25);color:var(--gold);}
+.meta-tags{display:flex;flex-wrap:wrap;gap:6px;margin:.4rem 0 .5rem;}
+.meta-tag{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--sub);
+  background:rgba(255,255,255,.04);border:1px solid var(--border);padding:3px 10px;border-radius:20px;}
+.meta-tag.goal-tag{color:var(--emerald);border-color:rgba(52,211,153,.2);background:rgba(52,211,153,.05);}
+.p-bio{font-size:13px;color:var(--sub);line-height:1.7;margin:.5rem 0;max-width:500px;font-style:italic;font-family:'Noto Sans Bengali',sans-serif;}
+.p-joined{font-size:11px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;}
+.upload-status{font-size:12px;color:var(--gold);margin-top:.4rem;min-height:18px;}
+
+/* action buttons */
+.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;}
+.btn-action{padding:.55rem 1.2rem;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:.2s;border:none;display:flex;align-items:center;gap:6px;}
+.btn-edit-p{background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2);color:var(--gold);}
+.btn-edit-p:hover{background:rgba(245,200,66,.16);}
+.btn-msg-p{background:linear-gradient(135deg,#1e3a5f,#3b1f6e);color:#fff;border:1px solid rgba(129,140,248,.2);}
+.btn-msg-p:hover{opacity:.85;}
+.btn-logout-p{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+.btn-logout-p:hover{background:rgba(251,113,133,.16);}
+.btn-friend{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:var(--emerald);}
+.btn-friend:hover{background:rgba(52,211,153,.16);}
+.btn-friend.pending{background:rgba(255,255,255,.04);border-color:var(--border);color:var(--muted);cursor:not-allowed;}
+.btn-friend.friends{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);cursor:default;}
+.btn-friend.accept{background:linear-gradient(135deg,#065f46,#14532d);border:1px solid rgba(52,211,153,.4);color:#6ee7b7;}
+.btn-friend.accept:hover{opacity:.85;}
+.btn-friend.cancel{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+/* ─── XP SECTION ─── */
+.xp-section{margin:1.5rem 0 0;padding:1.2rem 1.4rem;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:16px;}
+.xp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;}
+.xp-lbl{font-size:12px;color:var(--sub);font-weight:600;}
+.xp-val-txt{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);}
+.xp-bar-bg{height:8px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;}
+.xp-bar-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#f5c842,#2dd4bf);
+  transition:width 1s cubic-bezier(.4,0,.2,1);}
+.xp-milestones{display:flex;justify-content:space-between;margin-top:.5rem;}
+.xp-ms{font-size:10px;color:#2a3545;font-family:'JetBrains Mono',monospace;}
+.xp-ms.active{color:var(--gold);}
+
+/* ─── STATS GRID ─── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:10px;margin:1.4rem 0 0;}
+.stat-box{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;
+  padding:1rem .8rem;text-align:center;transition:.2s;position:relative;overflow:hidden;}
+.stat-box::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:2px;border-radius:2px;opacity:.6;}
+.stat-box:nth-child(1)::after{background:var(--teal);}
+.stat-box:nth-child(2)::after{background:var(--gold);}
+.stat-box:nth-child(3)::after{background:var(--orange);}
+.stat-box:nth-child(4)::after{background:var(--indigo);}
+.stat-box:nth-child(5)::after{background:var(--rose);}
+.stat-box:nth-child(6)::after{background:var(--emerald);}
+.stat-box:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.09);}
+.stat-v{font-size:1.5rem;font-weight:800;}
+.stat-l{font-size:10px;color:var(--muted);margin-top:3px;font-family:'Noto Sans Bengali',sans-serif;}
+.sv-1{color:var(--teal);}.sv-2{color:var(--gold);}.sv-3{color:var(--orange);}
+.sv-4{color:var(--indigo);}.sv-5{color:var(--rose);}.sv-6{color:var(--emerald);}
+
+/* ─── SECTION ─── */
+.section{margin-top:2rem;}
+.sec-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:.9rem;
+  display:flex;align-items:center;gap:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.sec-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ─── SOCIAL CHIPS ─── */
+.social-row{display:flex;flex-wrap:wrap;gap:8px;}
+.social-chip{display:flex;align-items:center;gap:7px;padding:.5rem 1rem;border-radius:20px;
+  text-decoration:none;font-size:12px;font-weight:600;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);color:var(--sub);transition:.2s;}
+.social-chip:hover{transform:translateY(-2px);color:#fff;}
+.sc-fb{border-color:rgba(99,102,241,.25);}  .sc-fb:hover{background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.4);}
+.sc-yt{border-color:rgba(239,68,68,.25);}   .sc-yt:hover{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.4);}
+.sc-ig{border-color:rgba(244,114,182,.25);} .sc-ig:hover{background:rgba(244,114,182,.1);border-color:rgba(244,114,182,.4);}
+.sc-gh{border-color:rgba(167,139,250,.25);} .sc-gh:hover{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.4);}
+.sc-tg{border-color:rgba(245,200,66,.25);}  .sc-tg:hover{background:rgba(245,200,66,.1);border-color:rgba(245,200,66,.4);}
+
+/* ─── STREAK CALENDAR ─── */
+.streak-day-labels{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px;}
+.day-label{text-align:center;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.streak-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;}
+.streak-day{aspect-ratio:1;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.streak-day.done{background:rgba(245,200,66,.18);border-color:rgba(245,200,66,.35);color:var(--gold);}
+.streak-day.today{background:rgba(245,200,66,.3);border-color:var(--gold);color:#fff;font-weight:800;}
+
+/* ─── ACHIEVEMENTS ─── */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;}
+.ach-card{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;padding:1rem .8rem;text-align:center;transition:.3s;}
+.ach-card.earned{background:rgba(245,200,66,.07);border-color:rgba(245,200,66,.25);box-shadow:0 0 16px rgba(245,200,66,.08);}
+.ach-card:not(.earned){filter:grayscale(.85);opacity:.35;}
+.ach-emoji{font-size:1.7rem;margin-bottom:.4rem;}
+.ach-name{font-size:11px;font-weight:700;margin-bottom:.2rem;}
+.ach-desc{font-size:9.5px;color:var(--muted);line-height:1.4;font-family:'Noto Sans Bengali',sans-serif;}
+
+/* ─── CERTIFICATES ─── */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;}
+.cert-card{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;padding:1.2rem;transition:.3s;}
+.cert-card.earned{background:linear-gradient(135deg,rgba(245,200,66,.06),rgba(45,212,191,.04));border-color:rgba(245,200,66,.2);}
+.cert-card:not(.earned){opacity:.35;filter:grayscale(.7);}
+.cert-icon{font-size:2rem;margin-bottom:.5rem;}
+.cert-title{font-size:13px;font-weight:700;margin-bottom:.2rem;}
+.cert-sub{font-size:11px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.cert-badge{display:inline-block;margin-top:.5rem;padding:2px 9px;border-radius:20px;font-size:9.5px;font-weight:800;
+  background:linear-gradient(135deg,#f5c842,#e0a820);color:#000;}
+
+/* ─── SCORE HISTORY ─── */
+.score-hist{display:flex;flex-direction:column;gap:8px;}
+.hist-row{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:14px;
+  padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;transition:.2s;gap:1rem;}
+.hist-row:hover{border-color:rgba(245,200,66,.15);transform:translateX(4px);}
+.hist-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,#f5c842,#2dd4bf);flex-shrink:0;}
+.hist-info{font-size:13px;font-weight:600;}
+.hist-meta{font-size:11px;color:var(--muted);margin-top:2px;font-family:'Noto Sans Bengali',sans-serif;}
+.hist-right{text-align:right;flex-shrink:0;}
+.hist-score{font-size:1.15rem;font-weight:800;color:var(--gold);}
+.hist-pct{font-size:11px;color:var(--teal);}
+.no-data{text-align:center;padding:2rem;color:#2a3545;font-size:13px;font-family:'Noto Sans Bengali',sans-serif;}
+
+/* ══════════════════════════════
+   EDIT MODAL
+══════════════════════════════ */
+#edit-modal{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.88);
+  backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;
+  padding:1.5rem;overflow-y:auto;}
+#edit-modal.open{display:flex;}
+.edit-box{background:#080e1a;border:1px solid rgba(245,200,66,.15);border-radius:24px;
+  width:100%;max-width:520px;position:relative;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);animation:modalIn .3s cubic-bezier(.34,1.56,.64,1);}
+@keyframes modalIn{from{opacity:0;transform:scale(.93) translateY(20px);}to{opacity:1;transform:none;}}
+.edit-stripe{height:3px;background:linear-gradient(90deg,#f5c842,#2dd4bf,#818cf8,#fb7185);}
+.edit-header{padding:1.5rem 1.8rem 0;display:flex;align-items:center;justify-content:space-between;}
+.edit-title{font-size:1.15rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.edit-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.05);
+  border:1px solid var(--border);color:var(--muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;transition:.2s;}
+.edit-close:hover{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+
+/* modal tabs */
+.edit-tabs{display:flex;gap:4px;background:rgba(255,255,255,.03);border-radius:12px;padding:4px;margin:1.2rem 1.8rem 0;border:1px solid var(--border);}
+.edit-tab{flex:1;padding:7px 6px;border:none;border-radius:9px;background:transparent;
+  color:var(--muted);font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;}
+.edit-tab.active{background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.1));
+  color:var(--text);border:1px solid rgba(245,200,66,.2);}
+.edit-panels{padding:1.2rem 1.8rem 1.4rem;}
+.edit-panel{display:none;flex-direction:column;gap:12px;}
+.edit-panel.active{display:flex;}
+.edit-field{display:flex;flex-direction:column;gap:5px;}
+.edit-field label{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
+.edit-field input,.edit-field textarea,.edit-field select{
+  width:100%;padding:10px 13px;border-radius:10px;border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.04);color:var(--text);font-family:'Noto Sans Bengali',sans-serif;
+  font-size:13.5px;outline:none;transition:.2s;resize:none;}
+.edit-field input:focus,.edit-field textarea:focus,.edit-field select:focus{
+  border-color:rgba(245,200,66,.4);box-shadow:0 0 0 3px rgba(245,200,66,.07);}
+.edit-field select option{background:#0c1322;}
+.edit-field textarea{min-height:80px;line-height:1.6;}
+.edit-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.social-grid{display:flex;flex-direction:column;gap:9px;}
+.social-input-row{display:flex;align-items:center;gap:8px;}
+.social-icon-box{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.si-fb{background:rgba(99,102,241,.12);}.si-yt{background:rgba(239,68,68,.12);}
+.si-ig{background:rgba(244,114,182,.12);}.si-gh{background:rgba(167,139,250,.12);}
+.si-tg{background:rgba(245,200,66,.12);}
+.pwd-note{font-size:11.5px;color:var(--sub);line-height:1.65;
+  background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.1);
+  border-radius:10px;padding:.7rem 1rem;font-family:'Noto Sans Bengali',sans-serif;}
+.edit-btns{display:flex;gap:8px;margin-top:.5rem;}
+.btn-save-edit{flex:1;background:linear-gradient(135deg,#f5c842,#e0a820);color:#000;border:none;
+  border-radius:12px;padding:.8rem;font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:.2s;}
+.btn-save-edit:hover{opacity:.87;transform:translateY(-1px);}
+.btn-save-edit:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+.btn-cancel-modal{background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--sub);
+  border-radius:12px;padding:.8rem 1.2rem;font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:.2s;}
+.btn-cancel-modal:hover{background:rgba(255,255,255,.07);color:var(--text);}
+.save-status{font-size:12px;text-align:center;min-height:16px;margin-bottom:.5rem;font-family:'Noto Sans Bengali',sans-serif;}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:24px;right:24px;background:#0c1322;color:var(--text);
+  padding:.9rem 1.2rem;border-radius:14px;border-left:3px solid var(--gold);
+  z-index:9999;opacity:0;transform:translateY(16px);transition:.3s;font-size:13.5px;pointer-events:none;
+  box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.toast.show{opacity:1;transform:translateY(0);}
+
+/* ─── FOOTER ─── */
+footer{margin-top:3rem;border-top:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),rgba(45,212,191,.35),transparent);}
+.footer-inner{max-width:1000px;margin:auto;padding:2.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;}
+.footer-brand .brand-name{font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.9rem;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:11px;color:#2a3545;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.copyright-text span{color:#374151;}
+.footer-col h4{font-size:.9rem;font-weight:700;color:var(--sub);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.dev-card{background:linear-gradient(135deg,rgba(245,200,66,.04),rgba(45,212,191,.04));border:1px solid rgba(245,200,66,.12);border-radius:14px;padding:1.1rem;}
+.dev-name{font-size:1.05rem;font-weight:800;color:#f0f4f8;margin-bottom:.1rem;}
+.dev-title{font-size:10px;color:var(--gold);letter-spacing:.8px;margin-bottom:.8rem;font-family:'JetBrains Mono',monospace;}
+.dev-contact{display:flex;flex-direction:column;gap:.45rem;}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);}
+.contact-row a{color:var(--sub);text-decoration:none;transition:.15s;}
+.contact-row a:hover{color:var(--gold);}
+.contact-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:rgba(255,255,255,.05);}
+.social-links-f{display:flex;flex-direction:column;gap:.55rem;}
+.social-link-f{display:flex;align-items:center;gap:10px;padding:.55rem .85rem;border-radius:11px;
+  background:rgba(255,255,255,.025);border:1px solid var(--border);
+  text-decoration:none;color:var(--sub);font-size:12px;transition:.2s;}
+.social-link-f:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);color:#f0f4f8;transform:translateX(3px);}
+.sl-icon{font-size:.9rem;width:20px;text-align:center;}
+.sl-label{font-weight:600;}
+.sl-handle{color:var(--muted);font-size:10.5px;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{max-width:1000px;margin:auto;padding:.8rem 1.4rem 1.3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;border-top:1px solid rgba(255,255,255,.04);font-size:11px;color:#2d3748;font-family:'JetBrains Mono',monospace;}
+.footer-bottom a{color:#374151;text-decoration:none;}
+.footer-heart{color:var(--rose);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:800px){.footer-inner{grid-template-columns:1fr;gap:1.6rem;}.nav-links{display:none;}}
+@media(max-width:600px){
+  .topbar{flex-direction:column;align-items:flex-start;}
+  .profile-top{flex-direction:column;align-items:flex-start;}
+  .edit-row{grid-template-columns:1fr;}
+  .edit-tabs{overflow-x:auto;}
+  .wrap{padding:1rem .9rem 2rem;}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>ENGLISH LEARNING PLATFORM · A1 TO C2</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+        <a href="profile.html" class="nav-link active">Profile</a>
+      </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar">👤</div>
+        <div class="user-name" id="nav-name">Loading...</div>
+        <button class="btn-logout" id="btn-logout-top">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COVER -->
+  <div class="cover-wrap">
+    <div class="cover" id="profile-cover">
+      <div class="cover-stripe"></div>
+      <button class="btn-cover" id="btn-cover">🖼️ Cover পরিবর্তন</button>
+      <input type="file" id="cover-input" accept="image/*">
+    </div>
+  </div>
+
+  <!-- PROFILE CARD -->
+  <div class="profile-card">
+    <div class="profile-top">
+      <div class="avatar-wrap-big">
+        <div class="profile-avatar-big" id="profile-avatar-big">👤</div>
+        <button class="avatar-edit-fab" id="avatar-edit-fab">✏️</button>
+        <input type="file" id="avatar-input" accept="image/*">
+      </div>
+      <div class="profile-meta">
+        <div class="p-name-row">
+          <span class="p-name" id="p-name">Loading...</span>
+          <span class="p-level-tag" id="p-level-tag">A1</span>
+        </div>
+        <div class="meta-tags" id="meta-tags"></div>
+        <div class="p-bio" id="p-bio" style="display:none"></div>
+        <div class="p-joined" id="p-joined"></div>
+        <div class="upload-status" id="upload-status"></div>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="profile-actions" id="profile-actions"></div>
+
+    <!-- XP -->
+    <div class="xp-section">
+      <div class="xp-top">
+        <span class="xp-lbl">🎯 XP Progress</span>
+        <span class="xp-val-txt" id="xp-val-txt">0 / 500 XP → A2</span>
+      </div>
+      <div class="xp-bar-bg"><div class="xp-bar-fill" id="xp-bar" style="width:0%"></div></div>
+      <div class="xp-milestones">
+        <span class="xp-ms active">A1·0</span>
+        <span class="xp-ms" id="ms-a2">A2·500</span>
+        <span class="xp-ms" id="ms-b1">B1·2000</span>
+        <span class="xp-ms" id="ms-b2">B2·5000</span>
+        <span class="xp-ms" id="ms-c1">C1·10k</span>
+        <span class="xp-ms" id="ms-c2">C2·20k</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-v sv-1" id="ps-correct">0</div><div class="stat-l">মোট সঠিক</div></div>
+      <div class="stat-box"><div class="stat-v sv-2" id="ps-sessions">0</div><div class="stat-l">সেশন</div></div>
+      <div class="stat-box"><div class="stat-v sv-3" id="ps-best">0%</div><div class="stat-l">সেরা স্কোর</div></div>
+      <div class="stat-box"><div class="stat-v sv-4" id="ps-xp">0</div><div class="stat-l">মোট XP</div></div>
+      <div class="stat-box"><div class="stat-v sv-5" id="ps-streak">0🔥</div><div class="stat-l">Streak</div></div>
+      <div class="stat-box"><div class="stat-v sv-6" id="ps-acc">0%</div><div class="stat-l">Accuracy</div></div>
+    </div>
+  </div>
+
+  <!-- SOCIAL LINKS -->
+  <div class="section" id="social-section" style="display:none">
+    <div class="sec-title">🔗 Social Media</div>
+    <div class="social-row" id="social-row"></div>
+  </div>
+
+  <!-- STREAK CALENDAR -->
+  <div class="section">
+    <div class="sec-title">🗓️ Streak Calendar (Last 28 Days)</div>
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.4rem;">
+      <div class="streak-day-labels">
+        <div class="day-label">Sun</div><div class="day-label">Mon</div><div class="day-label">Tue</div>
+        <div class="day-label">Wed</div><div class="day-label">Thu</div><div class="day-label">Fri</div><div class="day-label">Sat</div>
+      </div>
+      <div class="streak-grid" id="streak-grid"></div>
+      <div style="margin-top:.8rem;display:flex;gap:12px;font-size:11px;color:var(--muted);">
+        <span>⬜ Miss</span><span style="color:var(--gold)">🟨 Done</span><span style="color:#fff">📅 Today</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="section">
+    <div class="sec-title">🏅 Achievements</div>
+    <div class="ach-grid" id="ach-grid"></div>
+  </div>
+
+  <!-- CERTIFICATES -->
+  <div class="section">
+    <div class="sec-title">🎓 Certificates</div>
+    <div class="cert-grid" id="cert-grid"></div>
+  </div>
+
+  <!-- QUIZ HISTORY -->
+  <div class="section">
+    <div class="sec-title">📊 Quiz History</div>
+    <div class="score-hist" id="score-hist"><div class="no-data">কোনো quiz ইতিহাস নেই।</div></div>
+  </div>
+
+</div><!-- end .wrap -->
+
+
+<!-- ══════════════════════════════
+     EDIT MODAL
+══════════════════════════════ -->
+<div id="edit-modal">
+  <div class="edit-box">
+    <div class="edit-stripe"></div>
+    <div class="edit-header">
+      <div class="edit-title">✏️ Profile সম্পাদনা</div>
+      <button class="edit-close" onclick="closeEditModal()">✕</button>
+    </div>
+
+    <div class="edit-tabs">
+      <button class="edit-tab active" onclick="switchEditTab('basic',this)">👤 মূল তথ্য</button>
+      <button class="edit-tab" onclick="switchEditTab('about',this)">📝 পরিচিতি</button>
+      <button class="edit-tab" onclick="switchEditTab('social',this)">🔗 Social</button>
+      <button class="edit-tab" onclick="switchEditTab('password',this)">🔒 Password</button>
+    </div>
+
+    <div class="edit-panels">
+
+      <!-- TAB 1: Basic -->
+      <div class="edit-panel active" id="panel-basic">
+        <div class="edit-row">
+          <div class="edit-field"><label>👤 নাম</label><input type="text" id="edit-name" placeholder="আপনার পুরো নাম"></div>
+          <div class="edit-field"><label>📞 ফোন</label><input type="text" id="edit-phone" placeholder="+880 01XXXXXXXXX"></div>
+        </div>
+        <div class="edit-row">
+          <div class="edit-field"><label>🎂 জন্মতারিখ</label><input type="date" id="edit-dob" style="color-scheme:dark"></div>
+          <div class="edit-field"><label>⚧ লিঙ্গ</label>
+            <select id="edit-gender">
+              <option value="">বেছে নিন</option>
+              <option value="পুরুষ">পুরুষ</option>
+              <option value="মহিলা">মহিলা</option>
+              <option value="অন্যান্য">অন্যান্য</option>
+            </select>
+          </div>
+        </div>
+        <div class="edit-row">
+          <div class="edit-field"><label>📍 শহর</label><input type="text" id="edit-city" placeholder="যেমন: Dhaka"></div>
+          <div class="edit-field"><label>🌍 দেশ</label><input type="text" id="edit-country" placeholder="যেমন: Bangladesh"></div>
+        </div>
+        <div class="edit-field"><label>🎯 English শেখার লক্ষ্য</label>
+          <select id="edit-goal">
+            <option value="">বেছে নিন</option>
+            <option value="চাকরির জন্য">💼 চাকরির জন্য</option>
+            <option value="পড়াশোনার জন্য">📚 পড়াশোনার জন্য</option>
+            <option value="ভিসার জন্য">✈️ ভিসার জন্য</option>
+            <option value="ভ্রমণের জন্য">🌍 ভ্রমণের জন্য</option>
+            <option value="শখের জন্য">🎸 শখের জন্য</option>
+            <option value="পরিবারের জন্য">👨‍👩‍👧 পরিবারের জন্য</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- TAB 2: About -->
+      <div class="edit-panel" id="panel-about">
+        <div class="edit-field"><label>📝 Bio</label><textarea id="edit-bio" placeholder="নিজের সম্পর্কে কিছু লিখুন..."></textarea></div>
+        <div class="edit-field"><label>🏫 পেশা / পড়াশোনা</label><input type="text" id="edit-occupation" placeholder="যেমন: Student, Engineer..."></div>
+      </div>
+
+      <!-- TAB 3: Social -->
+      <div class="edit-panel" id="panel-social">
+        <div class="social-grid">
+          <div class="social-input-row"><div class="social-icon-box si-fb">📘</div><div class="edit-field" style="flex:1;gap:0"><input type="url" id="edit-fb" placeholder="Facebook profile URL"></div></div>
+          <div class="social-input-row"><div class="social-icon-box si-yt">▶️</div><div class="edit-field" style="flex:1;gap:0"><input type="url" id="edit-yt" placeholder="YouTube channel URL"></div></div>
+          <div class="social-input-row"><div class="social-icon-box si-ig">📸</div><div class="edit-field" style="flex:1;gap:0"><input type="url" id="edit-ig" placeholder="Instagram profile URL"></div></div>
+          <div class="social-input-row"><div class="social-icon-box si-gh">🐙</div><div class="edit-field" style="flex:1;gap:0"><input type="url" id="edit-gh" placeholder="GitHub profile URL"></div></div>
+          <div class="social-input-row"><div class="social-icon-box si-tg">✈️</div><div class="edit-field" style="flex:1;gap:0"><input type="url" id="edit-tg" placeholder="Telegram link"></div></div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Password -->
+      <div class="edit-panel" id="panel-password">
+        <div class="pwd-note">🔐 পাসওয়ার্ড পরিবর্তন করতে বর্তমান পাসওয়ার্ড দিন।<br>Google দিয়ে login করলে এই option কাজ করবে না।</div>
+        <div class="edit-field"><label>🔑 বর্তমান পাসওয়ার্ড</label><input type="password" id="edit-current-pwd" placeholder="Current password"></div>
+        <div class="edit-field"><label>🔒 নতুন পাসওয়ার্ড</label><input type="password" id="edit-new-pwd" placeholder="Minimum 6 characters"></div>
+        <div class="edit-field"><label>✅ নিশ্চিত করুন</label><input type="password" id="edit-confirm-pwd" placeholder="Confirm new password"></div>
+      </div>
+
+    </div><!-- end edit-panels -->
+
+    <div style="padding:0 1.8rem 1.8rem;">
+      <div class="save-status" id="save-status"></div>
+      <div class="edit-btns">
+        <button class="btn-cancel-modal" onclick="closeEditModal()">বাতিল</button>
+        <button class="btn-save-edit" id="btn-save-edit">💾 সেভ করুন</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম। A1 থেকে C2 পর্যন্ত vocabulary, grammar, speaking এবং live chat সুবিধা।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://facebook.com/zishanrafii" target="_blank">Facebook Message</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links-f">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link-f"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link-f"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link-f"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link-f"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link-f"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+
+
+<script type="module">
+import { safeUrl,
+  auth, db, requireAuth, signOut,
+  doc, getDoc, updateDoc,
+  collection, query, orderBy, limit, getDocs,
+  serverTimestamp,
+  updateProfile, EmailAuthProvider,
+  reauthenticateWithCredential, updatePassword
+} from "./js/firebase-config.js";
+
+const ACHIEVEMENTS = [
+  {id:"first-quiz", emoji:"🎯", name:"First Quiz",    desc:"প্রথম quiz সম্পন্ন"},
+  {id:"xp-100",     emoji:"⚡", name:"100 XP",         desc:"100 XP অর্জন করেছেন"},
+  {id:"xp-500",     emoji:"🌟", name:"500 XP",         desc:"500 XP অর্জন করেছেন"},
+  {id:"streak-3",   emoji:"🔥", name:"3-Day Streak",   desc:"৩ দিন ধারাবাহিক"},
+  {id:"streak-7",   emoji:"🏅", name:"7-Day Streak",   desc:"৭ দিন ধারাবাহিক"},
+  {id:"score-90",   emoji:"🎓", name:"Top Scorer",     desc:"Quiz-এ ৯০%+ পেয়েছেন"},
+  {id:"sessions-10",emoji:"📋", name:"10 Sessions",    desc:"১০টি session সম্পন্ন"},
+  {id:"a2-unlock",  emoji:"🌿", name:"A2 Unlocked",    desc:"A2 লেভেলে পৌঁছেছেন"},
+  {id:"b1-unlock",  emoji:"🌳", name:"B1 Unlocked",    desc:"B1 লেভেলে পৌঁছেছেন"},
+];
+
+/* Certificate earn condition:
+   - minXP: total XP must be >= this
+   - topicsRequired: all topics of this level must be done
+   - levelTopics: topic IDs from roadmap for this level             */
+const CERT_LEVEL_TOPICS = {
+  a1: ["a1-t1","a1-t2","a1-t3","a1-t4","a1-t5","a1-t6","a1-t7","a1-t8"],
+  a2: ["a2-t1","a2-t2","a2-t3","a2-t4","a2-t5","a2-t6","a2-t7","a2-t8"],
+  b1: ["b1-t1","b1-t2","b1-t3","b1-t4","b1-t5","b1-t6","b1-t7","b1-t8"],
+  b2: ["b2-t1","b2-t2","b2-t3","b2-t4","b2-t5","b2-t6","b2-t7","b2-t8"],
+  c1: ["c1-t1","c1-t2","c1-t3","c1-t4","c1-t5","c1-t6","c1-t7","c1-t8"],
+  c2: ["c2-t1","c2-t2","c2-t3","c2-t4","c2-t5","c2-t6","c2-t7","c2-t8"],
+};
+
+const CERTS = [
+  {id:"a1",emoji:"📜",title:"A1 Certificate",sub:"Beginner English",     minXP:500,   levelKey:"a1", totalTopics:8},
+  {id:"a2",emoji:"📜",title:"A2 Certificate",sub:"Elementary English",   minXP:2000,  levelKey:"a2", totalTopics:8},
+  {id:"b1",emoji:"🎓",title:"B1 Certificate",sub:"Intermediate English", minXP:5000,  levelKey:"b1", totalTopics:8},
+  {id:"b2",emoji:"🎓",title:"B2 Certificate",sub:"Upper-Inter English",  minXP:10000, levelKey:"b2", totalTopics:8},
+  {id:"c1",emoji:"🏅",title:"C1 Certificate",sub:"Advanced English",     minXP:18000, levelKey:"c1", totalTopics:8},
+  {id:"c2",emoji:"🏆",title:"C2 Certificate",sub:"Mastery English",      minXP:30000, levelKey:"c2", totalTopics:8},
+];
+
+/* Check if a certificate is earned */
+function isCertEarned(cert, xp, topicsDone=[]) {
+  const levelTopics = CERT_LEVEL_TOPICS[cert.levelKey] || [];
+  const allDone     = levelTopics.every(tid => topicsDone.includes(tid));
+  const xpOk        = xp >= cert.minXP;
+  return allDone && xpOk;
+}
+
+/* Count done topics for a level */
+function countDoneTopics(levelKey, topicsDone=[]) {
+  const levelTopics = CERT_LEVEL_TOPICS[levelKey] || [];
+  return levelTopics.filter(tid => topicsDone.includes(tid)).length;
+}
+
+/* ── GLOBALS ── */
+let meUID = null;
+let isOwnProfile = true;
+let currentData = {};
+
+/* ── HELPERS ── */
+document.getElementById("footer-year").textContent  = new Date().getFullYear();
+document.getElementById("footer-year2").textContent = new Date().getFullYear();
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2800);
+}
+
+function setStatus(msg, color="#f5c842") {
+  const el = document.getElementById("upload-status");
+  el.textContent = msg; el.style.color = color;
+  if(msg) setTimeout(() => el.textContent = "", 3000);
+}
+
+/* ── MODAL TABS — global ── */
+window.switchEditTab = (tab, el) => {
+  document.querySelectorAll(".edit-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".edit-panel").forEach(p => p.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("panel-" + tab).classList.add("active");
+};
+window.downloadCert   = downloadCert;
+
+/* ── Certificate download delegation ── */
+document.addEventListener("click", function(e){
+  const btn = e.target.closest('[data-action="download-cert"]');
+  if(!btn) return;
+  downloadCert(btn.dataset.certId||"", btn.dataset.certTitle||"");
+});
+window.closeEditModal = () => {
+  document.getElementById("edit-modal").classList.remove("open");
+  document.getElementById("save-status").textContent = "";
+};
+document.getElementById("edit-modal").onclick = e => {
+  if(e.target === document.getElementById("edit-modal")) window.closeEditModal();
+};
+
+/* ── XP UI ── */
+const XP_MAP = {a2:500, b1:2000, b2:5000, c1:10000, c2:18000};
+function updateXPUI(xp) {
+  const levels = [{k:"A1",min:0,max:500},{k:"A2",min:500,max:2000},{k:"B1",min:2000,max:5000},{k:"B2",min:5000,max:10000},{k:"C1",min:10000,max:18000},{k:"C2",min:18000,max:30000}];
+  let lv = levels[0];
+  for(let i=levels.length-1;i>=0;i--){ if(xp>=levels[i].min){ lv=levels[i]; break; } }
+  const next = levels[levels.indexOf(lv)+1];
+  const pct  = xp >= 30000 ? 100 : Math.max(0, Math.min(100, Math.round((xp-lv.min)/(lv.max-lv.min)*100)));
+  document.getElementById("xp-bar").style.width = pct + "%";
+  document.getElementById("xp-val-txt").textContent = next ? `${xp} / ${next.min} XP → ${next.k}` : `${xp} XP · 🏆 Max Level!`;
+  document.getElementById("p-level-tag").textContent = lv.k;
+  Object.entries(XP_MAP).forEach(([key,min]) => {
+    const el = document.getElementById("ms-"+key); if(el && xp>=min) el.classList.add("active");
+  });
+}
+
+/* ── STREAK CALENDAR ── */
+function buildCalendar(activeDays=[]) {
+  const grid = document.getElementById("streak-grid");
+  grid.innerHTML = "";
+  const today = new Date();
+  for(let i=27;i>=0;i--) {
+    const d = new Date(today); d.setDate(d.getDate()-i);
+    const div = document.createElement("div");
+    div.className = "streak-day";
+    div.textContent = d.getDate();
+    if(i===0) div.classList.add("today");
+    else if(activeDays.includes(i)) div.classList.add("done");
+    grid.appendChild(div);
+  }
+}
+
+/* ── ACHIEVEMENTS ── */
+function buildAchievements(xp, sessions, bestScore, streak) {
+  const earned = new Set();
+  if(sessions>=1)   earned.add("first-quiz");
+  if(xp>=100)       earned.add("xp-100");
+  if(xp>=500)       earned.add("xp-500");
+  if(streak>=3)     earned.add("streak-3");
+  if(streak>=7)     earned.add("streak-7");
+  if(bestScore>=90) earned.add("score-90");
+  if(sessions>=10)  earned.add("sessions-10");
+  if(xp>=500)       earned.add("a2-unlock");
+  if(xp>=2000)      earned.add("b1-unlock");
+  document.getElementById("ach-grid").innerHTML = ACHIEVEMENTS.map(a => `
+    <div class="ach-card ${earned.has(a.id)?"earned":""}">
+      <div class="ach-emoji">${a.emoji}</div>
+      <div class="ach-name">${a.name}</div>
+      <div class="ach-desc">${a.desc}</div>
+    </div>`).join("");
+}
+
+/* ── CERTIFICATES ── */
+function buildCerts(xp, topicsDone=[]) {
+  document.getElementById("cert-grid").innerHTML = CERTS.map(cert => {
+    const earned      = isCertEarned(cert, xp, topicsDone);
+    const doneTopics  = countDoneTopics(cert.levelKey, topicsDone);
+    const totalTopics = cert.totalTopics;
+    const topicsPct   = Math.round(doneTopics / totalTopics * 100);
+    const xpPct       = Math.min(100, Math.round(xp / cert.minXP * 100));
+    const needXP      = Math.max(0, cert.minXP - xp);
+    const needTopics  = Math.max(0, totalTopics - doneTopics);
+    const allTopicsDone = doneTopics >= totalTopics;
+
+    return `
+    <div class="cert-card ${earned ? "earned" : ""}">
+      <div class="cert-icon">${cert.emoji}</div>
+      <div class="cert-title">${cert.title}</div>
+      <div class="cert-sub">${cert.sub}</div>
+
+      ${earned ? `
+        <span class="cert-badge">✓ Earned</span>
+        <div style="margin-top:.7rem;">
+          <button data-cert-id="${cert.id}" data-cert-title="${cert.title}"
+            data-action="download-cert"
+            style="background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.25);color:#f5c842;
+                   padding:4px 11px;border-radius:8px;cursor:pointer;font-size:10.5px;font-weight:700;
+                   font-family:'Outfit',sans-serif;transition:.2s;width:100%;">
+            ⬇ Download Certificate
+          </button>
+        </div>` : `
+        <div style="margin-top:.7rem;display:flex;flex-direction:column;gap:6px;">
+
+          <!-- Topics progress -->
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:3px;">
+              <span>Topics</span><span>${doneTopics}/${totalTopics}</span>
+            </div>
+            <div style="height:3px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;">
+              <div style="height:100%;width:${topicsPct}%;background:${allTopicsDone?'#34d399':'linear-gradient(90deg,#2dd4bf,#818cf8)'};border-radius:20px;transition:.6s;"></div>
+            </div>
+          </div>
+
+          <!-- XP progress -->
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:3px;">
+              <span>XP</span><span>${xp.toLocaleString()}/${cert.minXP.toLocaleString()}</span>
+            </div>
+            <div style="height:3px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;">
+              <div style="height:100%;width:${xpPct}%;background:linear-gradient(90deg,#f5c842,#fbbf24);border-radius:20px;transition:.6s;"></div>
+            </div>
+          </div>
+
+          <!-- What's missing -->
+          <div style="font-size:9.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.5;margin-top:1px;">
+            ${!allTopicsDone ? `📚 ${cert.levelKey.toUpperCase()}-এর আরো <b style="color:var(--sub)">${needTopics}টি topic</b> শেষ করুন` : '✅ সব topic done!'}
+            ${needXP > 0 ? `<br>⚡ আরো <b style="color:var(--gold)">${needXP.toLocaleString()} XP</b> দরকার` : '<br>✅ XP যথেষ্ট!'}
+          </div>
+        </div>`
+      }
+    </div>`;
+  }).join("");
+}
+
+/* ── Download Certificate (Canvas) ── */
+function downloadCert(id, title) {
+  const canvas = document.createElement("canvas");
+  canvas.width  = 800;
+  canvas.height = 560;
+  const ctx = canvas.getContext("2d");
+
+  // Background
+  ctx.fillStyle = "#04080f";
+  ctx.fillRect(0, 0, 800, 560);
+
+  // Gold border
+  ctx.strokeStyle = "#f5c842";
+  ctx.lineWidth   = 4;
+  ctx.strokeRect(20, 20, 760, 520);
+  ctx.strokeStyle = "rgba(245,200,66,.3)";
+  ctx.lineWidth   = 1;
+  ctx.strokeRect(30, 30, 740, 500);
+
+  // Title
+  ctx.fillStyle   = "#f5c842";
+  ctx.font        = "bold 20px Arial";
+  ctx.textAlign   = "center";
+  ctx.fillText("🇬🇧 ENGLISH SHEKHO", 400, 80);
+
+  // Certificate of Completion
+  ctx.fillStyle = "#f0f4f8";
+  ctx.font      = "bold 32px Arial";
+  ctx.fillText("Certificate of Completion", 400, 140);
+
+  // Divider
+  ctx.strokeStyle = "rgba(245,200,66,.5)";
+  ctx.lineWidth   = 1;
+  ctx.beginPath();
+  ctx.moveTo(100, 160); ctx.lineTo(700, 160);
+  ctx.stroke();
+
+  // This certifies
+  ctx.fillStyle = "#94a3b8";
+  ctx.font      = "16px Arial";
+  ctx.fillText("This certifies that", 400, 210);
+
+  // User name
+  const name = document.getElementById("p-name")?.textContent || "Learner";
+  ctx.fillStyle = "#f5c842";
+  ctx.font      = "bold 28px Arial";
+  ctx.fillText(name, 400, 260);
+
+  // has successfully completed
+  ctx.fillStyle = "#94a3b8";
+  ctx.font      = "16px Arial";
+  ctx.fillText("has successfully completed", 400, 300);
+
+  // Course title
+  ctx.fillStyle = "#2dd4bf";
+  ctx.font      = "bold 24px Arial";
+  ctx.fillText(title + " — English Shekho", 400, 345);
+
+  // Date
+  ctx.fillStyle = "#64748b";
+  ctx.font      = "14px Arial";
+  const today   = new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+  ctx.fillText("Issued on: " + today, 400, 400);
+
+  // Signature line
+  ctx.strokeStyle = "rgba(255,255,255,.15)";
+  ctx.lineWidth   = 1;
+  ctx.beginPath();
+  ctx.moveTo(270, 460); ctx.lineTo(530, 460);
+  ctx.stroke();
+  ctx.fillStyle = "#64748b";
+  ctx.font      = "12px Arial";
+  ctx.fillText("Zishan Rafi — Founder, English Shekho", 400, 478);
+
+  // Footer
+  ctx.fillStyle = "rgba(245,200,66,.4)";
+  ctx.font      = "11px Arial";
+  ctx.fillText("english-shekho-bd.firebaseapp.com", 400, 520);
+
+  // Download
+  const link    = document.createElement("a");
+  link.download = `${id}-certificate-english-shekho.png`;
+  link.href     = canvas.toDataURL("image/png");
+  link.click();
+}
+
+/* ── SOCIAL SECTION ── */
+function buildSocial(social={}) {
+  const links = [
+    {key:"facebook", icon:"📘",label:"Facebook",cls:"sc-fb"},
+    {key:"youtube",  icon:"▶️",label:"YouTube", cls:"sc-yt"},
+    {key:"instagram",icon:"📸",label:"Instagram",cls:"sc-ig"},
+    {key:"github",   icon:"🐙",label:"GitHub",  cls:"sc-gh"},
+    {key:"telegram", icon:"✈️",label:"Telegram",cls:"sc-tg"},
+  ];
+  const row = document.getElementById("social-row");
+  const sec = document.getElementById("social-section");
+  row.innerHTML = "";
+  let has = false;
+  links.forEach(l => {
+    if(social[l.key]) {
+      has = true;
+      row.innerHTML += `<a href="${social[l.key]}" target="_blank" class="social-chip ${l.cls}">${l.icon} ${l.label}</a>`;
+    }
+  });
+  sec.style.display = has ? "block" : "none";
+}
+
+/* ── SCORE HISTORY ── */
+function buildScores(scores=[]) {
+  const hist = document.getElementById("score-hist");
+  if(!scores.length) { hist.innerHTML = '<div class="no-data">কোনো quiz ইতিহাস নেই।</div>'; return; }
+  hist.innerHTML = scores.map(s => `
+    <div class="hist-row">
+      <div class="hist-dot"></div>
+      <div style="flex:1">
+        <div class="hist-info">${s.correct}/${s.total} correct
+          <span style="font-size:10px;color:var(--muted);margin-left:6px;font-family:'JetBrains Mono',monospace;">${s.level}</span>
+        </div>
+        <div class="hist-meta">${s.date}</div>
+      </div>
+      <div class="hist-right">
+        <div class="hist-score">${s.correct}</div>
+        <div class="hist-pct">${s.pct}%</div>
+      </div>
+    </div>`).join("");
+}
+
+/* ── POPULATE UI ── */
+function populateUI(d, user=null) {
+  currentData = { ...d };
+  const name    = d.displayName || "Learner";
+  const photo   = d.photoURL    || "";
+  const xp      = d.xp          || 0;
+  const correct = d.totalCorrect || 0;
+  const totalQ  = d.totalQuestions || 0;
+  const acc     = totalQ > 0 ? Math.round((correct/totalQ)*100) : 0;
+  const sessions= d.sessions    || 0;
+  const best    = d.bestScore   || 0;
+  const streak  = d.streak      || 0;
+
+  /* nav */
+  document.getElementById("nav-name").textContent = name;
+  const nav = document.getElementById("nav-avatar");
+  if(photo) nav.innerHTML = `<img src="${safeUrl(photo)}">`;
+  else nav.textContent = (name[0]||"?").toUpperCase();
+
+  /* avatar big */
+  const avBig = document.getElementById("profile-avatar-big");
+  if(photo) avBig.innerHTML = `<img src="${safeUrl(photo)}">`;
+  else { avBig.innerHTML = ""; avBig.textContent = (name[0]||"?").toUpperCase(); }
+
+  /* cover */
+  if(d.coverURL) document.getElementById("profile-cover").style.backgroundImage = `url('${d.coverURL}')`;
+
+  /* name + meta tags */
+  document.getElementById("p-name").textContent = name;
+  const tags = document.getElementById("meta-tags");
+  tags.innerHTML = "";
+  if(d.email)              tags.innerHTML += `<span class="meta-tag">✉️ ${d.email}</span>`;
+  if(d.phone)              tags.innerHTML += `<span class="meta-tag">📞 ${d.phone}</span>`;
+  if(d.city||d.country)   tags.innerHTML += `<span class="meta-tag">📍 ${[d.city,d.country].filter(Boolean).join(", ")}</span>`;
+  if(d.goal)               tags.innerHTML += `<span class="meta-tag goal-tag">🎯 ${d.goal}</span>`;
+  if(d.occupation)         tags.innerHTML += `<span class="meta-tag">💼 ${d.occupation}</span>`;
+
+  /* bio */
+  if(d.bio) {
+    const b = document.getElementById("p-bio");
+    b.textContent = `"${d.bio}"`; b.style.display = "block";
+  }
+  document.getElementById("p-joined").textContent =
+    d.createdAt ? "📅 যোগ দিয়েছেন: " + (d.createdAt?.toDate ? d.createdAt.toDate().toLocaleDateString("bn-BD") : d.createdAt.slice(0,10)) : "";
+
+  /* stats */
+  document.getElementById("ps-correct").textContent  = correct;
+  document.getElementById("ps-sessions").textContent = sessions;
+  document.getElementById("ps-best").textContent     = best + "%";
+  document.getElementById("ps-xp").textContent       = xp;
+  document.getElementById("ps-streak").textContent   = streak + "🔥";
+  document.getElementById("ps-acc").textContent      = acc + "%";
+
+  /* xp, calendar, ach, certs, social */
+  updateXPUI(xp);
+  buildCalendar(d.activeDays || []);
+  buildAchievements(xp, sessions, best, streak);
+  buildCerts(xp, d.topicsDone || []);
+  buildSocial(d.social || {});
+
+  /* action buttons */
+  const actEl = document.getElementById("profile-actions");
+  if(isOwnProfile) {
+    document.getElementById("btn-cover").style.display     = "block";
+    document.getElementById("avatar-edit-fab").style.display = "flex";
+    actEl.innerHTML = `
+      <button class="btn-action btn-edit-p" id="btn-open-edit">✏️ সম্পাদনা</button>
+      <button class="btn-action btn-logout-p" id="btn-logout-p">🚪 Logout</button>`;
+    document.getElementById("btn-open-edit").onclick = () => openEditModal(d);
+    document.getElementById("btn-logout-p").onclick  = () => signOut(auth).then(() => location.href = "index.html");
+    setupUploads();
+  } else {
+    actEl.innerHTML = `
+      <button class="btn-action btn-msg-p" id="btn-msg">💬 Message পাঠান</button>
+      <button class="btn-action btn-friend" id="btn-friend">➕ Friend Request</button>`;
+    document.getElementById("btn-msg").onclick = () => window.location.href = `inbox.html?uid=${meUID}`;
+    /* checkFriendStatus() — Firebase এ connect করলে */
+  }
+}
+
+/* ── UPLOADS ── */
+function setupUploads() {
+  /* Avatar */
+  document.getElementById("avatar-edit-fab").onclick = () => document.getElementById("avatar-input").click();
+  document.getElementById("profile-avatar-big").onclick = () => document.getElementById("avatar-input").click();
+  document.getElementById("avatar-input").onchange = async function() {
+    const file = this.files[0]; if(!file) return;
+    if(file.size > 500 * 1024) { setStatus("❌ ছবি ৫০০KB এর বেশি হওয়া যাবে না", "var(--rose)"); return; }
+    setStatus("⏳ ছবি আপলোড হচ্ছে...");
+    const r = new FileReader();
+    r.onload = async e => {
+      const base64 = e.target.result; // base64 data URL — Firestore-এ সরাসরি রাখব
+      try {
+        await updateDoc(doc(db, "users", meUID), { photoURL: base64 });
+        await updateProfile(auth.currentUser, { photoURL: base64 });
+        document.getElementById("profile-avatar-big").innerHTML = `<img src="${base64}">`;
+        document.getElementById("nav-avatar").innerHTML = `<img src="${base64}">`;
+        setStatus("✅ Profile photo সেভ হয়েছে!", "var(--emerald)");
+      } catch(err) {
+        console.error(err);
+        setStatus("❌ সেভ হয়নি, আবার চেষ্টা করো", "var(--rose)");
+      }
+    };
+    r.readAsDataURL(file);
+  };
+  /* Cover */
+  document.getElementById("btn-cover").onclick = () => document.getElementById("cover-input").click();
+  document.getElementById("cover-input").onchange = async function() {
+    const file = this.files[0]; if(!file) return;
+    if(file.size > 800 * 1024) { setStatus("❌ Cover ছবি ৮০০KB এর বেশি হওয়া যাবে না", "var(--rose)"); return; }
+    setStatus("⏳ Cover আপলোড হচ্ছে...");
+    const r = new FileReader();
+    r.onload = async e => {
+      const base64 = e.target.result;
+      try {
+        await updateDoc(doc(db, "users", meUID), { coverURL: base64 });
+        document.getElementById("profile-cover").style.backgroundImage = `url('${base64}')`;
+        setStatus("✅ Cover photo সেভ হয়েছে!", "var(--emerald)");
+      } catch(err) {
+        console.error(err);
+        setStatus("❌ সেভ হয়নি, আবার চেষ্টা করো", "var(--rose)");
+      }
+    };
+    r.readAsDataURL(file);
+  };
+}
+
+/* ── EDIT MODAL OPEN ── */
+function openEditModal(d) {
+  const s = d.social || {};
+  document.getElementById("edit-name").value       = d.displayName || "";
+  document.getElementById("edit-phone").value      = d.phone || "";
+  document.getElementById("edit-dob").value        = d.dob || "";
+  document.getElementById("edit-gender").value     = d.gender || "";
+  document.getElementById("edit-city").value       = d.city || "";
+  document.getElementById("edit-country").value    = d.country || "";
+  document.getElementById("edit-goal").value       = d.goal || "";
+  document.getElementById("edit-bio").value        = d.bio || "";
+  document.getElementById("edit-occupation").value = d.occupation || "";
+  document.getElementById("edit-fb").value         = s.facebook || "";
+  document.getElementById("edit-yt").value         = s.youtube || "";
+  document.getElementById("edit-ig").value         = s.instagram || "";
+  document.getElementById("edit-gh").value         = s.github || "";
+  document.getElementById("edit-tg").value         = s.telegram || "";
+  document.getElementById("edit-current-pwd").value = "";
+  document.getElementById("edit-new-pwd").value     = "";
+  document.getElementById("edit-confirm-pwd").value = "";
+  /* reset to first tab */
+  document.querySelectorAll(".edit-tab").forEach((t,i) => t.classList.toggle("active", i===0));
+  document.querySelectorAll(".edit-panel").forEach((p,i) => p.classList.toggle("active", i===0));
+  document.getElementById("edit-modal").classList.add("open");
+}
+
+/* ── SAVE EDIT ── */
+document.getElementById("btn-save-edit").onclick = async () => {
+  const btn    = document.getElementById("btn-save-edit");
+  const status = document.getElementById("save-status");
+  const newName = document.getElementById("edit-name").value.trim();
+  if(!newName) { status.textContent = "❌ নাম দিন।"; status.style.color = "var(--rose)"; return; }
+
+  /* Password validation */
+  const curPwd  = document.getElementById("edit-current-pwd").value;
+  const newPwd  = document.getElementById("edit-new-pwd").value;
+  const confPwd = document.getElementById("edit-confirm-pwd").value;
+  if(newPwd || curPwd || confPwd) {
+    if(newPwd.length < 6) { status.textContent = "❌ নতুন পাসওয়ার্ড কমপক্ষে ৬ অক্ষর।"; status.style.color="var(--rose)"; return; }
+    if(newPwd !== confPwd) { status.textContent = "❌ পাসওয়ার্ড দুটো মিলছে না।"; status.style.color="var(--rose)"; return; }
+  }
+
+  btn.disabled = true; btn.textContent = "সেভ হচ্ছে...";
+  status.textContent = "";
+
+  const updated = {
+    displayName: newName,
+    phone:       document.getElementById("edit-phone").value.trim(),
+    dob:         document.getElementById("edit-dob").value,
+    gender:      document.getElementById("edit-gender").value,
+    city:        document.getElementById("edit-city").value.trim(),
+    country:     document.getElementById("edit-country").value.trim(),
+    goal:        document.getElementById("edit-goal").value,
+    bio:         document.getElementById("edit-bio").value.trim(),
+    occupation:  document.getElementById("edit-occupation").value.trim(),
+    social: {
+      facebook:  document.getElementById("edit-fb").value.trim(),
+      youtube:   document.getElementById("edit-yt").value.trim(),
+      instagram: document.getElementById("edit-ig").value.trim(),
+      github:    document.getElementById("edit-gh").value.trim(),
+      telegram:  document.getElementById("edit-tg").value.trim(),
+    }
+  };
+
+  /* Firebase: real Firestore save */
+  try {
+    await updateDoc(doc(db, "users", meUID), updated);
+    if(updated.displayName !== auth.currentUser.displayName) {
+      await updateProfile(auth.currentUser, { displayName: updated.displayName });
+    }
+    /* Password change */
+    if(newPwd && curPwd) {
+      const cred = EmailAuthProvider.credential(auth.currentUser.email, curPwd);
+      await reauthenticateWithCredential(auth.currentUser, cred);
+      await updatePassword(auth.currentUser, newPwd);
+    }
+    /* Update UI live */
+    populateUI({ ...currentData, ...updated });
+    status.textContent = "✅ সফলভাবে সেভ হয়েছে!"; status.style.color = "var(--emerald)";
+    showToast("Profile আপডেট হয়েছে ✅");
+    setTimeout(() => window.closeEditModal(), 1200);
+  } catch(err) {
+    console.error(err);
+    if(err.code === "auth/wrong-password") {
+      status.textContent = "❌ বর্তমান পাসওয়ার্ড ভুল।";
+    } else {
+      status.textContent = "❌ সেভ হয়নি: " + err.message;
+    }
+    status.style.color = "var(--rose)";
+  }
+  btn.disabled = false; btn.textContent = "💾 সেভ করুন";
+};
+
+/* ── TOPBAR LOGOUT ── */
+document.getElementById("btn-logout-top").onclick = () =>
+  signOut(auth).then(() => location.href = "index.html");
+
+/* ══════════════════════════════════════════════
+   REAL FIREBASE INIT
+══════════════════════════════════════════════ */
+requireAuth(async user => {
+  meUID = user.uid;
+
+  const params  = new URLSearchParams(location.search);
+  const viewUID = params.get("uid") || user.uid;
+  isOwnProfile  = viewUID === user.uid;
+
+  // User doc load
+  const snap = await getDoc(doc(db, "users", viewUID));
+  const data = snap.exists() ? snap.data() : { displayName: user.displayName || "Learner", email: user.email };
+  populateUI(data, user);
+
+  // Score history Firestore থেকে আনো
+  try {
+    const scoresSnap = await getDocs(
+      query(collection(db, "users", viewUID, "scores"), orderBy("createdAt", "desc"), limit(10))
+    );
+    const scores = scoresSnap.docs.map(d => {
+      const s = d.data();
+      const date = s.createdAt?.toDate
+        ? s.createdAt.toDate().toLocaleDateString("bn-BD")
+        : "";
+      return { correct: s.correct, total: s.total, pct: s.pct, level: s.level || "", date };
+    });
+    buildScores(scores);
+  } catch(e) {
+    console.warn("Score history load failed:", e);
+    buildScores([]);
+  }
+});
+
+</script>
+
+</body>
+</html>

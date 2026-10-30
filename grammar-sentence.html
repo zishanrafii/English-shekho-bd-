@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentence Structure — English Shekho Grammar</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#080e1a;--surface2:#0c1322;
+  --border:rgba(255,255,255,.055);--gold:#f5c842;--teal:#2dd4bf;
+  --rose:#fb7185;--indigo:#818cf8;--emerald:#34d399;--orange:#fb923c;
+  --accent:#fb923c;
+  --muted:#64748b;--sub:#94a3b8;--text:#f0f4f8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 70% 50% at 0% 0%,rgba(251,146,60,.07),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(251,146,60,.04),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+.topbar{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border);position:sticky;top:0;
+  background:rgba(4,8,15,.9);backdrop-filter:blur(20px);z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.4);}
+.tb-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.tb-icon{width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(251,146,60,.2),rgba(251,146,60,.1));
+  border:1px solid rgba(251,146,60,.3);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.tb-name{font-size:1rem;font-weight:800;background:linear-gradient(135deg,#fb923c,#fdba74);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tb-sep{width:1px;height:24px;background:var(--border);margin:0 4px;}
+.tb-page{font-size:.85rem;color:var(--muted);font-weight:600;}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.tb-btn{padding:.35rem .85rem;border-radius:20px;font-size:12px;font-weight:600;
+  color:var(--sub);text-decoration:none;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);transition:.2s;font-family:'Outfit',sans-serif;}
+.tb-btn:hover{color:var(--text);border-color:rgba(251,146,60,.3);}
+.nav-av{width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(251,146,60,.15),rgba(253,186,116,.15));
+  border:2px solid rgba(251,146,60,.2);display:flex;align-items:center;
+  justify-content:center;font-size:.9rem;cursor:pointer;flex-shrink:0;}
+
+.layout{display:flex;height:calc(100vh - 57px);}
+.sidebar{width:240px;flex-shrink:0;border-right:1px solid var(--border);
+  overflow-y:auto;background:rgba(8,14,26,.6);padding:.8rem .6rem;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(251,146,60,.2);border-radius:3px;}
+.sb-section-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;padding:.5rem .7rem .3rem;font-family:'JetBrains Mono',monospace;}
+.sb-item{display:flex;align-items:center;gap:8px;padding:.5rem .7rem;
+  border-radius:10px;cursor:pointer;transition:.2s;border:1px solid transparent;margin-bottom:2px;}
+.sb-item:hover{background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.1);}
+.sb-item.active{background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.25);color:var(--accent);}
+.sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-text{font-size:12.5px;font-weight:600;flex:1;}
+.sb-lvl{font-size:9px;font-family:'JetBrains Mono',monospace;padding:1px 6px;border-radius:20px;font-weight:700;flex-shrink:0;}
+.lvl-a1{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.2);}
+.lvl-a2{background:rgba(245,200,66,.1);color:#f5c842;border:1px solid rgba(245,200,66,.2);}
+.lvl-b1{background:rgba(251,146,60,.1);color:#fb923c;border:1px solid rgba(251,146,60,.2);}
+.lvl-b2{background:rgba(251,113,133,.1);color:#fb7185;border:1px solid rgba(251,113,133,.2);}
+
+.main{flex:1;overflow-y:auto;padding:2rem 2.2rem 4rem;}
+.main::-webkit-scrollbar{width:4px;}
+.main::-webkit-scrollbar-thumb{background:rgba(251,146,60,.15);border-radius:3px;}
+
+.lesson-header{margin-bottom:2rem;}
+.lesson-breadcrumb{font-size:11px;color:var(--muted);margin-bottom:.6rem;font-family:'JetBrains Mono',monospace;}
+.lesson-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.5rem;line-height:1.15;}
+.lesson-title span{background:linear-gradient(135deg,#fb923c,#fdba74);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lesson-desc{font-size:14px;color:var(--sub);line-height:1.75;max-width:640px;font-family:'Noto Sans Bengali',sans-serif;}
+.lesson-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:.8rem;}
+.lmeta{font-size:12px;color:var(--muted);background:rgba(255,255,255,.03);border:1px solid var(--border);padding:4px 12px;border-radius:20px;}
+
+.card{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.6rem;margin-bottom:1.4rem;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--card-accent,linear-gradient(90deg,var(--accent),#fdba74));opacity:.6;}
+.card-title{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:1.1rem;display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;}
+.card-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* SVO block diagram */
+.svo-wrap{display:flex;gap:.6rem;align-items:stretch;margin-bottom:1.2rem;flex-wrap:wrap;}
+.svo-block{border-radius:14px;padding:1rem 1.2rem;text-align:center;border:1px solid;flex:1;min-width:100px;}
+.svo-letter{font-size:2rem;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:.2rem;}
+.svo-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.3rem;}
+.svo-bn{font-size:11px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;line-height:1.4;}
+.svo-arrow{display:flex;align-items:center;color:var(--muted);font-size:1.4rem;font-weight:300;align-self:center;}
+
+/* Sentence breakdown */
+.sbreak{background:rgba(251,146,60,.04);border:1px solid rgba(251,146,60,.15);border-radius:14px;padding:1rem 1.2rem;margin-bottom:.8rem;}
+.sbreak-sent{font-size:1rem;font-weight:700;margin-bottom:.7rem;letter-spacing:.02em;}
+.sbreak-tags{display:flex;gap:.5rem;flex-wrap:wrap;}
+.stag{padding:.3rem .8rem;border-radius:20px;font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+
+/* Clause visual */
+.clause-split{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem;}
+.clause-box{border-radius:14px;padding:.9rem 1.1rem;border:1px solid;}
+.clause-label{font-size:9.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.clause-text{font-size:13px;font-weight:600;line-height:1.5;}
+.clause-bn{font-size:11.5px;color:var(--muted);margin-top:.3rem;font-family:'Noto Sans Bengali',sans-serif;}
+
+.formula{background:rgba(251,146,60,.06);border:1px solid rgba(251,146,60,.18);border-radius:14px;padding:1rem 1.4rem;margin-bottom:1rem;}
+.formula-label{font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;}
+.formula-text{font-size:.95rem;color:var(--text);line-height:1.9;font-family:'JetBrains Mono',monospace;}
+.hl{color:var(--accent);font-weight:700;}
+.hl2{color:var(--teal);font-weight:700;}
+.hl3{color:var(--rose);font-weight:700;}
+.hl4{color:var(--gold);font-weight:700;}
+.hl5{color:var(--indigo);font-weight:700;}
+.hl6{color:var(--emerald);font-weight:700;}
+
+/* Sentence type cards */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.8rem;margin-bottom:1.2rem;}
+.type-card{border-radius:16px;padding:1rem .9rem;border:1px solid;text-align:center;cursor:pointer;transition:.2s;}
+.type-card:hover{transform:translateY(-2px);}
+.type-icon{font-size:1.6rem;margin-bottom:.3rem;}
+.type-name{font-size:13px;font-weight:800;margin-bottom:.2rem;}
+.type-bn{font-size:10.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+
+/* Question tag builder */
+.qtag-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem;flex-wrap:wrap;}
+.qtag-main{font-size:13px;font-weight:600;flex:1;min-width:200px;}
+.qtag-comma{color:var(--muted);}
+.qtag-tag{background:rgba(251,146,60,.1);border:1px solid rgba(251,146,60,.25);color:var(--accent);border-radius:20px;padding:.25rem .8rem;font-size:12px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.qtag-bn{font-size:11px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;width:100%;margin-top:.2rem;}
+
+.examples{display:flex;flex-direction:column;gap:.6rem;}
+.ex{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:12px;padding:.8rem 1.1rem;transition:.2s;}
+.ex:hover{border-color:rgba(251,146,60,.2);transform:translateX(4px);}
+.ex-en{font-size:14px;font-weight:600;margin-bottom:.25rem;}
+.ex-bn{font-size:12.5px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;}
+.ex-tag{font-size:10px;font-family:'JetBrains Mono',monospace;padding:1px 8px;border-radius:20px;margin-left:8px;font-weight:700;background:rgba(251,146,60,.1);color:var(--accent);}
+
+.gtable{width:100%;border-collapse:collapse;font-size:13px;}
+.gtable th{background:rgba(251,146,60,.08);color:var(--accent);font-weight:700;padding:.65rem .9rem;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(251,146,60,.15);}
+.gtable td{padding:.6rem .9rem;border-bottom:1px solid rgba(255,255,255,.04);}
+.gtable tr:last-child td{border-bottom:none;}
+.gtable tr:hover td{background:rgba(255,255,255,.02);}
+.gtable td:first-child{color:var(--text);font-weight:600;}
+.gtable td:nth-child(2){color:var(--accent);font-size:12.5px;}
+.gtable td:nth-child(3){color:var(--sub);font-size:13px;}
+.gtable td:nth-child(4){color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;font-size:12px;}
+
+/* Sentence type flow diagram */
+.sent-flow{display:flex;flex-direction:column;gap:.6rem;}
+.sf-row{display:flex;align-items:center;gap:.6rem;}
+.sf-label{font-size:12px;font-weight:700;width:100px;font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+.sf-box{flex:1;border-radius:10px;padding:.5rem .9rem;font-size:12.5px;font-weight:600;border:1px solid;}
+.sf-plus{color:var(--muted);font-size:1.1rem;flex-shrink:0;}
+
+.tip{background:rgba(251,146,60,.06);border:1px solid rgba(251,146,60,.2);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.tip-icon{font-size:1.3rem;flex-shrink:0;}
+.tip-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.tip-text strong{color:var(--accent);}
+.warn{background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.18);border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;display:flex;gap:.8rem;}
+.warn-text{font-size:13px;line-height:1.7;font-family:'Noto Sans Bengali',sans-serif;color:var(--sub);}
+.warn-text strong{color:var(--rose);}
+
+.practice-q{background:rgba(251,146,60,.04);border:1px solid rgba(251,146,60,.15);border-radius:14px;padding:1.2rem;margin-bottom:.8rem;}
+.pq-text{font-size:14px;font-weight:600;margin-bottom:.6rem;}
+.pq-options{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+.pq-opt{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;transition:.2s;font-family:'Outfit',sans-serif;}
+.pq-opt:hover{border-color:rgba(251,146,60,.3);color:var(--accent);}
+.pq-opt.correct{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:#34d399;}
+.pq-opt.wrong{background:rgba(251,113,133,.1);border-color:rgba(251,113,133,.3);color:var(--rose);}
+.pq-feedback{font-size:13px;padding:.5rem .8rem;border-radius:8px;display:none;font-family:'Noto Sans Bengali',sans-serif;margin-top:.4rem;}
+.pq-feedback.show{display:block;}
+.pq-feedback.correct{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#34d399;}
+.pq-feedback.wrong{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.2);color:var(--rose);}
+
+.lesson-nav{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap;align-items:center;}
+.btn-prev,.btn-next{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.3rem;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--sub);cursor:pointer;font-size:13px;font-weight:600;font-family:'Outfit',sans-serif;transition:.2s;text-decoration:none;}
+.btn-prev:hover,.btn-next:hover{background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25);color:var(--text);}
+.btn-next{background:linear-gradient(135deg,rgba(251,146,60,.12),rgba(253,186,116,.08));border-color:rgba(251,146,60,.25);color:var(--text);margin-left:auto;}
+.btn-quiz-big{background:linear-gradient(135deg,#fb923c,#fdba74);color:#000;border:none;border-radius:14px;padding:.75rem 1.6rem;font-size:14px;font-weight:800;cursor:pointer;font-family:'Outfit',sans-serif;transition:.2s;}
+.btn-quiz-big:hover{opacity:.88;transform:translateY(-1px);}
+
+.progress-strip{position:fixed;top:57px;left:0;right:0;height:3px;z-index:99;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#fb923c,#fdba74);transition:width .3s;}
+
+@media(max-width:768px){
+  .layout{flex-direction:column;}
+  .sidebar{width:100%;height:auto;max-height:200px;border-right:none;border-bottom:1px solid var(--border);}
+  .main{padding:1.2rem 1rem 3rem;}
+  .svo-wrap{flex-direction:column;}
+  .clause-split{grid-template-columns:1fr;}
+  .type-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="grammar.html">
+    <div class="tb-icon">📚</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">🏗️ Sentence Structure</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="grammar.html">← Grammar Hub</a>
+    <a class="tb-btn" href="dashboard.html">Dashboard</a>
+    <div class="nav-av" onclick="location.href='profile.html'">👤</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section-label">Sentence Structure</div>
+    <div class="sb-item active" data-id="intro" onclick="show('intro',0)">
+      <span class="sb-dot" style="background:#fb923c"></span><span class="sb-text">Introduction</span><span class="sb-lvl lvl-a1">A1</span>
+    </div>
+    <div class="sb-item" data-id="svo" onclick="show('svo',1)">
+      <span class="sb-dot" style="background:#34d399"></span><span class="sb-text">SVO Structure</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="clauses" onclick="show('clauses',2)">
+      <span class="sb-dot" style="background:#2dd4bf"></span><span class="sb-text">Clauses</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="types" onclick="show('types',3)">
+      <span class="sb-dot" style="background:#f5c842"></span><span class="sb-text">Types of Sentences</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="purpose" onclick="show('purpose',4)">
+      <span class="sb-dot" style="background:#818cf8"></span><span class="sb-text">Purpose of Sentences</span><span class="sb-lvl lvl-a2">A2</span>
+    </div>
+    <div class="sb-item" data-id="qtags" onclick="show('qtags',5)">
+      <span class="sb-dot" style="background:#fb7185"></span><span class="sb-text">Question Tags</span><span class="sb-lvl lvl-b1">B1</span>
+    </div>
+    <div class="sb-item" data-id="combining" onclick="show('combining',6)">
+      <span class="sb-dot" style="background:#fb923c"></span><span class="sb-text">Combining Sentences</span><span class="sb-lvl lvl-b2">B2</span>
+    </div>
+    <div class="sb-item" data-id="practice" onclick="show('practice',7)">
+      <span class="sb-dot" style="background:#fdba74"></span><span class="sb-text">Practice Quiz</span>
+    </div>
+  </div>
+
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+const PANELS={
+
+'intro':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → Introduction</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a1" style="padding:4px 12px">A1</span><span class="lmeta">⚡ 50 XP</span><span class="lmeta">⏱️ 10 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Sentence — বাক্য</span></div>
+  <div class="lesson-desc">Sentence হলো শব্দের একটি অর্থপূর্ণ সমন্বয় যা একটি সম্পূর্ণ ভাব প্রকাশ করে। প্রতিটি sentence এ কমপক্ষে একটি Subject ও একটি Verb থাকতে হবে।</div>
+</div>
+
+<div class="type-grid">
+  <div class="type-card" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25)" onclick="show('svo',1)">
+    <div class="type-icon">🏗️</div><div class="type-name" style="color:#fb923c">SVO</div><div class="type-bn">মূল গঠন</div>
+  </div>
+  <div class="type-card" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)" onclick="show('clauses',2)">
+    <div class="type-icon">🔗</div><div class="type-name" style="color:#34d399">Clauses</div><div class="type-bn">উপবাক্য</div>
+  </div>
+  <div class="type-card" style="background:rgba(245,200,66,.08);border-color:rgba(245,200,66,.25)" onclick="show('types',3)">
+    <div class="type-icon">🌿</div><div class="type-name" style="color:#f5c842">Simple/Compound/Complex</div><div class="type-bn">গঠন অনুযায়ী</div>
+  </div>
+  <div class="type-card" style="background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.25)" onclick="show('purpose',4)">
+    <div class="type-icon">🎯</div><div class="type-name" style="color:#818cf8">Declarative etc.</div><div class="type-bn">উদ্দেশ্য অনুযায়ী</div>
+  </div>
+  <div class="type-card" style="background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.25)" onclick="show('qtags',5)">
+    <div class="type-icon">❓</div><div class="type-name" style="color:#fb7185">Question Tags</div><div class="type-bn">isn't it?</div>
+  </div>
+  <div class="type-card" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25)" onclick="show('combining',6)">
+    <div class="type-icon">✂️</div><div class="type-name" style="color:#2dd4bf">Combining</div><div class="type-bn">বাক্য যোগ করা</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#fdba74)">
+  <div class="card-title">📋 Sentence এর অবশ্যই প্রয়োজনীয় অংশ</div>
+  <table class="gtable">
+    <tr><th>অংশ</th><th>কী</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>Subject</td><td>কে করছে / কার কথা</td><td><b>She</b> runs fast.</td><td>কর্তা</td></tr>
+    <tr><td>Predicate</td><td>Subject সম্পর্কে যা বলা হচ্ছে</td><td>She <b>runs fast</b>.</td><td>বিধেয়</td></tr>
+    <tr><td>Verb</td><td>কাজ বা অবস্থা</td><td>She <b>runs</b> fast.</td><td>ক্রিয়া (অবশ্যই লাগবে)</td></tr>
+    <tr><td>Object</td><td>কাকে / কী (optional)</td><td>She reads <b>books</b>.</td><td>কর্ম</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">⚡ Sentence vs Phrase vs Clause</div>
+  <table class="gtable">
+    <tr><th>নাম</th><th>Subject+Verb?</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>Phrase</td><td>❌ নেই</td><td>in the morning</td><td>সম্পূর্ণ অর্থ নেই</td></tr>
+    <tr><td>Clause</td><td>✅ আছে</td><td>when she arrived</td><td>Subject+Verb আছে কিন্তু অসম্পূর্ণ</td></tr>
+    <tr><td>Sentence</td><td>✅ আছে</td><td>She arrived early.</td><td>সম্পূর্ণ অর্থপূর্ণ বাক্য</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Sentence চেনার সহজ উপায়:</strong><br>
+  ১. কি একটি Subject আছে? (কে/কী করছে)<br>
+  ২. কি একটি Verb আছে? (কাজ/অবস্থা)<br>
+  ৩. কি সম্পূর্ণ অর্থ প্রকাশ করে?<br>
+  তিনটি "হ্যাঁ" হলে সেটি একটি সম্পূর্ণ Sentence।</div>
+</div>
+
+<div class="lesson-nav">
+  <a class="btn-prev" href="grammar-prepositions.html">← Prepositions</a>
+  <button class="btn-next" onclick="show('svo',1)">SVO Structure →</button>
+</div>`,
+
+'svo':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → SVO</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 15 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>SVO — Subject Verb Object</span></div>
+  <div class="lesson-desc">English এর মূল word order হলো SVO। বাংলায় SOV (Subject-Object-Verb) কিন্তু English এ Verb Object এর আগে আসে — এটাই সবচেয়ে বড় পার্থক্য।</div>
+</div>
+
+<div class="svo-wrap">
+  <div class="svo-block" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.3)">
+    <div class="svo-letter" style="color:#fb923c">S</div>
+    <div class="svo-name" style="color:#fb923c">Subject</div>
+    <div class="svo-bn">কর্তা — কে করছে<br>Noun / Pronoun</div>
+  </div>
+  <div class="svo-arrow">→</div>
+  <div class="svo-block" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.3)">
+    <div class="svo-letter" style="color:#34d399">V</div>
+    <div class="svo-name" style="color:#34d399">Verb</div>
+    <div class="svo-bn">ক্রিয়া — কী করছে<br>Action / State</div>
+  </div>
+  <div class="svo-arrow">→</div>
+  <div class="svo-block" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.3)">
+    <div class="svo-letter" style="color:#2dd4bf">O</div>
+    <div class="svo-name" style="color:#2dd4bf">Object</div>
+    <div class="svo-bn">কর্ম — কাকে/কী<br>Noun / Pronoun</div>
+  </div>
+  <div class="svo-arrow">+</div>
+  <div class="svo-block" style="background:rgba(129,140,248,.08);border-color:rgba(129,140,248,.3)">
+    <div class="svo-letter" style="color:#818cf8" style="font-size:1.4rem">Adv</div>
+    <div class="svo-name" style="color:#818cf8">Adverbial</div>
+    <div class="svo-bn">কীভাবে/কোথায়<br>(optional)</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--emerald))">
+  <div class="card-title">🔬 SVO বিশ্লেষণ</div>
+  <div class="sbreak">
+    <div class="sbreak-sent"><span style="color:#fb923c">Rafi</span> <span style="color:#34d399">eats</span> <span style="color:#2dd4bf">rice</span> <span style="color:#818cf8">every day</span>.</div>
+    <div class="sbreak-tags">
+      <span class="stag" style="background:rgba(251,146,60,.12);color:#fb923c">S: Rafi</span>
+      <span class="stag" style="background:rgba(52,211,153,.12);color:#34d399">V: eats</span>
+      <span class="stag" style="background:rgba(45,212,191,.12);color:#2dd4bf">O: rice</span>
+      <span class="stag" style="background:rgba(129,140,248,.12);color:#818cf8">Adv: every day</span>
+    </div>
+  </div>
+  <div class="sbreak">
+    <div class="sbreak-sent"><span style="color:#fb923c">She</span> <span style="color:#34d399">sent</span> <span style="color:#2dd4bf">him a message</span> <span style="color:#818cf8">last night</span>.</div>
+    <div class="sbreak-tags">
+      <span class="stag" style="background:rgba(251,146,60,.12);color:#fb923c">S: She</span>
+      <span class="stag" style="background:rgba(52,211,153,.12);color:#34d399">V: sent</span>
+      <span class="stag" style="background:rgba(45,212,191,.12);color:#2dd4bf">IO: him</span>
+      <span class="stag" style="background:rgba(45,212,191,.08);color:#2dd4bf;border:1px solid rgba(45,212,191,.2)">DO: a message</span>
+      <span class="stag" style="background:rgba(129,140,248,.12);color:#818cf8">Adv: last night</span>
+    </div>
+  </div>
+  <div class="sbreak">
+    <div class="sbreak-sent"><span style="color:#fb923c">The children</span> <span style="color:#34d399">are playing</span> <span style="color:#818cf8">in the garden</span>.</div>
+    <div class="sbreak-tags">
+      <span class="stag" style="background:rgba(251,146,60,.12);color:#fb923c">S: The children</span>
+      <span class="stag" style="background:rgba(52,211,153,.12);color:#34d399">V: are playing</span>
+      <span class="stag" style="background:rgba(129,140,248,.12);color:#818cf8">Adv: in the garden</span>
+      <span class="stag" style="background:rgba(251,113,133,.1);color:#fb7185">No Object</span>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">📌 Direct Object vs Indirect Object</div>
+  <table class="gtable">
+    <tr><th>Object Type</th><th>কী</th><th>উদাহরণ</th><th>বাংলা</th></tr>
+    <tr><td>Direct Object (DO)</td><td>কাজটা কার উপর পড়ে</td><td>She gave <b>a book</b>.</td><td>প্রত্যক্ষ কর্ম</td></tr>
+    <tr><td>Indirect Object (IO)</td><td>কাকে দেওয়া হলো</td><td>She gave <b>me</b> a book.</td><td>পরোক্ষ কর্ম</td></tr>
+    <tr><td>IO after "to/for"</td><td>IO preposition দিয়েও আসে</td><td>She gave a book <b>to me</b>.</td><td>একই অর্থ</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">🌐 বাংলা SOV বনাম English SVO</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en">বাংলা: রাফি (S) ভাত (O) খায় (V). → English: <span class="hl">Rafi</span> (S) <span class="hl6">eats</span> (V) <span class="hl2">rice</span> (O). <span class="ex-tag">SOV → SVO</span></div>
+      <div class="ex-bn">বাংলায় Verb শেষে, English এ Verb Object এর আগে।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">বাংলা: সে (S) আমাকে (O) ভালোবাসে (V). → English: <span class="hl">She</span> (S) <span class="hl6">loves</span> (V) <span class="hl2">me</span> (O). <span class="ex-tag">SOV → SVO</span></div>
+      <div class="ex-bn">English এ কখনো "She me loves" বলা যাবে না।</div>
+    </div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Adverb of frequency Subject এর পরে, Verb এর আগে আসে:</strong><br>
+  ✅ She <strong>always</strong> comes early. (always = after subject, before main verb)<br>
+  ✅ She is <strong>always</strong> late. (always = after be-verb)<br>
+  ❌ She comes <strong>always</strong> early. (verb এর পরে নয়)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('intro',0)">← Introduction</button>
+  <button class="btn-next" onclick="show('clauses',2)">Clauses →</button>
+</div>`,
+
+'clauses':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → Clauses</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Clauses — উপবাক্য</span></div>
+  <div class="lesson-desc">Clause হলো Subject + Verb সহ একটি শব্দগোষ্ঠী। দুই ধরনের Clause আছে — Independent (স্বাধীন) এবং Dependent (পরাশ্রয়ী)।</div>
+</div>
+
+<div class="clause-split">
+  <div class="clause-box" style="background:rgba(251,146,60,.06);border-color:rgba(251,146,60,.25)">
+    <div class="clause-label" style="color:#fb923c">✦ Independent Clause</div>
+    <div class="clause-text">একা দাঁড়াতে পারে — সম্পূর্ণ অর্থ</div>
+    <div class="clause-bn">নিজে নিজেই একটি sentence হতে পারে। Main clause ও বলে।</div>
+  </div>
+  <div class="clause-box" style="background:rgba(45,212,191,.06);border-color:rgba(45,212,191,.25)">
+    <div class="clause-label" style="color:#2dd4bf">✦ Dependent Clause</div>
+    <div class="clause-text">একা দাঁড়াতে পারে না — অসম্পূর্ণ</div>
+    <div class="clause-bn">অন্য clause এর উপর নির্ভরশীল। Subordinate clause ও বলে।</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">🔬 Clause বিশ্লেষণ</div>
+  <div class="sbreak">
+    <div class="sbreak-sent"><span style="color:#fb923c">I stayed home</span> because <span style="color:#2dd4bf">it was raining</span>.</div>
+    <div class="sbreak-tags">
+      <span class="stag" style="background:rgba(251,146,60,.12);color:#fb923c">Independent: I stayed home</span>
+      <span class="stag" style="background:rgba(45,212,191,.12);color:#2dd4bf">Dependent: because it was raining</span>
+    </div>
+  </div>
+  <div class="sbreak">
+    <div class="sbreak-sent"><span style="color:#2dd4bf">When she arrived</span>, <span style="color:#fb923c">everyone cheered</span>.</div>
+    <div class="sbreak-tags">
+      <span class="stag" style="background:rgba(45,212,191,.12);color:#2dd4bf">Dependent: When she arrived</span>
+      <span class="stag" style="background:rgba(251,146,60,.12);color:#fb923c">Independent: everyone cheered</span>
+    </div>
+  </div>
+  <div class="sbreak">
+    <div class="sbreak-sent"><span style="color:#fb923c">The man</span> <span style="color:#818cf8">who lives next door</span> <span style="color:#fb923c">is a doctor</span>.</div>
+    <div class="sbreak-tags">
+      <span class="stag" style="background:rgba(251,146,60,.12);color:#fb923c">Main clause: The man...is a doctor</span>
+      <span class="stag" style="background:rgba(129,140,248,.12);color:#818cf8">Relative clause: who lives next door</span>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--emerald))">
+  <div class="card-title">📌 Dependent Clause — ৩ ধরন</div>
+  <table class="gtable">
+    <tr><th>ধরন</th><th>কাজ</th><th>শুরু হয়</th><th>উদাহরণ</th></tr>
+    <tr><td>Noun Clause</td><td>Noun এর মতো কাজ করে</td><td>that, what, who, if</td><td>I know <b>that she is right</b>.</td></tr>
+    <tr><td>Adjective Clause</td><td>Noun কে modify করে</td><td>who, which, that, whose</td><td>The book <b>that I bought</b> is good.</td></tr>
+    <tr><td>Adverb Clause</td><td>Verb কে modify করে</td><td>because, when, if, although</td><td>She left <b>because she was tired</b>.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--indigo),var(--accent))">
+  <div class="card-title">🔗 Subordinating Conjunctions — Dependent Clause এর signal</div>
+  <table class="gtable">
+    <tr><th>অর্থ</th><th>Conjunction</th><th>উদাহরণ</th></tr>
+    <tr><td>কারণ</td><td>because, since, as</td><td>She cried because she was hurt.</td></tr>
+    <tr><td>সময়</td><td>when, while, after, before, until</td><td>Call me when you arrive.</td></tr>
+    <tr><td>শর্ত</td><td>if, unless, provided that</td><td>I'll help if you ask.</td></tr>
+    <tr><td>বৈপরীত্য</td><td>although, even though, though</td><td>He passed although he didn't study.</td></tr>
+    <tr><td>উদ্দেশ্য</td><td>so that, in order that</td><td>She studied so that she could pass.</td></tr>
+    <tr><td>ফলাফল</td><td>so...that, such...that</td><td>It was so hot that we stayed home.</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Dependent clause আগে আসলে comma লাগে:</strong><br>
+  ✅ "<strong>When she arrived,</strong> everyone cheered." (dependent আগে → comma)<br>
+  ✅ "Everyone cheered <strong>when she arrived</strong>." (dependent পরে → comma নেই)<br>
+  Independent clause আগে থাকলে সাধারণত comma লাগে না।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('svo',1)">← SVO Structure</button>
+  <button class="btn-next" onclick="show('types',3)">Types of Sentences →</button>
+</div>`,
+
+'types':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → Types</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 100 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Types of Sentences — গঠন অনুযায়ী</span></div>
+  <div class="lesson-desc">Clause এর সংখ্যা ও ধরন অনুযায়ী sentence তিন (বা চার) ভাগে ভাগ করা হয়: Simple, Compound, Complex এবং Compound-Complex।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--emerald))">
+  <div class="card-title">🌿 Simple Sentence</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text"><span class="hl">১টি Independent Clause</span> মাত্র — কোনো dependent clause নেই</div>
+  </div>
+  <div class="sent-flow">
+    <div class="sf-row">
+      <div class="sf-label" style="color:#fb923c">Simple</div>
+      <div class="sf-box" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.2);color:#fb923c">Independent Clause</div>
+    </div>
+  </div>
+  <div class="examples" style="margin-top:.8rem">
+    <div class="ex"><div class="ex-en">She <b>sings</b>. <span class="ex-tag">S+V</span></div><div class="ex-bn">সে গান গায়।</div></div>
+    <div class="ex"><div class="ex-en">The dog <b>bit</b> the man. <span class="ex-tag">S+V+O</span></div><div class="ex-bn">কুকুরটা লোকটিকে কামড় দিল।</div></div>
+    <div class="ex"><div class="ex-en">Rafi and Mim <b>went</b> to school early. <span class="ex-tag">S+V+Adv (compound subject)</span></div><div class="ex-bn">রাফি ও মিম সকাল সকাল স্কুলে গেল।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">🔗 Compound Sentence</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text"><span class="hl">Independent Clause</span> + <span class="hl2">Coordinating Conjunction</span> + <span class="hl">Independent Clause</span></div>
+  </div>
+  <div class="sent-flow">
+    <div class="sf-row">
+      <div class="sf-label" style="color:#2dd4bf">Compound</div>
+      <div class="sf-box" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.2);color:#fb923c">Ind. Clause</div>
+      <div class="sf-plus">+</div>
+      <div class="sf-box" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.2);color:#2dd4bf;max-width:80px">FANBOYS</div>
+      <div class="sf-plus">+</div>
+      <div class="sf-box" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.2);color:#fb923c">Ind. Clause</div>
+    </div>
+  </div>
+  <div class="formula" style="margin-top:.8rem">
+    <div class="formula-label">FANBOYS — Coordinating Conjunctions</div>
+    <div class="formula-text"><span class="hl">F</span>or · <span class="hl">A</span>nd · <span class="hl">N</span>or · <span class="hl">B</span>ut · <span class="hl">O</span>r · <span class="hl">Y</span>et · <span class="hl">S</span>o</div>
+  </div>
+  <div class="examples" style="margin-top:.8rem">
+    <div class="ex"><div class="ex-en">I was tired, <b>but</b> I kept working. <span class="ex-tag">but</span></div><div class="ex-bn">আমি ক্লান্ত ছিলাম, তবুও কাজ করতে থাকলাম।</div></div>
+    <div class="ex"><div class="ex-en">She studied hard, <b>so</b> she passed the exam. <span class="ex-tag">so</span></div><div class="ex-bn">সে কঠোর পরিশ্রম করল, তাই পরীক্ষায় পাস করল।</div></div>
+    <div class="ex"><div class="ex-en">You can stay here, <b>or</b> you can leave. <span class="ex-tag">or</span></div><div class="ex-bn">তুমি এখানে থাকতে পারো, অথবা চলে যেতে পারো।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--indigo),var(--accent))">
+  <div class="card-title">🌊 Complex Sentence</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text"><span class="hl">Independent Clause</span> + <span class="hl5">Subordinating Conjunction</span> + <span class="hl2">Dependent Clause</span></div>
+  </div>
+  <div class="sent-flow">
+    <div class="sf-row">
+      <div class="sf-label" style="color:#818cf8">Complex</div>
+      <div class="sf-box" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.2);color:#fb923c">Ind. Clause</div>
+      <div class="sf-plus">+</div>
+      <div class="sf-box" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.2);color:#2dd4bf">Dep. Clause</div>
+    </div>
+  </div>
+  <div class="examples" style="margin-top:.8rem">
+    <div class="ex"><div class="ex-en">I stayed home <b>because</b> it was raining. <span class="ex-tag">adverb clause</span></div><div class="ex-bn">বৃষ্টির কারণে আমি বাসায় থাকলাম।</div></div>
+    <div class="ex"><div class="ex-en">The book <b>that</b> she recommended is excellent. <span class="ex-tag">adjective clause</span></div><div class="ex-bn">সে যে বইটি সুপারিশ করেছিল সেটি চমৎকার।</div></div>
+    <div class="ex"><div class="ex-en">I know <b>that</b> she will come. <span class="ex-tag">noun clause</span></div><div class="ex-bn">আমি জানি যে সে আসবে।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--rose),var(--accent))">
+  <div class="card-title">🌐 Compound-Complex Sentence</div>
+  <div class="formula">
+    <div class="formula-label">Structure</div>
+    <div class="formula-text"><span class="hl">Ind. Clause</span> + <span class="hl2">FANBOYS</span> + <span class="hl">Ind. Clause</span> + <span class="hl5">Sub. Conj.</span> + <span class="hl2">Dep. Clause</span></div>
+  </div>
+  <div class="examples" style="margin-top:.8rem">
+    <div class="ex"><div class="ex-en">She studied hard, <b>and</b> she passed the exam <b>although</b> the paper was difficult. <span class="ex-tag">Compound-Complex</span></div><div class="ex-bn">সে কঠোর পরিশ্রম করল এবং পরীক্ষায় পাস করল যদিও প্রশ্ন কঠিন ছিল।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">📊 তুলনামূলক সারণি</div>
+  <table class="gtable">
+    <tr><th>Type</th><th>Ind. Clause</th><th>Dep. Clause</th><th>সংযোগকারী</th></tr>
+    <tr><td style="color:#fb923c">Simple</td><td>১টি</td><td>০টি</td><td>—</td></tr>
+    <tr><td style="color:#2dd4bf">Compound</td><td>২+ টি</td><td>০টি</td><td>FANBOYS</td></tr>
+    <tr><td style="color:#818cf8">Complex</td><td>১টি</td><td>১+ টি</td><td>because, when, if...</td></tr>
+    <tr><td style="color:#fb7185">Comp-Complex</td><td>২+ টি</td><td>১+ টি</td><td>উভয়ই</td></tr>
+  </table>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('clauses',2)">← Clauses</button>
+  <button class="btn-next" onclick="show('purpose',4)">Purpose of Sentences →</button>
+</div>`,
+
+'purpose':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → Purpose</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-a2" style="padding:4px 12px">A2</span><span class="lmeta">⚡ 75 XP</span><span class="lmeta">⏱️ 12 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Purpose of Sentences — উদ্দেশ্য অনুযায়ী</span></div>
+  <div class="lesson-desc">উদ্দেশ্য অনুযায়ী sentence চার ভাগে বিভক্ত: Declarative, Interrogative, Imperative এবং Exclamatory।</div>
+</div>
+
+<div class="type-grid">
+  <div class="type-card" style="background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25)">
+    <div class="type-icon">📢</div>
+    <div class="type-name" style="color:#fb923c">Declarative</div>
+    <div class="type-bn">বিবৃতি — তথ্য জানানো<br>শেষে: .</div>
+  </div>
+  <div class="type-card" style="background:rgba(45,212,191,.08);border-color:rgba(45,212,191,.25)">
+    <div class="type-icon">❓</div>
+    <div class="type-name" style="color:#2dd4bf">Interrogative</div>
+    <div class="type-bn">প্রশ্ন করা<br>শেষে: ?</div>
+  </div>
+  <div class="type-card" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25)">
+    <div class="type-icon">📣</div>
+    <div class="type-name" style="color:#34d399">Imperative</div>
+    <div class="type-bn">আদেশ/অনুরোধ<br>শেষে: . বা !</div>
+  </div>
+  <div class="type-card" style="background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.25)">
+    <div class="type-icon">😲</div>
+    <div class="type-name" style="color:#fb7185">Exclamatory</div>
+    <div class="type-bn">বিস্ময়/আবেগ<br>শেষে: !</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb923c,var(--teal))">
+  <div class="card-title">📢 Declarative Sentence — বিবৃতিমূলক</div>
+  <div class="formula">
+    <div class="formula-label">Structure: Subject + Verb + ...</div>
+    <div class="formula-text">তথ্য, মতামত বা অনুভূতি জানায়। Positive বা Negative হতে পারে।</div>
+  </div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en">She <b>is</b> a doctor. <span class="ex-tag">Positive</span></div><div class="ex-bn">সে একজন ডাক্তার।</div></div>
+    <div class="ex"><div class="ex-en">He <b>doesn't</b> like coffee. <span class="ex-tag">Negative</span></div><div class="ex-bn">সে কফি পছন্দ করে না।</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#2dd4bf,var(--accent))">
+  <div class="card-title">❓ Interrogative Sentence — প্রশ্নবোধক</div>
+  <div class="formula">
+    <div class="formula-label">দুই ধরন</div>
+    <div class="formula-text"><span class="hl2">Yes/No:</span> Aux. Verb + Subject + Main Verb...?<br><span class="hl">Wh-:</span> Wh-word + Aux. Verb + Subject + Main Verb...?</div>
+  </div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>Are</b> you coming? <span class="ex-tag">Yes/No</span></div><div class="ex-bn">তুমি কি আসছ?</div></div>
+    <div class="ex"><div class="ex-en"><b>Where</b> do you live? <span class="ex-tag">Wh-question</span></div><div class="ex-bn">তুমি কোথায় থাকো?</div></div>
+    <div class="ex"><div class="ex-en"><b>Who</b> called you? <span class="ex-tag">Wh- as subject</span></div><div class="ex-bn">তোমাকে কে ডেকেছে? (who = subject, no inversion)</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#34d399,var(--accent))">
+  <div class="card-title">📣 Imperative Sentence — অনুজ্ঞাসূচক</div>
+  <div class="formula">
+    <div class="formula-label">Structure: Verb + Object/Complement (Subject "you" understood)</div>
+    <div class="formula-text">আদেশ, অনুরোধ, পরামর্শ, নিষেধ। Subject সাধারণত উহ্য।</div>
+  </div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>Open</b> the window. <span class="ex-tag">আদেশ</span></div><div class="ex-bn">জানালা খোলো। (You = উহ্য subject)</div></div>
+    <div class="ex"><div class="ex-en">Please <b>help</b> me. <span class="ex-tag">অনুরোধ</span></div><div class="ex-bn">দয়া করে আমাকে সাহায্য করো।</div></div>
+    <div class="ex"><div class="ex-en"><b>Don't</b> shout. <span class="ex-tag">নিষেধ</span></div><div class="ex-bn">চিৎকার করো না।</div></div>
+    <div class="ex"><div class="ex-en"><b>Let's</b> go! <span class="ex-tag">suggestion — আমরা সহ</span></div><div class="ex-bn">চলো যাই!</div></div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb7185,var(--accent))">
+  <div class="card-title">😲 Exclamatory Sentence — বিস্ময়সূচক</div>
+  <div class="formula">
+    <div class="formula-label">দুই Structure</div>
+    <div class="formula-text"><span class="hl3">What</span> + (a/an) + Adj + Noun + Subject + Verb!<br><span class="hl3">How</span> + Adj/Adv + Subject + Verb!</div>
+  </div>
+  <div class="examples">
+    <div class="ex"><div class="ex-en"><b>What</b> a beautiful day! <span class="ex-tag">What + a + adj + noun</span></div><div class="ex-bn">কী সুন্দর দিন!</div></div>
+    <div class="ex"><div class="ex-en"><b>How</b> fast he runs! <span class="ex-tag">How + adv + subject + verb</span></div><div class="ex-bn">সে কত দ্রুত দৌড়ায়!</div></div>
+    <div class="ex"><div class="ex-en"><b>What</b> terrible news! <span class="ex-tag">uncountable → no "a"</span></div><div class="ex-bn">কী ভয়ঙ্কর খবর!</div></div>
+  </div>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Who asked? — Subject Wh-question এ Inversion হয় না:</strong><br>
+  "Who <strong>called</strong> you?" — who = subject, তাই did লাগে না।<br>
+  "Who did you <strong>call</strong>?" — who = object, তাই did লাগে (inversion)।<br>
+  Wh-word যদি subject হয় → normal word order।</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('types',3)">← Types of Sentences</button>
+  <button class="btn-next" onclick="show('qtags',5)">Question Tags →</button>
+</div>`,
+
+'qtags':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → Question Tags</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b1" style="padding:4px 12px">B1</span><span class="lmeta">⚡ 125 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Question Tags — যোগ করা প্রশ্ন</span></div>
+  <div class="lesson-desc">বাক্যের শেষে ছোট প্রশ্ন যোগ করে নিশ্চিতকরণ বা সম্মতি চাওয়া হয়। দুটি মূল নিয়ম: Positive → Negative tag, Negative → Positive tag।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,#fb7185,var(--accent))">
+  <div class="card-title">📐 মূল নিয়ম</div>
+  <div class="formula">
+    <div class="formula-label">Rule 1 — Positive main → Negative tag</div>
+    <div class="formula-text">She <span class="hl">is</span> happy, <span class="hl3">isn't she</span>?</div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Rule 2 — Negative main → Positive tag</div>
+    <div class="formula-text">She <span class="hl3">isn't</span> happy, <span class="hl">is she</span>?</div>
+  </div>
+  <div class="formula">
+    <div class="formula-label">Tag এ কোন Verb আসে</div>
+    <div class="formula-text">Main verb এর Auxiliary verb → same tense, same person</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),#fb7185)">
+  <div class="card-title">🔄 Question Tag Examples</div>
+  <div class="qtag-row">
+    <div class="qtag-main">She <b>is</b> a teacher,</div><span class="qtag-comma">,</span>
+    <div class="qtag-tag">isn't she?</div>
+    <div class="qtag-bn">সে একজন শিক্ষিকা, তাই না?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main">They <b>are</b> coming,</div>
+    <div class="qtag-tag">aren't they?</div>
+    <div class="qtag-bn">তারা আসছে, তাই না?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main">He <b>can</b> swim,</div>
+    <div class="qtag-tag">can't he?</div>
+    <div class="qtag-bn">সে সাঁতার কাটতে পারে, তাই না?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main">You <b>have</b> finished,</div>
+    <div class="qtag-tag">haven't you?</div>
+    <div class="qtag-bn">তুমি শেষ করেছ, তাই না?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main">She <b>works</b> here,</div>
+    <div class="qtag-tag">doesn't she?</div>
+    <div class="qtag-bn">সে এখানে কাজ করে, তাই না?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main">He <b>went</b> to school,</div>
+    <div class="qtag-tag">didn't he?</div>
+    <div class="qtag-bn">সে স্কুলে গিয়েছিল, তাই না?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main">She <b>doesn't</b> like it,</div>
+    <div class="qtag-tag">does she?</div>
+    <div class="qtag-bn">সে এটা পছন্দ করে না, তাই না?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main">They <b>weren't</b> there,</div>
+    <div class="qtag-tag">were they?</div>
+    <div class="qtag-bn">তারা সেখানে ছিল না, তাই না?</div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">⚡ Tricky Question Tags</div>
+  <div class="qtag-row">
+    <div class="qtag-main"><b>I am</b> right,</div>
+    <div class="qtag-tag">aren't I?</div>
+    <div class="qtag-bn">I am → aren't I? (amn't = অগ্রহণযোগ্য)</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main"><b>Let's</b> go,</div>
+    <div class="qtag-tag">shall we?</div>
+    <div class="qtag-bn">Let's সবসময় → shall we?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main"><b>Open</b> the door,</div>
+    <div class="qtag-tag">will you?</div>
+    <div class="qtag-bn">Imperative → will you? / won't you?</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main"><b>Nobody</b> came,</div>
+    <div class="qtag-tag">did they?</div>
+    <div class="qtag-bn">nobody/nothing/no one → positive tag, they</div>
+  </div>
+  <div class="qtag-row">
+    <div class="qtag-main"><b>Everything</b> is fine,</div>
+    <div class="qtag-tag">isn't it?</div>
+    <div class="qtag-bn">everything/something/nothing → it</div>
+  </div>
+</div>
+
+<div class="warn"><span style="font-size:1.2rem">⚠️</span>
+  <div class="warn-text"><strong>never, hardly, scarcely, seldom = negative এর মতো:</strong><br>
+  "She <strong>never</strong> lies, <strong>does she</strong>?" (never = negative সেনটেন্স → positive tag)<br>
+  "He <strong>hardly</strong> speaks, <strong>does he</strong>?" (hardly = negative → positive tag)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('purpose',4)">← Purpose of Sentences</button>
+  <button class="btn-next" onclick="show('combining',6)">Combining Sentences →</button>
+</div>`,
+
+'combining':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → Combining</div>
+  <div class="lesson-meta"><span class="sb-lvl lvl-b2" style="padding:4px 12px">B2</span><span class="lmeta">⚡ 150 XP</span><span class="lmeta">⏱️ 20 min</span></div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>Combining Sentences — বাক্য যোগ করা</span></div>
+  <div class="lesson-desc">দুই বা ততোধিক ছোট বাক্যকে একটি বড়, ভালো বাক্যে পরিণত করার বিভিন্ন উপায় — লেখার মান উন্নত করে।</div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--accent),var(--teal))">
+  <div class="card-title">🔗 Coordinating Conjunctions (FANBOYS)</div>
+  <table class="gtable">
+    <tr><th>Conjunction</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td>and</td><td>এবং (addition)</td><td>She sang and he danced.</td></tr>
+    <tr><td>but</td><td>কিন্তু (contrast)</td><td>I tried but I failed.</td></tr>
+    <tr><td>or</td><td>অথবা (alternative)</td><td>Come now or leave.</td></tr>
+    <tr><td>so</td><td>তাই (result)</td><td>It was late, so I left.</td></tr>
+    <tr><td>yet</td><td>তথাপি (contrast)</td><td>He is poor, yet happy.</td></tr>
+    <tr><td>for</td><td>কারণ (reason)</td><td>I left, for I was tired.</td></tr>
+    <tr><td>nor</td><td>এবং...ও না</td><td>She didn't come, nor did he.</td></tr>
+  </table>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--indigo),var(--accent))">
+  <div class="card-title">🌊 Subordinating Conjunctions</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en">She is tired. She will finish the work. → She will finish the work <b>although</b> she is tired. <span class="ex-tag">contrast</span></div>
+      <div class="ex-bn">ক্লান্ত হলেও সে কাজ শেষ করবে।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">He studied hard. He passed the exam. → He passed the exam <b>because</b> he studied hard. <span class="ex-tag">reason</span></div>
+      <div class="ex-bn">কঠোর পরিশ্রম করেছিল বলে পাস করল।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">She will call me. I should be ready. → <b>When</b> she calls, I should be ready. <span class="ex-tag">time</span></div>
+      <div class="ex-bn">সে ফোন করলে আমাকে প্রস্তুত থাকতে হবে।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--teal),var(--accent))">
+  <div class="card-title">🔀 Relative Clauses দিয়ে Combine</div>
+  <div class="examples">
+    <div class="ex">
+      <div class="ex-en">The man is my teacher. He is standing there. → The man <b>who is standing there</b> is my teacher. <span class="ex-tag">who = person</span></div>
+      <div class="ex-bn">যে লোকটা ওখানে দাঁড়িয়ে আছে সে আমার শিক্ষক।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">I lost the book. I bought the book yesterday. → I lost the book <b>that I bought</b> yesterday. <span class="ex-tag">that = thing</span></div>
+      <div class="ex-bn">গতকাল কিনেছিলাম যে বইটা সেটা হারিয়ে ফেলেছি।</div>
+    </div>
+    <div class="ex">
+      <div class="ex-en">She has a sister. Her sister is a nurse. → She has a sister <b>whose sister is a nurse</b>. <span class="ex-tag">whose = possession</span></div>
+      <div class="ex-bn">তার একটি বোন আছে যে নার্স।</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="--card-accent:linear-gradient(90deg,var(--gold),var(--accent))">
+  <div class="card-title">⚡ Conjunctive Adverbs (Formal linking)</div>
+  <table class="gtable">
+    <tr><th>Adverb</th><th>অর্থ</th><th>উদাহরণ</th></tr>
+    <tr><td>however</td><td>তবে / কিন্তু</td><td>It was cold; however, we went out.</td></tr>
+    <tr><td>therefore</td><td>সুতরাং</td><td>She was late; therefore, she missed it.</td></tr>
+    <tr><td>moreover</td><td>তদুপরি</td><td>He is smart; moreover, he works hard.</td></tr>
+    <tr><td>nevertheless</td><td>তথাপি</td><td>It was hard; nevertheless, she succeeded.</td></tr>
+    <tr><td>furthermore</td><td>আরও</td><td>She is kind; furthermore, she is talented.</td></tr>
+    <tr><td>consequently</td><td>ফলস্বরূপ</td><td>He failed; consequently, he lost his job.</td></tr>
+  </table>
+</div>
+
+<div class="tip"><span class="tip-icon">💡</span>
+  <div class="tip-text"><strong>Conjunctive Adverb এর আগে semicolon (;) বা period, পরে comma:</strong><br>
+  ✅ "She was tired<strong>; however,</strong> she kept going."<br>
+  ✅ "She was tired<strong>. However,</strong> she kept going."<br>
+  ❌ "She was tired<strong>, however</strong> she kept going." (comma splice — ভুল)</div>
+</div>
+
+<div class="lesson-nav">
+  <button class="btn-prev" onclick="show('qtags',5)">← Question Tags</button>
+  <button class="btn-quiz-big" onclick="show('practice',7)">✍️ Practice Quiz</button>
+  <button class="btn-next" onclick="show('practice',7)">Practice →</button>
+</div>`,
+
+'practice':()=>`
+<div class="lesson-header">
+  <div class="lesson-breadcrumb">Grammar → Sentence Structure → Practice</div>
+  <div class="lesson-title" style="margin-top:.5rem"><span>✍️ Sentence Structure Practice Quiz</span></div>
+  <div class="lesson-desc">SVO, Clause, Sentence type, Question tag — সব মিলিয়ে প্রশ্ন আছে। সঠিক উত্তর বেছে নাও।</div>
+</div>
+<div id="quiz-wrap"></div>
+<div class="lesson-nav" style="margin-top:1.5rem">
+  <button class="btn-prev" onclick="show('combining',6)">← Combining Sentences</button>
+  <button class="btn-quiz-big" onclick="resetQuiz()">🔄 আবার চেষ্টা করো</button>
+  <a class="btn-next" href="grammar.html">Grammar Hub →</a>
+</div>`
+};
+
+const QUIZ=[
+  {q:'"She reads books every night." — এই sentence এ Object কোনটি?',
+   opts:['She','reads','books','every night'], ans:'books', exp:'books = Direct Object — কী পড়ে? বই।'},
+  {q:'"Although it was raining, they played football." — Dependent clause কোনটি?',
+   opts:['they played football','Although it was raining','it was raining','they played'], ans:'Although it was raining', exp:'Although দিয়ে শুরু subordinate/dependent clause।'},
+  {q:'"I was tired, but I finished the work." — এটি কোন ধরনের sentence?',
+   opts:['Simple','Compound','Complex','Exclamatory'], ans:'Compound', exp:'দুটি Independent clause + coordinating conjunction (but) = Compound।'},
+  {q:'"She passed the exam because she studied hard." — এটি কোন ধরনের sentence?',
+   opts:['Simple','Compound','Complex','Compound-Complex'], ans:'Complex', exp:'১টি Independent + ১টি Dependent clause (because) = Complex।'},
+  {q:'Question tag: "You are coming, ___?"',
+   opts:["aren't you","isn't you","are you","don't you"], ans:"aren't you", exp:'Positive (are) → Negative tag (aren\'t you)।'},
+  {q:'Question tag: "She doesn\'t like tea, ___?"',
+   opts:["doesn't she","does she","isn't she","did she"], ans:"does she", exp:'Negative (doesn\'t) → Positive tag (does she)।'},
+  {q:'"What a wonderful performance!" — এটি কোন ধরনের sentence?',
+   opts:['Declarative','Interrogative','Imperative','Exclamatory'], ans:'Exclamatory', exp:'What a + adj + noun + ! = Exclamatory sentence।'},
+  {q:'"Let\'s go for a walk, ___?"',
+   opts:["will we","shall we","won't we","do we"], ans:"shall we", exp:"Let's এর পরের tag সবসময় 'shall we?'।"},
+  {q:'এই দুটি বাক্য combine করো: "He is rich. He is unhappy." (contrast)',
+   opts:['He is rich and unhappy.','He is rich but he is unhappy.','He is rich because he is unhappy.','He is rich so he is unhappy.'], ans:'He is rich but he is unhappy.', exp:"Contrast বোঝাতে 'but' (coordinating conjunction)।"},
+  {q:'"Nobody called, ___?"',
+   opts:["did they","didn't they","did nobody","were they"], ans:"did they", exp:'nobody = negative → positive tag; nobody → they।'},
+  {q:'"The girl who won the prize is my sister." — এখানে "who won the prize" কোন ধরনের clause?',
+   opts:['Noun clause','Adverb clause','Adjective/Relative clause','Independent clause'], ans:'Adjective/Relative clause', exp:'"who won the prize" "the girl" কে modify করছে = Adjective/Relative clause।'},
+  {q:'"Close the door, ___?"',
+   opts:["will you","won't I","shall you","do you"], ans:"will you", exp:'Imperative sentence এর tag = will you? / won\'t you?।'},
+];
+
+let score=0,done=false;
+function renderQuiz(){
+  score=0;done=false;
+  const w=document.getElementById('quiz-wrap');
+  if(!w)return;
+  w.innerHTML=QUIZ.map((q,i)=>`
+    <div class="practice-q" id="pq-${i}">
+      <div class="pq-text">${i+1}. ${q.q}</div>
+      <div class="pq-options">${q.opts.map(o=>`<button class="pq-opt" onclick="checkQ(${i},'${o.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">${o}</button>`).join('')}</div>
+      <div class="pq-feedback" id="pf-${i}"></div>
+    </div>`).join('')+`<div id="score-wrap"></div>`;
+}
+window.checkQ=(i,sel)=>{
+  const q=QUIZ[i];
+  const el=document.getElementById('pq-'+i);
+  const fb=document.getElementById('pf-'+i);
+  el.querySelectorAll('.pq-opt').forEach(b=>{
+    b.onclick=null;
+    if(b.textContent===q.ans)b.classList.add('correct');
+    else if(b.textContent===sel&&sel!==q.ans)b.classList.add('wrong');
+  });
+  const correct=sel===q.ans;
+  fb.className='pq-feedback show '+(correct?'correct':'wrong');
+  fb.textContent=(correct?'✅ সঠিক! ':'❌ ভুল। ')+q.exp;
+  if(correct)score++;
+  if([...document.querySelectorAll('.pq-feedback.show')].length===QUIZ.length&&!done){
+    done=true;
+    const pct=Math.round(score/QUIZ.length*100);
+    document.getElementById('score-wrap').innerHTML=`
+      <div style="background:rgba(251,146,60,.07);border:1px solid rgba(251,146,60,.2);border-radius:18px;padding:1.5rem;text-align:center;margin-top:1rem;">
+        <div style="font-size:2.5rem;font-weight:900;color:var(--accent)">${score}/${QUIZ.length}</div>
+        <div style="font-size:1rem;color:var(--sub);margin:.3rem 0;font-family:'Noto Sans Bengali',sans-serif">${pct>=80?'🎉 অসাধারণ! Grammar Master!':pct>=60?'👍 ভালো করেছ!':'💪 আরো একটু পড়ো!'}</div>
+        <div style="font-size:13px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">Accuracy: ${pct}% · XP Earned: ${Math.round(pct*1.5)} XP</div>
+        <div style="margin-top:.8rem;font-size:12px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif">🎓 Grammar Section সম্পূর্ণ! Grammar Hub এ ফিরে অন্য topic দেখো।</div>
+      </div>`;
+  }
+};
+window.resetQuiz=()=>{score=0;done=false;renderQuiz();};
+
+const ORDER=['intro','svo','clauses','types','purpose','qtags','combining','practice'];
+window.show=(id,idx)=>{
+  document.querySelectorAll('.sb-item').forEach(el=>el.classList.toggle('active',el.dataset.id===id));
+  document.getElementById('prog').style.width=Math.round(idx/(ORDER.length-1)*100)+'%';
+  document.getElementById('main').innerHTML=PANELS[id]();
+  document.getElementById('main').scrollTop=0;
+  if(id==='practice')renderQuiz();
+};
+
+show('intro',0);
+</script>
+</body>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challenges — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#04080f;
+  --surface:#080e1a;
+  --surface2:#0c1322;
+  --surface3:#101828;
+  --border:rgba(255,255,255,.055);
+  --gold:#f5c842;
+  --gold2:#e0a820;
+  --teal:#2dd4bf;
+  --rose:#fb7185;
+  --indigo:#818cf8;
+  --emerald:#34d399;
+  --orange:#fb923c;
+  --muted:#64748b;
+  --sub:#94a3b8;
+  --text:#f0f4f8;
+}
+
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 0% 0%,rgba(245,200,66,.055),transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%,rgba(45,212,191,.045),transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%,rgba(129,140,248,.025),transparent 60%);
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.008) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.008) 1px,transparent 1px);
+  background-size:52px 52px;
+}
+.wrap{max-width:1160px;margin:auto;padding:1.6rem 1.4rem 0;position:relative;z-index:1;}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+  background:rgba(8,14,26,.8);border:1px solid var(--border);
+  border-radius:18px;padding:.9rem 1.4rem;
+  backdrop-filter:blur(24px);box-shadow:0 4px 32px rgba(0,0,0,.4);
+  position:sticky;top:16px;z-index:100;
+}
+.logo{display:flex;align-items:center;gap:14px;}
+.logo-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.1));border:1px solid rgba(245,200,66,.3);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 18px rgba(245,200,66,.12);flex-shrink:0;}
+.logo-text h1{font-size:1.55rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px;}
+.logo-text p{font-size:10px;color:var(--muted);margin-top:1px;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.nav-links{display:flex;gap:6px;}
+.nav-link{padding:.4rem .9rem;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--sub);text-decoration:none;transition:.2s;border:1px solid transparent;}
+.nav-link:hover{background:rgba(255,255,255,.05);color:var(--text);border-color:var(--border);}
+.nav-link.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.28);color:var(--gold);}
+.user-section{display:flex;align-items:center;gap:10px;}
+.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,rgba(245,200,66,.15),rgba(45,212,191,.15));display:flex;align-items:center;justify-content:center;font-size:1rem;overflow:hidden;border:2px solid rgba(245,200,66,.3);cursor:pointer;flex-shrink:0;transition:.2s;box-shadow:0 0 14px rgba(245,200,66,.1);}
+.user-avatar:hover{border-color:var(--gold);box-shadow:0 0 22px rgba(245,200,66,.25);}
+.user-name{font-size:13.5px;font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-logout{border:1px solid rgba(251,113,133,.2);background:rgba(251,113,133,.07);color:var(--rose);padding:.4rem .9rem;border-radius:10px;cursor:pointer;font-weight:600;font-family:'Outfit',sans-serif;font-size:12.5px;transition:.2s;}
+.btn-logout:hover{background:rgba(251,113,133,.15);border-color:var(--rose);}
+
+/* ─── HERO ─── */
+.hero{border-radius:24px;padding:2.2rem 2.4rem;margin-bottom:1.8rem;position:relative;overflow:hidden;background:linear-gradient(135deg,#080e18,#0a1220);border:1px solid rgba(255,255,255,.07);box-shadow:0 8px 48px rgba(0,0,0,.45);}
+.hero-stripe{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#f5c842 30%,#2dd4bf 70%,transparent);}
+.hero-orb1{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,.1),transparent 70%);top:-100px;left:-80px;pointer-events:none;}
+.hero-orb2{position:absolute;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(45,212,191,.09),transparent 70%);bottom:-80px;right:-60px;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:.7rem;opacity:.8;}
+.hero h2{font-size:2.1rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.6rem;line-height:1.15;}
+.hero h2 span{background:linear-gradient(135deg,#f5c842,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--sub);font-size:13.5px;line-height:1.7;max-width:500px;font-family:'Noto Sans Bengali',sans-serif;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.hstat{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:.75rem 1.2rem;text-align:center;min-width:78px;transition:.2s;position:relative;overflow:hidden;}
+.hstat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5;}
+.hstat:hover{border-color:rgba(245,200,66,.25);transform:translateY(-2px);}
+.hstat-v{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hstat-l{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.8px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+
+/* ─── SECTION TITLE ─── */
+.section-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05);}
+
+/* ─── FILTER TABS ─── */
+.filter-tabs{display:flex;gap:8px;margin-bottom:1.8rem;flex-wrap:wrap;}
+.ftab{padding:.55rem 1.2rem;border-radius:13px;font-size:12.5px;font-weight:700;border:1px solid var(--border);background:var(--surface2);color:var(--sub);cursor:pointer;transition:.2s;}
+.ftab:hover{border-color:rgba(245,200,66,.25);color:var(--text);}
+.ftab.active{background:rgba(245,200,66,.09);border-color:rgba(245,200,66,.3);color:var(--gold);}
+
+/* ─── CHALLENGE GRID ─── */
+.challenge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:2.2rem;}
+.challenge-card{
+  background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:1.4rem;
+  position:relative;overflow:hidden;transition:.25s;
+}
+.challenge-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--c-color,#f5c842);opacity:.5;}
+.challenge-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.3);border-color:var(--c-border,rgba(245,200,66,.25));}
+.challenge-card.completed{opacity:.65;}
+.cc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;}
+.cc-icon{font-size:1.7rem;width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border:1px solid var(--border);}
+.cc-xp{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.25);color:var(--gold);}
+.cc-title{font-size:1.05rem;font-weight:700;margin-bottom:.4rem;}
+.cc-desc{font-size:12.5px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;line-height:1.65;margin-bottom:1rem;min-height:42px;}
+.cc-progress-track{height:6px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-bottom:.5rem;}
+.cc-progress-fill{height:100%;border-radius:20px;background:var(--c-color,#f5c842);transition:width .4s ease;}
+.cc-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:1rem;}
+.cc-footer{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.cc-diff{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;}
+.diff-easy{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.25);color:var(--emerald);}
+.diff-medium{background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.25);color:var(--gold);}
+.diff-hard{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.25);color:var(--rose);}
+.cc-deadline{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.cc-btn{padding:.5rem 1.2rem;border-radius:11px;font-weight:700;font-size:12.5px;cursor:pointer;border:1px solid var(--border);background:var(--surface3);color:var(--text);transition:.2s;font-family:'Outfit',sans-serif;}
+.cc-btn:hover{border-color:rgba(245,200,66,.3);}
+.cc-btn.done{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);color:var(--emerald);cursor:default;}
+.cc-btn.claimable{background:linear-gradient(135deg,rgba(245,200,66,.18),rgba(45,212,191,.12));border-color:rgba(245,200,66,.35);color:var(--gold);}
+.cc-btn:disabled{opacity:.55;cursor:not-allowed;}
+
+/* ─── STREAK BANNER ─── */
+.streak-banner{
+  background:linear-gradient(135deg,rgba(245,200,66,.08),rgba(45,212,191,.05));
+  border:1px solid rgba(245,200,66,.18);border-radius:18px;padding:1.3rem 1.6rem;
+  margin-bottom:2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+.streak-left{display:flex;align-items:center;gap:14px;}
+.streak-emoji{font-size:2.2rem;}
+.streak-text strong{font-size:1.1rem;font-weight:800;display:block;}
+.streak-text span{font-size:12px;color:var(--sub);font-family:'Noto Sans Bengali',sans-serif;}
+.streak-days{display:flex;gap:6px;}
+.sday{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);}
+.sday.done{background:rgba(245,200,66,.12);border-color:rgba(245,200,66,.3);color:var(--gold);}
+.sday.today{border-color:rgba(45,212,191,.4);color:var(--teal);}
+
+/* ─── FOOTER ─── */
+footer{margin-top:3rem;border-top:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,200,66,.35),rgba(45,212,191,.35),transparent);}
+.footer-inner{max-width:1160px;margin:auto;padding:2.2rem 1.4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;}
+.footer-brand .brand-name{font-size:1.35rem;font-weight:800;background:linear-gradient(135deg,#f5c842,#2dd4bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.3rem;}
+.footer-brand .brand-sub{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:.9rem;font-family:'Noto Sans Bengali',sans-serif;}
+.copyright-text{font-size:11px;color:#2a3545;line-height:1.8;font-family:'JetBrains Mono',monospace;}
+.copyright-text span{color:#374151;}
+.footer-col h4{font-size:.9rem;font-weight:700;color:var(--sub);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.dev-card{background:linear-gradient(135deg,rgba(245,200,66,.04),rgba(45,212,191,.04));border:1px solid rgba(245,200,66,.12);border-radius:14px;padding:1.1rem;}
+.dev-name{font-size:1.05rem;font-weight:800;color:#f0f4f8;margin-bottom:.1rem;}
+.dev-title{font-size:10px;color:var(--gold);letter-spacing:.8px;margin-bottom:.8rem;font-family:'JetBrains Mono',monospace;}
+.dev-contact{display:flex;flex-direction:column;gap:.45rem;}
+.contact-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--sub);}
+.contact-row a{color:var(--sub);text-decoration:none;transition:.15s;}
+.contact-row a:hover{color:var(--gold);}
+.contact-icon{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;background:rgba(255,255,255,.05);}
+.social-links{display:flex;flex-direction:column;gap:.55rem;}
+.social-link{display:flex;align-items:center;gap:10px;padding:.55rem .85rem;border-radius:11px;background:rgba(255,255,255,.025);border:1px solid var(--border);text-decoration:none;color:var(--sub);font-size:12px;transition:.2s;}
+.social-link:hover{background:rgba(245,200,66,.06);border-color:rgba(245,200,66,.2);color:#f0f4f8;transform:translateX(3px);}
+.sl-icon{font-size:.9rem;width:20px;text-align:center;}
+.sl-label{font-weight:600;}
+.sl-handle{color:var(--muted);font-size:10.5px;margin-left:auto;font-family:'JetBrains Mono',monospace;}
+.footer-bottom{max-width:1160px;margin:auto;padding:.8rem 1.4rem 1.3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;border-top:1px solid rgba(255,255,255,.04);font-size:11px;color:#2d3748;font-family:'JetBrains Mono',monospace;}
+.footer-bottom a{color:#374151;text-decoration:none;}
+.footer-bottom a:hover{color:var(--muted);}
+.footer-heart{color:var(--rose);}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:800px){.footer-inner{grid-template-columns:1fr;gap:1.6rem;}.nav-links{display:none;}}
+@media(max-width:600px){.topbar{flex-direction:column;align-items:flex-start;}.hero h2{font-size:1.6rem;}.wrap{padding:1rem .9rem 0;}.footer-bottom{flex-direction:column;align-items:flex-start;}.streak-banner{flex-direction:column;align-items:flex-start;}}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;top:20px;right:20px;background:#0c1322;color:#f0f4f8;padding:.9rem 1.2rem;border-radius:14px;border-left:3px solid #f5c842;z-index:9999;opacity:0;transform:translateY(-16px);transition:.3s;font-size:13.5px;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.toast.show{opacity:1;transform:translateY(0);}
+</style>
+  <link rel="stylesheet" href="styles/tokens.css">
+  <meta name="theme-color" content="#101827">
+  <meta name="es-guest" content="allowed">
+  <link rel="stylesheet" href="styles/ux-polish.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon"><img src="assets/branding/english-shekho-mark.png" alt="English Shekho logo" class="es-brand-mark"></div>
+      <div class="logo-text">
+        <h1>English Shekho</h1>
+        <p>ENGLISH LEARNING PLATFORM · A1 TO C2</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Home</a>
+        <a href="roadmap.html" class="nav-link">Journey</a>
+        <a href="quiz-beginner.html" class="nav-link">Quiz</a>
+        <a href="grammar.html" class="nav-link">Grammar</a>
+        <a href="vocab-dashboard.html" class="nav-link">Vocabulary</a>
+        <a href="writing-lab.html" class="nav-link">Writing</a>
+              </nav>
+      <div class="user-section">
+        <div class="user-avatar" id="nav-avatar" onclick="location.href='profile.html'">👤</div>
+        <div class="user-name" id="nav-name">Learner</div>
+        <button class="btn-logout" id="btn-logout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-stripe"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">🎯 Daily & Weekly Challenges</div>
+        <h2>Complete <span>Challenges</span>, Earn XP 🏆</h2>
+        <p class="hero-sub">প্রতিদিন নতুন চ্যালেঞ্জ সম্পূর্ণ করো এবং extra XP অর্জন করো। Streak ধরে রাখলে bonus reward পাবে!</p>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-v" id="h-xp">0</div>
+          <div class="hstat-l">Total XP</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-done">0</div>
+          <div class="hstat-l">Completed</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-v" id="h-streak">0</div>
+          <div class="hstat-l">Day Streak</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STREAK BANNER -->
+  <div class="streak-banner">
+    <div class="streak-left">
+      <div class="streak-emoji">🔥</div>
+      <div class="streak-text">
+        <strong id="streak-title">0 দিনের Streak!</strong>
+        <span>প্রতিদিন কমপক্ষে ১টি challenge complete করো streak বজায় রাখতে।</span>
+      </div>
+    </div>
+    <div class="streak-days" id="streak-days"></div>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="filter-tabs" id="filter-tabs">
+    <button class="ftab active" data-filter="all">All</button>
+    <button class="ftab" data-filter="daily">📅 Daily</button>
+    <button class="ftab" data-filter="weekly">🗓️ Weekly</button>
+    <button class="ftab" data-filter="monthly">🏆 Monthly</button>
+  </div>
+
+  <!-- CHALLENGES -->
+  <div class="section-title">⚡ Active Challenges</div>
+  <div class="challenge-grid" id="challenge-grid"></div>
+
+  <!-- COMPLETED -->
+  <div class="section-title">✅ Completed</div>
+  <div class="challenge-grid" id="completed-grid"></div>
+
+</div><!-- end .wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name"><img src="assets/branding/english-shekho-logo.png" alt="" style="width:22px;height:22px;object-fit:contain;vertical-align:middle"> English Shekho</div>
+      <div class="brand-sub">একটি বাংলা-মাধ্যম English ভাষা শেখার প্ল্যাটফর্ম। A1 থেকে C2 পর্যন্ত vocabulary, grammar, speaking এবং live chat সুবিধা।</div>
+      <div class="copyright-text">© <span id="footer-year"></span> English Shekho<br><span>All rights reserved.</span><br><span>Unauthorized reproduction</span><br><span>is strictly prohibited.</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>👨‍💻 Developer</h4>
+      <div class="dev-card">
+        <div class="dev-name">Zishan Rafi</div>
+        <div class="dev-title">WEB DEVELOPER · EDUCATOR</div>
+        <div class="dev-contact">
+          <div class="contact-row"><div class="contact-icon">📧</div><a href="mailto:zishanrafii@gmail.com">zishanrafii@gmail.com</a></div>
+          <div class="contact-row"><div class="contact-icon">📞</div><a href="tel:+8801877083978">+8801877083978</a></div>
+          <div class="contact-row"><div class="contact-icon">💬</div><a href="https://wa.me/8801877083978" target="_blank">WhatsApp</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>🔗 Social Media</h4>
+      <div class="social-links">
+        <a href="https://facebook.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">📘</span><span class="sl-label">Facebook</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://www.youtube.com/@Cyrus_rush" target="_blank" class="social-link"><span class="sl-icon">▶️</span><span class="sl-label">YouTube</span><span class="sl-handle">Cy-Rush</span></a>
+        <a href="https://instagram.com/sodium_neon" target="_blank" class="social-link"><span class="sl-icon">📸</span><span class="sl-label">Instagram</span><span class="sl-handle">Zishan Rafi</span></a>
+        <a href="https://github.com/zishanrafii" target="_blank" class="social-link"><span class="sl-icon">🐙</span><span class="sl-label">GitHub</span><span class="sl-handle">zishanrafi</span></a>
+        <a href="https://t.me/zissueissue" target="_blank" class="social-link"><span class="sl-icon">✈️</span><span class="sl-label">Telegram</span><span class="sl-handle">itz cyrus</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© <span id="footer-year2"></span> English Shekho · Developed by <a href="https://facebook.com/zishanrafii" target="_blank">Zishan Rafi</a></div>
+    <div>Built with <span class="footer-heart">♥</span> for Bengali learners &nbsp;·&nbsp; Version 1.0</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { safeUrl,
+  auth, db, signOut, requireAuth,
+  doc, getDoc, setDoc, updateDoc, increment
+} from "./js/firebase-config.js";
+
+/* ══════════════════════════════════
+   CHALLENGE DEFINITIONS
+══════════════════════════════════ */
+const CHALLENGES = [
+  {id:"daily-vocab", type:"daily", icon:"📚", title:"Vocabulary Practice",
+   desc:"Vocabulary dashboard-এ ৫টি নতুন শব্দ \"learned\" mark করো।",
+   xp:50, diff:"easy", deadline:"আজ", color:"#f5c842", border:"rgba(245,200,66,.25)",
+   target:5, link:"vocab-dashboard.html"},
+
+  {id:"daily-grammar", type:"daily", icon:"📖", title:"Grammar Lesson",
+   desc:"Grammar section-এ অন্তত ১টি lesson সম্পূর্ণ করো।",
+   xp:30, diff:"easy", deadline:"আজ", color:"#2dd4bf", border:"rgba(45,212,191,.25)",
+   target:1, link:"grammar.html"},
+
+  {id:"daily-quiz", type:"daily", icon:"📝", title:"Quiz Attempt",
+   desc:"যেকোনো ১টি level-এর quiz সম্পূর্ণ করো।",
+   xp:40, diff:"easy", deadline:"আজ", color:"#818cf8", border:"rgba(129,140,248,.25)",
+   target:1, link:"quiz-beginner.html"},
+
+  {id:"daily-writing", type:"daily", icon:"✍️", title:"Daily Writing Sprint",
+   desc:"Writing Lab-এ ১টি লেখা submit করো (২০+ শব্দ)।",
+   xp:50, diff:"medium", deadline:"আজ", color:"#fb923c", border:"rgba(251,146,60,.25)",
+   target:1, link:"writing-lab.html"},
+
+  {id:"weekly-quiz5", type:"weekly", icon:"🎯", title:"Quiz Marathon",
+   desc:"এই সপ্তাহে মোট ৫টি quiz session সম্পূর্ণ করো।",
+   xp:150, diff:"medium", deadline:"৭ দিন", color:"#34d399", border:"rgba(52,211,153,.25)",
+   target:5, link:"quiz-beginner.html"},
+
+  {id:"weekly-vocab25", type:"weekly", icon:"🧠", title:"Vocabulary Master",
+   desc:"এই সপ্তাহে ২৫টি নতুন শব্দ শিখো।",
+   xp:200, diff:"hard", deadline:"৭ দিন", color:"#a78bfa", border:"rgba(167,139,250,.25)",
+   target:25, link:"vocab-dashboard.html"},
+
+  {id:"weekly-essay", type:"weekly", icon:"📄", title:"Weekly Essay Challenge",
+   desc:"Climate change নিয়ে ২০০ শব্দের essay জমা দাও।",
+   xp:150, diff:"hard", deadline:"৭ দিন", color:"#fb7185", border:"rgba(251,113,133,.25)",
+   target:1, link:"writing-lab.html"},
+
+  {id:"monthly-xp1000", type:"monthly", icon:"🏆", title:"XP Champion",
+   desc:"এই মাসে মোট ১০০০ XP অর্জন করো।",
+   xp:500, diff:"hard", deadline:"৩০ দিন", color:"#f5c842", border:"rgba(245,200,66,.25)",
+   target:1000, link:"dashboard.html"},
+
+  {id:"monthly-streak30", type:"monthly", icon:"🔥", title:"Unstoppable",
+   desc:"৩০ দিন ধরে প্রতিদিন কমপক্ষে ১টি challenge সম্পূর্ণ করো।",
+   xp:1000, diff:"hard", deadline:"৩০ দিন", color:"#fb923c", border:"rgba(251,146,60,.25)",
+   target:30, link:"dashboard.html"},
+];
+
+/* ══════════════════════════════════
+   STATE
+══════════════════════════════════ */
+let currentUid = null;
+let activeFilter = "all";
+let userXP = 0;
+let userData = {};
+let claimedToday = new Set();   // challenge ids claimed in current period
+let claimedAll   = {};          // full claim history map id -> count/last date
+let streakCount  = 0;
+let streakDates  = [];          // array of yyyy-mm-dd
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2600);
+}
+
+function todayKey(){
+  return new Date().toISOString().slice(0,10);
+}
+function weekKey(){
+  const d = new Date();
+  const onejan = new Date(d.getFullYear(),0,1);
+  const week = Math.ceil((((d - onejan) / 86400000) + onejan.getDay()+1)/7);
+  return `${d.getFullYear()}-W${week}`;
+}
+function monthKey(){
+  const d = new Date();
+  return `${d.getFullYear()}-${d.getMonth()+1}`;
+}
+function periodKeyFor(type){
+  if(type==="daily") return todayKey();
+  if(type==="weekly") return weekKey();
+  return monthKey();
+}
+
+/* ══════════════════════════════════
+   PROGRESS CALCULATION (based on real Firestore stats)
+══════════════════════════════════ */
+function progressFor(ch){
+  switch(ch.id){
+    case "daily-vocab":
+    case "weekly-vocab25": {
+      const learned = (userData.vocabProgress?.learned || []).length;
+      return ch.id==="daily-vocab" ? Math.min(learned, ch.target) : Math.min(learned, ch.target);
+    }
+    case "daily-grammar": {
+      const done = (userData.grammarProgress?.done || []).length;
+      return done > 0 ? 1 : 0;
+    }
+    case "daily-quiz":
+    case "weekly-quiz5": {
+      const sessions = userData.sessions || 0;
+      return Math.min(sessions, ch.target);
+    }
+    case "daily-writing":
+    case "weekly-essay": {
+      const written = userData.writingProgress?.totalWritten || 0;
+      return Math.min(written, ch.target);
+    }
+    case "monthly-xp1000": {
+      return Math.min(userData.xp || 0, ch.target);
+    }
+    case "monthly-streak30": {
+      return Math.min(streakCount, ch.target);
+    }
+    default: return 0;
+  }
+}
+
+function isClaimed(ch){
+  const key = `${ch.id}_${periodKeyFor(ch.type)}`;
+  return !!claimedAll[key];
+}
+
+/* ══════════════════════════════════
+   RENDER
+══════════════════════════════════ */
+function renderChallenges(){
+  const active = [];
+  const completed = [];
+
+  CHALLENGES.forEach(ch=>{
+    if(activeFilter !== "all" && ch.type !== activeFilter) return;
+    const progress = progressFor(ch);
+    const pct = Math.min(100, Math.round(progress/ch.target*100));
+    const done = progress >= ch.target;
+    const claimed = isClaimed(ch);
+
+    let btnHtml;
+    if(claimed){
+      btnHtml = `<button class="cc-btn done" disabled>✅ Claimed</button>`;
+    } else if(done){
+      btnHtml = `<button class="cc-btn claimable" data-claim="${ch.id}">🎁 Claim +${ch.xp} XP</button>`;
+    } else {
+      btnHtml = `<button class="cc-btn" data-link="${ch.link}">শুরু করো →</button>`;
+    }
+
+    const cardHtml = `
+      <div class="challenge-card ${claimed?'completed':''}" style="--c-color:${ch.color};--c-border:${ch.border};">
+        <div class="cc-top">
+          <div class="cc-icon">${ch.icon}</div>
+          <div class="cc-xp">+${ch.xp} XP</div>
+        </div>
+        <div class="cc-title">${ch.title}</div>
+        <div class="cc-desc">${ch.desc}</div>
+        <div class="cc-progress-track"><div class="cc-progress-fill" style="width:${pct}%"></div></div>
+        <div class="cc-meta"><span>${progress} / ${ch.target}</span><span>${pct}%</span></div>
+        <div class="cc-footer">
+          <span class="cc-diff ${ch.diff==='easy'?'diff-easy':ch.diff==='medium'?'diff-medium':'diff-hard'}">${ch.diff}</span>
+          <span class="cc-deadline">⏰ ${ch.deadline}</span>
+        </div>
+        <div style="margin-top:.9rem;">${btnHtml}</div>
+      </div>`;
+
+    if(claimed) completed.push(cardHtml);
+    else active.push(cardHtml);
+  });
+
+  document.getElementById("challenge-grid").innerHTML = active.length
+    ? active.join("")
+    : `<div style="color:var(--muted);font-size:13px;grid-column:1/-1;">এই category-তে কোনো active challenge নেই।</div>`;
+
+  document.getElementById("completed-grid").innerHTML = completed.length
+    ? completed.join("")
+    : `<div style="color:var(--muted);font-size:13px;grid-column:1/-1;">এখনো কোনো challenge claim করা হয়নি।</div>`;
+
+  // attach events
+  document.querySelectorAll("[data-claim]").forEach(btn=>{
+    btn.addEventListener("click", ()=> claimChallenge(btn.dataset.claim));
+  });
+  document.querySelectorAll("[data-link]").forEach(btn=>{
+    btn.addEventListener("click", ()=> location.href = btn.dataset.link);
+  });
+}
+
+/* ══════════════════════════════════
+   CLAIM CHALLENGE
+══════════════════════════════════ */
+async function claimChallenge(id){
+  const ch = CHALLENGES.find(c=>c.id===id);
+  if(!ch || !currentUid) return;
+  const key = `${ch.id}_${periodKeyFor(ch.type)}`;
+  if(claimedAll[key]) return;
+
+  claimedAll[key] = true;
+  userXP += ch.xp;
+
+  // update streak
+  const today = todayKey();
+  if(!streakDates.includes(today)){
+    streakDates.push(today);
+    streakDates = streakDates.slice(-60); // keep recent history small
+    recalcStreak();
+  }
+
+  try{
+    await updateDoc(doc(db,"users",currentUid), {
+      xp: increment(ch.xp),
+      challengeClaims: claimedAll,
+      challengeStreak: streakCount,
+      challengeStreakDates: streakDates
+    });
+  }catch(e){ console.warn("claim save failed", e); }
+
+  toast(`🎉 Challenge complete! +${ch.xp} XP অর্জিত হয়েছে।`);
+  updateHeroStats();
+  renderStreak();
+  renderChallenges();
+}
+
+/* ══════════════════════════════════
+   STREAK
+══════════════════════════════════ */
+function recalcStreak(){
+  // count consecutive days ending today
+  let count = 0;
+  let d = new Date();
+  while(true){
+    const key = d.toISOString().slice(0,10);
+    if(streakDates.includes(key)){
+      count++;
+      d.setDate(d.getDate()-1);
+    } else break;
+  }
+  streakCount = count;
+}
+
+function renderStreak(){
+  document.getElementById("streak-title").textContent = `${streakCount} দিনের Streak! 🔥`;
+  document.getElementById("h-streak").textContent = streakCount;
+
+  const wrap = document.getElementById("streak-days");
+  const days = [];
+  const today = new Date();
+  for(let i=6;i>=0;i--){
+    const d = new Date(today);
+    d.setDate(d.getDate()-i);
+    const key = d.toISOString().slice(0,10);
+    const label = ["Su","Mo","Tu","We","Th","Fr","Sa"][d.getDay()];
+    const isToday = key === todayKey();
+    const done = streakDates.includes(key);
+    days.push(`<div class="sday ${done?'done':''} ${isToday?'today':''}">${label}</div>`);
+  }
+  wrap.innerHTML = days.join("");
+}
+
+/* ══════════════════════════════════
+   STATS
+══════════════════════════════════ */
+function updateHeroStats(){
+  document.getElementById("h-xp").textContent = userXP;
+  document.getElementById("h-done").textContent = Object.keys(claimedAll).filter(k=>claimedAll[k]).length;
+}
+
+/* ══════════════════════════════════
+   FILTER TABS
+══════════════════════════════════ */
+document.getElementById("filter-tabs").addEventListener("click", e=>{
+  const tab = e.target.closest(".ftab");
+  if(!tab) return;
+  activeFilter = tab.dataset.filter;
+  document.querySelectorAll(".ftab").forEach(t=>t.classList.remove("active"));
+  tab.classList.add("active");
+  renderChallenges();
+});
+
+/* ══════════════════════════════════
+   AUTH + INIT
+══════════════════════════════════ */
+const yr = new Date().getFullYear();
+document.getElementById("footer-year").textContent  = yr;
+document.getElementById("footer-year2").textContent = yr;
+
+document.getElementById("btn-logout").onclick = async ()=>{
+  await signOut(auth);
+  window.location.href="index.html";
+};
+
+requireAuth(async user => {
+  currentUid = user.uid;
+  const snap = await getDoc(doc(db,"users",user.uid));
+  userData = snap.exists() ? snap.data() : {};
+
+  const name  = userData.displayName || user.displayName || "Learner";
+  const photo = userData.photoURL    || user.photoURL    || "";
+  document.getElementById("nav-name").textContent = name;
+  const av = document.getElementById("nav-avatar");
+  if(photo) av.innerHTML = `<img src="${safeUrl(photo)}" style="width:100%;height:100%;object-fit:cover;">`;
+  else av.textContent = name[0]?.toUpperCase() || "?";
+
+  userXP = userData.xp || 0;
+  claimedAll = userData.challengeClaims || {};
+  streakDates = userData.challengeStreakDates || [];
+  recalcStreak();
+
+  updateHeroStats();
+  renderStreak();
+  renderChallenges();
+});
+</script>
+</body>
+</html>
