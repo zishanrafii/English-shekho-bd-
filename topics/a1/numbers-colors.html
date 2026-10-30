@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numbers & Colors — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/topic-page.css">
+<style>
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:.8rem;}
+.color-chip{border-radius:14px;padding:1.2rem .8rem .8rem;text-align:center;border:1px solid var(--border);}
+.color-swatch{width:36px;height:36px;border-radius:50%;margin:0 auto .6rem;border:2px solid rgba(255,255,255,.15);}
+.color-en{font-size:13px;font-weight:700;}
+.color-bn{font-size:11px;color:var(--muted);font-family:'Noto Sans Bengali',sans-serif;margin-top:2px;}
+</style>
+  <link rel="stylesheet" href="../../styles/tokens.css">
+  <meta name="theme-color" content="#070914">
+  <meta name="es-guest" content="allowed">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="../../roadmap.html">
+    <div class="tb-icon">🇬🇧</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">🔢 Numbers & Colors</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="../../roadmap.html">← Journey</a>
+    <a class="tb-btn" href="../../dashboard.html">Dashboard</a>
+    <button class="tb-btn" id="btn-logout">Logout</button>
+    <div class="nav-av" id="nav-av">👤</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="lesson-header">
+    <div class="lesson-breadcrumb">
+      <a href="../../roadmap.html">Journey</a> <span>→</span> <span>A1 · Beginner</span> <span>→</span> <span>Numbers & Colors</span>
+    </div>
+    <div class="lesson-meta">
+      <span class="sb-lvl lvl-a1">A1</span>
+      <span class="lmeta">⚡ 50 XP</span>
+      <span class="lmeta">⏱️ 15 min</span>
+    </div>
+    <div class="lesson-title" style="margin-top:.6rem"><span>Numbers & Colors</span></div>
+    <div class="lesson-desc">দৈনন্দিন জীবনে সংখ্যা (numbers) এবং রঙের নাম (colors) প্রতিনিয়ত প্রয়োজন হয় — দাম বলা, সময় বলা, জিনিসের বর্ণনা দেওয়া ইত্যাদিতে। এই lesson-এ ১–১০০ পর্যন্ত numbers এবং প্রধান colors শিখবেন।</div>
+  </div>
+
+  <!-- NUMBERS 1-10 -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#f5c842,#2dd4bf)">
+    <div class="card-title">🔢 Numbers 1–10</div>
+    <table class="gtable">
+      <tr><th>Number</th><th>English</th><th>উচ্চারণ</th></tr>
+      <tr><td>1</td><td>One</td><td>ওয়ান</td></tr>
+      <tr><td>2</td><td>Two</td><td>টু</td></tr>
+      <tr><td>3</td><td>Three</td><td>থ্রি</td></tr>
+      <tr><td>4</td><td>Four</td><td>ফোর</td></tr>
+      <tr><td>5</td><td>Five</td><td>ফাইভ</td></tr>
+      <tr><td>6</td><td>Six</td><td>সিক্স</td></tr>
+      <tr><td>7</td><td>Seven</td><td>সেভেন</td></tr>
+      <tr><td>8</td><td>Eight</td><td>এইট</td></tr>
+      <tr><td>9</td><td>Nine</td><td>নাইন</td></tr>
+      <tr><td>10</td><td>Ten</td><td>টেন</td></tr>
+    </table>
+  </div>
+
+  <!-- NUMBERS 11-20 -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#34d399,#2dd4bf)">
+    <div class="card-title">🔢 Numbers 11–20</div>
+    <table class="gtable">
+      <tr><th>Number</th><th>English</th><th>উচ্চারণ</th></tr>
+      <tr><td>11</td><td>Eleven</td><td>ইলেভেন</td></tr>
+      <tr><td>12</td><td>Twelve</td><td>টুয়েলভ</td></tr>
+      <tr><td>13</td><td>Thirteen</td><td>থার্টিন</td></tr>
+      <tr><td>14</td><td>Fourteen</td><td>ফোর্টিন</td></tr>
+      <tr><td>15</td><td>Fifteen</td><td>ফিফটিন</td></tr>
+      <tr><td>16</td><td>Sixteen</td><td>সিক্সটিন</td></tr>
+      <tr><td>17</td><td>Seventeen</td><td>সেভেন্টিন</td></tr>
+      <tr><td>18</td><td>Eighteen</td><td>এইটিন</td></tr>
+      <tr><td>19</td><td>Nineteen</td><td>নাইন্টিন</td></tr>
+      <tr><td>20</td><td>Twenty</td><td>টুয়েন্টি</td></tr>
+    </table>
+  </div>
+
+  <!-- TENS 20-100 -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#818cf8,#fb7185)">
+    <div class="card-title">🔟 Tens (20–100)</div>
+    <table class="gtable">
+      <tr><th>Number</th><th>English</th><th>Number</th><th>English</th></tr>
+      <tr><td>20</td><td>Twenty</td><td>70</td><td>Seventy</td></tr>
+      <tr><td>30</td><td>Thirty</td><td>80</td><td>Eighty</td></tr>
+      <tr><td>40</td><td>Forty</td><td>90</td><td>Ninety</td></tr>
+      <tr><td>50</td><td>Fifty</td><td>100</td><td>One hundred</td></tr>
+      <tr><td>60</td><td>Sixty</td><td></td><td></td></tr>
+    </table>
+    <div class="formula" style="margin-top:1rem;">
+      <div class="formula-label">Combining Tens + Units</div>
+      <div class="formula-text">21 = Twenty-<span class="hl">one</span> &nbsp;&nbsp; 35 = Thirty-<span class="hl">five</span> &nbsp;&nbsp; 99 = Ninety-<span class="hl">nine</span></div>
+    </div>
+  </div>
+
+  <!-- COLORS -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#fb923c,#f5c842)">
+    <div class="card-title">🎨 Colors</div>
+    <div class="color-grid">
+      <div class="color-chip"><div class="color-swatch" style="background:#ef4444"></div><div class="color-en">Red</div><div class="color-bn">লাল</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#3b82f6"></div><div class="color-en">Blue</div><div class="color-bn">নীল</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#22c55e"></div><div class="color-en">Green</div><div class="color-bn">সবুজ</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#facc15"></div><div class="color-en">Yellow</div><div class="color-bn">হলুদ</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#000"></div><div class="color-en">Black</div><div class="color-bn">কালো</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#fff"></div><div class="color-en">White</div><div class="color-bn">সাদা</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#a855f7"></div><div class="color-en">Purple</div><div class="color-bn">বেগুনি</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#f97316"></div><div class="color-en">Orange</div><div class="color-bn">কমলা</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#ec4899"></div><div class="color-en">Pink</div><div class="color-bn">গোলাপি</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#78350f"></div><div class="color-en">Brown</div><div class="color-bn">বাদামি</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#9ca3af"></div><div class="color-en">Grey</div><div class="color-bn">ধূসর</div></div>
+      <div class="color-chip"><div class="color-swatch" style="background:#06b6d4"></div><div class="color-en">Cyan</div><div class="color-bn">আকাশী</div></div>
+    </div>
+    <div class="examples" style="margin-top:1rem;">
+      <div class="ex"><div class="ex-en">The sky is blue.</div><div class="ex-bn">আকাশ নীল।</div></div>
+      <div class="ex"><div class="ex-en">I like the red shirt.</div><div class="ex-bn">আমার লাল শার্টটা পছন্দ।</div></div>
+      <div class="ex"><div class="ex-en">My favourite color is green.</div><div class="ex-bn">আমার পছন্দের রঙ সবুজ।</div></div>
+    </div>
+  </div>
+
+  <!-- PRACTICE -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#2dd4bf,#818cf8)">
+    <div class="card-title">📝 Practice Quiz</div>
+
+    <div class="practice-q">
+      <div class="pq-text">1. "15" সংখ্যাটি English-এ কী?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Fifteen-teen</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Fifteen</div>
+        <div class="pq-opt" onclick="pq(this,false)">Fiveteen</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! 15 = Fifteen।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">2. "৪২" সংখ্যাটি English-এ কীভাবে লিখবেন?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Four-twenty</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Forty-two</div>
+        <div class="pq-opt" onclick="pq(this,false)">Fourty-two</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! 42 = Forty-two (লক্ষ্য করুন "Forty"-তে 'u' নেই)।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">3. "আকাশ নীল" — এই বাক্যে "নীল" রঙের English কী?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Green</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Blue</div>
+        <div class="pq-opt" onclick="pq(this,false)">Black</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! নীল = Blue।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">4. "100" সংখ্যাটি English-এ কী?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Ten-ty</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">One hundred</div>
+        <div class="pq-opt" onclick="pq(this,false)">Hundred-one</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! 100 = One hundred।</div>
+    </div>
+
+    <div class="pq-score" id="pq-score">Score: <b>0 / 0</b></div>
+  </div>
+
+  <!-- COMPLETE -->
+  <div class="complete-box">
+    <div class="complete-box-text">
+      <strong>এই Topic শেষ করেছেন?</strong>
+      সম্পন্ন করলে আপনার Journey progress এবং XP আপডেট হবে।
+    </div>
+    <button class="btn-complete" id="complete-btn">✅ সম্পন্ন করুন (+50 XP)</button>
+  </div>
+
+  <div class="lesson-nav">
+    <a class="btn-prev" href="greetings-intro.html">← আগের: Greetings & Intro</a>
+    <a class="btn-next" href="common-nouns.html">পরবর্তী: Common Nouns →</a>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initTopic } from "../../js/topic-common.js";
+  initTopic({ id: "a1-t3", xp: 50 });
+</script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A1 Final Test — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/topic-page.css">
+  <link rel="stylesheet" href="../../styles/tokens.css">
+  <meta name="theme-color" content="#070914">
+  <meta name="es-guest" content="allowed">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="../../roadmap.html">
+    <div class="tb-icon">🇬🇧</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">📖 A1 Final Test</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="../../roadmap.html">← Journey</a>
+    <a class="tb-btn" href="../../dashboard.html">Dashboard</a>
+    <button class="tb-btn" id="btn-logout">Logout</button>
+    <div class="nav-av" id="nav-av">👤</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="lesson-header">
+    <div class="lesson-breadcrumb">
+      <a href="../../roadmap.html">Journey</a> <span>→</span> <span>A1 · Beginner</span> <span>→</span> <span>Final Test</span>
+    </div>
+    <div class="lesson-meta">
+      <span class="sb-lvl lvl-a1">A1</span>
+      <span class="lmeta">⚡ 100 XP</span>
+      <span class="lmeta">⏱️ 25 min</span>
+    </div>
+    <div class="lesson-title" style="margin-top:.6rem"><span>🎓 A1 Final Test</span></div>
+    <div class="lesson-desc">অভিনন্দন! আপনি A1 (Beginner) লেভেলের সব topic শেষ করেছেন — Alphabet, Greetings, Numbers & Colors, Common Nouns, Present Simple এবং Basic Questions। এখন এই সব মিলিয়ে একটি final quiz দিন। ৭০% বা তার বেশি স্কোর করলে আপনি A2 (Elementary) লেভেলের জন্য প্রস্তুত!</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="hero-grid">
+    <div class="hero-box c1">
+      <div class="hero-word">🔤</div>
+      <div class="hero-label">Alphabet & Phonics</div>
+      <div class="hero-desc">26 letters, sounds</div>
+    </div>
+    <div class="hero-box c3">
+      <div class="hero-word">👋</div>
+      <div class="hero-label">Greetings & Intro</div>
+      <div class="hero-desc">Hello, My name is...</div>
+    </div>
+    <div class="hero-box c2">
+      <div class="hero-word">🔢</div>
+      <div class="hero-label">Numbers & Colors</div>
+      <div class="hero-desc">1-100, colors</div>
+    </div>
+    <div class="hero-box c4">
+      <div class="hero-word">🏠</div>
+      <div class="hero-label">Nouns, "to be" & Qs</div>
+      <div class="hero-desc">am/is/are, WH-words</div>
+    </div>
+  </div>
+
+  <!-- FINAL QUIZ -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#f5c842,#2dd4bf)">
+    <div class="card-title">📝 Final Quiz — 10 Questions</div>
+
+    <div class="practice-q">
+      <div class="pq-text">1. ইংরেজি Alphabet-এ কতটি vowel letter আছে?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">4</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">5</div>
+        <div class="pq-opt" onclick="pq(this,false)">6</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! A, E, I, O, U — ৫টি vowel।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">2. ঘুমানোর আগে কী বলা হয়?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Good morning</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Good night</div>
+        <div class="pq-opt" onclick="pq(this,false)">Good afternoon</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! ঘুমানোর আগে "Good night" বলা হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">3. "৭০" সংখ্যাটি English-এ কী?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Seventy</div>
+        <div class="pq-opt" onclick="pq(this,false)">Seventeen</div>
+        <div class="pq-opt" onclick="pq(this,false)">Seventieth</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! 70 = Seventy।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">4. আকাশের রঙ কী?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Green</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Blue</div>
+        <div class="pq-opt" onclick="pq(this,false)">Yellow</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! আকাশের রঙ Blue (নীল)।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">5. "বাবা" শব্দটির English কী?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Father</div>
+        <div class="pq-opt" onclick="pq(this,false)">Brother</div>
+        <div class="pq-opt" onclick="pq(this,false)">Son</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "বাবা" = Father।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">6. He ___ a good boy.</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">am</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">is</div>
+        <div class="pq-opt" onclick="pq(this,false)">are</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! "He" এর সাথে "is" হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">7. They ___ from Bangladesh.</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">is</div>
+        <div class="pq-opt" onclick="pq(this,false)">am</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">are</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "They" এর সাথে "are" হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">8. কারো নাম জানতে চাইলে কোন WH-word ব্যবহার হয়?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">What</div>
+        <div class="pq-opt" onclick="pq(this,false)">Where</div>
+        <div class="pq-opt" onclick="pq(this,false)">Why</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "What is your name?" — নাম জানতে "What" ব্যবহার হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">9. "আমার খিদে লেগেছে" — এর সঠিক English কোনটি?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">I'm hungry.</div>
+        <div class="pq-opt" onclick="pq(this,false)">I'm hungrily.</div>
+        <div class="pq-opt" onclick="pq(this,false)">I'm hunger.</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! "I'm hungry." সঠিক বাক্য।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">10. দাম জানতে চাইলে দোকানে কী বলবেন?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Where is this?</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">How much is this?</div>
+        <div class="pq-opt" onclick="pq(this,false)">Who is this?</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "How much is this?" দিয়ে দাম জানতে চাওয়া হয়।</div>
+    </div>
+
+    <div class="pq-score" id="pq-score">Score: <b>0 / 0</b></div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-icon">🎉</div>
+    <div class="tip-text"><strong>অভিনন্দন!</strong> এই quiz শেষ করার পর "সম্পন্ন করুন" বাটনে ক্লিক করুন — আপনার A1 level সম্পূর্ণ হয়ে যাবে এবং একটি certificate-ও ডাউনলোড করতে পারবেন Journey পেজ থেকে। এরপর A2 (Elementary) level আনলক হবে!</div>
+  </div>
+
+  <!-- COMPLETE -->
+  <div class="complete-box">
+    <div class="complete-box-text">
+      <strong>A1 Final Test শেষ করেছেন?</strong>
+      সম্পন্ন করলে A1 level সম্পূর্ণ হবে এবং A2 আনলক হবে।
+    </div>
+    <button class="btn-complete" id="complete-btn">✅ সম্পন্ন করুন (+100 XP)</button>
+  </div>
+
+  <div class="lesson-nav">
+    <a class="btn-prev" href="everyday-phrases.html">← আগের: Everyday Phrases</a>
+    <a class="btn-next" href="../a2/past-simple.html">পরবর্তী: A2 — Past Simple Tense →</a>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initTopic } from "../../js/topic-common.js";
+  initTopic({ id: "a1-t8", xp: 100 });
+</script>
+</body>
+</html>

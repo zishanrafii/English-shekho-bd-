@@ -1,0 +1,137 @@
+/* Dashboard refresh — calm light surfaces, accessible contrast, mobile-first spacing.
+   Scoped to dashboard.html so other pages and their learning logic remain unchanged. */
+:root {
+  color-scheme: light;
+  --dash-bg: #f4f7fb;
+  --dash-surface: #ffffff;
+  --dash-surface-soft: #f7fafc;
+  --dash-border: #e1e8f0;
+  --dash-text: #17243a;
+  --dash-sub: #52647b;
+  --dash-muted: #6c7c90;
+  --dash-teal: #078f83;
+  --dash-indigo: #5369c8;
+  --dash-amber: #a96808;
+}
+html { background: var(--dash-bg); color-scheme: light; }
+body { background: var(--dash-bg) !important; color: var(--dash-text) !important; }
+body::before { background: radial-gradient(ellipse 70% 45% at 0% 0%, rgba(83,105,200,.08), transparent 62%), radial-gradient(ellipse 55% 45% at 100% 10%, rgba(7,143,131,.07), transparent 62%) !important; }
+body::after { background-image: none !important; }
+.wrap { max-width: 1200px; padding-top: 1.25rem; }
+.topbar { background: rgba(255,255,255,.94) !important; border: 1px solid var(--dash-border) !important; box-shadow: 0 8px 28px rgba(28,47,75,.07) !important; border-radius: 18px; backdrop-filter: blur(18px); }
+.logo-icon { background: linear-gradient(135deg,#e9edff,#d9f5f0); border: 1px solid #d9e3f2; box-shadow: none; }
+.logo-text h1 { background: linear-gradient(110deg,#465db9,#078f83); -webkit-background-clip:text; background-clip:text; }
+.logo-text p { color: #718096; }
+.nav-link { color: #52647b; }
+.nav-link:hover, .nav-link:focus-visible { background: #edf4fa; color: #17243a; border-color: #dce6f0; }
+.user-avatar { border: 2px solid #cfe8e4; box-shadow: none; background: #e7f6f3; }
+.user-name { color: var(--dash-text); }
+.btn-logout { background: #fff2f2; border-color: #f4d4d8; color: #a73d50; }
+.btn-logout:hover { background: #ffe6e9; border-color: #eaaab4; }
+.hero { background: linear-gradient(118deg,#ffffff 0%,#f1f6ff 54%,#eaf8f5 100%) !important; border: 1px solid #dfe8f3 !important; box-shadow: 0 12px 34px rgba(31,55,89,.08) !important; }
+.hero-stripe { background: linear-gradient(90deg,#5369c8,#078f83,#f0c879) !important; height: 3px; }
+.hero-orb1 { background: radial-gradient(circle,rgba(83,105,200,.12),transparent 70%) !important; }
+.hero-orb2 { background: radial-gradient(circle,rgba(7,143,131,.12),transparent 70%) !important; }
+.hero-eyebrow { color: #5369c8 !important; opacity: 1; }
+.hero h2 { color: #17243a; }
+.hero h2 span { background: linear-gradient(120deg,#465db9,#078f83); -webkit-background-clip:text; background-clip:text; }
+.hero-sub { color: #52647b !important; }
+.hstat { background: rgba(255,255,255,.82) !important; border: 1px solid #dfe7f1 !important; border-radius: 13px; box-shadow: 0 3px 10px rgba(30,50,80,.035); }
+.hstat::after { background: linear-gradient(90deg,#5369c8,#078f83) !important; opacity: .7; }
+.hstat-v { background: linear-gradient(120deg,#465db9,#078f83); -webkit-background-clip:text; background-clip:text; }
+.hstat-l { color: #6c7c90 !important; }
+.challenge-banner { background: linear-gradient(110deg,#fff9e9,#effaf8) !important; border: 1px solid #e8e3d1 !important; box-shadow: 0 5px 18px rgba(35,55,70,.04); }
+.challenge-banner::before { background: linear-gradient(90deg,transparent,#e2b454,transparent); }
+.challenge-icon { background: #fff1c9; border-color: #f1dfac; }
+.challenge-title { color: #17243a; }
+.challenge-desc { color: #52647b !important; }
+.challenge-badge { background: #f0c879; color: #533700; }
+.btn-challenge { background: #087f76 !important; color: #fff !important; border: 1px solid #087f76 !important; box-shadow: 0 4px 12px rgba(7,143,131,.14); }
+.btn-challenge:hover { background: #066c65 !important; }
+.stat-card, .level-progress-wrap, .panel, .card, #plan-card .es-card, #dna-card .es-card { background: var(--dash-surface) !important; border: 1px solid var(--dash-border) !important; box-shadow: 0 5px 18px rgba(28,47,75,.045) !important; }
+.stat-card { border-radius: 16px; }
+.stat-card:hover, .card:hover { box-shadow: 0 12px 28px rgba(28,47,75,.09) !important; border-color: #cbd9e8 !important; }
+.stat-card::after { opacity: .85; }
+.stat-v { color: var(--dash-text) !important; }
+.sv-1 { color: #087f76 !important; } .sv-2 { color: #a96808 !important; } .sv-3 { color: #5369c8 !important; } .sv-4 { color: #b64e67 !important; }
+.stat-l, .score-meta { color: var(--dash-muted) !important; }
+.level-progress-wrap { border-radius: 18px; }
+.level-label { color: var(--dash-text); }
+.lb-active { box-shadow: inset 0 0 0 1px currentColor; }
+.lb-inactive { opacity: .55; }
+.progress-track { background: #e8edf4 !important; }
+.progress-fill { background: linear-gradient(90deg,#5369c8,#078f83) !important; box-shadow: none !important; }
+.progress-meta { color: var(--dash-muted) !important; }
+.section-title { color: #5b6c81 !important; }
+.section-title::after { background: #dfe6ef !important; }
+.card { border-radius: 17px; }
+.card::before { background: linear-gradient(135deg,rgba(83,105,200,.045),rgba(7,143,131,.045)) !important; }
+.card h3 { color: #17243a; }
+.card p { color: #5c6e83 !important; }
+.card-icon { background: #f0f5fa !important; border-color: #e0e8f1 !important; }
+.card:hover .card-icon { background: #e5f5f2 !important; border-color: #c8e9e3 !important; }
+.card-badge { background: #f0c879 !important; color: #533700 !important; }
+.card-live { background: linear-gradient(135deg,#f1fbf8,#f6f9ff) !important; border-color: #cfe8e4 !important; }
+.score-item { border-bottom-color: #edf1f6 !important; }
+.score-val { color: #9a650d !important; }
+.score-pct { color: #087f76 !important; }
+.no-data { color: #718096 !important; }
+.footer-bottom { color: #708095 !important; border-top-color: #dfe6ef !important; }
+.footer-bottom a { color: #52647b !important; }
+#plan-card .es-card, #dna-card .es-card { color: var(--dash-text); border-radius: 18px; padding: 1.25rem !important; }
+#plan-card .es-sub, #plan-card .es-muted { color: #52647b !important; }
+#plan-card .es-badge { border-radius: 999px; }
+:focus-visible { outline-color: #078f83 !important; }
+@media (max-width: 800px) {
+  .topbar { align-items: flex-start; }
+  .topbar-right { width: 100%; justify-content: space-between; flex-wrap: wrap; }
+  .nav-links { display: flex !important; order: 3; width: 100%; overflow-x: auto; padding: .25rem 0 .1rem; scrollbar-width: thin; }
+  .nav-link { flex: 0 0 auto; white-space: nowrap; }
+  .hero-inner { gap: 1.2rem; }
+  .hero-stats { width: 100%; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); }
+  .hstat { min-width: 0; padding: .65rem .35rem; }
+  .hstat-v { font-size: 1.25rem; }
+  .hstat-l { font-size: .62rem; letter-spacing: .3px; }
+}
+@media (max-width: 600px) {
+  .wrap { padding: .7rem .65rem 0; }
+  .topbar { top: 6px; padding: .8rem; gap: .7rem; margin-bottom: 1rem; }
+  .logo { gap: .65rem; }
+  .logo-icon { width: 40px; height: 40px; }
+  .logo-text h1 { font-size: 1.28rem; }
+  .logo-text p { font-size: 8px; letter-spacing: .15px; }
+  .user-section { gap: .5rem; flex-wrap: wrap; }
+  .user-name { max-width: 100px; }
+  .btn-logout { padding: .45rem .65rem; }
+  .hero { padding: 1.25rem 1rem; border-radius: 19px; margin-bottom: 1rem; }
+  .hero h2 { font-size: 1.65rem; }
+  .hero-sub { font-size: .9rem; }
+  .hero-stats { gap: .45rem; }
+  .challenge-banner { padding: .9rem; gap: .75rem; margin-bottom: 1rem; }
+  .challenge-left { gap: .65rem; }
+  .challenge-icon { width: 38px; height: 38px; }
+  .challenge-title { font-size: .9rem; }
+  .challenge-desc { font-size: .76rem; }
+  .btn-challenge { padding: .55rem .75rem; font-size: .8rem; }
+  .stats-row { gap: .6rem; margin-bottom: 1rem; }
+  .stat-card { padding: .8rem .7rem; gap: .6rem; }
+  .stat-icon { width: 34px; height: 34px; font-size: 1rem; }
+  .stat-v { font-size: 1.1rem; }
+  .stat-l { font-size: .72rem; }
+  .level-progress-wrap, .panel { padding: 1rem; margin-bottom: 1rem; }
+  .level-badges { gap: .3rem; }
+  .level-badge { padding: .25rem .5rem; font-size: .68rem; }
+  .dashboard-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: .65rem; }
+  .card { padding: 1rem .85rem; border-radius: 15px; }
+  .card-icon { width: 40px; height: 40px; font-size: 1.2rem; margin-bottom: .65rem; }
+  .card h3 { font-size: .92rem; }
+  .card p { font-size: .78rem; line-height: 1.55; }
+}
+@media (max-width: 360px) {
+  .hero-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .challenge-banner { align-items: flex-start; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .stat-card, .hstat { transition: none !important; }
+}

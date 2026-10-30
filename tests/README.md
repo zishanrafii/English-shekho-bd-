@@ -1,0 +1,24 @@
+# tests/
+
+- `node tests/profile-schema.test.mjs` — unit tests for the Learning DNA validation (no dependencies).
+- `onboarding.smoke.js` — real-browser wizard test (needs `npm i -D playwright`; start `python3 -m http.server 8765` in the project root first). Firebase is stubbed, so it checks UI flow and the exact data that would be saved.
+- `node tests/placement.test.mjs` — validates the question bank and simulates 2,400 learners per scenario against the adaptive placement engine.
+- `placement.smoke.js` — real-browser test of `placement.html` (Firebase stubbed; the final redirect to dashboard prints a harmless stub-export error).
+- Rebuild the question bank with `node tools/build-placement-bank.mjs`.
+- `node tests/daily-plan.test.mjs` — unit tests for the daily plan engine (time budget, personalisation, stability, links exist, tone).
+- `dashboard-plan.smoke.js` — real-browser test of the dashboard plan card (check/uncheck saves, rollback on failure, guest, onboarding redirect).
+- Rebuild the grammar topic list with `node tools/build-plan-catalog.mjs`.
+- `node tests/srs.test.mjs` — unit tests for the spaced-repetition engine (intervals, ease limits, statuses, session caps, retention simulation).
+- `vocab-review.smoke.js` — real-browser test of Smart Review against an in-memory Firestore that mirrors the security rules (`srsCardOk`, `srsMetaOk`).
+- Re-run the dataset audit with `node tools/vocab-audit.mjs` (writes `docs/VOCAB_AUDIT.md` and `data/vocab-flags.json`).
+- `node tests/grammar-practice.test.mjs` — unit tests for the grammar practice helpers (mastery, mistake documents, weak topics, stages).
+- `grammar-topic.smoke.js` — real-browser test of the whole practice loop on a real topic page (storage mirrors `grammarOk` / `grammarMistakeOk`).
+- `grammar-review.smoke.js` — real-browser test of the "ভুল থেকে শেখা" page.
+- `all-topics.sweep.js` — loads all 48 topic pages, answers every question, checks the results panel and the XP lock.
+- `node tests/word-bank.test.mjs`, `listening-tools.test.mjs`, `reading-tools.test.mjs` — unit tests for the Phase 9 helpers (saved words, cloze/practice words, reading speed), including checks against all 60 listening lessons and 63 reading passages.
+- `listening.smoke.js`, `reading.smoke.js` — real-browser tests (shared in-memory Firestore in `stub-store.js`, mirrors `srsCardOk`).
+- Rebuild the word lookup with `node tools/build-dictionary.mjs` (writes `data/dictionary.json`).
+- Phase 10 (speaking): `speaking-analyzer`, `speaking-core`, `speaking-engine`, `speaking-persistence` unit/integration tests (`node tests/<name>.test.mjs`), `node tests/functions.test.js` (Cloud Function incl. the AI coach route), and `speaking.smoke.js` (real Chromium: fake microphone device + MediaRecorder; SpeechRecognition is scripted because headless Chromium has no speech service).
+- `rules-mirror.mjs` is a JS copy of the speaking rules used by the tests; the real `firestore.rules` could NOT be executed here (no emulator).
+- Phase 11 (writing): `writing-analyzer`, `writing-mistakes`, `rules-regex` (decodes every regex in firestore.rules and runs it), and the writing-coach cases in `node tests/functions.test.js`; browser: `writing.smoke.js` (instant check, apply-fix, mistake memory, AI coach with a mocked route, honest XP, review page, lab card, guests).
+- Phase 12 (simulator): `node tests/simulator-engine.test.mjs` (12 scenarios: data integrity + deterministic goal detection + guided partner + report), the sim-turn cases in `node tests/functions.test.js`, sim-session cases in `speaking-persistence.test.mjs`, and `simulator.smoke.js` (real Chromium: guided and AI modes, AI failures → guided fallback, spoken input, limits, save failure + retry, guests, 360 px mobile).

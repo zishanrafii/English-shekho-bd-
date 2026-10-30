@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A2 Final Test — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/topic-page.css">
+  <link rel="stylesheet" href="../../styles/tokens.css">
+  <meta name="theme-color" content="#070914">
+  <meta name="es-guest" content="allowed">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="../../roadmap.html">
+    <div class="tb-icon">🇬🇧</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">📖 A2 Final Test</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="../../roadmap.html">← Journey</a>
+    <a class="tb-btn" href="../../dashboard.html">Dashboard</a>
+    <button class="tb-btn" id="btn-logout">Logout</button>
+    <div class="nav-av" id="nav-av">👤</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="lesson-header">
+    <div class="lesson-breadcrumb">
+      <a href="../../roadmap.html">Journey</a> <span>→</span> <span>A2 · Elementary</span> <span>→</span> <span>Final Test</span>
+    </div>
+    <div class="lesson-meta">
+      <span class="sb-lvl lvl-a2">A2</span>
+      <span class="lmeta">⚡ 150 XP</span>
+      <span class="lmeta">⏱️ 25 min</span>
+    </div>
+    <div class="lesson-title" style="margin-top:.6rem"><span>🎓 A2 Final Test</span></div>
+    <div class="lesson-desc">অভিনন্দন! আপনি A2 (Elementary) লেভেলের সব topic শেষ করেছেন — Past Simple, Future Tense, Adjectives & Adverbs, Conjunctions, Shopping & Travel, Short Conversations এবং Paragraph Writing। এখন এই সব মিলিয়ে একটি final quiz দিন। ৭০% বা তার বেশি স্কোর করলে আপনি B1 (Intermediate) লেভেলের জন্য প্রস্তুত!</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="hero-grid">
+    <div class="hero-box c1">
+      <div class="hero-word">⏰</div>
+      <div class="hero-label">Past Simple</div>
+      <div class="hero-desc">went, watched, was/were</div>
+    </div>
+    <div class="hero-box c3">
+      <div class="hero-word">🔮</div>
+      <div class="hero-label">Future Tense</div>
+      <div class="hero-desc">will / going to</div>
+    </div>
+    <div class="hero-box c2">
+      <div class="hero-word">🎨</div>
+      <div class="hero-label">Adjectives & Adverbs</div>
+      <div class="hero-desc">careful / carefully</div>
+    </div>
+    <div class="hero-box c4">
+      <div class="hero-word">🔗</div>
+      <div class="hero-label">Conjunctions & Writing</div>
+      <div class="hero-desc">and, but, because, so</div>
+    </div>
+  </div>
+
+  <!-- FINAL QUIZ -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#f5c842,#2dd4bf)">
+    <div class="card-title">📝 Final Quiz — 10 Questions</div>
+
+    <div class="practice-q">
+      <div class="pq-text">1. Yesterday, I ___ (visit) my grandmother.</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">visit</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">visited</div>
+        <div class="pq-opt" onclick="pq(this,false)">visiting</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! Regular verb-এর past form: visit + ed = visited।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">2. She ___ (go) to the market last week.</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">goed</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">went</div>
+        <div class="pq-opt" onclick="pq(this,false)">going</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! "Go" এর irregular past form "went"।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">3. Look at those clouds — it ___ rain soon. (লক্ষণ দেখে অনুমান)</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">is going to</div>
+        <div class="pq-opt" onclick="pq(this,false)">was</div>
+        <div class="pq-opt" onclick="pq(this,false)">did</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! লক্ষণ দেখে অনুমানের জন্য "going to" ব্যবহার হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">4. I'll call you tomorrow. (এটি কী বোঝায়?)</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">তাৎক্ষণিক সিদ্ধান্ত/প্রতিশ্রুতি</div>
+        <div class="pq-opt" onclick="pq(this,false)">অতীতের ঘটনা</div>
+        <div class="pq-opt" onclick="pq(this,false)">নিয়মিত অভ্যাস</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "Will" দিয়ে তাৎক্ষণিক সিদ্ধান্ত/প্রতিশ্রুতি বোঝানো হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">5. She is a ___ girl. (Noun-এর আগে কোনটি বসবে)</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">happy</div>
+        <div class="pq-opt" onclick="pq(this,false)">happily</div>
+        <div class="pq-opt" onclick="pq(this,false)">happiness</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! Noun-এর আগে adjective বসে — "happy girl"।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">6. He runs very ___. (verb-এর পরে কোনটি বসবে)</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">quick</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">quickly</div>
+        <div class="pq-opt" onclick="pq(this,false)">quickness</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! Verb-এর পরে adverb বসে — "runs quickly"।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">7. It was raining, ___ I stayed home.</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">because</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">so</div>
+        <div class="pq-opt" onclick="pq(this,false)">but</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! কারণের পর পরিণতি বোঝাতে "so" ব্যবহার হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">8. রেস্টুরেন্টে বিল চাইতে কী বলবেন?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Could we have the bill, please?</div>
+        <div class="pq-opt" onclick="pq(this,false)">Can I try this on?</div>
+        <div class="pq-opt" onclick="pq(this,false)">Is there any discount?</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "Could we have the bill, please?" দিয়ে বিল চাওয়া হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">9. একটি paragraph-এর প্রথম বাক্যকে কী বলা হয়?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Topic Sentence</div>
+        <div class="pq-opt" onclick="pq(this,false)">Linking Sentence</div>
+        <div class="pq-opt" onclick="pq(this,false)">Question Sentence</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! প্রথম বাক্যকে "Topic Sentence" বলা হয়।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">10. They ___ very happy at the party. (was/were)</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">was</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">were</div>
+        <div class="pq-opt" onclick="pq(this,false)">is</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "They" এর past be verb "were"।</div>
+    </div>
+
+    <div class="pq-score" id="pq-score">Score: <b>0 / 0</b></div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-icon">🎉</div>
+    <div class="tip-text"><strong>অভিনন্দন!</strong> এই quiz শেষ করার পর "সম্পন্ন করুন" বাটনে ক্লিক করুন — আপনার A2 level সম্পূর্ণ হয়ে যাবে এবং certificate ডাউনলোড করতে পারবেন Journey পেজ থেকে। এরপর B1 (Intermediate) level আনলক হবে!</div>
+  </div>
+
+  <!-- COMPLETE -->
+  <div class="complete-box">
+    <div class="complete-box-text">
+      <strong>A2 Final Test শেষ করেছেন?</strong>
+      সম্পন্ন করলে A2 level সম্পূর্ণ হবে এবং B1 আনলক হবে।
+    </div>
+    <button class="btn-complete" id="complete-btn">✅ সম্পন্ন করুন (+150 XP)</button>
+  </div>
+
+  <div class="lesson-nav">
+    <a class="btn-prev" href="paragraph-writing.html">← আগের: Paragraph Writing</a>
+    <a class="btn-next" href="../b1/present-perfect.html">পরবর্তী: B1 — Present Perfect →</a>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initTopic } from "../../js/topic-common.js";
+  initTopic({ id: "a2-t8", xp: 150 });
+</script>
+</body>
+</html>

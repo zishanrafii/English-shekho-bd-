@@ -1,0 +1,16 @@
+import { readFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+const rules = readFileSync(new URL('../firestore.rules', import.meta.url), 'utf8');
+const friend = rules.slice(rules.indexOf('match /friendRequests/{reqId}'), rules.indexOf('match /studyGroups/{groupId}'));
+const groups = rules.slice(rules.indexOf('match /studyGroups/{groupId}'), rules.indexOf('// ───── SPEAKING SESSIONS'));
+const rooms = rules.slice(rules.indexOf('match /liveRooms/{roomId}'), rules.indexOf('match /friendRequests/{reqId}'));
+assert.match(friend, /affectedKeys\(\)\.hasOnly\(\['status'\]\)/, 'friend request updates only change status');
+assert.match(friend, /resource\.data\.status == "pending"/, 'only pending friend requests can be accepted');
+assert.match(friend, /request\.resource\.data\.to != request\.auth\.uid/, 'self friend requests are rejected');
+assert.match(groups, /toSet\(\)\.difference\(resource\.data\.members\.toSet\(\)\)\.hasOnly\(\[request\.auth\.uid\]\)/, 'joining may only add own UID');
+assert.match(groups, /resource\.data\.members\.toSet\(\)\.difference\(request\.resource\.data\.members\.toSet\(\)\)\.hasOnly\(\[request\.auth\.uid\]\)/, 'leaving may only remove own UID');
+assert.match(groups, /request\.resource\.data\.members\.size\(\) <= 100/, 'group membership is bounded');
+assert.match(rooms, /request\.resource\.data\.get\('participantCount', 0\) <= resource\.data\.get\('participantCount', 0\) \+ 1/, 'participant counter changes are bounded');
+assert.match(rooms, /request\.resource\.data\.get\('waitingCount', 0\) <= resource\.data\.get\('waitingCount', 0\) \+ 1/, 'waiting counter changes are bounded');
+console.log('PASS Firestore rules include friend-request, group-membership, and live-counter hardening');
+console.log('NOTE These are source assertions, not Firestore Emulator authorization tests.');

@@ -1,0 +1,202 @@
+/* ═══════════════════════════════════════════════════════════════
+   English Shekho — Design System v1  (Phase 2)
+   Brand: calm · clear · premium · friendly
+   Palette: Soft Indigo + Teal + warm amber highlight
+
+   HOW IT WORKS
+   1) Brand tokens (--es-*)         → use these in ALL new code.
+   2) Legacy aliases (--bg, --gold…) → remapped here so every existing
+      page picks up the new brand without editing its own CSS.
+      This file is linked LAST in <head>, so it wins the cascade.
+   3) Components (.es-btn, .es-card …) → for new/updated pages.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Brand colors ── */
+  --es-indigo-500: #7185dc;   /* Electric Indigo — primary */
+  --es-indigo-400: #8b9be8;
+  --es-indigo-300: #b5c0f5;
+  --es-violet-500: #8c7bd5;   /* Violet — secondary */
+  --es-violet-400: #a99be8;
+  --es-cyan-400:   #67c9bf;   /* Cyan — accent / info */
+  --es-cyan-300:   #9be0d8;
+  --es-warm-400:   #f0c879;   /* Warm highlight — reward / XP / CTA glow */
+  --es-warm-500:   #dfad50;
+
+  /* ── Semantic ── */
+  --es-success: #72c9a4;
+  --es-danger:  #ee929d;
+  --es-warning: #eeb36e;
+  --es-info:    var(--es-cyan-400);
+
+  /* ── Surfaces (dark) ── */
+  --es-bg:        #101827;
+  --es-surface-1: #151f2e;
+  --es-surface-2: #1b293b;
+  --es-surface-3: #26374b;
+  --es-border:    rgba(215, 229, 247, .10);
+  --es-border-strong: rgba(215, 229, 247, .19);
+
+  /* ── Text ── */
+  --es-text:  #edf3f9;
+  --es-sub:   #bdcbdc;
+  --es-muted: #91a2b8;
+
+  /* ── Gradients ── */
+  --es-grad-brand:  linear-gradient(135deg, var(--es-indigo-500), var(--es-violet-500));
+  --es-grad-energy: linear-gradient(135deg, var(--es-violet-500), var(--es-cyan-400));
+  --es-grad-reward: linear-gradient(135deg, var(--es-warm-400), var(--es-warm-500));
+
+  /* ── Typography ── */
+  --es-font: 'Outfit', 'Noto Sans Bengali', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --es-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --es-fs-xs: .75rem;  --es-fs-sm: .875rem; --es-fs-md: 1rem;
+  --es-fs-lg: 1.125rem; --es-fs-xl: 1.375rem; --es-fs-2xl: 1.75rem; --es-fs-3xl: 2.25rem;
+  --es-lh: 1.6;
+
+  /* ── Spacing (4px scale) ── */
+  --es-s1: .25rem; --es-s2: .5rem; --es-s3: .75rem; --es-s4: 1rem;
+  --es-s5: 1.5rem; --es-s6: 2rem;  --es-s7: 3rem;
+
+  /* ── Radius / shadow / motion ── */
+  --es-r-sm: 8px; --es-r-md: 12px; --es-r-lg: 18px; --es-r-xl: 24px; --es-r-pill: 999px;
+  --es-shadow-1: 0 2px 8px rgba(0, 0, 0, .28);
+  --es-shadow-2: 0 10px 30px rgba(0, 0, 0, .38);
+  --es-glow:     0 0 0 1px rgba(139, 155, 232, .22), 0 8px 24px rgba(71, 91, 151, .18);
+  --es-ease: cubic-bezier(.2, .8, .2, 1);
+  --es-dur-1: 120ms; --es-dur-2: 220ms; --es-dur-3: 380ms;
+
+  /* ── Layers ── */
+  --es-z-nav: 100; --es-z-modal: 1000; --es-z-toast: 1100;
+
+  /* ═══ LEGACY ALIASES — remap old per-page variables to the new brand ═══ */
+  --bg:       var(--es-bg);
+  --surface:  var(--es-surface-1);
+  --surface2: var(--es-surface-2);
+  --surface3: var(--es-surface-3);
+  --border:   var(--es-border);
+  --text:     var(--es-text);
+  --sub:      var(--es-sub);
+  --muted:    var(--es-muted);
+  --gold:     var(--es-warm-400);
+  --gold2:    var(--es-warm-500);
+  --teal:     var(--es-cyan-400);
+  --sky:      var(--es-cyan-300);
+  --indigo:   var(--es-indigo-400);
+  --violet:   var(--es-violet-400);
+  --violet2:  var(--es-violet-500);
+  --emerald:  var(--es-success);
+  --rose:     var(--es-danger);
+  --orange:   var(--es-warning);
+  --green:    var(--es-success);
+  --red:      var(--es-danger);
+}
+
+/* ── Base ── */
+html { color-scheme: dark; -webkit-text-size-adjust: 100%; }
+body {
+  background-color: var(--es-bg);
+  /* soft brand ambience; low opacity so page content stays readable */
+  background-image:
+    radial-gradient(900px 500px at 12% -8%, rgba(113, 133, 220, .10), transparent 60%),
+    radial-gradient(800px 480px at 105% 4%, rgba(103, 201, 191, .06), transparent 60%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--es-text);
+  font-family: var(--es-font);
+  line-height: var(--es-lh);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: rgba(124, 131, 255, .4); color: #fff; }
+
+/* Accessible focus ring everywhere */
+:focus-visible {
+  outline: 2px solid var(--es-cyan-400);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Comfortable tap targets on touch screens */
+@media (pointer: coarse) {
+  button, .es-btn, [role="button"], select, input[type="button"], input[type="submit"] { min-height: 44px; }
+}
+/* Slim brand scrollbar */
+* { scrollbar-width: thin; scrollbar-color: var(--es-surface-3) transparent; }
+
+/* ═══════════ COMPONENTS ═══════════ */
+
+/* Buttons */
+.es-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--es-s2);
+  padding: .7rem 1.3rem; border: 1px solid transparent; border-radius: var(--es-r-md);
+  font: 600 var(--es-fs-md)/1 var(--es-font); color: #fff; text-decoration: none; cursor: pointer;
+  background: var(--es-grad-brand); box-shadow: var(--es-glow);
+  transition: transform var(--es-dur-2) var(--es-ease), box-shadow var(--es-dur-2) var(--es-ease), filter var(--es-dur-2);
+}
+.es-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.es-btn:active { transform: translateY(0) scale(.98); }
+.es-btn[disabled], .es-btn.is-disabled { opacity: .5; cursor: not-allowed; transform: none; filter: none; }
+.es-btn--secondary { background: var(--es-surface-2); border-color: var(--es-border-strong); box-shadow: none; color: var(--es-text); }
+.es-btn--ghost { background: transparent; border-color: var(--es-border-strong); box-shadow: none; color: var(--es-sub); }
+.es-btn--reward { background: var(--es-grad-reward); color: #2a1b00; box-shadow: 0 8px 24px rgba(255, 176, 32, .25); }
+.es-btn--sm { padding: .45rem .9rem; font-size: var(--es-fs-sm); border-radius: var(--es-r-sm); }
+.es-btn--lg { padding: .95rem 1.8rem; font-size: var(--es-fs-lg); border-radius: var(--es-r-lg); }
+
+/* Cards */
+.es-card {
+  background: linear-gradient(180deg, var(--es-surface-2), var(--es-surface-1));
+  border: 1px solid var(--es-border); border-radius: var(--es-r-lg);
+  padding: var(--es-s5); box-shadow: var(--es-shadow-1);
+  transition: transform var(--es-dur-2) var(--es-ease), border-color var(--es-dur-2), box-shadow var(--es-dur-2);
+}
+a.es-card:hover, .es-card--hover:hover { transform: translateY(-3px); border-color: rgba(124, 131, 255, .45); box-shadow: var(--es-glow); }
+
+/* Inputs */
+.es-input, .es-select, .es-textarea {
+  width: 100%; padding: .75rem 1rem; color: var(--es-text); font: inherit;
+  background: var(--es-surface-1); border: 1px solid var(--es-border-strong); border-radius: var(--es-r-md);
+  transition: border-color var(--es-dur-1), box-shadow var(--es-dur-1);
+}
+.es-input::placeholder, .es-textarea::placeholder { color: var(--es-muted); }
+.es-input:focus, .es-select:focus, .es-textarea:focus {
+  outline: none; border-color: var(--es-indigo-400); box-shadow: 0 0 0 3px rgba(124, 131, 255, .25);
+}
+.es-input[aria-invalid="true"] { border-color: var(--es-danger); }
+
+/* Badges & chips */
+.es-badge {
+  display: inline-flex; align-items: center; gap: .3rem; padding: .2rem .65rem;
+  font: 700 var(--es-fs-xs)/1.4 var(--es-font); border-radius: var(--es-r-pill);
+  background: rgba(124, 131, 255, .16); color: var(--es-indigo-300); border: 1px solid rgba(124, 131, 255, .3);
+}
+.es-badge--success { background: rgba(52, 211, 153, .14); color: var(--es-success); border-color: rgba(52, 211, 153, .3); }
+.es-badge--reward  { background: rgba(255, 200, 87, .14); color: var(--es-warm-400); border-color: rgba(255, 200, 87, .3); }
+.es-badge--info    { background: rgba(34, 211, 238, .13); color: var(--es-cyan-300); border-color: rgba(34, 211, 238, .3); }
+.es-chip { display: inline-block; padding: .35rem .85rem; border-radius: var(--es-r-pill); background: var(--es-surface-2); border: 1px solid var(--es-border-strong); color: var(--es-sub); font-size: var(--es-fs-sm); cursor: pointer; }
+.es-chip[aria-pressed="true"], .es-chip.is-active { background: var(--es-grad-brand); color: #fff; border-color: transparent; }
+
+/* Progress */
+.es-progress { height: 10px; background: var(--es-surface-3); border-radius: var(--es-r-pill); overflow: hidden; }
+.es-progress > span { display: block; height: 100%; width: var(--value, 0%); background: var(--es-grad-energy); border-radius: inherit; transition: width var(--es-dur-3) var(--es-ease); }
+
+/* Modal */
+.es-modal-backdrop { position: fixed; inset: 0; z-index: var(--es-z-modal); display: grid; place-items: center; padding: var(--es-s4); background: rgba(4, 5, 14, .72); backdrop-filter: blur(6px); }
+.es-modal { width: min(520px, 100%); max-height: 90vh; overflow: auto; background: var(--es-surface-2); border: 1px solid var(--es-border-strong); border-radius: var(--es-r-xl); padding: var(--es-s5); box-shadow: var(--es-shadow-2); }
+
+/* Navigation */
+.es-nav { position: sticky; top: 0; z-index: var(--es-z-nav); display: flex; align-items: center; gap: var(--es-s4); padding: var(--es-s3) var(--es-s5); background: rgba(7, 9, 20, .8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--es-border); }
+.es-nav a { color: var(--es-sub); text-decoration: none; padding: .4rem .8rem; border-radius: var(--es-r-sm); }
+.es-nav a:hover, .es-nav a[aria-current="page"] { color: #fff; background: rgba(124, 131, 255, .16); }
+
+/* Text helpers */
+.es-gradient-text { background: var(--es-grad-energy); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.es-muted { color: var(--es-muted); } .es-sub { color: var(--es-sub); }
+.es-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

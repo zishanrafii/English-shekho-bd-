@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C2 Mastery Exam — English Shekho</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/topic-page.css">
+<style>
+.mastery-banner{background:linear-gradient(135deg,rgba(245,200,66,.12),rgba(45,212,191,.08),rgba(129,140,248,.08));
+  border:1px solid rgba(245,200,66,.3);border-radius:24px;padding:2.5rem 2rem;text-align:center;margin-bottom:2rem;}
+.mastery-banner h2{font-size:2.2rem;font-weight:900;letter-spacing:-.5px;margin-bottom:.6rem;
+  background:linear-gradient(135deg,#f5c842,#2dd4bf,#818cf8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.mastery-banner p{font-family:'Noto Sans Bengali',sans-serif;font-size:14px;color:var(--sub);line-height:1.8;max-width:600px;margin:0 auto;}
+.stat-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem;}
+.stat-chip{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;
+  padding:.6rem 1.4rem;font-size:13px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.stat-chip span{color:var(--gold);}
+</style>
+  <link rel="stylesheet" href="../../styles/tokens.css">
+  <meta name="theme-color" content="#070914">
+  <meta name="es-guest" content="allowed">
+</head>
+<body>
+
+<div class="progress-strip"><div class="progress-fill" id="prog"></div></div>
+
+<div class="topbar">
+  <a class="tb-logo" href="../../roadmap.html">
+    <div class="tb-icon">🇬🇧</div>
+    <div class="tb-name">English Shekho</div>
+  </a>
+  <div class="tb-sep"></div>
+  <div class="tb-page">👑 C2 Mastery Exam</div>
+  <div class="tb-right">
+    <a class="tb-btn" href="../../roadmap.html">← Journey</a>
+    <a class="tb-btn" href="../../dashboard.html">Dashboard</a>
+    <button class="tb-btn" id="btn-logout">Logout</button>
+    <div class="nav-av" id="nav-av">👤</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="mastery-banner">
+    <h2>👑 C2 Mastery Exam</h2>
+    <p>আপনি পুরো English Shekho Journey-এর শেষ পর্যন্ত এসেছেন — A1 থেকে C2 পর্যন্ত। এটি আপনার চূড়ান্ত পরীক্ষা। সব ৬টি লেভেলের বিষয়বস্তু এখানে পরীক্ষিত হবে। শুভকামনা!</p>
+    <div class="stat-row">
+      <div class="stat-chip">⚡ <span>750 XP</span> পুরস্কার</div>
+      <div class="stat-chip">📚 <span>48</span> topics কভার করা</div>
+      <div class="stat-chip">⏱️ <span>50</span> মিনিট</div>
+    </div>
+  </div>
+
+  <div class="lesson-header">
+    <div class="lesson-meta">
+      <span class="sb-lvl lvl-c2">C2</span>
+      <span class="lmeta">A1 → C2 সম্পূর্ণ Mastery Test</span>
+    </div>
+  </div>
+
+  <!-- COMPREHENSIVE QUIZ -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#f5c842,#818cf8)">
+    <div class="card-title">📝 Mastery Quiz — 15 Questions (A1 to C2)</div>
+
+    <div class="practice-q">
+      <div class="pq-text">1. [A1] ইংরেজি Alphabet-এ কতটি Vowel আছে?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">4</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">5 (A, E, I, O, U)</div>
+        <div class="pq-opt" onclick="pq(this,false)">6</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! A, E, I, O, U — ৫টি vowel।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">2. [A2] "She ___ very happy at the party." (Past be verb)</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">was</div>
+        <div class="pq-opt" onclick="pq(this,false)">were</div>
+        <div class="pq-opt" onclick="pq(this,false)">is</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! She/He/I + was।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">3. [A2] "I will call you tomorrow." — এটি future-এর কোন ব্যবহার?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">তাৎক্ষণিক সিদ্ধান্ত বা প্রতিশ্রুতি</div>
+        <div class="pq-opt" onclick="pq(this,false)">আগে থেকে পরিকল্পিত</div>
+        <div class="pq-opt" onclick="pq(this,false)">অতীতের ঘটনা</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "will" = immediate decision or promise।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">4. [B1] "I ___ (live) in Dhaka since 2015." সঠিক form কোনটি?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">lived</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">have lived</div>
+        <div class="pq-opt" onclick="pq(this,false)">was living</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! "since" + Present Perfect — have lived।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">5. [B1] "The letter was written by her." — এটি কোন voice?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Active Voice</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Passive Voice</div>
+        <div class="pq-opt" onclick="pq(this,false)">Reported Speech</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! was + written by = Passive Voice।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">6. [B1] "You should see a doctor." — "should" কী বোঝাচ্ছে?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">পরামর্শ</div>
+        <div class="pq-opt" onclick="pq(this,false)">বাধ্যতামূলক নিয়ম</div>
+        <div class="pq-opt" onclick="pq(this,false)">সম্ভাবনা</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "should" = advice/recommendation।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">7. [B2] "If I had studied harder, I ___ passed." (Third Conditional)</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">would pass</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">would have passed</div>
+        <div class="pq-opt" onclick="pq(this,false)">will pass</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! Third Conditional: would have + V3।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">8. [B2] "I am tired." → She said that she ___ tired. (Reported Speech)</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">was</div>
+        <div class="pq-opt" onclick="pq(this,false)">is</div>
+        <div class="pq-opt" onclick="pq(this,false)">am</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! Reported Speech tense backshift: am → was।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">9. [B2] "Sales rose sharply." — Graph-এ এটি কী দেখায়?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">দ্রুত বৃদ্ধি ↑</div>
+        <div class="pq-opt" onclick="pq(this,false)">ধীরে হ্রাস ↓</div>
+        <div class="pq-opt" onclick="pq(this,false)">স্থির →</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! rose = increased, sharply = rapidly।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">10. [C1] Academic writing-এ "I think" এর পরিবর্তে কোনটি উপযুক্ত?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">I strongly feel</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">It can be argued that</div>
+        <div class="pq-opt" onclick="pq(this,false)">Obviously,</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! "It can be argued that" — impersonal academic phrasing।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">11. [C1] "You can't trust him — he failed school." — কোন logical fallacy?</div>
+      <div class="pq-options">
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Ad Hominem</div>
+        <div class="pq-opt" onclick="pq(this,false)">Slippery Slope</div>
+        <div class="pq-opt" onclick="pq(this,false)">False Dichotomy</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! ব্যক্তিকে আক্রমণ করা = Ad Hominem।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">12. [C2] "Her eyes were stars." — এটি কোন figurative device?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Simile</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Metaphor</div>
+        <div class="pq-opt" onclick="pq(this,false)">Personification</div>
+      </div>
+      <div class="pq-feedback correct">✅ সঠিক! "like" ছাড়া সরাসরি তুলনা = Metaphor।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">13. [C2] "Ask not what your country can do for you..." — এটি কোন rhetorical device?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Anaphora</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">Antithesis</div>
+        <div class="pq-opt" onclick="pq(this,false)">Tricolon</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! বিপরীত ধারণা পাশাপাশি = Antithesis।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">14. [C2] Research paper-এ "data were collected" — "were" কেন?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">Passive voice তাই</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">"data" plural noun তাই plural verb</div>
+        <div class="pq-opt" onclick="pq(this,false)">Past tense তাই</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! "data" = plural → "were collected"। Passive-ও ঠিক, কিন্তু কারণটা plural agreement।</div>
+    </div>
+
+    <div class="practice-q">
+      <div class="pq-text">15. [C2] Aristotle-এর rhetoric-এ "Logos" কী?</div>
+      <div class="pq-options">
+        <div class="pq-opt" onclick="pq(this,false)">আবেগে আবেদন</div>
+        <div class="pq-opt" onclick="pq(this,false)">বক্তার বিশ্বাসযোগ্যতা</div>
+        <div class="pq-opt" data-correct="1" onclick="pq(this,true)">যুক্তি ও তথ্যের মাধ্যমে persuasion</div>
+      </div>
+      <div class="pq-feedback correct">✅ ঠিক! Logos = logical argument, evidence, data।</div>
+    </div>
+
+    <div class="pq-score" id="pq-score">Score: <b>0 / 0</b></div>
+  </div>
+
+  <!-- FINAL CELEBRATION -->
+  <div class="card" style="--card-accent:linear-gradient(90deg,#f5c842,#2dd4bf,#818cf8);margin-top:1.5rem;">
+    <div class="card-title">🏆 আপনার Journey সম্পূর্ণ!</div>
+    <div style="font-family:'Noto Sans Bengali',sans-serif;font-size:14px;line-height:1.9;color:var(--sub);">
+      <p>আপনি English Shekho-র সম্পূর্ণ Journey শেষ করেছেন — A1 (Alphabet & Phonics) থেকে C2 (Mastery Exam) পর্যন্ত। এই পথে আপনি শিখেছেন:</p>
+      <ul style="margin:.8rem 0 .8rem 1.2rem;display:flex;flex-direction:column;gap:.3rem;">
+        <li><span class="sb-lvl lvl-a1" style="font-size:9px;padding:2px 8px;">A1</span> Alphabet, Greetings, Numbers, Nouns, Present Simple, Questions, Phrases</li>
+        <li><span class="sb-lvl lvl-a2" style="font-size:9px;padding:2px 8px;">A2</span> Past/Future Tense, Adjectives, Conjunctions, Conversations, Writing</li>
+        <li><span class="sb-lvl lvl-b1" style="font-size:9px;padding:2px 8px;">B1</span> Present Perfect, Passive Voice, Modals, Reading, Opinion, Email, Listening</li>
+        <li><span class="sb-lvl lvl-b2" style="font-size:9px;padding:2px 8px;">B2</span> Advanced Vocab, Conditionals, Reported Speech, Essay, Public Speaking, Idioms</li>
+        <li><span class="sb-lvl lvl-c1" style="font-size:9px;padding:2px 8px;">C1</span> Academic English, Formal Register, Current Affairs, Figurative Language, Literary Analysis</li>
+        <li><span class="sb-lvl lvl-c2" style="font-size:9px;padding:2px 8px;">C2</span> Classical Literature, Philosophy, Creative Writing, Research, Media, Rhetoric</li>
+      </ul>
+      <p>এখন আপনি শুধু একটি ভাষা শেখেননি — আপনি একটি দৃষ্টিভঙ্গি অর্জন করেছেন। এটাই C2 Mastery।</p>
+    </div>
+  </div>
+
+  <div class="complete-box">
+    <div class="complete-box-text">
+      <strong>🎓 C2 Mastery Exam সম্পন্ন করুন!</strong>
+      এটি আপনার final milestone — সম্পন্ন করলে সর্বোচ্চ XP এবং Mastery Certificate পাবেন।
+    </div>
+    <button class="btn-complete" id="complete-btn">👑 Mastery সম্পন্ন করুন (+750 XP)</button>
+  </div>
+
+  <div class="lesson-nav">
+    <a class="btn-prev" href="keynote-oratory.html">← আগের: Keynote & Oratory</a>
+    <a class="btn-next" href="../../roadmap.html">🗺️ Journey Map-এ ফিরে যান</a>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initTopic } from "../../js/topic-common.js";
+  initTopic({ id: "c2-t8", xp: 750 });
+</script>
+</body>
+</html>
